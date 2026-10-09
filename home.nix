@@ -107,7 +107,28 @@
     icons = "auto";
   };
   # Ctrl-R で履歴検索、Ctrl-T でファイル検索、Alt-C でディレクトリ移動
-  programs.fzf.enable = true;
+  # ファイル一覧は fd で作る（.gitignore を尊重し、隠しファイルも含める）
+  programs.fzf = {
+    enable = true;
+    defaultCommand = "fd --type f --hidden --exclude .git";
+    fileWidgetCommand = "fd --type f --hidden --exclude .git";
+    changeDirWidgetCommand = "fd --type d --hidden --exclude .git";
+  };
+
+  # 検索ツール。Neovim の telescope（live_grep / find_files）からも使う
+  programs.ripgrep = {
+    enable = true;
+    # 小文字だけなら大文字小文字を区別しない
+    arguments = [ "--smart-case" ];
+  };
+  programs.fd.enable = true;
+  programs.jq.enable = true;
+
+  # Git の操作画面。diff は delta で表示する
+  programs.lazygit = {
+    enable = true;
+    settings.git.pagers = [ { pager = "delta --paging=never"; } ];
+  };
   # z <ディレクトリ名の一部> で、よく行くディレクトリへ移動
   programs.zoxide.enable = true;
 

@@ -7,6 +7,22 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### ripgrep・fd・jq・lazygit を移した（Step 4 の始め）
+
+**やったこと**（nix 環境だけ）
+- ripgrep: `--smart-case`（小文字だけで検索すると大文字小文字を区別しない）
+- fd・jq: 設定なしでそのまま
+- fzf: ファイル・ディレクトリの一覧を fd で作るようにした（Ctrl-T / Alt-C）。.gitignore にあるものは出さず、隠しファイルは出す
+- lazygit: diff を delta で表示
+
+**なぜこうしたか**
+- 旧環境ではどれも設定ファイルがなく、Brewfile のコメントによると telescope.nvim と lazygit.nvim のために入れていた。Neovim を移すときにも使う
+- fzf は既定だと `find` で一覧を作るので、.git や node_modules の中まで出てしまう
+
+**確認したこと**
+- nix 側: rg / fd / jq / lazygit / delta は Nix 版。lazygit の設定は `~/.config-nix/lazygit` から読まれる（`XDG_CONFIG_HOME` が効くため）
+- old 側: どれも Homebrew 版のまま。lazygit は今までどおり `~/Library/Application Support/lazygit` を読む
+
 ### Git を SSH 接続・コミット署名・delta にした（Step 3 の残り）
 
 **やったこと**（nix 環境だけ）
