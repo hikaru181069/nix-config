@@ -32,3 +32,11 @@ vim.pack.add({
 })
 
 vim.cmd.colorscheme("nightfox")
+
+-- treesitter で色付けする（パーサとプラグインは home.nix で入れている）
+-- nvim-treesitter は自動では有効にしないので、ファイルを開いたときに始める。パーサがない言語では何もしない
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})

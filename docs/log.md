@@ -7,6 +7,26 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim に treesitter を入れた（Step 4）
+
+**やったこと**（nix 環境だけ）
+- 構文に沿った色付けを treesitter で行うようにした
+- 言語: bash, css, html, javascript, json, lua, markdown, markdown_inline, nix, python, tsx, typescript, vim, vimdoc（旧設定の13言語に、この設定を書くための nix を足した）
+- ファイルを開いたときに `vim.treesitter.start` を呼ぶ。パーサのない言語では何もしない
+
+**なぜこうしたか**
+- パーサはコンパイル済みのものを nixpkgs から取る（`nvim-treesitter.withPlugins`）。旧設定のように Neovim の中でビルドすると、コンパイラや tree-sitter CLI が要り、版も固定されない。LSP と同じく Mason は使わない方針
+- nvim-treesitter のクエリはパーサの版と合わせる必要があるので、これだけは vim.pack ではなく Nix で入れた
+- home-manager は Nix で入れたプラグインへのリンクを `~/.local/share/nvim/site/pack/hm` に作る。ここは旧環境の Neovim のデータ置き場で、旧環境の Neovim にも読み込まれてしまう。`NVIM_APPNAME` に合わせて `~/.local/share/nvim-nix/site/pack/hm` に移した
+
+**確認したこと**
+- 14言語すべてでパーサとハイライトが読み込まれる。home.nix・flake.lock・init.lua で色付けが有効
+- `:checkhealth nvim-treesitter` の「tree-sitter-cli not found」は、Neovim の中でパーサをビルドするときにだけ要るもので、問題ない
+- 旧環境の `~/.local/share/nvim/site/pack` には何も足していない
+
+**注意**
+- 環境変数を足したときは、新しく開いたシェルにしか入らない。tmux の既存のペインでは `NVIM_APPNAME` がなく、素の Neovim が起動した。新しいペインで確かめる
+
 ### Neovim の土台を作った（Step 4）
 
 **やったこと**（nix 環境だけ）

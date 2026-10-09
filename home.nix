@@ -273,7 +273,31 @@ in
     defaultEditor = true;
     # home-manager が作る設定は init.lua に書かず、起動時に読ませる（init.lua は自分の設定だけにする）
     sideloadInitLua = true;
+    # 構文解析（色付けなど）。パーサはコンパイル済みのものを nixpkgs から取る（Mason や実行時のビルドは使わない）
+    # nvim-treesitter のクエリはパーサの版と合わせる必要があるので、これだけは vim.pack ではなく Nix で入れる
+    plugins = [
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
+        bash
+        css
+        html
+        javascript
+        json
+        lua
+        markdown
+        markdown_inline
+        nix
+        python
+        tsx
+        typescript
+        vim
+        vimdoc
+      ]))
+    ];
   };
+  # Nix で入れたプラグインは、データ置き場の site/pack/hm へのリンクから読み込まれる。
+  # home-manager は ~/.local/share/nvim（旧環境の置き場）に作るので、NVIM_APPNAME に合わせた場所に移す
+  xdg.dataFile."nvim/site/pack/hm".enable = lib.mkForce false;
+  xdg.dataFile."nvim-nix/site/pack/hm".source = config.xdg.dataFile."nvim/site/pack/hm".source;
   # 設定・データ・状態・キャッシュをまとめて旧環境（~/.config/nvim, ~/.local/share/nvim など）と分ける
   home.sessionVariables.NVIM_APPNAME = "nvim-nix";
   xdg.configFile."nvim-nix".source =
