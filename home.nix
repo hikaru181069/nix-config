@@ -41,9 +41,47 @@
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
+    # EDITOR に vi が含まれると zsh は vi 式の行編集になるので、Emacs 式を明示する
+    defaultKeymap = "emacs";
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    # macOS の既定だと約1000件で古い履歴が消えていくので、大きく取る
+    history = {
+      size = 100000;
+      save = 100000;
+      ignoreAllDups = true;
+      extended = true;
+    };
+    # tree コマンドの別名はやめ、ツリー表示は eza にまとめる
+    shellAliases = {
+      ll = "eza -lah";
+      lt = "eza --tree --level=2";
+      lt3 = "eza --tree --level=3";
+      lta = "eza --tree --level=2 -a";
+    };
+    # Ctrl-X Ctrl-E で、入力中のコマンドをエディタで編集する
+    initContent = ''
+      autoload -Uz edit-command-line
+      zle -N edit-command-line
+      bindkey '^X^E' edit-command-line
+    '';
   };
 
-  programs.starship.enable = true;
+  # 時刻やホスト名は tmux / sketchybar に任せ、プロンプトには作業に要るものだけ出す
+  programs.starship = {
+    enable = true;
+    settings.format = "$directory$git_branch$git_status$nix_shell$cmd_duration$line_break$character";
+  };
+
+  # ls を eza に置き換える（ls / ll / lt などの別名は eza が用意し、上で一部上書き）
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+  };
+  # Ctrl-R で履歴検索、Ctrl-T でファイル検索、Alt-C でディレクトリ移動
+  programs.fzf.enable = true;
+  # z <ディレクトリ名の一部> で、よく行くディレクトリへ移動
+  programs.zoxide.enable = true;
 
   # 本体は /Applications の Ghostty.app（cask）を使い、設定だけ管理する。中身は wezterm.lua から引き継ぎ
   programs.ghostty = {

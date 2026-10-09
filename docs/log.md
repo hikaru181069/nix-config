@@ -7,6 +7,32 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### シェルまわりを整えた（Step 3 の残り）
+
+**やったこと**（nix 環境だけ。old 環境は変わらない）
+- zsh:
+  - 補完、入力中に履歴から候補を薄く表示する機能（autosuggestions）、コマンドの色分け（syntax-highlighting）
+  - 履歴は 10 万件。全タブで共有し、重複を除き、実行時刻も残す
+  - Ctrl-X Ctrl-E で、入力中のコマンドをエディタで編集できる
+- starship: 表示はディレクトリ・git ブランチ/状態・nix shell・実行時間（2 秒以上のときだけ）・成否で色の変わる `❯` だけにした
+- eza: `ls` `ll` `la` `lt` `lt3` `lta` を eza にした（アイコン付き）。`tree` `tree2` `tree3` `treei` の別名はやめた
+- fzf を追加: Ctrl-R で履歴検索、Ctrl-T でファイル検索、Alt-C でディレクトリ移動
+- zoxide はそのまま続投（`z`）
+
+**なぜこうしたか**
+- 今までは macOS の既定設定のままで、履歴が約 1000 件で消えていき、補完の初期化（compinit）もされていなかった
+- 時刻やホスト名はプロンプトに出さず、tmux / sketchybar に任せる（計画どおり）
+- ツリー表示が `tree` と `eza --tree` の2通りあったので eza に揃えた
+- 行編集は Emacs 式と明示した。EDITOR に nvim を設定すると、zsh が勝手に vi 式に変わるため
+
+**確認したこと**
+- nix 側: eza / fzf / zoxide / starship / git は Nix 版。Ctrl-R が fzf、Ctrl-X Ctrl-E がエディタ編集、履歴の設定も入っている
+- old 側: eza・git は Homebrew 版のまま、`ll` も今までどおり
+
+**注意**
+- 履歴は old と nix で別のファイル（nix は `~/.config-nix/zsh/.zsh_history`）。nix 側は空から始まる
+- プロンプトの色はまだ starship の既定。Nightfox への色合わせはテーマ統一（Step 5.5）でまとめて行う
+
 ### ターミナルを Ghostty に切り替え
 
 - WezTerm から Ghostty（1.3.1）に移行。本体は `/Applications/Ghostty.app` のまま、設定だけ `home.nix` の `programs.ghostty` で管理
