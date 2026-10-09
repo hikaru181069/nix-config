@@ -29,8 +29,11 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - nix 側: 別のソケット、読む設定は1つだけでエラーなし、自動保存も有効、保存先は resurrect-nix、キー割り当ても上のとおり
 - old 側: 旧環境の tmux サーバー（セッション 4 / MLB-App / coffee-app）はそのまま。プロセス名も `tmux` のまま
 
+- 実際に起動すると、ペインで Nix 版のツールが使われなかった。tmux はペインに `ZDOTDIR` を渡すので、zsh が `~/.zshenv`（envswitch の分岐）を飛ばして `~/.config-nix/zsh/.zshenv` を直接読み、旧環境向けの印（`__ETC_PROFILE_NIX_SOURCED`）が残って Nix の PATH が足されなかった。tmux の設定で `set-environment -gu ZDOTDIR` として、ペインが必ず `~/.zshenv` を通るようにした
+
 **注意**
 - 旧環境の tmux と Nix の tmux は別物で、互いのセッションは見えない
+- tmux の外から `tmux new-window` などを実行すると、実行したシェルの環境変数がそのウィンドウに混ざる（テストのときに旧環境の PATH が混ざって紛らわしかった）
 - tmux の中で開くペインも、開いた時点の envswitch のモードに従う。nix の tmux を使っている途中で `envswitch old` にすると、そのあと開いたペインは旧環境になる
 
 ### ripgrep・fd・jq・lazygit を移した（Step 4 の始め）

@@ -207,6 +207,10 @@ in
       );
     in
     ''
+      # ペインの zsh に ZDOTDIR を渡さない。渡すと zsh は ~/.zshenv（envswitch の分岐）を飛ばして
+      # ~/.config-nix/zsh/.zshenv を直接読み、Nix の PATH が足されないペインになる
+      set-environment -gu ZDOTDIR
+
       # コマンド入力（prefix + :）の行編集は Emacs 式（tmux-sensible と同じ）
       set -g status-keys emacs
       set -g display-time 4000
