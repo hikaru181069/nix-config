@@ -63,6 +63,15 @@ vim.pack.add({
   "https://github.com/folke/trouble.nvim",
   -- Neovim の中で lazygit を開く
   "https://github.com/kdheepak/lazygit.nvim",
+  -- インデントの縦線（snacks.nvim のうち indent だけ使う）
+  "https://github.com/folke/snacks.nvim",
+  -- 画面上部に、今いる関数やクラスの見出しを出す
+  "https://github.com/nvim-treesitter/nvim-treesitter-context",
+  -- #ff0000 などの色コードをその色で表示し、色を選んで書き換える
+  "https://github.com/uga-rosa/ccc.nvim",
+  -- 集中モード（zen-mode は1つのウィンドウを中央に大きく、no-neck-pain は左右に余白を足して中央に寄せる）
+  "https://github.com/folke/zen-mode.nvim",
+  "https://github.com/shortcuts/no-neck-pain.nvim",
 })
 
 vim.cmd.colorscheme("nightfox")
@@ -166,6 +175,7 @@ require("which-key").add({
   { "<leader>g", group = "git" },
   { "<leader>c", group = "コード" },
   { "<leader>b", group = "バッファ" },
+  { "<leader>t", group = "表示" },
 })
 
 -- 診断・参照・シンボルの一覧（旧設定と同じく右側に出し、選ぶと中身を見せる）
@@ -184,6 +194,63 @@ vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "qu
 -- lazygit（シェルと同じ Nix 版。diff は delta で出る）。fugitive は計画どおり使わない
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "lazygit" })
 vim.keymap.set("n", "<leader>gf", "<cmd>LazyGitCurrentFile<cr>", { desc = "このファイルの lazygit" })
+
+-- インデントの縦線。今いるかたまり（関数など）の線は目立たせる
+require("snacks").setup({
+  indent = { enabled = true, animate = { enabled = false }, scope = { enabled = true } },
+})
+
+-- 今いる関数などの見出しを上に出す（旧設定と同じく最大3行、低いウィンドウでは出さない）
+require("treesitter-context").setup({
+  max_lines = 3,
+  min_window_height = 20,
+  multiline_threshold = 5,
+})
+
+-- 色コードの表示（LSP が返す色も含む）。<space>cp で色を選ぶ
+require("ccc").setup({ highlighter = { auto_enable = true, lsp = true } })
+vim.keymap.set("n", "<leader>cp", "<cmd>CccPick<cr>", { desc = "色を選ぶ" })
+-- Neovim 0.12 から LSP の色の表示が標準で付いたが、ccc と二重になるので止める
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.lsp.document_color.enable(false, { bufnr = args.buf })
+  end,
+})
+
+-- 集中モード（設定は旧設定と同じ。twilight は計画どおり使わない）
+require("zen-mode").setup({
+  window = {
+    backdrop = 0.9,
+    width = 95,
+    height = 1,
+    options = {
+      signcolumn = "no",
+      number = false,
+      relativenumber = false,
+      cursorline = false,
+      cursorcolumn = false,
+      foldcolumn = "0",
+      list = false,
+    },
+  },
+  plugins = {
+    options = { enabled = true, ruler = false, showcmd = false },
+    twilight = { enabled = false },
+  },
+})
+vim.keymap.set("n", "<leader>tz", "<cmd>ZenMode<cr>", { desc = "集中モード（zen-mode）" })
+
+local palette = require("palette")
+vim.api.nvim_set_hl(0, "NoNeckPainBg", { bg = palette.bg0 })
+require("no-neck-pain").setup({
+  width = 110,
+  buffers = {
+    colors = { background = palette.bg0, blend = 0 },
+    bo = { filetype = "no-neck-pain" },
+    wo = { winfixwidth = true, winhighlight = "Normal:NoNeckPainBg,EndOfBuffer:NoNeckPainBg" },
+  },
+})
+vim.keymap.set("n", "<leader>tn", "<cmd>NoNeckPain<cr>", { desc = "中央に寄せる（no-neck-pain）" })
 
 -- 浮かぶウィンドウ（ホバー・診断の詳細など）を角の丸い枠で囲む
 vim.o.winborder = "rounded"

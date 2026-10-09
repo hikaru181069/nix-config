@@ -7,6 +7,28 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim にインデント表示・treesitter-context・ccc・zen-mode・no-neck-pain を入れた（Step 4）
+
+**やったこと**（nix 環境だけ。どれも vim.pack）
+- インデントの縦線: 旧設定と同じく snacks.nvim の indent を使う（snacks のほかの機能は使わない）。今いるかたまりの線は目立たせる
+- treesitter-context: 画面上部に、今いる関数やブロックの見出しを出す（最大3行、低いウィンドウでは出さない。旧設定と同じ）
+- ccc: `#ff0000` などの色コードをその色で表示。`<space>cp` で色を選んで書き換える
+- zen-mode（`<space>tz`）: 1つのウィンドウを中央に大きく出す。設定は旧設定と同じ
+- no-neck-pain（`<space>tn`）: 左右に余白を足して本文を中央に寄せる。余白の色は Nightfox の bg0
+- which-key に「表示」（`<space>t`）のグループを足した
+
+**なぜこうしたか**
+- Neovim 0.12 から、LSP が返す色の表示が標準で付いた。ccc（LSP の色も表示する）と二重になるので、標準のほうを止めた
+- zen-mode の twilight 連携は、計画どおり twilight を使わないので切った
+
+**確認したこと**
+- palette.nix を開くと、22色すべてに色が付く
+- 関数の途中までスクロールすると、上に `require("gitsigns").setup({` と `on_attach = function(bufnr)` が出る
+- `<space>tn` で左右に余白が出て、`<space>tz` で中央に大きく出る
+
+**注意**
+- treesitter-context は、画面の一番上とカーソルの間に見出しを出す。カーソルが画面の一番上にあると出ない（最初、これを知らずに「動かない」と調べてしまった）
+
 ### Neovim に bufferline・noice・which-key・trouble・lazygit.nvim を入れた（Step 4）
 
 **やったこと**（nix 環境だけ。どれも vim.pack）

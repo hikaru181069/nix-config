@@ -62,8 +62,8 @@ require("lualine").setup({
     theme = "auto",
     component_separators = "",
     section_separators = "",
-    -- ツリーの下には出さない
-    disabled_filetypes = { statusline = { "NvimTree" } },
+    -- ツリーと no-neck-pain の余白の下には出さない
+    disabled_filetypes = { statusline = { "NvimTree", "no-neck-pain" } },
   },
   sections = {
     lualine_a = {
