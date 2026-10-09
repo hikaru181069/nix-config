@@ -266,6 +266,19 @@ in
   # z <ディレクトリ名の一部> で、よく行くディレクトリへ移動
   programs.zoxide.enable = true;
 
+  # Neovim。設定（Lua）は ~/nix-config/nvim に置き、リンクして編集がすぐ反映されるようにする
+  programs.neovim = {
+    enable = true;
+    # EDITOR / VISUAL を nvim にする（Ctrl-X Ctrl-E や git のコミットメッセージで使われる）
+    defaultEditor = true;
+    # home-manager が作る設定は init.lua に書かず、起動時に読ませる（init.lua は自分の設定だけにする）
+    sideloadInitLua = true;
+  };
+  # 設定・データ・状態・キャッシュをまとめて旧環境（~/.config/nvim, ~/.local/share/nvim など）と分ける
+  home.sessionVariables.NVIM_APPNAME = "nvim-nix";
+  xdg.configFile."nvim-nix".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/nvim";
+
   # 本体は /Applications の Ghostty.app（cask）を使い、設定だけ管理する。中身は wezterm.lua から引き継ぎ
   programs.ghostty = {
     enable = true;

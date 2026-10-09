@@ -7,6 +7,26 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim の土台を作った（Step 4）
+
+**やったこと**（nix 環境だけ）
+- Neovim 0.12.5 を `programs.neovim` で入れた。`EDITOR` / `VISUAL` も nvim にした
+- 設定はゼロから作り直す。`~/nix-config/nvim/init.lua` に書き、`~/.config-nix/nvim-nix` からリンクしている（編集するとすぐ反映される）
+- 旧設定から引き継いだオプション: 行番号（相対）、カーソル行、signcolumn、`~` を消す、2スペースインデント、クリップボード共有、`<leader>nh` で検索ハイライトを消す
+  - 引き継がなかったもの: termguicolors（0.10 から既定で有効）、completeopt（補完は blink.cmp を入れるときに決める）、updatetime（gitsigns などを入れるときに決める）
+- プラグインは Neovim 標準の `vim.pack` で入れる。版は `nvim/nvim-pack-lock.json` に記録され、リポジトリで管理する
+  - nightfox.nvim（配色）
+  - vim-tmux-navigator（tmux のペインと C-hjkl で行き来するため。tmux 側の設定がこれを前提にしている）
+
+**なぜこうしたか**
+- `NVIM_APPNAME=nvim-nix` にして、設定・データ・状態・キャッシュをまとめて旧環境と分けた
+  - 計画では「XDG_CONFIG_HOME の切り替えで自然に分かれる」としていたが、分かれるのは設定だけだった。データ（`~/.local/share/nvim`）には旧環境の lazy・mason・treesitter のパーサがあり、共有するとパーサなどが混ざる
+- home-manager が作る設定（provider の無効化など）は init.lua に書かせず、起動時に読ませる（`sideloadInitLua`）。init.lua を自分の設定だけにするため
+
+**確認したこと**
+- nix 側: nvim は Nix 版、設定は `~/.config-nix/nvim-nix`、データは `~/.local/share/nvim-nix`、配色は nightfox、プラグイン2つが入った
+- old 側: `NVIM_APPNAME` / `EDITOR` / `VISUAL` は envswitch で外す。旧環境の nvim はこれまでどおり `~/.config/nvim` を読む
+
 ### tmux を移した（Step 4）
 
 **やったこと**（nix 環境だけ）
