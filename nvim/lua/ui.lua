@@ -2,20 +2,34 @@
 local p = require("palette")
 
 -- 開いているファイル（バッファ）をタブのように上に並べる
+-- 旧設定の見た目に合わせ、すべての部品の背景を揃える。選んでいるタブは通常の背景（bg1）で1枚のタブに見せ、
+-- ほかのタブと余白は暗い背景（bg0）にする。部品ごとに背景を指定しないと、名前だけ明るくなるなどまだらになる
+local function bufferline_highlights(defaults)
+  local hl = {}
+  for name, attrs in pairs(defaults.highlights) do
+    hl[name] = vim.tbl_extend("force", attrs, { bg = name:match("_selected$") and p.bg1 or p.bg0 })
+  end
+  -- 文字の色（旧設定と同じ考え方: ほかのタブは暗め、見えているタブは明るめ、変更ありは黄色）
+  local fg = {
+    background = p.fg3,
+    buffer_visible = p.fg0,
+    numbers = p.fg3,
+    numbers_visible = p.fg2,
+    modified = p.yellow,
+    modified_visible = p.yellow,
+    -- 斜めの区切りは背景と同じ色にして、タブの形だけを見せる
+    separator = p.bg0,
+    separator_visible = p.bg0,
+    separator_selected = p.bg0,
+  }
+  for name, color in pairs(fg) do
+    hl[name].fg = color
+  end
+  return hl
+end
+
 require("bufferline").setup({
-  highlights = {
-    fill = { bg = p.bg0 },
-    background = { fg = p.fg3, bg = p.bg0 },
-    buffer_visible = { fg = p.fg0, bg = p.bg0 },
-    numbers = { fg = p.fg3, bg = p.bg0 },
-    numbers_visible = { fg = p.fg2, bg = p.bg0 },
-    modified = { fg = p.yellow, bg = p.bg0 },
-    modified_visible = { fg = p.yellow, bg = p.bg0 },
-    separator = { fg = p.bg0, bg = p.bg0 },
-    separator_visible = { fg = p.bg0, bg = p.bg0 },
-    separator_selected = { fg = p.bg0, bg = "NONE" },
-    buffer_selected = { bg = "NONE" },
-  },
+  highlights = bufferline_highlights,
   options = {
     separator_style = "slant",
     -- LSP の診断の数をタブに出す
