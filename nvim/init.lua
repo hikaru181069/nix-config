@@ -43,6 +43,14 @@ vim.pack.add({
   -- ファイルツリー（devicons はファイルの種類のアイコン）
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-tree/nvim-tree.lua",
+  -- 保存時の整形（prettier・ruff・stylua を呼ぶ）
+  "https://github.com/stevearc/conform.nvim",
+  -- 行の左に git の変更を表示し、変更のかたまり（hunk）単位で操作する
+  "https://github.com/lewis6991/gitsigns.nvim",
+  -- ステータスライン
+  "https://github.com/nvim-lualine/lualine.nvim",
+  -- 括弧や引用符を自動で閉じる
+  "https://github.com/windwp/nvim-autopairs",
 })
 
 vim.cmd.colorscheme("nightfox")
@@ -72,6 +80,67 @@ require("nvim-tree").setup({
   renderer = { group_empty = true },
 })
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "ファイルツリーを開閉" })
+
+-- ステータスライン（長いので lua/statusline.lua に分けた）
+require("statusline")
+
+-- 保存時に整形する。整形ツールのない言語は LSP の整形を使う
+require("conform").setup({
+  formatters_by_ft = {
+    javascript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
+    css = { "prettier" },
+    scss = { "prettier" },
+    html = { "prettier" },
+    markdown = { "prettier" },
+    yaml = { "prettier" },
+    python = { "ruff_format" },
+    lua = { "stylua" },
+  },
+  format_on_save = { timeout_ms = 1000, lsp_format = "fallback" },
+})
+vim.keymap.set("n", "<leader>f", function()
+  require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "整形" })
+
+-- git の変更の表示（記号は旧設定と同じ。追加・変更は細い縦線、削除は三角）
+local bar, deleted = "\u{258e}", "\u{f0da}"
+local git_signs = {
+  add = { text = bar },
+  change = { text = bar },
+  delete = { text = deleted },
+  topdelete = { text = deleted },
+  changedelete = { text = bar },
+  untracked = { text = bar },
+}
+require("gitsigns").setup({
+  signs = git_signs,
+  signs_staged = git_signs,
+  on_attach = function(bufnr)
+    local gs = require("gitsigns")
+    local map = function(lhs, rhs, desc)
+      vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
+    end
+    map("]h", function() gs.nav_hunk("next") end, "次の変更へ")
+    map("[h", function() gs.nav_hunk("prev") end, "前の変更へ")
+    -- ステージ済みの変更でもう一度押すと、ステージを取り消す（旧設定の <leader>hu の代わり）
+    map("<leader>hs", gs.stage_hunk, "変更をステージ / 取り消し")
+    map("<leader>hr", gs.reset_hunk, "変更を元に戻す")
+    map("<leader>hS", gs.stage_buffer, "ファイル全体をステージ")
+    map("<leader>hR", gs.reset_buffer, "ファイル全体を元に戻す")
+    map("<leader>hp", gs.preview_hunk, "変更の中身を見る")
+    map("<leader>hb", function() gs.blame_line({ full = true }) end, "この行を最後に変えたコミット")
+    map("<leader>hd", gs.diffthis, "差分を並べて見る")
+    map("<leader>hD", function() gs.diffthis("~") end, "1つ前のコミットとの差分を見る")
+  end,
+})
+
+-- 括弧や引用符を自動で閉じる
+-- （旧設定の check_ts は、今の nvim-treesitter では文字列の中でも閉じてしまい効いていなかったので外した）
+require("nvim-autopairs").setup({})
 
 -- 浮かぶウィンドウ（ホバー・診断の詳細など）を角の丸い枠で囲む
 vim.o.winborder = "rounded"

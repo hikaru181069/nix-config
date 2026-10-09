@@ -7,6 +7,26 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim に conform・gitsigns・lualine・autopairs を入れた（Step 4）
+
+**やったこと**（nix 環境だけ。どれも vim.pack）
+- conform: 保存時に整形する。prettier（JS/TS/JSON/CSS/HTML/Markdown/YAML）、ruff（Python）、stylua（Lua）。ないものは LSP の整形。`<space>f` で手動整形
+  - prettier と stylua は nixpkgs から入れた（Neovim の中だけで見える）。プロジェクトの node_modules に prettier があれば、そちらが使われる
+- gitsigns: 行の左に git の変更を表示。記号とキー（`]h` `[h`、`<space>h` + s / r / S / R / p / b / d / D）は旧設定と同じ
+  - 旧設定の `next_hunk` などは古い書き方なので `nav_hunk` に直した。`<space>hu`（ステージの取り消し）は、`<space>hs` をもう一度押すことで取り消せるようになったのでなくした
+- lualine: 旧設定の見た目（モードで色が変わる左右の三角、ブランチ・変更行数・ファイル名・診断・種類・位置）をそのままに、色を Nightfox にした。長いので `nvim/lua/statusline.lua` に分けた
+  - 色は palette.nix から Lua のファイル（`~/.local/share/nvim-nix/site/lua/palette.lua`）を作り、`require("palette")` で読む。色の定義は palette.nix の1か所のまま
+  - 旧設定の Copilot の表示は計画どおり外した
+- autopairs: 括弧や引用符を自動で閉じる
+
+**確認したこと**
+- TS・Python・Lua の崩したファイルを保存すると、それぞれ整形される
+- 変更した行に `▎` が出て、ステータスラインに変更行数と診断の数が出る
+- `print(` で `print()` になる
+
+**注意**
+- autopairs は文字列の中でも括弧を閉じる。旧設定の `check_ts`（文字列の中では閉じない）は、今の nvim-treesitter では効いていなかったので外した
+
 ### Neovim に nvim-tree を入れた（Step 4）
 
 **やったこと**（nix 環境だけ）

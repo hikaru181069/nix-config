@@ -305,8 +305,13 @@ in
       ruff # Python の lint・整形
       lua-language-server
       nixd # Nix（この設定を書くため）
+      # 整形（conform.nvim が使う）。プロジェクトの node_modules に prettier があれば、そちらが優先される
+      prettier
+      stylua
     ];
   };
+  # palette.nix の色を Neovim の Lua から require("palette") で読めるようにする（色の定義を1か所に保つ）
+  xdg.dataFile."nvim-nix/site/lua/palette.lua".text = "return " + lib.generators.toLua { } palette;
   # Nix で入れたプラグインは、データ置き場の site/pack/hm へのリンクから読み込まれる。
   # home-manager は ~/.local/share/nvim（旧環境の置き場）に作るので、NVIM_APPNAME に合わせた場所に移す
   xdg.dataFile."nvim/site/pack/hm".enable = lib.mkForce false;
