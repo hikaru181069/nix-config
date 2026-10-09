@@ -7,6 +7,21 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim に telescope を入れた（Step 4）
+
+**やったこと**（nix 環境だけ）
+- telescope（と、それが使う plenary）を vim.pack で入れた
+- キーは旧設定と同じ: `<space>ff` ファイル、`<space>fg` 文字列（ripgrep）、`<space>fb` バッファ、`<space>fh` ヘルプ
+- 見た目も旧設定と同じ: 入力欄が上、結果も上から並ぶ
+
+**なぜこうしたか**
+- ファイル一覧はシェルの fzf（Ctrl-T）と同じ fd のコマンドで作る。旧設定は `hidden = true` だけで、`.git` の中のファイルまで出ていた
+- 旧設定は lazy.nvim で「使うときに読み込む」にしていたが、telescope は使うときまで中身を読み込まないので、そのまま起動時に入れている
+
+**確認したこと**
+- `:checkhealth telescope`: plenary・rg・fd が見つかる
+- 実際に `<space>ff` を開くと、このリポジトリの 10 ファイルが出て、`.git` の中は出ない。プレビューも出る
+
 ### Neovim に treesitter を入れた（Step 4）
 
 **やったこと**（nix 環境だけ）
