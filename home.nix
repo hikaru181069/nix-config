@@ -44,4 +44,27 @@
   };
 
   programs.starship.enable = true;
+
+  # 本体は /Applications の Ghostty.app（cask）を使い、設定だけ管理する。中身は wezterm.lua から引き継ぎ
+  programs.ghostty = {
+    enable = true;
+    package = null;
+    settings = {
+      font-family = [ "Maple Mono NF" "Maple Mono NF CN" ];
+      font-size = 18.5;
+      theme = "Nightfox";
+      window-width = 130;
+      window-height = 38;
+      window-padding-x = 10;
+      window-padding-y = 10;
+      macos-titlebar-style = "hidden";
+      scrollbar = "never";
+    };
+  };
+
+  # Ghostty は Dock から起動するので ~/.config-nix を見ない。old / nix どちらのシェルでも使うため、
+  # 生成した設定を ~/.config-nix ではなく Ghostty が必ず読む場所に置く
+  xdg.configFile."ghostty/config".enable = false;
+  home.file."Library/Application Support/com.mitchellh.ghostty/config.ghostty".source =
+    config.xdg.configFile."ghostty/config".source;
 }
