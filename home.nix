@@ -197,9 +197,10 @@ in
     let
       p = palette;
       # Nerd Font の区切り記号（右向きの三角、右向きの線、左向きの三角）
-      r = "";
-      rThin = "";
-      l = "";
+      # 見えない文字なので、直接書くと抜け落ちやすい。文字コードで指定する
+      r = builtins.fromJSON ''"\ue0b0"'';
+      rThin = builtins.fromJSON ''"\ue0b1"'';
+      l = builtins.fromJSON ''"\ue0b2"'';
       # 右端の虹色の三角。前の色の上に次の色の三角を重ねていく
       rainbow = [ p.bg0 p.red p.orange p.yellow p.green p.cyan p.blue p.bg0 ];
       rainbowArrows = lib.concatStrings (

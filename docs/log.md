@@ -31,8 +31,11 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 - 実際に起動すると、ペインで Nix 版のツールが使われなかった。tmux はペインに `ZDOTDIR` を渡すので、zsh が `~/.zshenv`（envswitch の分岐）を飛ばして `~/.config-nix/zsh/.zshenv` を直接読み、旧環境向けの印（`__ETC_PROFILE_NIX_SOURCED`）が残って Nix の PATH が足されなかった。tmux の設定で `set-environment -gu ZDOTDIR` として、ペインが必ず `~/.zshenv` を通るようにした
 
+- ステータスラインの区切りの三角（Nerd Font の U+E0B0 など）が、設定を書くときに空文字として抜け落ちていて、旧環境と形が違っていた。見えない文字なので、`builtins.fromJSON` で文字コードから作るようにした
+
 **注意**
 - 旧環境の tmux と Nix の tmux は別物で、互いのセッションは見えない
+- 設定の再読み込みは prefix + r で行う。tmux の外から `tmux source-file` を実行すると、continuum がそのプロセスを「別のサーバー」と数え、自動保存が止まる（ps がコマンド名を `nix-tmux -f /Use` までしか出さず、`source` を除外できないため）。止まったら tmux を起動し直す
 - tmux の外から `tmux new-window` などを実行すると、実行したシェルの環境変数がそのウィンドウに混ざる（テストのときに旧環境の PATH が混ざって紛らわしかった）
 - tmux の中で開くペインも、開いた時点の envswitch のモードに従う。nix の tmux を使っている途中で `envswitch old` にすると、そのあと開いたペインは旧環境になる
 
