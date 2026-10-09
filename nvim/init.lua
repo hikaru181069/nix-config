@@ -51,6 +51,18 @@ vim.pack.add({
   "https://github.com/nvim-lualine/lualine.nvim",
   -- 括弧や引用符を自動で閉じる
   "https://github.com/windwp/nvim-autopairs",
+  -- 開いているファイルのタブ表示
+  "https://github.com/akinsho/bufferline.nvim",
+  -- コマンド入力・メッセージ・通知の見た目（nui は noice が使う部品）
+  "https://github.com/MunifTanjim/nui.nvim",
+  "https://github.com/rcarriga/nvim-notify",
+  "https://github.com/folke/noice.nvim",
+  -- <space> などを押して少し待つと、続けて押せるキーの一覧を出す
+  "https://github.com/folke/which-key.nvim",
+  -- 診断・参照・シンボルの一覧
+  "https://github.com/folke/trouble.nvim",
+  -- Neovim の中で lazygit を開く
+  "https://github.com/kdheepak/lazygit.nvim",
 })
 
 vim.cmd.colorscheme("nightfox")
@@ -141,6 +153,37 @@ require("gitsigns").setup({
 -- 括弧や引用符を自動で閉じる
 -- （旧設定の check_ts は、今の nvim-treesitter では文字列の中でも閉じてしまい効いていなかったので外した）
 require("nvim-autopairs").setup({})
+
+-- タブ表示・コマンド入力・通知（長いので lua/ui.lua に分けた）
+require("ui")
+
+-- キーの一覧（旧設定と同じく、少し待つと出る）
+require("which-key").setup({ preset = "modern", delay = 300 })
+require("which-key").add({
+  { "<leader>f", group = "探す" },
+  { "<leader>x", group = "診断" },
+  { "<leader>h", group = "git の変更" },
+  { "<leader>g", group = "git" },
+  { "<leader>c", group = "コード" },
+  { "<leader>b", group = "バッファ" },
+})
+
+-- 診断・参照・シンボルの一覧（旧設定と同じく右側に出し、選ぶと中身を見せる）
+require("trouble").setup({
+  focus = true,
+  win = { position = "right", size = 40 },
+  auto_preview = true,
+})
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "診断の一覧" })
+vim.keymap.set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "このファイルの診断" })
+vim.keymap.set("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "シンボルの一覧" })
+vim.keymap.set("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false<cr>", { desc = "定義・参照の一覧" })
+vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "ロケーションリスト" })
+vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "quickfix リスト" })
+
+-- lazygit（シェルと同じ Nix 版。diff は delta で出る）。fugitive は計画どおり使わない
+vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "lazygit" })
+vim.keymap.set("n", "<leader>gf", "<cmd>LazyGitCurrentFile<cr>", { desc = "このファイルの lazygit" })
 
 -- 浮かぶウィンドウ（ホバー・診断の詳細など）を角の丸い枠で囲む
 vim.o.winborder = "rounded"

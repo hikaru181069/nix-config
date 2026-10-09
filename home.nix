@@ -133,7 +133,7 @@ in
   # Git の操作画面。diff は delta で表示する
   programs.lazygit = {
     enable = true;
-    settings.git.pagers = [ { pager = "delta --paging=never"; } ];
+    settings.git.diffRenderers = [ { command = "delta --paging=never"; } ];
   };
 
   # tmux（~/.config/tmux から引き継ぎ）。ペイン分割とセッションは tmux、ターミナルは描画と IME だけを担当
@@ -287,6 +287,7 @@ in
         markdown_inline
         nix
         python
+        regex # noice がコマンド入力の色付けに使う
         tsx
         typescript
         vim

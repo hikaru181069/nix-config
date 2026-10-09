@@ -7,6 +7,28 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim に bufferline・noice・which-key・trouble・lazygit.nvim を入れた（Step 4）
+
+**やったこと**（nix 環境だけ。どれも vim.pack）
+- bufferline: 開いているファイルを上にタブのように並べる。`<Tab>` / `<S-Tab>` で切り替え、`<space>bd` で閉じる。見た目は旧設定のまま色を Nightfox に
+- noice（と nui・nvim-notify）: コマンド入力を画面中央に出し、メッセージは右上の通知にする。アイコンと位置は旧設定と同じ
+- which-key: `<space>` などを押して少し待つと、続けて押せるキーの一覧が出る。グループ名は日本語にした
+- trouble: 診断・参照・シンボルの一覧を右側に出す。キー（`<space>xx` など）は旧設定と同じ
+- lazygit.nvim: `<space>gg` で lazygit、`<space>gf` でこのファイルの履歴
+- 長い設定（bufferline・noice）は `nvim/lua/ui.lua` に分けた
+
+**なぜこうしたか**
+- 関数の引数の説明は blink.cmp が出しているので、noice では出さないようにした（二重になる）
+- 旧設定の fugitive（`<space>gs` など）は計画どおり入れない。git の操作は lazygit と gitsigns に任せる
+- noice がコマンド入力の色付けに regex のパーサを使うので、treesitter の言語に足した
+
+**直したこと**
+- lazygit が起動していなかった。lazygit を入れたときに書いた設定（`git.pagers`）は古い名前で、lazygit 0.66 は `git.diffRenderers` を使う。lazygit は設定を自動で書き直そうとするが、Nix が置いた設定は書き込めないのでエラーで止まっていた。名前を直した
+  - 入れたときは版の確認しかしておらず、起動までは確かめていなかった
+
+**確認したこと**（実際の画面で）
+- 2つのファイルを開くと上にタブが出る。`:` で中央に入力欄が出る。`<space>` で一覧が出る。`<space>xx` で型エラーの一覧が出る。lazygit が開き、diff は delta で出る
+
 ### Neovim に conform・gitsigns・lualine・autopairs を入れた（Step 4）
 
 **やったこと**（nix 環境だけ。どれも vim.pack）
