@@ -3,6 +3,10 @@
 
 vim.g.mapleader = " "
 
+-- 標準のファイル一覧（netrw）は使わず nvim-tree に任せる。起動の早い段階で止めないと両方が動いてしまう
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- 表示
 vim.o.number = true
 vim.o.relativenumber = true
@@ -36,6 +40,9 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
   -- 各言語のスニペット集（VS Code 形式。blink.cmp が読む）
   "https://github.com/rafamadriz/friendly-snippets",
+  -- ファイルツリー（devicons はファイルの種類のアイコン）
+  "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/nvim-tree/nvim-tree.lua",
 })
 
 vim.cmd.colorscheme("nightfox")
@@ -58,6 +65,13 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "ファイルを�
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "文字列で探す（ripgrep）" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "開いているバッファ" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "ヘルプ" })
+
+-- ファイルツリー（旧設定と同じく右側、幅 25、中身が1つだけのフォルダはまとめて1行にする）
+require("nvim-tree").setup({
+  view = { width = 25, side = "right" },
+  renderer = { group_empty = true },
+})
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "ファイルツリーを開閉" })
 
 -- 浮かぶウィンドウ（ホバー・診断の詳細など）を角の丸い枠で囲む
 vim.o.winborder = "rounded"

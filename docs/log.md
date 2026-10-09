@@ -7,6 +7,18 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim に nvim-tree を入れた（Step 4）
+
+**やったこと**（nix 環境だけ）
+- ファイルツリーの nvim-tree と、アイコンの nvim-web-devicons を vim.pack で入れた
+- 旧設定と同じ: `<space>e` で開閉、右側、幅 25、中身が1つだけのフォルダは1行にまとめる
+- 標準のファイル一覧（netrw）は止めた（`:Ex` は使えなくなる。`nvim .` では nvim-tree が開く）
+
+**なぜこうしたか**
+- `<space>e` で開いていたのに何も起きず不便だったため
+- nvim-tree の説明書どおり、netrw は起動の最初に止める。止めないと両方が動いてしまうことがある
+- 旧設定の色の上書き（`after/plugin/highlights.lua`）は Catppuccin 用なので持ってこない。Nightfox は nvim-tree の色を持っている
+
 ### Neovim に補完（blink.cmp）を入れた（Step 4）
 
 **やったこと**（nix 環境だけ）
