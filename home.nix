@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  palette = import ./palette.nix;
+in
 {
   home.username = "hikarusato";
   home.homeDirectory = "/Users/hikarusato";
@@ -22,6 +25,9 @@
 
   # git は ~/.gitconfig（旧環境）も読んでしまうので、Nix 環境では読む先を1つに絞る
   home.sessionVariables.GIT_CONFIG_GLOBAL = "${config.xdg.configHome}/git/config";
+  # tmux のサーバーは1ユーザーに1つ（/tmp/tmux-<uid>/default）なので、そのままだと旧環境の tmux に
+  # つながってしまう。Nix 環境ではソケットを macOS のユーザー専用一時フォルダ（$TMPDIR）に置いて分ける
+  home.sessionVariables.TMUX_TMPDIR = "\${TMPDIR}";
 
   programs.git = {
     enable = true;
@@ -129,6 +135,129 @@
     enable = true;
     settings.git.pagers = [ { pager = "delta --paging=never"; } ];
   };
+
+  # tmux（~/.config/tmux から引き継ぎ）。ペイン分割とセッションは tmux、ターミナルは描画と IME だけを担当
+  programs.tmux = {
+    enable = true;
+    # tmux は ~/.tmux.conf・$XDG_CONFIG_HOME/tmux/tmux.conf・~/.config/tmux/tmux.conf のうち、
+    # あるものを全部読む。旧環境の ~/.config/tmux/tmux.conf まで読まれないよう、-f で1つに絞る
+    # また、プロセス名を nix-tmux にする（下の continuum の説明を参照）
+    package = pkgs.symlinkJoin {
+      name = "tmux";
+      paths = [ pkgs.tmux ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/tmux --argv0 nix-tmux --add-flags "-f ${config.xdg.configHome}/tmux/tmux.conf"
+      '';
+    };
+    prefix = "C-a";
+    terminal = "tmux-256color";
+    mouse = true;
+    keyMode = "vi";
+    baseIndex = 1;
+    escapeTime = 0;
+    historyLimit = 10000;
+    # prefix + hjkl でペイン移動、prefix + HJKL でサイズ変更（5 ずつ）
+    customPaneNavigationAndResize = true;
+    resizeAmount = 5;
+    # 旧環境で tmux-sensible が有効にしていたもののうち、効いていたものだけ残す
+    sensibleOnTop = false;
+    focusEvents = true;
+    aggressiveResize = true;
+    clock24 = true;
+    plugins = with pkgs.tmuxPlugins; [
+      # C-hjkl で Neovim の分割と tmux のペインを区別なく移動
+      vim-tmux-navigator
+      {
+        plugin = resurrect;
+        # 旧環境の保存データ（~/.local/share/tmux/resurrect）と混ざらないよう別の場所に保存する
+        extraConfig = "set -g @resurrect-dir '${config.xdg.dataHome}/tmux/resurrect-nix'";
+      }
+      {
+        # 30 分ごとにセッションを保存し、tmux の起動時に復元する
+        # continuum は「tmux という名前のプロセスがほかにあれば自動保存しない」ので、旧環境の tmux と
+        # 同時に動かすと、どちらも保存しなくなる。Nix 側はプロセス名を nix-tmux にし、数えるのも nix-tmux だけにする
+        plugin = continuum.overrideAttrs (old: {
+          postInstall = (old.postInstall or "") + ''
+            substituteInPlace $target/scripts/helpers.sh \
+              --replace-fail '\grep "^tmux"' '\grep "^nix-tmux"' \
+              --replace-fail '\grep -v "^tmux source"' '\grep -v "^nix-tmux source"'
+          '';
+        });
+        extraConfig = ''
+          set -g @continuum-save-interval '30'
+          set -g @continuum-restore 'on'
+        '';
+      }
+    ];
+  };
+  # 自分の設定は、プラグインより前に読ませる。continuum は読み込み時に status-right へ自動保存の処理を足すので、
+  # status-right をプラグインより後で設定すると自動保存が止まってしまう
+  xdg.configFile."tmux/tmux.conf".text = lib.mkOrder 800 (
+    let
+      p = palette;
+      # Nerd Font の区切り記号（右向きの三角、右向きの線、左向きの三角）
+      r = "";
+      rThin = "";
+      l = "";
+      # 右端の虹色の三角。前の色の上に次の色の三角を重ねていく
+      rainbow = [ p.bg0 p.red p.orange p.yellow p.green p.cyan p.blue p.bg0 ];
+      rainbowArrows = lib.concatStrings (
+        lib.zipListsWith (bg: fg: "#[fg=${fg},bg=${bg}]${l}") (lib.init rainbow) (lib.tail rainbow)
+      );
+    in
+    ''
+      # コマンド入力（prefix + :）の行編集は Emacs 式（tmux-sensible と同じ）
+      set -g status-keys emacs
+      set -g display-time 4000
+      set -s set-clipboard on
+      set -g renumber-windows on
+      set -as terminal-features ",*:RGB"
+      set -as terminal-features ",*:usstyle"
+
+      bind r source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "tmux config reloaded"
+
+      unbind %
+      unbind '"'
+      bind - split-window -v
+      bind | split-window -h
+      bind m resize-pane -Z
+
+      # コピーモード: v で選択開始、y か Enter でクリップボードへ
+      bind -T copy-mode-vi v send-keys -X begin-selection
+      bind -T copy-mode-vi y send-keys -X copy-pipe "pbcopy"
+      bind -T copy-mode-vi Enter send-keys -X copy-pipe "pbcopy"
+      bind -T copy-mode-vi Escape send-keys -X cancel
+
+      # ステータスライン（見た目は旧環境のまま、色だけ Nightfox に置き換え）
+      set -g mode-style "fg=${p.fg1},bg=${p.sel0}"
+      set -g message-style "fg=${p.fg2},bg=${p.bg0}"
+      set -g message-command-style "fg=${p.fg2},bg=${p.bg0}"
+      set -g pane-border-style "fg=${p.bg1},bg=${p.bg1}"
+      set -g pane-active-border-style "fg=${p.bg3},bg=${p.bg1}"
+
+      set -g status on
+      set -g status-interval 1
+      set -g status-justify left
+      set -g status-style "fg=${p.fg2},bg=${p.bg0}"
+      set -g status-left-length 100
+      set -g status-right-length 100
+      set -g status-left-style NONE
+      set -g status-right-style NONE
+
+      # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
+      set -g status-left "#[fg=#{?client_prefix,${p.bg0},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg0}},bold] #S #[fg=#{?client_prefix,${p.cyan},${p.bg0}},bg=${p.fg2},nobold]${r}#[fg=${p.bg0},bg=${p.fg2},bold] #(whoami) #[fg=${p.fg2},bg=${p.bg0},nobold]${r}"
+      # 右: 虹色の三角とホスト名
+      set -g status-right "${rainbowArrows}#[fg=${p.fg3},bg=${p.bg0},bold] #h "
+
+      # ウィンドウ一覧: 番号とディレクトリ名
+      setw -g window-status-separator ""
+      setw -g window-status-style "fg=${p.comment},bg=${p.bg0}"
+      setw -g window-status-activity-style "underscore,fg=${p.comment},bg=${p.bg0}"
+      setw -g window-status-format "#[fg=${p.bg0},bg=${p.bg0}]${r}#[default] #I ${rThin} #{b:pane_current_path} #[fg=${p.bg0},bg=${p.bg0}]${r}"
+      setw -g window-status-current-format "#[fg=${p.bg0},bg=${p.fg1}]${r}#[fg=${p.fg3},bg=${p.fg1}] #I #[fg=${p.fg1},bg=${p.fg3}]${r} #{b:pane_current_path} #[fg=${p.fg3},bg=${p.bg0}]${r}"
+    ''
+  );
   # z <ディレクトリ名の一部> で、よく行くディレクトリへ移動
   programs.zoxide.enable = true;
 

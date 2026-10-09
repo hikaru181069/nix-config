@@ -7,6 +7,32 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### tmux を移した（Step 4）
+
+**やったこと**（nix 環境だけ）
+- `~/.config/tmux` の設定を `programs.tmux` に移した。prefix は C-a のまま
+- 残したもの: マウス、vi 式コピーモード（v で選択、y / Enter で pbcopy）、prefix + hjkl で移動・HJKL でサイズ変更、`-` `|` で分割、`m` でズーム、`r` で再読み込み、C-hjkl で Neovim と行き来、escape-time 0、RGB、resurrect + continuum（30 分ごとに保存、起動時に復元）
+- 削ったもの: tmux の既定と同じキー（1〜9、`[`、p / n、copy-mode の q）、分割キーの連打（`-r`）、tmux-sensible、tpm
+  - tmux-sensible が実際に変えていた設定（focus-events、aggressive-resize、表示時間 4 秒、コマンド入力は Emacs 式）は直接書いた
+- プラグインは tpm ではなく nixpkgs の tmuxPlugins。vim-tmux-navigator は手書きの設定をやめてプラグインにした
+- ステータスラインは見た目をそのままに、色を Nightfox に置き換えた
+  - 色の定義を `palette.nix` に作った（nightfox.nvim の値）。ほかのツールもここから色を取る
+  - コピーモードの選択範囲の色だけは、背景と同じ色で見えにくかったので、Nightfox の選択色（sel0）にした
+
+**旧環境と分けるためにしたこと**
+- tmux のサーバーは1ユーザーに1つ（`/tmp/tmux-501/default`）なので、そのままだと旧環境で動いている tmux につながる。nix 環境では `TMUX_TMPDIR` を `$TMPDIR` にして、別のサーバーにした
+- tmux 3.7 は `~/.tmux.conf`・`$XDG_CONFIG_HOME/tmux/tmux.conf`・`~/.config/tmux/tmux.conf` のうち、あるものを**全部**読む。旧環境の設定まで読まれていたので、tmux 本体をラップして `-f` で1つに絞った
+- resurrect の保存先を `~/.local/share/tmux/resurrect-nix` に分けた
+- continuum は「ほかに tmux のプロセスがあると自動保存しない」。旧環境と同時に動かすとどちらも保存しなくなるので、nix 側の tmux はプロセス名を `nix-tmux` にし、nix 側の continuum は `nix-tmux` だけを数えるように書き換えた
+
+**確認したこと**
+- nix 側: 別のソケット、読む設定は1つだけでエラーなし、自動保存も有効、保存先は resurrect-nix、キー割り当ても上のとおり
+- old 側: 旧環境の tmux サーバー（セッション 4 / MLB-App / coffee-app）はそのまま。プロセス名も `tmux` のまま
+
+**注意**
+- 旧環境の tmux と Nix の tmux は別物で、互いのセッションは見えない
+- tmux の中で開くペインも、開いた時点の envswitch のモードに従う。nix の tmux を使っている途中で `envswitch old` にすると、そのあと開いたペインは旧環境になる
+
 ### ripgrep・fd・jq・lazygit を移した（Step 4 の始め）
 
 **やったこと**（nix 環境だけ）
