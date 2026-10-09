@@ -7,6 +7,12 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim に nvim-ts-autotag を入れた（Step 4）
+
+- HTML・JSX のタグを自動で閉じ、開きタグを書き換えると閉じタグも揃える（vim.pack）
+- 確認: HTML で `<p>` → `<p></p>`、TSX で `<div>` を `<section>` に変えると `</div>` も `</section>` になる
+- これで計画の Neovim のプラグインはすべて入った
+
 ### Neovim にインデント表示・treesitter-context・ccc・zen-mode・no-neck-pain を入れた（Step 4）
 
 **やったこと**（nix 環境だけ。どれも vim.pack）

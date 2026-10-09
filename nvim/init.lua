@@ -72,6 +72,8 @@ vim.pack.add({
   -- 集中モード（zen-mode は1つのウィンドウを中央に大きく、no-neck-pain は左右に余白を足して中央に寄せる）
   "https://github.com/folke/zen-mode.nvim",
   "https://github.com/shortcuts/no-neck-pain.nvim",
+  -- HTML・JSX のタグを自動で閉じ、開きタグを書き換えると閉じタグも揃える
+  "https://github.com/windwp/nvim-ts-autotag",
 })
 
 vim.cmd.colorscheme("nightfox")
@@ -162,6 +164,7 @@ require("gitsigns").setup({
 -- 括弧や引用符を自動で閉じる
 -- （旧設定の check_ts は、今の nvim-treesitter では文字列の中でも閉じてしまい効いていなかったので外した）
 require("nvim-autopairs").setup({})
+require("nvim-ts-autotag").setup({})
 
 -- タブ表示・コマンド入力・通知（長いので lua/ui.lua に分けた）
 require("ui")

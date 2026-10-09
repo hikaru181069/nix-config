@@ -64,6 +64,10 @@
       "rev": "cee25e6f83935cfd0db2ec6e54ac0cdcf6fbeea5",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
+    "nvim-ts-autotag": {
+      "rev": "d7220b55e16ed3c04e88086256def5d282429493",
+      "src": "https://github.com/windwp/nvim-ts-autotag"
+    },
     "nvim-web-devicons": {
       "rev": "58447c1fca354bbf184425e4a8d01deecbd6f3c4",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
