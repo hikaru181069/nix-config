@@ -293,6 +293,17 @@ in
         vimdoc
       ]))
     ];
+    # 言語サーバー（LSP）。Mason は使わず nixpkgs から入れる。Neovim の中だけで見え、シェルの PATH には出ない
+    extraPackages = with pkgs; [
+      vtsls # TypeScript / JavaScript（VS Code と同じ中身）
+      vscode-langservers-extracted # HTML・CSS・JSON・ESLint
+      tailwindcss-language-server
+      emmet-language-server
+      basedpyright # Python の型チェック・補完
+      ruff # Python の lint・整形
+      lua-language-server
+      nixd # Nix（この設定を書くため）
+    ];
   };
   # Nix で入れたプラグインは、データ置き場の site/pack/hm へのリンクから読み込まれる。
   # home-manager は ~/.local/share/nvim（旧環境の置き場）に作るので、NVIM_APPNAME に合わせた場所に移す

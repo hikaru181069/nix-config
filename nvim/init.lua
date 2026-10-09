@@ -32,6 +32,8 @@ vim.pack.add({
   -- ファイル・文字列・バッファなどを絞り込んで探す（plenary は telescope が使う部品）
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-telescope/telescope.nvim",
+  -- 各言語サーバーの起動方法（コマンド・対象のファイル・ルートの探し方）の定義集
+  "https://github.com/neovim/nvim-lspconfig",
 })
 
 vim.cmd.colorscheme("nightfox")
@@ -54,6 +56,88 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "ファイルを�
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "文字列で探す（ripgrep）" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "開いているバッファ" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "ヘルプ" })
+
+-- 浮かぶウィンドウ（ホバー・診断の詳細など）を角の丸い枠で囲む
+vim.o.winborder = "rounded"
+
+-- 診断（エラー・警告）の表示。行末への文字表示は既定で出ないので、印と下線で示す
+vim.diagnostic.config({
+  severity_sort = true,
+  signs = {
+    text = {
+      -- Nerd Font のアイコン。見えない文字なので文字コードで書く
+      [vim.diagnostic.severity.ERROR] = "\u{f057}",
+      [vim.diagnostic.severity.WARN] = "\u{f071}",
+      [vim.diagnostic.severity.INFO] = "\u{f05a}",
+      [vim.diagnostic.severity.HINT] = "\u{f0335}",
+    },
+  },
+  float = { source = true },
+})
+
+-- LSP のキー。Neovim 0.11 から次は最初から使える（旧設定の gr / gi / <leader>rn / <leader>ca などは、これに置き換え）
+--   K 説明 / grn 名前の変更 / gra コードアクション / grr 参照 / gri 実装 / grt 型の定義
+--   gO シンボル一覧 / [d ]d 前後の診断 / <C-w>d 行の診断 / 挿入モードの <C-s> 引数の説明
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local map = function(lhs, rhs, desc)
+      vim.keymap.set("n", lhs, rhs, { buffer = args.buf, desc = desc })
+    end
+    map("gd", vim.lsp.buf.definition, "定義へ移動")
+    map("gD", vim.lsp.buf.declaration, "宣言へ移動")
+    map("<leader>gl", vim.diagnostic.open_float, "行の診断を表示")
+  end,
+})
+
+-- 言語サーバーの設定（旧設定から、既定と違うところだけ残した）
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      -- Neovim の設定を書くとき、vim.* の補完と型が効くようにする
+      runtime = { version = "LuaJIT" },
+      workspace = { library = { vim.env.VIMRUNTIME }, checkThirdParty = false },
+      telemetry = { enable = false },
+    },
+  },
+})
+vim.lsp.config("basedpyright", {
+  settings = {
+    -- 既定の "recommended" は厳しすぎるので、旧設定（pyright の basic）に合わせる
+    basedpyright = { analysis = { typeCheckingMode = "basic" } },
+  },
+})
+vim.lsp.config("ruff", {
+  on_attach = function(client)
+    -- 説明（K）は basedpyright に任せる
+    client.server_capabilities.hoverProvider = false
+  end,
+})
+vim.lsp.config("tailwindcss", {
+  settings = {
+    tailwindCSS = {
+      emmetCompletions = true,
+      -- この関数の引数の中でもクラス名を補完する
+      classFunctions = { "clsx", "cn", "cva", "tv", "tw", "twMerge" },
+    },
+  },
+})
+vim.lsp.config("emmet_language_server", {
+  -- JS / TS の中では出さない（HTML・CSS・JSX だけ）
+  filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact" },
+})
+vim.lsp.enable({
+  "vtsls", -- 旧設定の ts_ls から変更（VS Code と同じ TypeScript の機能）
+  "eslint",
+  "html",
+  "cssls",
+  "jsonls",
+  "tailwindcss",
+  "emmet_language_server",
+  "basedpyright", -- 旧設定の pyright から変更（pyright に機能を足したもの）
+  "ruff", -- 新規（Python の lint）
+  "lua_ls",
+  "nixd", -- 新規（この設定の home.nix などを書くため）
+})
 
 -- treesitter で色付けする（パーサとプラグインは home.nix で入れている）
 -- nvim-treesitter は自動では有効にしないので、ファイルを開いたときに始める。パーサがない言語では何もしない

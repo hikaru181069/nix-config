@@ -7,6 +7,23 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim に LSP を入れた（Step 4）
+
+**やったこと**（nix 環境だけ）
+- 言語サーバーを nixpkgs から入れた（`programs.neovim.extraPackages`。Neovim の中だけで見え、シェルの PATH には出ない）
+  - vtsls（TypeScript）、vscode-langservers-extracted（HTML・CSS・JSON・ESLint）、tailwindcss、emmet、basedpyright と ruff（Python）、lua_ls、nixd（Nix）
+- 起動方法の定義は nvim-lspconfig（vim.pack）から取り、`vim.lsp.config` / `vim.lsp.enable` で有効にした
+- 旧設定から変えたもの:
+  - ts_ls → vtsls、pyright → basedpyright（計画どおり。どちらも VS Code に近い機能）。basedpyright の型チェックは旧設定と同じ basic に下げた
+  - ruff と nixd を新しく足した。ruff の説明（K）は basedpyright と重なるので切った
+  - サーバーの設定は、既定と同じ値を書き写していたものを消し、違うところだけ残した（tailwind の classFunctions など）
+- キー: Neovim 0.11 から既定で使えるもの（K・grn・gra・grr・gri・[d ]d など）は自分では割り当てない。旧設定の gr / gi / `<leader>rn` / `<leader>ca` はこれに置き換わる。残したのは gd・gD・`<leader>gl`
+- 診断: 印のアイコンは旧設定と同じ（Nerd Font。文字コードで書いた）。浮かぶウィンドウは `winborder` で角の丸い枠にした
+
+**確認したこと**（試しのファイルを開いて、サーバーがつながり診断が出るか）
+- TypeScript: vtsls が型エラーを出す / Python: basedpyright と ruff / Lua: lua_ls / Nix: nixd / HTML・CSS・JSON: それぞれのサーバー
+- ESLint は ESLint の設定があるプロジェクトでだけ動く
+
 ### Neovim に telescope を入れた（Step 4）
 
 **やったこと**（nix 環境だけ）
