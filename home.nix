@@ -292,6 +292,8 @@ in
         vim
         vimdoc
       ]))
+      # 補完。あいまい検索の部品（Rust）のコンパイル済みのものが要るので、vim.pack ではなく Nix で入れる
+      pkgs.vimPlugins.blink-cmp
     ];
     # 言語サーバー（LSP）。Mason は使わず nixpkgs から入れる。Neovim の中だけで見え、シェルの PATH には出ない
     extraPackages = with pkgs; [

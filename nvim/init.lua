@@ -34,6 +34,8 @@ vim.pack.add({
   "https://github.com/nvim-telescope/telescope.nvim",
   -- 各言語サーバーの起動方法（コマンド・対象のファイル・ルートの探し方）の定義集
   "https://github.com/neovim/nvim-lspconfig",
+  -- 各言語のスニペット集（VS Code 形式。blink.cmp が読む）
+  "https://github.com/rafamadriz/friendly-snippets",
 })
 
 vim.cmd.colorscheme("nightfox")
@@ -87,6 +89,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("gD", vim.lsp.buf.declaration, "宣言へ移動")
     map("<leader>gl", vim.diagnostic.open_float, "行の診断を表示")
   end,
+})
+
+-- 補完（blink.cmp。home.nix で入れている）。LSP・スニペット・パス・バッファの単語を候補に出す
+-- LSP に「補完ができる」と伝える設定は blink.cmp が自動で行う
+require("blink.cmp").setup({
+  keymap = {
+    -- Enter で確定、C-Space で開く、C-e で閉じる、C-n / C-p でも上下
+    preset = "enter",
+    -- 旧設定と同じく、Tab / S-Tab で候補を上下する（スニペットの中では次・前の入力欄へ）
+    ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+    ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+  },
+  completion = {
+    -- 候補の説明を横に出す
+    documentation = { auto_show = true },
+  },
+  -- 関数の引数を入力している間、引数の説明を出す
+  signature = { enabled = true },
 })
 
 -- 言語サーバーの設定（旧設定から、既定と違うところだけ残した）

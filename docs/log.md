@@ -7,6 +7,22 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Neovim に補完（blink.cmp）を入れた（Step 4）
+
+**やったこと**（nix 環境だけ）
+- blink.cmp を入れた。候補は LSP・スニペット・パス・バッファの単語。候補の説明と、関数の引数の説明も出る
+- スニペット集 friendly-snippets を vim.pack で入れた
+- キー: Enter で確定、Tab / S-Tab で候補を上下（スニペットの中では次・前の入力欄へ）、C-Space で開く、C-e で閉じる
+
+**なぜこうしたか**
+- 旧設定の nvim-cmp は部品が8つ（cmp-nvim-lsp・cmp-buffer・cmp-path・cmp-cmdline・LuaSnip・cmp_luasnip・lspkind など）に分かれていた。blink.cmp は1つでこれらを持っていて、計画どおり置き換えた
+- blink.cmp はあいまい検索の部品が Rust で、コンパイル済みのものが要る。treesitter と同じく nixpkgs から入れた（vim.pack だと GitHub からダウンロードする）
+- 候補の1つ目が選ばれた状態で開くので、Enter だけで1つ目を確定できる（VS Code と同じ）。旧設定では Tab で1つ目に移っていたが、今は Tab で2つ目に移る
+
+**確認したこと**
+- `:checkhealth blink.cmp`: コンパイル済みの部品が読み込まれている
+- TypeScript で `console.lo` と打つと `log` などの候補と MDN の説明が出て、Enter で `log()` が入り、引数の説明が出る
+
 ### Neovim に LSP を入れた（Step 4）
 
 **やったこと**（nix 環境だけ）
