@@ -263,6 +263,16 @@ in
       setw -g window-status-current-format "#[fg=${p.bg0},bg=${p.fg1}]${r}#[fg=${p.fg3},bg=${p.fg1}] #I #[fg=${p.fg1},bg=${p.fg3}]${r} #{b:pane_current_path} #[fg=${p.fg3},bg=${p.bg0}]${r}"
     ''
   );
+  # プロジェクトのフォルダに入ると、その .envrc（flake.nix の devShell）の環境に自動で切り替わる
+  # nix-direnv は devShell を保存しておき、2回目からすぐ読み込む（ガベージコレクションでも消さない）
+  # 旧環境には direnv がないので、プロジェクトに .envrc を置いても旧環境の動きは変わらない
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    # 切り替えのたびに出る環境変数の一覧は長いので出さない
+    config.global.hide_env_diff = true;
+  };
+
   # z <ディレクトリ名の一部> で、よく行くディレクトリへ移動
   programs.zoxide.enable = true;
 

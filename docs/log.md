@@ -5,6 +5,32 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ---
 
+## 2026-10-10
+
+### プロジェクトごとの環境: direnv と coffee-app の devShell（Step 5 の始め）
+
+**やったこと**
+- nix 環境に direnv と nix-direnv を入れた。プロジェクトのフォルダに入ると、その `.envrc`（flake.nix の devShell）の環境に自動で切り替わる
+  - 旧環境には direnv がないので、プロジェクトに `.envrc` を置いても旧環境の動きは変わらない
+- coffee-app に `flake.nix`・`flake.lock`・`.envrc` を置いた（ブランチ `chore/nix-devshell-node22`。まだ push していない）
+  - devShell: Node.js 22・Python 3.13・uv・mongosh。MongoDB などのサービスは Docker Compose のまま
+  - `.envrc` は `.venv` がなければ uv で作り、`fastapi-service/requirements-dev.txt` を入れる
+- coffee-app の Dockerfile（frontend・backend）と CI の Node.js を 20 から 22 に上げた
+
+**なぜこうしたか**
+- 開発環境の定義はプロジェクトに置いた（プロジェクトと一緒に版が管理され、clone すれば同じ環境になる）
+- Node.js 20 は 2026-04 にサポートが終わり、nixpkgs からも削除されていた。devShell だけ 22 にすると手元と本番で版がずれるので、Docker・CI も 22 に揃えた
+- coffee-app は作業中のブランチ（feat/k8s-bootstrap、未コミットの変更あり）だったので、触らずに git worktree で main から別のフォルダを作って作業した
+
+**確認したこと**（devShell の Node 22 で、coffee-app の CLAUDE.md が求めるテスト）
+- backend: 型チェック成功、テスト 580 件成功 / frontend: lint・テスト 368 件・ビルド成功 / fastapi: pytest 10 件成功
+- Docker: backend・frontend の dev・prod の4イメージが Node 22 でビルドできた
+- direnv: `direnv allow` で `.venv` が作られ、node と python が Nix の版になる
+
+**注意**
+- coffee-app の既存のコミットは旧環境の設定（icloud のアドレス・署名なし）。nix 環境でコミットすると noreply のアドレス・署名ありになる
+- ~/coffee-app の今の `.venv` は pyenv の Python で作られ、スクリプトが mlb-app の `.venv` を指している（mlb-app からコピーされたもの）。ブランチを取り込んだあと nix 環境で使う前に、作り直す必要がある
+
 ## 2026-10-09
 
 ### Neovim に nvim-ts-autotag を入れた（Step 4）
