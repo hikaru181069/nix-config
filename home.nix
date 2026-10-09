@@ -34,8 +34,34 @@
       fetch.prune = true;
       merge.conflictStyle = "zdiff3";
       rerere.enabled = true;
+      # GitHub との通信は SSH。~/.ssh/config は旧環境と共有なので触らず、Nix 環境用の設定を指定する
+      # UseKeychain は macOS 標準の ssh だけが対応しているので /usr/bin/ssh を使う
+      core.sshCommand = "/usr/bin/ssh -F ${config.xdg.configHome}/ssh/config";
+      # コミット署名も同じ SSH 鍵で行う（GitHub に Signing key として登録）
+      user.signingKey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "${config.xdg.configHome}/git/allowed_signers";
+      commit.gpgSign = true;
+      tag.gpgSign = true;
     };
     ignores = [ ".DS_Store" ".direnv/" "result" "**/.claude/settings.local.json" ];
+  };
+  # 自分の署名を手元で検証するための一覧（git log --show-signature で Good signature と出る）
+  xdg.configFile."git/allowed_signers".text =
+    "174260688+hikaru181069@users.noreply.github.com namespaces=\"git\" ${builtins.readFile ./keys/id_ed25519.pub}";
+  # 鍵のパスフレーズはキーチェーンに保存し、初回に ssh-agent へ読み込む（毎回入力しない）
+  xdg.configFile."ssh/config".text = ''
+    Host *
+      AddKeysToAgent yes
+      UseKeychain yes
+      IdentityFile ~/.ssh/id_ed25519
+  '';
+
+  # git diff / log / show の表示を delta で見やすくする（色はテーマ統一の Step 5.5 で合わせる）
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options.navigate = true;
   };
 
   programs.zsh = {
@@ -64,6 +90,8 @@
       autoload -Uz edit-command-line
       zle -N edit-command-line
       bindkey '^X^E' edit-command-line
+      # キーチェーンに保存したパスフレーズで SSH 鍵を ssh-agent に読み込む（コミット署名に必要）
+      /usr/bin/ssh-add --apple-load-keychain -q 2>/dev/null
     '';
   };
 

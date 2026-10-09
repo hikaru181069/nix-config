@@ -7,6 +7,27 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-09
 
+### Git を SSH 接続・コミット署名・delta にした（Step 3 の残り）
+
+**やったこと**（nix 環境だけ）
+- GitHub との通信を SSH にした。鍵は既存の `~/.ssh/id_ed25519`（認証用として GitHub に登録済みだった）
+  - SSH の設定は `~/.config-nix/ssh/config` に置き、git の `core.sshCommand` で指定
+  - パスフレーズは macOS のキーチェーンに保存し、nix 環境のシェル起動時に ssh-agent へ読み込む
+  - このリポジトリのリモートを `git@github.com:hikaru181069/nix-config.git` に変更
+- コミットとタグに、同じ鍵で署名するようにした（`gpg.format = ssh`）。GitHub に Signing key として登録
+  - 手元で検証するための一覧 `allowed_signers` を置いた。公開鍵はリポジトリの `keys/` に入れた
+- delta: `git diff` / `log` / `show` の表示を見やすくした（`n` / `N` で次・前のファイルへ移動）
+
+**なぜこうしたか**
+- `~/.ssh/config` は旧環境と共有なので、home-manager の `programs.ssh` は使わず、別の場所に置いた
+- キーチェーン連携（UseKeychain）は macOS 標準の ssh だけが対応しているので、`/usr/bin/ssh` を使う
+- 認証と署名を1つの鍵にまとめ、管理するものを増やさない
+
+**注意**
+- nix 環境では全コミットに署名するので、鍵が ssh-agent にないとコミットが失敗する。そのときは `/usr/bin/ssh-add --apple-load-keychain`
+- 旧環境は今までどおり（HTTPS + gh、署名なし）
+- delta の色はまだ既定。テーマ統一（Step 5.5）で合わせる
+
 ### シェルまわりを整えた（Step 3 の残り）
 
 **やったこと**（nix 環境だけ。old 環境は変わらない）
