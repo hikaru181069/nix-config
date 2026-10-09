@@ -19,7 +19,7 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 **やったこと**
 - nix 環境に direnv と nix-direnv を入れた。プロジェクトのフォルダに入ると、その `.envrc`（flake.nix の devShell）の環境に自動で切り替わる
   - 旧環境には direnv がないので、プロジェクトに `.envrc` を置いても旧環境の動きは変わらない
-- coffee-app に `flake.nix`・`flake.lock`・`.envrc` を置いた（ブランチ `chore/nix-devshell-node22`。まだ push していない）
+- coffee-app に `flake.nix`・`flake.lock`・`.envrc` を置いた（PR #1 でマージ済み、`46cc0c4`。CI も Node 22 で通過）
   - devShell: Node.js 22・Python 3.13・uv・mongosh。MongoDB などのサービスは Docker Compose のまま
   - `.envrc` は `.venv` がなければ uv で作り、`fastapi-service/requirements-dev.txt` を入れる
 - coffee-app の Dockerfile（frontend・backend）と CI の Node.js を 20 から 22 に上げた
@@ -36,7 +36,9 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 **注意**
 - coffee-app の既存のコミットは旧環境の設定（icloud のアドレス・署名なし）。nix 環境でコミットすると noreply のアドレス・署名ありになる
-- ~/coffee-app の今の `.venv` は pyenv の Python で作られ、スクリプトが mlb-app の `.venv` を指している（mlb-app からコピーされたもの）。ブランチを取り込んだあと nix 環境で使う前に、作り直す必要がある
+- ~/coffee-app の `.venv` は、pyenv の Python で作られ、スクリプトが mlb-app の `.venv` を指していた（mlb-app からコピーされたもの）。マージ後に Nix の Python 3.13 で作り直した。旧環境の pyright もこの `.venv` を読むが、Python の場所が変わっただけなのでそのまま使える
+- この `.venv` の Python は Nix のストアにある。~/coffee-app で direnv が一度動くまでは、ガベージコレクション（`nix-collect-garbage`）から守られていない。作業ブランチ（feat/k8s-bootstrap）には `.envrc` がないので、main を取り込んで `direnv allow` するまで、ガベージコレクションはしない
+- nix 環境の gh はログイン情報を見つけられない（設定の置き場所が `~/.config-nix` に変わるため。ログイン情報は旧環境の `~/.config/gh` にある）。PR は `GH_CONFIG_DIR=~/.config/gh` を付けて作った。gh も Nix で管理するのが次の作業候補
 
 ## 2026-10-09
 
