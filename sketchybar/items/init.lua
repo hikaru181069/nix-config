@@ -10,16 +10,31 @@ require("items.spaces.spaces")
 require("items.front_app.front_app")
 
 -- 右
--- 島と島の間を空ける（見えない幅だけの項目）
+-- 幅だけの見えない項目。共通の見た目の余白（左右 3）が付くと、島の端がその分はみ出して隣の島と重なるので 0 にする
+local function spacer(name, width)
+  return SBAR.add("item", name, {
+    position = "right",
+    width = width,
+    padding_left = 0,
+    padding_right = 0,
+    icon = { drawing = false },
+    label = { drawing = false },
+    background = { drawing = false, padding_left = 0, padding_right = 0 },
+  })
+end
+
+-- 島と島の間を空ける
+local gaps = 0
 local function gap()
-  SBAR.add("item", { position = "right", width = 10 })
+  gaps = gaps + 1
+  spacer("island.gap." .. gaps, 10)
 end
 
 -- 島: add_items で項目を足し（右端から順に）、それらを角丸の背景で囲む。両端に少し余白を入れる
 local function island(name, add_items)
-  local pad_right = SBAR.add("item", name .. ".pad_right", { position = "right", width = 4 })
+  local pad_right = spacer(name .. ".pad_right", 6)
   local members = add_items()
-  local pad_left = SBAR.add("item", name .. ".pad_left", { position = "right", width = 4 })
+  local pad_left = spacer(name .. ".pad_left", 6)
   table.insert(members, 1, pad_right.name)
   table.insert(members, pad_left.name)
   SBAR.add("bracket", name, members, {
