@@ -1,7 +1,7 @@
 -- Padding item required because of bracket
 SBAR.add("item", { position = "right", width = PADDINGS + 6 })
 
-local cal_date = SBAR.add("item", {
+local cal_date = SBAR.add("item", "calendar.date", {
   position = "right",
   padding_left = -5,
   width = 0,
@@ -14,7 +14,7 @@ local cal_date = SBAR.add("item", {
   y_offset = 6,
 })
 
-local cal_time = SBAR.add("item", {
+local cal_time = SBAR.add("item", "calendar.time", {
   position = "right",
   padding_left = -5,
   label = {
