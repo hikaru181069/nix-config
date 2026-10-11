@@ -7,6 +7,30 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-11
 
+### sketchybar をゼロから作り直し始めた（Step 5.5）
+
+**決めたこと**（ユーザーと相談）
+- 出すもの: 左に Apple ロゴ・スペース番号・今のアプリ・アプリのメニュー、右に日付と時刻・バッテリー・Wi-Fi・音量・CPU とメモリ・git ブランチ・Docker
+- 形: バー自体は透明にして、項目のまとまりごとに角の丸い「島」を浮かべる
+- 計画どおり、項目は1つずつ足す。旧設定（テンプレートを元にした Lua の設定、ヘルパーの C プログラムや常駐の統計プログラムあり）は参考にするだけ
+
+**やったこと**（1回目: 土台と3項目）
+- sketchybar を Nix（home-manager の `programs.sketchybar`、Lua と SbarLua）で入れ、起動も Nix に移した。設定は `~/nix-config/sketchybar`（編集したら `sketchybar --reload`）
+- 土台: 透明なバー（高さ 38。ノッチの MacBook のメニューバーと同じ）、島（bg0 の地に bg3 の細い枠、角丸 10）、文字は Maple Mono NF
+- 色は palette.nix から Lua のファイル（`~/.config-nix/sketchybar/palette.lua`）を作って読む
+- スペース番号（1〜10）: 今いるスペースは番号を青く、背景を選択範囲の色に。中のアプリのアイコンを並べる（yabai に聞く）。押すとそのスペースへ
+- 今のアプリ: アイコンと名前
+- 日付と時刻: `10/11 日 22:05` の形。30 秒ごとに更新
+- アプリのアイコンは sketchybar-app-font を nixpkgs から入れた（`~/Library/Fonts/HomeManager`）。アプリ名からアイコンを引く表（icon_map.lua）も同じパッケージのものを使い、フォントと版を揃えた
+- Homebrew の起動設定（`homebrew.mxcl.sketchybar`）と、旧設定の統計プログラム（`com.sketchybar.stats-provider`）は止めて、`launchctl disable` で次のログインでも起動しないようにした（plist は残している）
+
+**確認したこと**
+- 項目がすべて登録され、スペース1に Ghostty などのアイコン、今のアプリに Ghostty、時刻に今の日時が入っている。エラーのログは空
+
+**注意**
+- 起動時に `--config` で設定を指定する。指定しないと旧環境の `~/.config/sketchybar` を読む
+- 旧環境に戻すとき: `launchctl enable gui/$(id -u)/homebrew.mxcl.sketchybar`（stats-provider も）→ `brew services start sketchybar`。そのうえで home.nix から sketchybar を外す
+
 ### yabai と skhd を Nix に移した（Step 5.5）
 
 **やったこと**

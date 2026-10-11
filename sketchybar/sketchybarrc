@@ -1,0 +1,17 @@
+#!/usr/bin/env lua
+-- sketchybar の設定（Lua。SbarLua を使う）。表示項目もデザインもゼロから作り直したもの
+-- home.nix の launchd.agents.sketchybar が `sketchybar --config このファイル` で起動する
+-- このフォルダは ~/nix-config/sketchybar にあり、編集したら `sketchybar --reload` で反映される
+
+-- このファイルと同じフォルダの Lua（style.lua や items/ など）を require で読めるようにする
+local here = debug.getinfo(1, "S").source:sub(2):match("(.*/)")
+package.path = here .. "?.lua;" .. here .. "?/init.lua;" .. package.path
+
+sbar = require("sketchybar")
+
+sbar.begin_config()
+require("style")
+require("items")
+sbar.end_config()
+
+sbar.event_loop()

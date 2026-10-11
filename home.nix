@@ -412,7 +412,11 @@ in
   # ウィンドウ管理（yabai）とキー操作（skhd）。デスクトップは1つなので、旧環境・Nix 環境どちらのタブでもこれが動く
   # 起動は launchd（ログイン時に自動で起動し、落ちたら起こし直す）。Homebrew の起動設定は止めてある（docs/log.md 参照）
   # どちらも「アクセシビリティ」の許可が要る。Nix で版が上がると本体の場所が変わるので、そのたびに許可し直す
-  home.packages = [ pkgs.yabai ];
+  home.packages = [
+    pkgs.yabai
+    # sketchybar でアプリのアイコンを出すフォント（~/Library/Fonts/HomeManager に入る）
+    pkgs.sketchybar-app-font
+  ];
   launchd.agents.yabai = {
     enable = true;
     config = {
@@ -438,6 +442,26 @@ in
       SHELL = "/bin/sh";
     };
   };
+
+  # メニューバーの代わりのバー（sketchybar）。設定は ~/nix-config/sketchybar（Lua）で、ゼロから作り直したもの
+  # yabai と同じく、デスクトップは1つなので旧環境・Nix 環境どちらでもこれが動く。Homebrew の起動設定は止めてある
+  programs.sketchybar = {
+    enable = true;
+    configType = "lua";
+    # スペースを押したときなどに yabai を呼ぶ
+    extraPackages = [ pkgs.yabai ];
+  };
+  # -c ではなく --config で設定を指定する（指定しないと旧環境の ~/.config/sketchybar を読む）
+  launchd.agents.sketchybar.config.Program = lib.mkForce null;
+  launchd.agents.sketchybar.config.ProgramArguments = [
+    (lib.getExe config.programs.sketchybar.finalPackage)
+    "--config"
+    "${config.home.homeDirectory}/nix-config/sketchybar/sketchybarrc"
+  ];
+  # 色（palette.nix）と、アプリ名からアイコンを引く表（アイコンのフォントと同じパッケージのもの）を置く
+  xdg.configFile."sketchybar/palette.lua".text = "return " + lib.generators.toLua { } palette;
+  xdg.configFile."sketchybar/icon_map.lua".source =
+    "${pkgs.sketchybar-app-font}/lib/sketchybar-app-font/icon_map.lua";
 
   # 本体は /Applications の Ghostty.app（cask）を使い、設定だけ管理する。中身は wezterm.lua から引き継ぎ
   programs.ghostty = {
