@@ -2,6 +2,15 @@
 
 let
   palette = import ./palette.nix;
+  # sketchybar の Apple ロゴ・アプリのメニューが使う小さなプログラム（旧設定の helpers/menus。毎回 make していたものを Nix でビルドする）
+  sketchybar-menus = pkgs.stdenv.mkDerivation {
+    name = "sketchybar-menus";
+    src = ./sketchybar/helpers/menus;
+    buildPhase = ''
+      $CC -std=c99 -O3 -F/System/Library/PrivateFrameworks/ -framework Carbon -framework SkyLight menus.c -o sketchybar-menus
+    '';
+    installPhase = "install -Dm755 sketchybar-menus $out/bin/sketchybar-menus";
+  };
 in
 {
   home.username = "hikarusato";
@@ -448,8 +457,12 @@ in
   programs.sketchybar = {
     enable = true;
     configType = "lua";
-    # スペースを押したときなどに yabai を呼ぶ
-    extraPackages = [ pkgs.yabai ];
+    # スペースを押したときの yabai、アプリのメニューのプログラム、メニューを出すスクリプトが使う jq
+    extraPackages = [
+      pkgs.yabai
+      sketchybar-menus
+      pkgs.jq
+    ];
   };
   # -c ではなく --config で設定を指定する（指定しないと旧環境の ~/.config/sketchybar を読む）
   launchd.agents.sketchybar.config.Program = lib.mkForce null;

@@ -31,6 +31,24 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 起動時に `--config` で設定を指定する。指定しないと旧環境の `~/.config/sketchybar` を読む
 - 旧環境に戻すとき: `launchctl enable gui/$(id -u)/homebrew.mxcl.sketchybar`（stats-provider も）→ `brew services start sketchybar`。そのうえで home.nix から sketchybar を外す
 
+### sketchybar の左側を旧環境と同じにした（Step 5.5）
+
+**やったこと**
+- ユーザーの希望で、左側（Apple ロゴ・アプリのメニュー・スペース番号・今のアプリ）は、ゼロから作り直すのをやめ、旧設定（`~/.config/sketchybar`）のファイルをそのまま持ってきた。変えたのは色だけ
+  - 色: 旧設定のコードは Catppuccin の色の名前（`subtext0` など）を使っているので、名前はそのままにして、同じ役割の Nightfox の色を割り当てた（`sketchybar/colors.lua`。tmux と同じ対応）
+  - ファイルの場所を指す行だけ直した（`$CONFIG_DIR/helpers/menus/bin/menus` → `sketchybar-menus`、`~/.config/sketchybar/helpers` → `$CONFIG_DIR/helpers`）。それ以外は旧設定と1文字も違わない
+  - バー全体と共通の見た目（高さ・余白・枠など）も旧設定の compact と同じ値にした
+- アプリのメニューを読む小さなプログラム（`helpers/menus/menus.c`）は、旧設定では起動のたびに `make` していたが、Nix でビルドする（`sketchybar-menus`）。アクセシビリティの許可が要る
+- 右側の島の形は、今のところ時刻だけ残している
+
+**旧設定から変えたところ**（ユーザーの希望）
+- アプリのアイコン: 旧設定の sketchybar-app-font-bg（背景付きのアイコン）ではなく、最初に作った版と同じ nixpkgs の sketchybar-app-font と、同じパッケージの対応表を使う。旧設定のフォントでは正しく表示されなかった（原因は特定できていない。フォントの中には対応表の名前が入っていた）
+- 今のアプリ: 旧設定は名前だけだったが、名前の左にアプリのアイコンを出す
+- スペース番号とアプリのメニューを入れ替えるスイッチは外し、代わりに今のアプリのアイコンを押すと入れ替わるようにした。アイコンと名前は別の項目にして、名前を押したときは旧設定と同じくメニューのポップアップが出る
+
+**確認したこと**
+- アイコンを押すとスペース番号が消えてアプリのメニュー（Ghostty・File など）が並び、もう一度押すと戻る。メニューを出している間もアイコンは残る
+
 ### yabai と skhd を Nix に移した（Step 5.5）
 
 **やったこと**

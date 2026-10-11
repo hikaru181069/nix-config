@@ -1,33 +1,71 @@
--- バー全体と、すべての項目に共通の見た目
--- バー自体は透明にして、項目のまとまりごとに角の丸い「島」を浮かべる（島は items/island.lua）
-local colors = require("colors")
+-- バー全体と、すべての項目に共通の見た目（旧設定 ~/.config/sketchybar/init.lua の compact と同じ値。色だけ Nightfox）
 
--- ノッチのある MacBook のメニューバーの高さ（38pt）。これより低いと、最大化したウィンドウの上に隙間ができる
-sbar.bar({
+SBAR.bar({
+  color = COLORS.transparent,
+  -- ノッチのある MacBook のメニューバーの高さ（38pt）。これより低いと、最大化したウィンドウの上に隙間ができる
   height = 38,
-  color = colors.transparent,
-  padding_left = 8,
-  padding_right = 8,
-  notch_width = 200,
+  border_width = 0,
+  border_color = COLORS.surface0,
+  corner_radius = 0,
+  blur_radius = 0,
+  shadow = { drawing = false },
   sticky = true,
-  shadow = false,
+  font_smoothing = true,
+  padding_right = PADDINGS,
+  padding_left = PADDINGS,
+  y_offset = 0,
+  margin = 0,
+  notch_width = 200,
 })
 
-sbar.default({
+SBAR.default({
   updates = "when_shown",
-  padding_left = 2,
-  padding_right = 2,
+  padding_left = PADDINGS,
+  padding_right = PADDINGS,
   icon = {
-    font = { family = "Maple Mono NF", style = "Bold", size = 14.0 },
-    color = colors.fg2,
-    padding_left = 6,
-    padding_right = 4,
+    font = { family = FONT.icon_font, style = FONT.style_map["Bold"], size = 16.0 },
+    color = COLORS.subtext0,
+    padding_left = PADDINGS,
+    padding_right = PADDINGS,
+    background = { image = { corner_radius = 9 } },
   },
   label = {
-    font = { family = "Maple Mono NF", style = "Bold", size = 13.0 },
-    color = colors.fg2,
-    padding_left = 4,
-    padding_right = 6,
+    font = { family = FONT.label_font, style = FONT.style_map["Bold"], size = 13.0 },
+    color = COLORS.subtext0,
+    padding_left = PADDINGS,
+    padding_right = PADDINGS,
+    shadow = { drawing = false },
   },
-  background = { height = 24, corner_radius = 8 },
+  background = {
+    height = 28,
+    corner_radius = 9,
+    border_width = 2,
+    border_color = COLORS.surface1,
+    image = { corner_radius = 9, border_color = COLORS.grey, border_width = 1 },
+  },
+  popup = {
+    background = {
+      border_width = 2,
+      corner_radius = 9,
+      border_color = COLORS.surface0,
+      color = COLORS.base,
+      shadow = { drawing = true },
+    },
+    blur_radius = 50,
+    align = "center",
+  },
+  slider = {
+    background = {
+      height = 6,
+      corner_radius = 3,
+      color = COLORS.surface1,
+    },
+    highlight_color = COLORS.blue,
+    knob = {
+      string = "\u{f111}",
+      drawing = true,
+      color = COLORS.lavender,
+    },
+  },
+  scroll_texts = true,
 })
