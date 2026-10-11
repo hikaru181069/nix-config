@@ -27,4 +27,13 @@
 
   sel0 = "#2b3b51"; # 選択範囲の背景
   sel1 = "#3c5372"; # 検索結果の背景
+
+  # 差分の背景（nightfox.nvim の DiffAdd / DiffDelete / DiffChange / DiffText と同じ値）
+  diff_add = "#26343c";
+  diff_delete = "#2f2837";
+  diff_change = "#243244";
+  diff_text = "#253f4a";
+  # 差分のうち、行の中で実際に変わった部分の背景（green / red を背景 bg1 に 30% 混ぜた色）
+  diff_add_emph = "#384e50";
+  diff_delete_emph = "#4e3042";
 }

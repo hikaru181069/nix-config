@@ -83,7 +83,24 @@ in
   programs.delta = {
     enable = true;
     enableGitIntegration = true;
-    options.navigate = true;
+    options = {
+      navigate = true;
+      # 構文の色は Nightfox（下の bat に入れた nightfox.tmTheme）、追加・削除の背景は Neovim の差分と同じ色
+      syntax-theme = "nightfox";
+      plus-style = "syntax ${palette.diff_add}";
+      plus-emph-style = "syntax ${palette.diff_add_emph}";
+      minus-style = "syntax ${palette.diff_delete}";
+      minus-emph-style = "syntax ${palette.diff_delete_emph}";
+    };
+  };
+  # delta は構文の色を bat の配色から取るので、nightfox.nvim に付いている配色（tmTheme）を bat に入れる
+  programs.bat = {
+    enable = true;
+    config.theme = "nightfox";
+    themes.nightfox = {
+      src = pkgs.vimPlugins.nightfox-nvim;
+      file = "extra/nightfox/nightfox.tmTheme";
+    };
   };
 
   programs.zsh = {
@@ -120,7 +137,19 @@ in
   # 時刻やホスト名は tmux / sketchybar に任せ、プロンプトには作業に要るものだけ出す
   programs.starship = {
     enable = true;
-    settings.format = "$directory$git_branch$git_status$nix_shell$cmd_duration$line_break$character";
+    settings = {
+      format = "$directory$git_branch$git_status$nix_shell$cmd_duration$line_break$character";
+      # 色は palette.nix から（どの部品に何色を使うかは starship の既定と同じ）
+      directory.style = "bold ${palette.cyan}";
+      git_branch.style = "bold ${palette.magenta}";
+      git_status.style = "bold ${palette.red}";
+      nix_shell.style = "bold ${palette.blue}";
+      cmd_duration.style = "bold ${palette.yellow}";
+      character = {
+        success_symbol = "[❯](bold ${palette.green})";
+        error_symbol = "[❯](bold ${palette.red})";
+      };
+    };
   };
 
   # ls を eza に置き換える（ls / ll / lt などの別名は eza が用意し、上で一部上書き）
@@ -135,6 +164,21 @@ in
     defaultCommand = "fd --type f --hidden --exclude .git";
     fileWidgetCommand = "fd --type f --hidden --exclude .git";
     changeDirWidgetCommand = "fd --type d --hidden --exclude .git";
+    # 背景は端末のまま。選んでいる行は Neovim の選択範囲と同じ色
+    colors = {
+      fg = palette.fg2;
+      "fg+" = palette.fg1;
+      "bg+" = palette.sel0;
+      hl = palette.blue;
+      "hl+" = palette.cyan;
+      info = palette.yellow;
+      prompt = palette.cyan;
+      pointer = palette.magenta;
+      marker = palette.green;
+      spinner = palette.magenta;
+      header = palette.comment;
+      border = palette.bg4;
+    };
   };
 
   # 検索ツール。Neovim の telescope（live_grep / find_files）からも使う
@@ -149,7 +193,24 @@ in
   # Git の操作画面。diff は delta で表示する
   programs.lazygit = {
     enable = true;
-    settings.git.diffRenderers = [ { command = "delta --paging=never"; } ];
+    settings = {
+      git.diffRenderers = [ { command = "delta --paging=never"; } ];
+      # 色は palette.nix から。いま操作している枠は青、選んでいる行は Neovim の選択範囲と同じ色
+      gui.theme = {
+        activeBorderColor = [ palette.blue "bold" ];
+        inactiveBorderColor = [ palette.bg4 ];
+        searchingActiveBorderColor = [ palette.yellow "bold" ];
+        optionsTextColor = [ palette.blue ];
+        selectedLineBgColor = [ palette.sel0 ];
+        inactiveViewSelectedLineBgColor = [ palette.bg2 ];
+        cherryPickedCommitFgColor = [ palette.blue ];
+        cherryPickedCommitBgColor = [ palette.sel1 ];
+        markedBaseCommitFgColor = [ palette.blue ];
+        markedBaseCommitBgColor = [ palette.yellow ];
+        unstagedChangesColor = [ palette.red ];
+        defaultFgColor = [ palette.fg1 ];
+      };
+    };
   };
 
   # tmux（~/.config/tmux から引き継ぎ）。ペイン分割とセッションは tmux、ターミナルは描画と IME だけを担当
