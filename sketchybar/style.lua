@@ -1,9 +1,7 @@
 -- バー全体と、すべての項目に共通の見た目（旧設定 ~/.config/sketchybar/init.lua の compact と同じ値。色だけ Nightfox）
 
 SBAR.bar({
-  -- 旧設定は透明だったが、画面の上のあたりは壁紙が明るく見え、ターミナルの背景と色が揃わないので、
-  -- ターミナル・エディタと同じ背景（bg1 = #192330）を塗る
-  color = COLORS.base,
+  color = COLORS.transparent,
   -- ノッチのある MacBook のメニューバーの高さ（38pt）。これより低いと、最大化したウィンドウの上に隙間ができる
   height = 38,
   border_width = 0,
