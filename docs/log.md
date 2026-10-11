@@ -7,6 +7,10 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-10
 
+### mlb-app は devShell の対象外にした（Step 5）
+
+- coffee-app と同じ構成（Node 20・Python 3.13）だったが、devShell は置かないことにした（ユーザーの判断）。mlb-app には何も変更していない
+
 ### gh を Nix で管理した（Step 5）
 
 - nix 環境では設定の置き場所が `~/.config-nix` に変わるので、gh が旧環境の `~/.config/gh` を読まず、ログインしていない扱いになっていた
