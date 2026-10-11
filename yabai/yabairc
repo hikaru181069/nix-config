@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+# yabai の設定（~/.config/yabai/yabairc から引き継ぎ。動きは同じ）
+# home.nix の launchd.agents.yabai が `yabai -c このファイル` で起動する
+
+# BSP（二分割）で自動的に並べる。scripting addition（`yabai --load-sa`）は読み込まない。
+# SIP を一部無効にする必要があり、この設定はウィンドウの基本的な管理だけで足りるため
+# （枠線や透明度が欲しくなったら SA が要る）
+yabai -m config layout bsp
+
+yabai -m config window_gap 8
+yabai -m config top_padding 8
+yabai -m config bottom_padding 8
+yabai -m config left_padding 8
+yabai -m config right_padding 8
+
+# alt を押しながら、左ドラッグで移動、右ドラッグでサイズ変更、ドロップで入れ替え
+yabai -m config mouse_modifier alt
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config mouse_drop_action swap
+
+yabai -m config focus_follows_mouse off
+yabai -m config mouse_follows_focus off
+
+# 並べるとうまく動かない、設定画面やダイアログのようなアプリは並べない
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^System Information$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Archive Utility$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^App Store$" manage=off
+yabai -m rule --add app="^Software Update$" manage=off
+yabai -m rule --add title="^(Preferences|Settings|Setting|Alert)$" manage=off
+
+echo "yabai config loaded"

@@ -409,6 +409,36 @@ in
   xdg.configFile."nvim-nix".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/nvim";
 
+  # ウィンドウ管理（yabai）とキー操作（skhd）。デスクトップは1つなので、旧環境・Nix 環境どちらのタブでもこれが動く
+  # 起動は launchd（ログイン時に自動で起動し、落ちたら起こし直す）。Homebrew の起動設定は止めてある（docs/log.md 参照）
+  # どちらも「アクセシビリティ」の許可が要る。Nix で版が上がると本体の場所が変わるので、そのたびに許可し直す
+  home.packages = [ pkgs.yabai ];
+  launchd.agents.yabai = {
+    enable = true;
+    config = {
+      # -c で設定を指定する（指定しないと旧環境の ~/.config/yabai/yabairc を読む）
+      ProgramArguments = [ (lib.getExe pkgs.yabai) "-c" "${config.home.homeDirectory}/nix-config/yabai/yabairc" ];
+      # yabairc の中で yabai コマンドを呼ぶので、Nix のコマンドが見えるようにする
+      EnvironmentVariables.PATH = "${config.home.profileDirectory}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+      ProcessType = "Interactive";
+      Nice = -20;
+      RunAtLoad = true;
+      # 落ちたときだけ起こし直す（Homebrew の起動設定と同じ）
+      KeepAlive = { Crashed = true; SuccessfulExit = false; };
+      StandardOutPath = "${config.home.homeDirectory}/Library/Logs/yabai/yabai.out.log";
+      StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/yabai/yabai.err.log";
+    };
+  };
+  services.skhd.enable = true;
+  launchd.agents.skhd.config = {
+    ProgramArguments = lib.mkForce [ (lib.getExe pkgs.skhd) "-c" "${config.home.homeDirectory}/nix-config/skhd/skhdrc" ];
+    # キーに割り当てたコマンドは $SHELL で動く。zsh だと ~/.zshenv（envswitch）まで読むので、sh にする
+    EnvironmentVariables = {
+      PATH = "${config.home.profileDirectory}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+      SHELL = "/bin/sh";
+    };
+  };
+
   # 本体は /Applications の Ghostty.app（cask）を使い、設定だけ管理する。中身は wezterm.lua から引き継ぎ
   programs.ghostty = {
     enable = true;

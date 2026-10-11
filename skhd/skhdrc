@@ -1,0 +1,60 @@
+# skhd の設定（~/.config/skhd/skhdrc から引き継ぎ。キーは同じ）
+# home.nix の services.skhd が `skhd -c このファイル` で起動する
+#
+# 修飾キーはすべて alt。macOS やアプリのショートカット（cmd）、tmux の prefix（C-a）とぶつからないようにする
+# 方向は hjkl（tmux のペイン移動や Neovim と同じ）
+
+# ウィンドウにフォーカスを移す
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+# ウィンドウを入れ替える
+shift + alt - h : yabai -m window --swap west
+shift + alt - j : yabai -m window --swap south
+shift + alt - k : yabai -m window --swap north
+shift + alt - l : yabai -m window --swap east
+
+# ウィンドウのサイズを変える（その方向へ広げる）
+ctrl + alt - h : yabai -m window --resize left:-40:0
+ctrl + alt - j : yabai -m window --resize bottom:0:40
+ctrl + alt - k : yabai -m window --resize top:0:-40
+ctrl + alt - l : yabai -m window --resize right:40:0
+
+# 浮かせる / 全画面に広げる（切り替え）
+alt - t : yabai -m window --toggle float
+alt - f : yabai -m window --toggle zoom-fullscreen
+
+# 今のスペースの並びを均等にする / 90度回す
+alt - e : yabai -m space --balance
+alt - r : yabai -m space --rotate 90
+
+# スペース N に移る（1〜10）
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+alt - 6 : yabai -m space --focus 6
+alt - 7 : yabai -m space --focus 7
+alt - 8 : yabai -m space --focus 8
+alt - 9 : yabai -m space --focus 9
+alt - 0 : yabai -m space --focus 10
+
+# 今のウィンドウをスペース N に送り、一緒に移る
+shift + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1
+shift + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2
+shift + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3
+shift + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4
+shift + alt - 5 : yabai -m window --space 5; yabai -m space --focus 5
+shift + alt - 6 : yabai -m window --space 6; yabai -m space --focus 6
+shift + alt - 7 : yabai -m window --space 7; yabai -m space --focus 7
+shift + alt - 8 : yabai -m window --space 8; yabai -m space --focus 8
+shift + alt - 9 : yabai -m window --space 9; yabai -m space --focus 9
+shift + alt - 0 : yabai -m window --space 10; yabai -m space --focus 10
+
+# キーボードから yabai / skhd を再起動する
+# 旧設定の `yabai --restart-service` は Homebrew の起動設定を対象にするので、home-manager の起動設定を再起動する
+ctrl + alt - r : launchctl kickstart -k gui/$(id -u)/org.nix-community.home.yabai
+ctrl + alt - s : launchctl kickstart -k gui/$(id -u)/org.nix-community.home.skhd

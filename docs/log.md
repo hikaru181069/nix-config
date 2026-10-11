@@ -7,6 +7,29 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-11
 
+### yabai と skhd を Nix に移した（Step 5.5）
+
+**やったこと**
+- yabai（7.1.25）と skhd（0.3.9）を、本体・設定・起動ともに Nix（home-manager）で管理するようにした。版は Homebrew と同じ
+- 設定は `~/nix-config/yabai/yabairc` と `~/nix-config/skhd/skhdrc`。中身は旧設定と同じ（コメントだけ日本語にした）
+- 起動は home-manager の launchd の起動設定（`org.nix-community.home.yabai` / `.skhd`）。ログは `~/Library/Logs/yabai`・`~/Library/Logs/skhd`
+- Homebrew の起動設定（`com.asmvik.yabai` / `com.koekeishiya.skhd`）は止めて、`launchctl disable` で次のログインでも起動しないようにした。plist は消していない
+- skhd の再起動キー（`ctrl+alt+r` / `ctrl+alt+s`）は、旧設定の `--restart-service`（Homebrew の起動設定が対象）から、新しい起動設定を `launchctl kickstart -k` で再起動するものに変えた
+
+**なぜこうしたか**
+- デスクトップは1つなので、tmux や Neovim のように旧環境と Nix 環境で分けることはできない。どちらのタブでも、この yabai・skhd が動く。設定の中身は同じなので、体感は変わらない
+- 計画では「envswitch で常駐ツールを選んだ側の設定で再起動する」としていたが、設定が同じなのに切り替えるのは手間だけなのでやめた
+- 起動時に `-c` で設定を指定する。指定しないと、launchd から起動したとき旧環境の `~/.config/yabai`・`~/.config/skhd` を読む
+- yabairc・skhdrc の中で yabai コマンドを呼ぶので、起動設定に Nix のコマンドの PATH を入れた。skhd のキーのコマンドは `$SHELL` で動くので、`SHELL=/bin/sh` にした（zsh だと ~/.zshenv の envswitch まで読むため）
+
+**確認したこと**
+- Nix の yabai・skhd が動いている。yabai の設定値（bsp・隙間 8・alt でドラッグ・ルール 8 件）が旧設定と同じ
+- 新しい本体に「アクセシビリティ」の許可を出したあと、skhd がエラーなく動き続けている
+
+**注意**
+- Nix で yabai・skhd の版が上がると、本体の場所（/nix/store/...）が変わるので、アクセシビリティの許可を出し直す必要がある
+- Homebrew に戻すとき: `launchctl enable gui/$(id -u)/com.asmvik.yabai`（skhd も同じ）→ `yabai --start-service`。そのうえで home.nix から yabai・skhd を外す
+
 ### 配色の統一の残り: delta・fzf・lazygit・starship（Step 5.5 の始め）
 
 **やったこと**（nix 環境だけ）
