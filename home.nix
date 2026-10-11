@@ -333,7 +333,8 @@ in
       set -g status-right-style NONE
 
       # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
-      set -g status-left "#[fg=#{?client_prefix,${p.bg0},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg0}},bold] #S #[fg=#{?client_prefix,${p.cyan},${p.bg0}},bg=${p.fg2},nobold]${r}#[fg=${p.bg0},bg=${p.fg2},bold] #(whoami) #[fg=${p.fg2},bg=${p.bg0},nobold]${r}"
+      # 区切りの三角の一部は、旧環境と同じくブロックより1段明るい色にする（prefix 中の三角・ユーザー名の右端）
+      set -g status-left "#[fg=#{?client_prefix,${p.bg0},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg0}},bold] #S #[fg=#{?client_prefix,${p.cyan_light},${p.bg0}},bg=${p.fg2},nobold]${r}#[fg=${p.bg0},bg=${p.fg2},bold] #(whoami) #[fg=${p.fg1},bg=${p.bg0},nobold]${r}"
       # 右: 虹色の三角とホスト名
       set -g status-right "${rainbowArrows}#[fg=${p.fg3},bg=${p.bg0},bold] #h "
 
@@ -342,7 +343,8 @@ in
       setw -g window-status-style "fg=${p.comment},bg=${p.bg0}"
       setw -g window-status-activity-style "underscore,fg=${p.comment},bg=${p.bg0}"
       setw -g window-status-format "#[fg=${p.bg0},bg=${p.bg0}]${r}#[default] #I ${rThin} #{b:pane_current_path} #[fg=${p.bg0},bg=${p.bg0}]${r}"
-      setw -g window-status-current-format "#[fg=${p.bg0},bg=${p.fg1}]${r}#[fg=${p.fg3},bg=${p.fg1}] #I #[fg=${p.fg1},bg=${p.fg3}]${r} #{b:pane_current_path} #[fg=${p.fg3},bg=${p.bg0}]${r}"
+      # 選んでいるウィンドウ: 番号の右の三角と右端の三角は、旧環境と同じくブロックより1段明るい色
+      setw -g window-status-current-format "#[fg=${p.bg0},bg=${p.fg1}]${r}#[fg=${p.fg3},bg=${p.fg1}] #I #[fg=${p.fg0},bg=${p.fg3}]${r} #{b:pane_current_path} #[fg=${p.comment},bg=${p.bg0}]${r}"
     ''
   );
   # プロジェクトのフォルダに入ると、その .envrc（flake.nix の devShell）の環境に自動で切り替わる

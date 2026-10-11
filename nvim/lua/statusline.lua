@@ -38,7 +38,7 @@ local function lighten(hex, amount)
 end
 local mode_sep_colors = {
   n = p.comment,
-  i = lighten(p.cyan, 0.4),
+  i = p.cyan_light, -- lighten(p.cyan, 0.4) と同じ色（palette.nix に定義）
   v = lighten(p.magenta, 0.4),
   V = lighten(p.magenta, 0.4),
   ["\22"] = lighten(p.magenta, 0.4),

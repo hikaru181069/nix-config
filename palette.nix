@@ -10,6 +10,7 @@
   blue = "#83a598";
   magenta = "#d3869b";
   cyan = "#8ec07c"; # Gruvbox の aqua
+  cyan_light = "#bbd9b0"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
   white = "#ebdbb2";
   orange = "#fe8019";
   pink = "#d3869b"; # Gruvbox に pink はないので purple と同じ
