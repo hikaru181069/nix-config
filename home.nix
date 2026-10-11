@@ -510,6 +510,25 @@ in
   xdg.configFile."sketchybar/icon_map.lua".source =
     "${pkgs.sketchybar-app-font}/lib/sketchybar-app-font/icon_map.lua";
 
+  # 選んでいるウィンドウに枠線を付ける（JankyBorders。sketchybar と同じ作者）。色は palette.nix から
+  # home-manager の起動設定は設定ファイルを渡さず、launchd から起動すると旧環境の ~/.config/borders を見に行くので、設定を直接渡す
+  services.jankyborders.enable = true;
+  launchd.agents.jankyborders.config.ProgramArguments =
+    let
+      # palette.nix の "#rrggbb" を、borders の書き方（0xAARRGGBB）にする
+      argb = hex: "0xff" + lib.removePrefix "#" hex;
+    in
+    lib.mkForce [
+      (lib.getExe pkgs.jankyborders)
+      # 選んでいるウィンドウは Gruvbox の aqua（今のアプリのアイコンや tmux の prefix 中と同じ色）
+      "active_color=${argb palette.cyan}"
+      # 選んでいないウィンドウには枠を付けない
+      "inactive_color=0x00000000"
+      "width=5.0"
+      "style=round"
+      "hidpi=on"
+    ];
+
   # 本体は /Applications の Ghostty.app（cask）を使い、設定だけ管理する。中身は wezterm.lua から引き継ぎ
   programs.ghostty = {
     enable = true;

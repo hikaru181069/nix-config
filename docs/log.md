@@ -31,6 +31,12 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 起動時に `--config` で設定を指定する。指定しないと旧環境の `~/.config/sketchybar` を読む
 - 旧環境に戻すとき: `launchctl enable gui/$(id -u)/homebrew.mxcl.sketchybar`（stats-provider も）→ `brew services start sketchybar`。そのうえで home.nix から sketchybar を外す
 
+### JankyBorders を入れた（Step 5.5）
+
+- 選んでいるウィンドウに枠線を付ける（sketchybar と同じ作者）。home-manager の `services.jankyborders`
+- 色は palette.nix から: 選んでいるウィンドウは Gruvbox の aqua（`cyan`。今のアプリのアイコンや tmux の prefix 中と同じ色）、選んでいないウィンドウは枠なし。太さ 5、角丸
+- home-manager の起動設定は設定ファイルを渡さず、launchd から起動すると旧環境の `~/.config/borders` を見に行くので、設定を起動の引数で直接渡している
+
 ### sketchybar の git ブランチと統計プログラムを直した（Step 5.5）
 
 **git ブランチ**
