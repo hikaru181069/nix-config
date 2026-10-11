@@ -94,22 +94,18 @@ in
     enableGitIntegration = true;
     options = {
       navigate = true;
-      # 構文の色は Nightfox（下の bat に入れた nightfox.tmTheme）、追加・削除の背景は Neovim の差分と同じ色
-      syntax-theme = "nightfox";
+      # 構文の色は bat に最初から入っている Gruvbox（gruvbox-dark）、追加・削除の背景は palette.nix の差分の色
+      syntax-theme = "gruvbox-dark";
       plus-style = "syntax ${palette.diff_add}";
       plus-emph-style = "syntax ${palette.diff_add_emph}";
       minus-style = "syntax ${palette.diff_delete}";
       minus-emph-style = "syntax ${palette.diff_delete_emph}";
     };
   };
-  # delta は構文の色を bat の配色から取るので、nightfox.nvim に付いている配色（tmTheme）を bat に入れる
+  # delta は構文の色を bat の配色から取る。Gruvbox は bat に最初から入っている
   programs.bat = {
     enable = true;
-    config.theme = "nightfox";
-    themes.nightfox = {
-      src = pkgs.vimPlugins.nightfox-nvim;
-      file = "extra/nightfox/nightfox.tmTheme";
-    };
+    config.theme = "gruvbox-dark";
   };
 
   programs.zsh = {
@@ -320,7 +316,7 @@ in
       bind -T copy-mode-vi Enter send-keys -X copy-pipe "pbcopy"
       bind -T copy-mode-vi Escape send-keys -X cancel
 
-      # ステータスライン（見た目は旧環境のまま、色だけ Nightfox に置き換え）
+      # ステータスライン（見た目は旧環境のまま、色だけ palette.nix のものに置き換え）
       set -g mode-style "fg=${p.fg1},bg=${p.sel0}"
       set -g message-style "fg=${p.fg2},bg=${p.bg0}"
       set -g message-command-style "fg=${p.fg2},bg=${p.bg0}"
@@ -485,7 +481,7 @@ in
     settings = {
       font-family = [ "Maple Mono NF" "Maple Mono NF CN" ];
       font-size = 18.5;
-      theme = "Nightfox";
+      theme = "Gruvbox Dark Hard";
       window-width = 130;
       window-height = 38;
       window-padding-x = 10;

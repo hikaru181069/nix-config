@@ -31,6 +31,28 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 起動時に `--config` で設定を指定する。指定しないと旧環境の `~/.config/sketchybar` を読む
 - 旧環境に戻すとき: `launchctl enable gui/$(id -u)/homebrew.mxcl.sketchybar`（stats-provider も）→ `brew services start sketchybar`。そのうえで home.nix から sketchybar を外す
 
+### テーマを Nightfox から Gruvbox Dark Hard に変えた（Step 5.5）
+
+**決めたこと**（ユーザー）
+- Nightfox に飽きたので、比較ページ（Ghostty 同梱のテーマの色で描いたもの）で見比べて、Gruvbox Dark Hard にした
+- Gruvbox は、基本の Gruvbox（Dark / Dark Hard）がいちばん対応が広い。Dark と Dark Hard は同じテーマのコントラストの設定違い
+
+**やったこと**
+- palette.nix を Gruvbox Dark Hard の値にした（Ghostty の Gruvbox Dark Hard と、Neovim の gruvbox.nvim の hard の値）。tmux・sketchybar・starship・lazygit・fzf・delta の背景は、これで自動で変わる
+  - 名前（bg0〜bg4 など）は Nightfox の頃の役割の名前のまま。bg1 が通常の背景 `#1d2021`、bg0 はバーなどの少しだけ違う背景 `#282828`
+  - 差分の背景: 行の中で変わった部分は gruvbox.nvim の DiffAdd / DiffDelete と同じ色、行全体はそれより控えめな色
+- Ghostty: テーマを `Gruvbox Dark Hard` に
+- Neovim: nightfox.nvim をやめて gruvbox.nvim（ellisonleao）に。`contrast = "hard"`
+- delta: 構文の色は bat に最初から入っている `gruvbox-dark`（nightfox.tmTheme を入れていた設定は外した）
+
+**確認したこと**
+- Neovim の背景が `#1d2021`（Ghostty と同じ）。delta の出力の色が Gruvbox（追加 `#343722`・削除 `#3e2624`、構文は黄・aqua・緑）
+- sketchybar は読み込み直して新しい色に
+
+**注意**
+- 開いている tmux・Ghostty・Neovim は、読み込み直すまで前の色のまま（tmux は prefix + r、Ghostty は ⌘⇧,、Neovim は開き直す）
+- Claude Code は自由な配色の設定がない。`/config` のテーマで「ANSI の色だけを使う」ダークを選ぶと、ターミナル（Ghostty）の16色になる
+
 ### sketchybar の右側も、いったん旧環境と同じにした（Step 5.5）
 
 - 右側をどう作り直すかイメージしにくいので、まず旧設定の右側をそのまま持ってきて、色だけ Nightfox にした（ユーザーの希望）。見てから直す

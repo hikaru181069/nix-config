@@ -2,7 +2,7 @@
 -- sketchybar の書き方（0xAARRGGBB の数）に直す
 --
 -- 旧設定（~/.config/sketchybar）から持ってきた項目は Catppuccin Mocha の色の名前（subtext0 など）を使っている。
--- コードはそのままにして色だけ変えるため、Catppuccin の名前に、同じ役割の Nightfox の色を割り当てる
+-- コードはそのままにして色だけ変えるため、Catppuccin の名前に、同じ役割の palette.nix の色を割り当てる
 -- （tmux のステータスラインと同じ対応）
 local palette = dofile(os.getenv("HOME") .. "/.config-nix/sketchybar/palette.lua")
 

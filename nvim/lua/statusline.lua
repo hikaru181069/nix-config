@@ -1,4 +1,4 @@
--- ステータスライン（lualine）。見た目は旧設定のまま、色を Nightfox（palette.nix）に置き換えた
+-- ステータスライン（lualine）。見た目は旧設定のまま、色を palette.nix のものに置き換えた
 -- 左: モード | ブランチ | 変更行数 | ファイル名 | 診断　　右: ファイルの種類 | 位置（%）| 行:列
 local p = require("palette")
 

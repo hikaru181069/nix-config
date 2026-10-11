@@ -30,7 +30,7 @@ vim.keymap.set("n", "<leader>nh", "<cmd>nohlsearch<cr>", { desc = "検索のハ�
 -- プラグインは Neovim 標準の vim.pack で入れる。版はこのディレクトリの nvim-pack-lock.json に記録される
 vim.pack.add({
   -- 配色（tmux・Ghostty などと揃える）
-  "https://github.com/EdenEast/nightfox.nvim",
+  "https://github.com/ellisonleao/gruvbox.nvim",
   -- C-hjkl で Neovim の分割と tmux のペインを区別なく移動（tmux 側にも同じプラグインがある）
   "https://github.com/christoomey/vim-tmux-navigator",
   -- ファイル・文字列・バッファなどを絞り込んで探す（plenary は telescope が使う部品）
@@ -76,7 +76,9 @@ vim.pack.add({
   "https://github.com/windwp/nvim-ts-autotag",
 })
 
-vim.cmd.colorscheme("nightfox")
+-- Gruvbox の背景を暗いほう（hard）にする（Ghostty の Gruvbox Dark Hard と同じ背景 #1d2021）
+require("gruvbox").setup({ contrast = "hard" })
+vim.cmd.colorscheme("gruvbox")
 
 -- telescope: 入力欄を上に置き、結果も上から並べる（旧設定と同じ）
 require("telescope").setup({

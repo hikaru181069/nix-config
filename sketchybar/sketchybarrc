@@ -3,7 +3,7 @@
 -- home.nix の launchd.agents.sketchybar が `sketchybar --config このファイル` で起動する
 -- このフォルダは ~/nix-config/sketchybar にあり、編集したら `sketchybar --reload` で反映される
 --
--- 旧設定（~/.config/sketchybar）をそのまま移し、色だけ Nightfox にした（アプリのアイコンなど、ユーザーの希望で変えたところは docs/log.md）
+-- 旧設定（~/.config/sketchybar）をそのまま移し、色だけ palette.nix のものにした（アプリのアイコンなど、ユーザーの希望で変えたところは docs/log.md）
 
 -- このファイルと同じフォルダの Lua（settings.lua や items/ など）を require で読めるようにする
 local here = debug.getinfo(1, "S").source:sub(2):match("(.*/)")

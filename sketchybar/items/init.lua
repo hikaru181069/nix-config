@@ -1,5 +1,5 @@
 -- 表示する項目。左側は左から順に、右側は右端から順に並ぶ
--- 左右とも旧設定（~/.config/sketchybar/items/init.lua）と同じ項目・同じ順番。色だけ Nightfox
+-- 左右とも旧設定（~/.config/sketchybar/items/init.lua）と同じ項目・同じ順番。色だけ palette.nix のもの
 
 -- 右側の項目のまとまりの間を空ける（旧設定と同じ。見えない幅だけの項目）
 local function right_gap()

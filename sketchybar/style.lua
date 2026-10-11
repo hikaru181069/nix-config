@@ -1,4 +1,4 @@
--- バー全体と、すべての項目に共通の見た目（旧設定 ~/.config/sketchybar/init.lua の compact と同じ値。色だけ Nightfox）
+-- バー全体と、すべての項目に共通の見た目（旧設定 ~/.config/sketchybar/init.lua の compact と同じ値。色だけ palette.nix のもの）
 
 SBAR.bar({
   color = COLORS.transparent,
