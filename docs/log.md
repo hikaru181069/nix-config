@@ -31,7 +31,9 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 起動時に `--config` で設定を指定する。指定しないと旧環境の `~/.config/sketchybar` を読む
 - 旧環境に戻すとき: `launchctl enable gui/$(id -u)/homebrew.mxcl.sketchybar`（stats-provider も）→ `brew services start sketchybar`。そのうえで home.nix から sketchybar を外す
 
-### sketchybar の右側を3つの島にした（Step 5.5）
+### sketchybar の右側を3つの島にした（Step 5.5）→ やめた
+
+- 島どうしがくっついて見える不具合（幅だけの項目に共通の余白が付いていた）を直したあと、島の表示はやめて、右側を旧設定の形（並びも旧設定の順番）に戻した（同じ日、ユーザーの判断）。以下は試したときの記録
 
 - 右側の形を、見比べのページ（今のまま・項目ごとの島・左と同じ枠・1つの島、と島の分け方4通り）でユーザーが選んだ: B2（3つの島）
   - 左から [開発: git ブランチ・Docker] [統計: 切り替え・CPU・メモリ・通信量] [いつも見るもの: 音量・Wi-Fi・電池・日付と時刻]
