@@ -62,7 +62,9 @@ SBAR.default({
     },
     highlight_color = COLORS.blue,
     knob = {
-      string = "\u{f111}",
+      string = "\u{f111}", -- 丸（Nerd Font）
+      -- フォントを指定しないと sketchybar の既定のフォントになり、この記号がなく豆腐になる（旧設定は指定がなかった）
+      font = { family = FONT.icon_font, style = FONT.style_map["Bold"], size = 16.0 },
       drawing = true,
       color = COLORS.lavender,
     },
