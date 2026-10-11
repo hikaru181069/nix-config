@@ -7,6 +7,14 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-10
 
+### gh を Nix で管理した（Step 5）
+
+- nix 環境では設定の置き場所が `~/.config-nix` に変わるので、gh が旧環境の `~/.config/gh` を読まず、ログインしていない扱いになっていた
+- `programs.gh` で入れた。トークンはファイルではなく macOS のキーチェーンにあるので、`hosts.yml` にユーザー名を書くだけで旧環境と同じトークンが使われる（ログインし直しは不要）
+- 接続は SSH（`git_protocol: ssh`）。旧設定の別名 `gh co`（`pr checkout`）も引き継いだ
+- git の HTTPS の認証にも gh を使うようにした（`gh auth git-credential`）。coffee-app のように HTTPS のリモートでも、nix 環境の git から push できる
+- 確認: nix 環境で `gh auth status` がログイン済み、`gh api user` が通る、coffee-app のリモートに git でつながる。旧環境の gh はこれまでどおり（HTTPS）
+
 ### bufferline の見た目を旧環境に合わせた（Step 4 の手直し）
 
 - 旧環境と比べると、選んでいるタブは名前の部分だけ背景が明るく、まわりの余白・アイコン・区切りは暗いままで、まだらに見えていた
@@ -38,7 +46,7 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - coffee-app の既存のコミットは旧環境の設定（icloud のアドレス・署名なし）。nix 環境でコミットすると noreply のアドレス・署名ありになる
 - ~/coffee-app の `.venv` は、pyenv の Python で作られ、スクリプトが mlb-app の `.venv` を指していた（mlb-app からコピーされたもの）。マージ後に Nix の Python 3.13 で作り直した。旧環境の pyright もこの `.venv` を読むが、Python の場所が変わっただけなのでそのまま使える
 - この `.venv` の Python は Nix のストアにある。~/coffee-app で direnv が一度動くまでは、ガベージコレクション（`nix-collect-garbage`）から守られていない。作業ブランチ（feat/k8s-bootstrap）には `.envrc` がないので、main を取り込んで `direnv allow` するまで、ガベージコレクションはしない
-- nix 環境の gh はログイン情報を見つけられない（設定の置き場所が `~/.config-nix` に変わるため。ログイン情報は旧環境の `~/.config/gh` にある）。PR は `GH_CONFIG_DIR=~/.config/gh` を付けて作った。gh も Nix で管理するのが次の作業候補
+- nix 環境の gh はログイン情報を見つけられない（設定の置き場所が `~/.config-nix` に変わるため。ログイン情報は旧環境の `~/.config/gh` にある）。PR は `GH_CONFIG_DIR=~/.config/gh` を付けて作った。→ 2026-10-11 に gh を Nix で管理して解消
 
 ## 2026-10-09
 

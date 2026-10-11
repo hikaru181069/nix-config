@@ -52,6 +52,22 @@ in
     };
     ignores = [ ".DS_Store" ".direnv/" "result" "**/.claude/settings.local.json" ];
   };
+  # GitHub の CLI。Nix 環境では設定の置き場所が ~/.config-nix に変わり、旧環境の ~/.config/gh を読まないので、ここで用意する
+  # トークンはファイルではなく macOS のキーチェーンにあり、ユーザー名を書いておけば旧環境と同じものを使う
+  programs.gh = {
+    enable = true;
+    settings = {
+      # git と同じく SSH でつなぐ（clone などで使われる）
+      git_protocol = "ssh";
+      aliases.co = "pr checkout";
+    };
+    hosts."github.com" = {
+      user = "hikaru181069";
+      git_protocol = "ssh";
+      users.hikaru181069 = { };
+    };
+  };
+
   # 自分の署名を手元で検証するための一覧（git log --show-signature で Good signature と出る）
   xdg.configFile."git/allowed_signers".text =
     "174260688+hikaru181069@users.noreply.github.com namespaces=\"git\" ${builtins.readFile ./keys/id_ed25519.pub}";
