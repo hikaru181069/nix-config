@@ -31,6 +31,19 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 起動時に `--config` で設定を指定する。指定しないと旧環境の `~/.config/sketchybar` を読む
 - 旧環境に戻すとき: `launchctl enable gui/$(id -u)/homebrew.mxcl.sketchybar`（stats-provider も）→ `brew services start sketchybar`。そのうえで home.nix から sketchybar を外す
 
+### sketchybar の git ブランチと統計プログラムを直した（Step 5.5）
+
+**git ブランチ**
+- 旧設定は WezTerm 専用（WezTerm に今のペインのフォルダを聞く）で、Ghostty では出なかった
+- Ghostty にはそれを聞く方法がないので、tmux に聞くようにした: Nix 側（`$TMPDIR/tmux-501`）と旧環境（`/tmp/tmux-501`）の両方の tmux から、いちばん最近使ったクライアントの今のペインのフォルダを使う。ターミナルは tmux の中で使う前提
+- Ghostty か WezTerm が前面のときに出す。押すと Ghostty を開く（旧設定は WezTerm）
+
+**統計プログラム（CPU・メモリ・通信量の数値）**
+- joncrangle/sketchybar-system-stats（Rust）を Nix でビルドした（nixpkgs にない）。版は旧環境と同じ 0.9.0（最新は 0.9.2）
+- home-manager の launchd（`org.nix-community.home.sketchybar-stats`）で、旧環境と同じ引数で起動する。ログは `~/Library/Logs/sketchybar/stats.*.log`
+- 一時的に戻していた旧環境の Homebrew 版（`com.sketchybar.stats-provider`）は、また止めて `launchctl disable` した
+- 確認: Nix 版が動き、sketchybar の CPU の数値が更新される
+
 ### Neovim のステータスラインの形を旧環境と同じにした（Step 5.5）
 
 - 旧環境と表示が違っていた。最初に移したときに旧設定をそのまま使わず書き直したため、モードの前後の空白・右側の見えない区切りなどが変わっていた
@@ -66,7 +79,7 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 右側をどう作り直すかイメージしにくいので、まず旧設定の右側をそのまま持ってきて、色だけ Nightfox にした（ユーザーの希望）。見てから直す
 - 項目と順番は旧設定と同じ: 日付と時刻・バッテリー・Wi-Fi・音量・統計の表示切り替え・Docker・git ブランチ・CPU・メモリ・通信量。最初に作った時刻の島（clock.lua・island.lua）は外した
 - 音量を押したときの出力先の切り替えに使う SwitchAudioSource は nixpkgs から（switchaudio-osx）
-- CPU・メモリ・通信量の数値を送る常駐の統計プログラム（sketchybar-system-stats の `stats_provider`）は nixpkgs にない。とりあえず旧環境の Homebrew 版と起動設定（`com.sketchybar.stats-provider`）を、止めていたのを戻して使っている。右側の形が決まったら Nix でビルドする
+- CPU・メモリ・通信量の数値を送る常駐の統計プログラム（sketchybar-system-stats の `stats_provider`）は nixpkgs にない。とりあえず旧環境の Homebrew 版と起動設定（`com.sketchybar.stats-provider`）を、止めていたのを戻して使っている。→ 2026-10-11 に Nix でビルドして切り替えた
 
 **注意**
 - git ブランチの項目は旧設定のまま WezTerm 専用（WezTerm に今のペインのフォルダを聞く）。Ghostty では表示されない

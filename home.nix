@@ -11,6 +11,19 @@ let
     '';
     installPhase = "install -Dm755 sketchybar-menus $out/bin/sketchybar-menus";
   };
+  # sketchybar の CPU・メモリ・通信量の数値を送る常駐プログラム（joncrangle/sketchybar-system-stats）。nixpkgs にないのでビルドする
+  # 版は旧環境（Homebrew）で使っていたものと同じ 0.9.0
+  sketchybar-system-stats = pkgs.rustPlatform.buildRustPackage {
+    pname = "sketchybar-system-stats";
+    version = "0.9.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "joncrangle";
+      repo = "sketchybar-system-stats";
+      tag = "0.9.0";
+      hash = "sha256-UQk4Q5Rs7NFMEsQzcZzj/EHUZ2ryC3gzVopA4I4663U=";
+    };
+    cargoHash = "sha256-AlMdC1yQGwSn/omF01aRwiJlmjoQoAl+l1cMyjbmQ1E=";
+  };
 in
 {
   home.username = "hikarusato";
@@ -471,6 +484,27 @@ in
     "--config"
     "${config.home.homeDirectory}/nix-config/sketchybar/sketchybarrc"
   ];
+  # sketchybar に CPU・メモリ・通信量の数値を送る常駐プログラム。引数は旧環境の起動設定（com.sketchybar.stats-provider）と同じ
+  # sketchybar を読み込み直しても止まらないよう、sketchybar の中からではなく launchd で起動する（旧設定と同じ考え方）
+  launchd.agents.sketchybar-stats = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "${sketchybar-system-stats}/bin/stats_provider"
+        "--cpu" "usage"
+        "--memory" "ram_usage"
+        "--network" "en0"
+        "--interval" "1"
+        "--no-units"
+      ];
+      ProcessType = "Interactive";
+      KeepAlive = true;
+      RunAtLoad = true;
+      StandardOutPath = "${config.home.homeDirectory}/Library/Logs/sketchybar/stats.out.log";
+      StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/sketchybar/stats.err.log";
+    };
+  };
+
   # 色（palette.nix）と、アプリ名からアイコンを引く表（アイコンのフォントと同じパッケージのもの）を置く
   xdg.configFile."sketchybar/palette.lua".text = "return " + lib.generators.toLua { } palette;
   xdg.configFile."sketchybar/icon_map.lua".source =
