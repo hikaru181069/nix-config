@@ -77,7 +77,25 @@ vim.pack.add({
 })
 
 -- Gruvbox の背景を暗いほう（hard）にする（Ghostty の Gruvbox Dark Hard と同じ背景 #1d2021）
-require("gruvbox").setup({ contrast = "hard" })
+-- 左端の列（git や診断の印が出る列）と、その上の印の背景を、Gruvbox の既定（本文より明るい色）から本文と同じ色にする
+local body = require("palette").bg1
+local same_as_body = { bg = body }
+require("gruvbox").setup({
+  contrast = "hard",
+  overrides = {
+    SignColumn = same_as_body,
+    FoldColumn = same_as_body,
+    GruvboxRedSign = same_as_body,
+    GruvboxGreenSign = same_as_body,
+    GruvboxYellowSign = same_as_body,
+    GruvboxBlueSign = same_as_body,
+    GruvboxPurpleSign = same_as_body,
+    GruvboxAquaSign = same_as_body,
+    GruvboxOrangeSign = same_as_body,
+    -- カーソル行は、左端もカーソル行の色にして帯が途切れないようにする
+    CursorLineSign = { bg = require("palette").bg3 },
+  },
+})
 vim.cmd.colorscheme("gruvbox")
 
 -- telescope: 入力欄を上に置き、結果も上から並べる（旧設定と同じ）
