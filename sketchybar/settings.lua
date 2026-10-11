@@ -22,3 +22,8 @@ SPACES = {
 
 PADDINGS = 3
 GROUP_PADDINGS = 5
+
+-- 右側の項目で、設定を見るもの（旧設定と同じ値）
+MODULES = {
+  battery = { enable = true, style = "icon" },
+}

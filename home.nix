@@ -462,6 +462,8 @@ in
       pkgs.yabai
       sketchybar-menus
       pkgs.jq
+      # 音量を押したときの、音の出力先の一覧と切り替え
+      pkgs.switchaudio-osx
     ];
   };
   # -c ではなく --config で設定を指定する（指定しないと旧環境の ~/.config/sketchybar を読む）

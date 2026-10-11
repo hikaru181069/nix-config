@@ -31,6 +31,17 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 起動時に `--config` で設定を指定する。指定しないと旧環境の `~/.config/sketchybar` を読む
 - 旧環境に戻すとき: `launchctl enable gui/$(id -u)/homebrew.mxcl.sketchybar`（stats-provider も）→ `brew services start sketchybar`。そのうえで home.nix から sketchybar を外す
 
+### sketchybar の右側も、いったん旧環境と同じにした（Step 5.5）
+
+- 右側をどう作り直すかイメージしにくいので、まず旧設定の右側をそのまま持ってきて、色だけ Nightfox にした（ユーザーの希望）。見てから直す
+- 項目と順番は旧設定と同じ: 日付と時刻・バッテリー・Wi-Fi・音量・統計の表示切り替え・Docker・git ブランチ・CPU・メモリ・通信量。最初に作った時刻の島（clock.lua・island.lua）は外した
+- 音量を押したときの出力先の切り替えに使う SwitchAudioSource は nixpkgs から（switchaudio-osx）
+- CPU・メモリ・通信量の数値を送る常駐の統計プログラム（sketchybar-system-stats の `stats_provider`）は nixpkgs にない。とりあえず旧環境の Homebrew 版と起動設定（`com.sketchybar.stats-provider`）を、止めていたのを戻して使っている。右側の形が決まったら Nix でビルドする
+
+**注意**
+- git ブランチの項目は旧設定のまま WezTerm 専用（WezTerm に今のペインのフォルダを聞く）。Ghostty では表示されない
+- Docker の項目は `/usr/local/bin/docker`（Docker Desktop が置くもの）を使う。OrbStack に移るときに見直す
+
 ### sketchybar の左側を旧環境と同じにした（Step 5.5）
 
 **やったこと**
