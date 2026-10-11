@@ -27,8 +27,24 @@ local mode_colors = {
   R = p.red,
 }
 
--- モードの横の三角の色（地と同じ色）
-local mode_sep_colors = mode_colors
+-- モードの横の三角の色。旧設定と同じく、地より少し明るい色にする
+-- 旧設定の値を調べると、色のあるモードは地の色を白に約4割寄せた色、ノーマルモードは1段明るい灰色だった
+local function lighten(hex, amount)
+  local r, g, b = tonumber(hex:sub(2, 3), 16), tonumber(hex:sub(4, 5), 16), tonumber(hex:sub(6, 7), 16)
+  local function mix(c)
+    return math.floor(c + (255 - c) * amount + 0.5)
+  end
+  return string.format("#%02x%02x%02x", mix(r), mix(g), mix(b))
+end
+local mode_sep_colors = {
+  n = p.comment,
+  i = lighten(p.cyan, 0.4),
+  v = lighten(p.magenta, 0.4),
+  V = lighten(p.magenta, 0.4),
+  ["\22"] = lighten(p.magenta, 0.4),
+  c = lighten(p.yellow, 0.4),
+  R = lighten(p.red, 0.4),
+}
 
 -- Nerd Font のアイコン。見えない文字なので文字コードで書く
 local mode_icon_map = {
