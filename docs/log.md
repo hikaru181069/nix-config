@@ -31,6 +31,14 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 起動時に `--config` で設定を指定する。指定しないと旧環境の `~/.config/sketchybar` を読む
 - 旧環境に戻すとき: `launchctl enable gui/$(id -u)/homebrew.mxcl.sketchybar`（stats-provider も）→ `brew services start sketchybar`。そのうえで home.nix から sketchybar を外す
 
+### Neovim のステータスラインの形を旧環境と同じにした（Step 5.5）
+
+- 旧環境と表示が違っていた。最初に移したときに旧設定をそのまま使わず書き直したため、モードの前後の空白・右側の見えない区切りなどが変わっていた
+- 旧設定（`~/.config/nvim/lua/ui/lualine.lua`）と同じ作り（部品の関数・余白・左右の並び）にして、色だけ palette.nix のものにした（色は今のものがよいというユーザーの希望）
+  - 色の名前（`C.dark` など）は旧設定のまま、値を palette.nix の色にした。モードの色と横の三角の色は、それまでの新しいもの（三角は地と同じ色）
+  - 外したのは Copilot の表示だけ
+- アイコンと区切りの記号は、旧設定と同じ13個（文字コードで書いた）
+
 ### テーマを Nightfox から Gruvbox Dark Hard に変えた（Step 5.5）
 
 **決めたこと**（ユーザー）
