@@ -169,9 +169,17 @@ local function sep_left_thin(sep_fg, sep_bg)
   }
 end
 
+-- 部品のない真ん中の部分（と、ほかのウィンドウのステータスライン）の色。両側の部品と同じ暗い色にして、1本のバーに見せる
+-- 旧設定は theme = "auto" だった。Catppuccin はここを両側と同じ暗い色にしていたが、Gruvbox は明るめの色にするので指定する
+local fill = { fg = C.fog, bg = C.dark }
+local theme = {
+  normal = { a = fill, b = fill, c = fill },
+  inactive = { a = fill, b = fill, c = fill },
+}
+
 require("lualine").setup({
   options = {
-    theme = "auto",
+    theme = theme,
     component_separators = "",
     section_separators = "",
     globalstatus = false,
