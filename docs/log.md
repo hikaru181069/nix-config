@@ -7,25 +7,18 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
-### cava を入れた
+### cava を入れ、ミュージック.app の音に反応させた
 
 - 音に合わせて棒グラフが動くビジュアライザー（`programs.cava`、1.0.0）。設定は `~/.config-nix/cava/config`（cava は `XDG_CONFIG_HOME` を見るので、そのまま読まれる）
 - 棒の色は palette.nix から、下から上へ 水色 → 緑 → 黄 → オレンジ → 赤 のグラデーション
-- macOS の cava は既定の入力（マイク）の音に反応する。Mac で流している音（Apple Music など）に反応させるには、BlackHole などの仮想の機器が要る。まだ入れていない（ユーザーと相談する）
-- 確認: Nix 版が入り、設定ファイルができた。起動はしていない（起動するとマイクを使うので、マイクの許可の確認が出る。ユーザーが試す）
-
-### amp（ミュージック.app をターミナルから操作する）を入れた
-
-- 「Apple Music を再生する CLI」として調べた。Apple Music には外部から再生を操作する公式の仕組みがないので、どれもミュージック.app を AppleScript で動かす形。ユーザーが amp（helmedeiros/amp）を選んだ
-- nixpkgs にないので、`home.nix` の let の中に `buildGoModule` で定義した（v0.6.0、MIT）。`amp`（本体）と `amd`（任意の常駐プログラム）の2つ。zsh の補完（`_amp`）もビルド時に作る
-- スターが1つしかない、ほとんど使われていないリポジトリなので、入れる前にソースを読んだ
-  - 普段の操作は `osascript` を呼ぶだけ
-  - 外につなぐのは2つだけで、どちらも自分でコマンドを打ったときしか動かない: `amp auth apple-music`（ブラウザからトークンを貼り、Apple のサーバーに問い合わせる）と `amp soundcloud import`（自分のアップロードを取ってくる）
-  - `amd` は Mac の中だけで通信するソケットを作るだけ
-- 確認: ビルドと同梱のテストが通り、`amp --help` が出た。`amp --version` は `(devel)` と出る（版は `go install` で入れたときだけ埋め込まれる仕組みのため。動作には関係ない）
-- 最初、`amp tui` が「connecting…」のまま止まった。tui は状態を取れなくてもエラーを出さない作り。`amp status` で見ると `-1743`（ミュージックを操作する許可がない）だった
-  - 許可の確認が出ないままになっていたので、`tccutil reset AppleEvents com.mitchellh.ghostty` で Ghostty の「ほかのアプリを操作する許可」を最初の状態に戻した（Finder などへの許可も、次に使うときにまた確認が出る）
-  - そのあと `amp status` を実行し、出た確認でユーザーが許可した → `stopped` / `volume 100%` が返り、操作できるようになった
+- 音の取り方: `method = coreaudio`・`source = tap`。macOS 14.2 からの公式の仕組み（Core Audio tap）で、Mac から出ている音をそのまま取る。cava 1.0 はこれに対応していて、nixpkgs の cava にも組み込まれている
+- そこにたどり着くまで（ユーザーと相談しながら）
+  - 最初は「macOS の cava はマイクの音にしか反応しない。Mac の音を取るには BlackHole（仮想の音の機器）が要る」と説明した。これは誤りで、cava の最新版を確かめていなかった
+  - BlackHole は nixpkgs にもあるが、ドライバを Mac 全体の場所（`/Library/Audio/Plug-Ins/HAL`）に置く必要があり、home-manager ではできない。さらに複数出力装置を使うと音量キーが効かなくなる。なので見送った
+  - 代わりに AudioTee（makeusabrew/audiotee、Core Audio tap で音を標準出力に流す Swift 製のコマンド）を Nix でビルドし、fifo で cava に渡す形を試した。音は取れたが、cava は fifo からの音が 0.1 秒来ないと「無音」として毎回リセットする作りで、AudioTee は 0.2 秒ごとに送るため、棒が動かなかった
+  - その原因を調べるため cava のソースを読んでいて、`coreaudio_tap.m`（cava 自身の tap 対応）を見つけた → AudioTee・fifo・起動用のスクリプトは外し、cava の設定2行だけにした
+- 確認: 仮の設定（数字で出力）で、ミュージック.app の再生中に棒の高さが音楽に合わせて動いた（197 行中 196 行が 0 以外）。許可（画面と音声の収録）は AudioTee を試したときに Ghostty に出したもので足りた
+- 違い: AudioTee ならミュージック.app の音だけに絞れたが、cava の tap は Mac から出ている音すべてに反応する
 
 ### hollywood の代わりに genact を入れた
 

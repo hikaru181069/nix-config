@@ -248,10 +248,15 @@ in
     skins.gruvbox-dark-hard = "${pkgs.k9s}/share/k9s/skins/gruvbox-dark-hard.yaml";
     settings.k9s.ui.skin = "gruvbox-dark-hard";
   };
-  # 音に合わせて棒グラフが動く（遊び）。macOS では既定の入力（マイク）の音に反応する。
-  # Mac で流している音に反応させるには BlackHole などの仮想の機器が要る（まだ入れていない）
+  # 音に合わせて棒グラフが動く（遊び）。ミュージック.app などの Mac から出ている音に反応する
+  # cava 1.0 は macOS 14.2 からの公式の仕組み（Core Audio tap）に対応しているので、BlackHole などの仮想の機器は要らない
+  # 初回は「画面と音声の収録」の許可が要る（Ghostty に対して）
   programs.cava = {
     enable = true;
+    settings.input = {
+      method = "coreaudio";
+      source = "tap";
+    };
     settings.color = {
       # 下から上へ Gruvbox の 水色 → 緑 → 黄 → オレンジ → 赤
       gradient = 1;
