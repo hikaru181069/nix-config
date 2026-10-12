@@ -7,6 +7,34 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
+### nix-darwin を入れ、旧環境を卒業した（Step 6 の始め）
+
+**決めたこと**（ユーザーと相談）
+- 最初は「旧環境に一切さわらない」最小の形（nix-darwin にシェルの設定や Nix 本体を管理させない）を提案したが、ユーザーから「中途半端では」と指摘があった
+- 旧環境と Nix 環境を並べて `envswitch` で行き来するのは珍しいやり方で、ふつうは Nix の世代（ロールバック）を命綱にそのまま乗り換える。旧環境はほとんど使っていないので、**旧環境を卒業する**ことにした
+- 旧環境のファイル（`~/.config` の dotfiles、`~/.zshrc`）と Homebrew のコマンド（formula 26 個）は消さずに残す
+
+**やったこと**
+- `flake.nix` に nix-darwin を足し、`darwinConfigurations."MacBook-Pro-5"`（Mac のローカルホスト名と同じ名前）を作った。home-manager は nix-darwin のモジュールとして一緒に適用する（`useGlobalPkgs = true`）。単独の `homeConfigurations` は外した
+- `darwin.nix`（Mac 全体の設定）を新しく作った
+  - Nix 本体（nix-daemon・`/etc/nix/nix.conf`）も nix-darwin で管理し、flakes を有効にした
+  - `/etc/zshenv`・`/etc/zshrc` は nix-darwin が作る。補完の初期化とプロンプトは home-manager 側で行うので、`enableGlobalCompInit = false`・`promptInit = ""`
+  - nix-darwin は PATH を作り直す。Homebrew の場所は macOS の `/etc/paths.d` で足されていたので、`environment.systemPath` で明示した
+  - Homebrew は cask 11 個をそのまま宣言した。`cleanup = "none"`・自動更新なし
+- `envswitch` をやめた（`home.nix` の `~/.zshenv` の差し替えと `~/.local/bin/envswitch` を外し、`envswitch/` を消した）。`~/.zshenv` は home-manager の標準の中身（`~/.config-nix/zsh/.zshenv` を読むだけ）になり、新しいタブはいつも Nix 環境
+- home.nix の `nix.package`・`nix.settings` は Mac 全体の設定と重なるので外した
+
+**適用**（ユーザーがパスワードを打って実行）
+- `/etc/zshrc`・`/etc/bashrc` は nix-darwin の「知っている中身」の一覧になく（macOS 26.5 の中身 + Nix インストーラの行）、そのままだと安全のため止まる。そこで `*.before-nix-darwin` に名前を変えて残した。`/etc/zprofile` は nix-darwin が自動で名前を変えた
+- 初回はビルドしたものに入っている `darwin-rebuild` で適用した（世代1）
+- 適用後に `~/.local/bin`（`claude` と `uv` がある）が PATH にないことに気づき、`home.sessionPath` に足して再適用した（世代2）
+- `sudo darwin-rebuild` は「見つからない」になる。`sudo` は決まった場所しか探さず、`/run/current-system/sw/bin` が入っていないため。今はフルパスで打つ: `sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config`
+
+**確認したこと**
+- 新しいシェル（ログインシェル）で: `ZDOTDIR`・`XDG_CONFIG_HOME` が `~/.config-nix`、PATH は `~/.local/bin` → `~/.nix-profile/bin` → `/run/current-system/sw/bin` → Nix → `/opt/homebrew/bin` → macOS 標準の順。git・nvim・starship・gh は Nix 版、`claude`・`uv`・`darwin-rebuild`・`brew` も見つかる。git のメールは noreply、補完も履歴（10 万件）もそのまま
+- nix-daemon は nix-darwin の起動設定で動いている。yabai・skhd・sketchybar も動いたまま。Homebrew の cask は 11 個のまま（`brew bundle` はすべて Using）
+- 戻し方: `sudo darwin-rebuild --rollback`（前の世代へ）。nix-darwin ごとやめるなら、`*.before-nix-darwin` を元の名前に戻し、nix-darwin のアンインストーラを使う
+
 ### typioca を入れた
 
 - 英語のタイピング練習（`home.packages`、3.1.0）。ttyper と比べて、メニューでモード（時間制・単語数制など）を選べて記録も残る typioca をユーザーが選んだ

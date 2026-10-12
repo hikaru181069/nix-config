@@ -55,6 +55,9 @@ in
 
   programs.home-manager.enable = true;
 
+  # Claude Code（claude）と uv は自分で ~/.local/bin に入れているので、PATH に足す
+  home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
+
   # git は ~/.gitconfig（旧環境）も読んでしまうので、Nix 環境では読む先を1つに絞る
   home.sessionVariables.GIT_CONFIG_GLOBAL = "${config.xdg.configHome}/git/config";
   # tmux のサーバーは1ユーザーに1つ（/tmp/tmux-<uid>/default）なので、そのままだと旧環境の tmux に
