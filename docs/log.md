@@ -18,7 +18,14 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
   - 公開されているイメージ（node・redis など）、名前なしのボリューム（node_modules の保護用）、ビルドキャッシュは移していない
 - 確認: OrbStack で開発用の MongoDB を compose で起動し、件数が Docker Desktop と同じ（記録21件・ユーザー4件など）
 - kind のクラスタを作り直し（3ノード Ready）、本番用イメージ3つを読み込んだ。マニフェストの適用はまだ（作業中の変更があるため、ユーザーが行う）
-- まだのこと: 本番相当の一式の起動確認、kind へのマニフェストの適用、Docker Desktop を終了して自動起動を止める（しばらくは消さずに残す。戻すときは `docker context use desktop-linux`）
+- 続き（同じ日）:
+  - 本番相当の一式を OrbStack で起動。8コンテナとも動き、http://localhost:8080 が応答、本番相当の MongoDB のデータ（記録17件など）も残っていた。Prometheus は backend 3台と fastapi を集められている
+  - kind にマニフェストを適用（namespace・secret・configmap・mongodb・fastapi・backend・frontend）。Pod はすべて Running で、worker 2台に分かれた。DB は空なので `npm run seed`・`seed:demo` を入れ直した。http://localhost:8081 が応答
+  - Docker Desktop を終了した。自動起動はもともと無効（`AutoStart: false`、ログイン項目にもない）。アプリは消さずに残している（戻すときは Docker Desktop を開いて `docker context use desktop-linux`）
+  - OrbStack もログイン時には起動しない設定（`app.start_at_login: false`、既定のまま）。Docker を使うときは OrbStack を開く
+  - `~/coffee-app/backend/.env`（Git 管理外）の `MONGO_URI` を手元の MongoDB（27018）に変えた。Atlas の行はコメントにして残した
+  - coffee-app の PR #2 を作った（`chore/mac-native-dev`）
+- 困ったこと: gh（Go 製）だけ GitHub の API に `TLS handshake timeout` でつながらない（curl・git push は通る。サンドボックスの外でも同じ、`GODEBUG=tlsmlkem=0` でも同じ）。OrbStack を入れた後に起きたが、関係はまだわからない。PR は `gh auth token` のトークンで curl から API を呼んで作った
 
 ### coffee-app を Mac 上で動かせるか確かめた（Step 5 の残り）
 
