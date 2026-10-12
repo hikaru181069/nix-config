@@ -201,8 +201,8 @@ in
   programs.fzf = {
     enable = true;
     defaultCommand = "fd --type f --hidden --exclude .git";
-    fileWidgetCommand = "fd --type f --hidden --exclude .git";
-    changeDirWidgetCommand = "fd --type d --hidden --exclude .git";
+    fileWidget.command = "fd --type f --hidden --exclude .git";
+    changeDirWidget.command = "fd --type d --hidden --exclude .git";
     # 背景は端末のまま。選んでいる行は Neovim の選択範囲と同じ色
     colors = {
       fg = palette.fg2;
