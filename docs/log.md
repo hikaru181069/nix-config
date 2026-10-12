@@ -26,6 +26,10 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
   - `~/coffee-app/backend/.env`（Git 管理外）の `MONGO_URI` を手元の MongoDB（27018）に変えた。Atlas の行はコメントにして残した
   - coffee-app の PR #2 を作った（`chore/mac-native-dev`）
 - 困ったこと: gh（Go 製）だけ GitHub の API に `TLS handshake timeout` でつながらない（curl・git push は通る。サンドボックスの外でも同じ、`GODEBUG=tlsmlkem=0` でも同じ）。OrbStack を入れた後に起きたが、関係はまだわからない。PR は `gh auth token` のトークンで curl から API を呼んで作った
+  - 調べた結果（同じ日）: OrbStack は関係なさそう。失敗するのは Nix の gh（2.102.0、Go 1.27.1 で作られている）だけで、Homebrew の gh（2.92.0、Go 1.26.2）・kubectl（Go 1.24）・curl・openssl はつながる
+  - 試したがだめだったこと: `GODEBUG` で ML-KEM（`tlsmlkem=0`・`tlssecpmlkem=0`）や HTTP/2 を止める、証明書ファイルの指定、Go の名前解決への切り替え、サンドボックスの外での実行。IPv6・MTU（大きな最初の通信）の問題でもなかった（openssl で確認）
+  - gh 2.102 は Go 1.27 が必須で、Go 1.26 で作り直すことはできない
+  - 今のネットワークは学内（`josai.jp`）。Go 1.27 の通信だけをネットワーク側が止めている可能性もあるので、別のネットワークでも試す
 
 ### coffee-app を Mac 上で動かせるか確かめた（Step 5 の残り）
 
