@@ -12,6 +12,13 @@
   # Nix 本体（nix-daemon と /etc/nix/nix.conf）も nix-darwin で管理する
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # sudo を Touch ID で通す（/etc/pam.d/sudo_local。macOS のアップデートでも消えない場所）
+  # reattach は tmux の中でも Touch ID を使えるようにするため（ないとパスワードしか聞かれない）
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
+
   # /etc/zshenv・/etc/zshrc は nix-darwin が作る。ユーザーの zsh の設定は home.nix（home-manager）にある
   programs.zsh = {
     enable = true;
