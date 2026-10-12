@@ -7,6 +7,14 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
+### btop と fastfetch を入れた
+
+- どちらも旧環境には入っていなかったので、新しく足した。Nix 環境（`envswitch nix` のタブ）だけで使える
+- btop（`programs.btop`）: 配色は btop に最初から入っている `gruvbox_dark_v2`。背景は塗らずにターミナルの色を使う（`theme_background = false`）。`hjkl` で動く（`vim_keys`）
+- fastfetch（`programs.fastfetch`）: まずは初期設定のまま。表示する項目は使いながら決める
+- 確認: どちらも Nix 版（btop 1.4.7、fastfetch 2.69.0）が入り、btop の設定ファイル（`~/.config-nix/btop/btop.conf`）に上の3つが書かれている。fastfetch はロゴと情報が表示された
+- 適用時に、fzf の設定名が変わったという警告が出た（`changeDirWidgetCommand` → `changeDirWidget.command`、`fileWidgetCommand` → `fileWidget.command`）。今回の変更とは関係ない。動作には影響しないので、そのままにしている
+
 ### Docker Desktop から OrbStack へ乗り換えた（Step 5 の残り）
 
 - `brew install --cask orbstack`（計画どおり、nix-darwin までは GUI アプリは Homebrew の cask）。`docker` の接続先（context）は `orbstack` に切り替わった。旧環境・新環境どちらの zsh でも同じ OrbStack を使う

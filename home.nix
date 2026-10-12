@@ -208,6 +208,20 @@ in
   programs.fd.enable = true;
   programs.jq.enable = true;
 
+  # CPU・メモリ・プロセスを見る画面
+  programs.btop = {
+    enable = true;
+    settings = {
+      # btop に最初から入っている Gruvbox。背景は塗らずにターミナルの色（palette.nix の bg1）を使う
+      color_theme = "gruvbox_dark_v2";
+      theme_background = false;
+      # Neovim と同じく hjkl で動く
+      vim_keys = true;
+    };
+  };
+  # OS・PC の情報をロゴと一緒に表示する。まずは初期設定のまま
+  programs.fastfetch.enable = true;
+
   # Git の操作画面。diff は delta で表示する
   programs.lazygit = {
     enable = true;
