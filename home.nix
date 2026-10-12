@@ -53,16 +53,7 @@ in
   xdg.enable = true;
   xdg.configHome = "${config.home.homeDirectory}/.config-nix";
 
-  # flakes を有効化（Nix 環境のときだけ読まれる）
-  nix.package = pkgs.nix;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   programs.home-manager.enable = true;
-
-  # 旧環境と Nix 環境を切り替える仕組み。~/.zshenv はどのシェルでも最初に読まれるので、
-  # home-manager が置く「常に Nix 環境を読む」中身を、モードで分岐する中身に差し替える
-  home.file.".zshenv".text = lib.mkForce (builtins.readFile ./envswitch/zshenv);
-  home.file.".local/bin/envswitch".source = ./envswitch/envswitch;
 
   # git は ~/.gitconfig（旧環境）も読んでしまうので、Nix 環境では読む先を1つに絞る
   home.sessionVariables.GIT_CONFIG_GLOBAL = "${config.xdg.configHome}/git/config";
@@ -387,8 +378,8 @@ in
       );
     in
     ''
-      # ペインの zsh に ZDOTDIR を渡さない。渡すと zsh は ~/.zshenv（envswitch の分岐）を飛ばして
-      # ~/.config-nix/zsh/.zshenv を直接読み、Nix の PATH が足されないペインになる
+      # ペインの zsh に ZDOTDIR を渡さない。渡すと zsh は ~/.zshenv を飛ばして
+      # ~/.config-nix/zsh/.zshenv を直接読むので、新しいタブと同じ順番で読み込ませる
       set-environment -gu ZDOTDIR
 
       # コマンド入力（prefix + :）の行編集は Emacs 式（tmux-sensible と同じ）
@@ -558,7 +549,7 @@ in
   services.skhd.enable = true;
   launchd.agents.skhd.config = {
     ProgramArguments = lib.mkForce [ (lib.getExe pkgs.skhd) "-c" "${config.home.homeDirectory}/nix-config/skhd/skhdrc" ];
-    # キーに割り当てたコマンドは $SHELL で動く。zsh だと ~/.zshenv（envswitch）まで読むので、sh にする
+    # キーに割り当てたコマンドは $SHELL で動く。zsh だと ~/.zshenv などまで読んで遅くなるので、sh にする
     EnvironmentVariables = {
       PATH = "${config.home.profileDirectory}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
       SHELL = "/bin/sh";
