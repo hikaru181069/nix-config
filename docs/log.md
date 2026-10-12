@@ -7,6 +7,13 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
+### sudo を Touch ID で通せるようにした（Step 6）
+
+- `darwin.nix` に `security.pam.services.sudo_local.touchIdAuth = true` と `reattach = true` を足した。書き込まれるのは `/etc/pam.d/sudo_local`（macOS がユーザーの追加の設定用に用意している場所で、アップデートでも消えない）
+- `reattach` は tmux の中でも Touch ID を使うため（pam_reattach）。ないと tmux の中ではパスワードしか聞かれない
+- 確認: `rebuild` で適用（世代4）したあと、ユーザーが `sudo -k && sudo true` を試し、Touch ID で通った
+- つまずき: 世代3より前に開いたペインには `rebuild` のエイリアスがなかった。`exec zsh` で読み込み直せば使える
+
 ### nix-darwin を入れ、旧環境を卒業した（Step 6 の始め）
 
 **決めたこと**（ユーザーと相談）
