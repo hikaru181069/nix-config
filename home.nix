@@ -222,6 +222,24 @@ in
   # OS・PC の情報をロゴと一緒に表示する。まずは初期設定のまま
   programs.fastfetch.enable = true;
 
+  # Kubernetes（kind の coffee-app）を画面で見て操作する
+  programs.k9s = {
+    enable = true;
+    # k9s に最初から入っている Gruvbox Dark Hard（背景は palette.nix の bg1 と同じ #1d2021）
+    skins.gruvbox-dark-hard = "${pkgs.k9s}/share/k9s/skins/gruvbox-dark-hard.yaml";
+    settings.k9s.ui.skin = "gruvbox-dark-hard";
+  };
+  # ターミナルで動くファイル操作の画面。`y` で開くと、閉じたときにそのフォルダへ移動する
+  programs.yazi.enable = true;
+  # コマンドの使い方を、よく使う例だけ短く見せる（コマンドは tldr）。説明はネットから取ってくるので自動で更新する
+  # home-manager の settings は macOS だと ~/Library/Application Support に書くが、tealdeer は XDG_CONFIG_HOME（~/.config-nix）を
+  # 優先して読むので、設定ファイルは自分で ~/.config-nix に置く
+  programs.tealdeer.enable = true;
+  xdg.configFile."tealdeer/config.toml".text = ''
+    [updates]
+    auto_update = true
+  '';
+
   # Git の操作画面。diff は delta で表示する
   programs.lazygit = {
     enable = true;
@@ -450,6 +468,14 @@ in
     pkgs.yabai
     # sketchybar でアプリのアイコンを出すフォント（~/Library/Fonts/HomeManager に入る）
     pkgs.sketchybar-app-font
+    # ping の応答時間をグラフで見る
+    pkgs.gping
+    # どのフォルダが容量を食っているかを見る
+    pkgs.dust
+    # Markdown をターミナルで読む
+    pkgs.glow
+    # ls を sl と打ち間違えると SL が走る（遊び）
+    pkgs.sl
   ];
   launchd.agents.yabai = {
     enable = true;

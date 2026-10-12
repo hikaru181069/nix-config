@@ -7,6 +7,17 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
+### k9s・yazi・gping・dust・glow・sl・tealdeer を入れた
+
+- 「おもしろい CLI ツール」として候補を出し、ユーザーが選んだ。どれも旧環境にはなく、Nix 環境だけで使える
+- k9s（`programs.k9s`）: kind の coffee-app を画面で見るため。配色は k9s に最初から入っている `gruvbox-dark-hard`（背景が palette.nix の bg1 と同じ）
+- yazi（`programs.yazi`）: ファイル操作の画面。`y` で開くと、閉じたときにそのフォルダへ移動する（home-manager が zsh に関数 `y` を作る）
+- tealdeer（`programs.tealdeer`、コマンドは `tldr`）: 説明の自動更新を有効にした
+  - home-manager の `settings` は macOS だと `~/Library/Application Support/tealdeer` に書く。一方 tealdeer は、Nix 環境が設定する `XDG_CONFIG_HOME`（`~/.config-nix`）を優先して読む。そのため設定が読まれなかった → `xdg.configFile` で `~/.config-nix/tealdeer/config.toml` に自分で置いた
+- gping・dust・glow・sl: 入れただけ（`home.packages`）
+- 確認: 7つとも Nix 版が入った。k9s は `~/.config-nix/k9s` の設定と配色を読んでいる（`k9s info`）。tldr は初回に説明を取ってきて `tldr dust` が表示された。glow で log.md が読め、dust でフォルダの容量が表示された。yazi の `y` は zsh の関数になっている
+- まだ画面で見ていないもの: k9s・yazi・gping・sl（どれも操作する画面なので、ユーザーが触って確認する）
+
 ### btop と fastfetch を入れた
 
 - どちらも旧環境には入っていなかったので、新しく足した。Nix 環境（`envswitch nix` のタブ）だけで使える
