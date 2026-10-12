@@ -29,6 +29,7 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 初回はビルドしたものに入っている `darwin-rebuild` で適用した（世代1）
 - 適用後に `~/.local/bin`（`claude` と `uv` がある）が PATH にないことに気づき、`home.sessionPath` に足して再適用した（世代2）
 - `sudo darwin-rebuild` は「見つからない」になる。`sudo` は決まった場所しか探さず、`/run/current-system/sw/bin` が入っていないため。今はフルパスで打つ: `sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config`
+  - 同じ日に、これを zsh のエイリアス `rebuild` にした。適用が要るのは Nix の設定ファイル（home.nix・darwin.nix・flake.nix）を変えたときと、`nix flake update` のあとだけ
 
 **確認したこと**
 - 新しいシェル（ログインシェル）で: `ZDOTDIR`・`XDG_CONFIG_HOME` が `~/.config-nix`、PATH は `~/.local/bin` → `~/.nix-profile/bin` → `/run/current-system/sw/bin` → Nix → `/opt/homebrew/bin` → macOS 標準の順。git・nvim・starship・gh は Nix 版、`claude`・`uv`・`darwin-rebuild`・`brew` も見つかる。git のメールは noreply、補完も履歴（10 万件）もそのまま
