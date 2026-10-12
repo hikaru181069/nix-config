@@ -154,6 +154,8 @@ in
       lt = "eza --tree --level=2";
       lt3 = "eza --tree --level=3";
       lta = "eza --tree --level=2 -a";
+      # Nix の設定（home.nix・darwin.nix）を Mac に適用する。sudo は決まった場所しか探さないのでフルパスで書く
+      rebuild = "sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config";
       # 東京から見える今の星空を、色付き・星座の線付きで（astroterm は設定ファイルがないのでオプションで指定する）
       astroterm = "astroterm --city Tokyo --color --constellations --unicode";
     };
