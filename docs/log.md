@@ -7,6 +7,19 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
+### macOS の設定を nix-darwin で宣言した（Step 6）
+
+- まず `defaults read` で今の値を読み、「今の値をそのまま宣言するもの（A）」と「この機会に変えるもの（B）」に分けて提案した。ユーザーが A と B の 1〜3・6 を選んだ
+- A（見た目も動きも変わらない）: ダークモード、メニューバーを隠す（sketchybar を出すため）、Dock は左・自動で隠す・大きさ 40、Finder はカラム表示、トラックパッドはタップでクリックなし・3本指ドラッグなし・右クリックあり、スクリーンショットは `~/screenshots`、macOS のタイルの余白なし
+- B（変えたもの）
+  - `dock.mru-spaces = false`: スペースを最近使った順に並び替えない（yabai・sketchybar のスペース番号がずれるため）
+  - キーの押しっぱなしで文字をくり返す（`ApplePressAndHoldEnabled = false`）。くり返しはシステム設定で選べるいちばん速い値（`KeyRepeat = 2`・`InitialKeyRepeat = 15`）
+  - 文字の自動修正をすべてオフ（文頭の大文字・ピリオド・引用符・ダッシュ・スペル・インライン予測）
+  - 壁紙をクリックしてもウィンドウをよけない（`EnableStandardClickToShowDesktop = false`）
+- 見送ったもの: Finder の表示の追加（拡張子・パスバーなど）、Dock の「最近使ったアプリ」と出てくるまでの待ち時間、Dock に並べるアプリ（並びを変えるたびに設定を書き換えることになるため）
+- 確認: `rebuild` で適用（世代5）。`defaults read` で値が入ったことを確認した。Dock は適用の中で自動で再起動された（nix-darwin が `killall Dock` する）
+- 注意: キーリピートと押しっぱなしの動きは、開いていたアプリには反映されないことがある。ログインし直すと確実
+
 ### sudo を Touch ID で通せるようにした（Step 6）
 
 - `darwin.nix` に `security.pam.services.sudo_local.touchIdAuth = true` と `reattach = true` を足した。書き込まれるのは `/etc/pam.d/sudo_local`（macOS がユーザーの追加の設定用に用意している場所で、アップデートでも消えない）
