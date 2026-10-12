@@ -5,6 +5,20 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ---
 
+## 2026-10-12
+
+### coffee-app を Mac 上で動かせるか確かめた（Step 5 の残り）
+
+- アプリ本体（frontend・backend・fastapi）は Mac 上（devShell）で、MongoDB だけ Docker で動かす形を、実際に起動して確認した
+  - 作業中のブランチ（`feat/k8s-bootstrap`）に触らないよう、main から `chore/mac-native-dev` を作り、別のフォルダ `~/coffee-app-mac`（git worktree）で作業した
+  - `direnv allow` → `npm ci` で、手元に `node_modules` と `.venv` ができる（Neovim の LSP が型を読める）
+  - 登録・ログイン・記録一覧の API、画面、FastAPI が応答。テスト（backend 580件、frontend lint・build・368件、pytest 10件）もすべて通った
+- 見つかったずれ: `backend/.env.example` の MongoDB の番号が 27017（mlb-app の MongoDB）になっていて、Docker の MongoDB（27018）につながらなかった → 27018 に直し、README と IMPLEMENTATION.md に追記してコミット（58cd918。push はまだ）
+- Prometheus・Grafana は、コンテナ名でアプリを見に行く設定のため、この形では使わない（メトリクスを見るときは全部 Docker で起動する）
+- 注意: `~/coffee-app/backend/.env`（Git 管理外）は MongoDB Atlas を指している。このまま Mac 上で動かすと Atlas のデータを読み書きする
+
+---
+
 ## 2026-10-11
 
 ### sketchybar をゼロから作り直し始めた（Step 5.5）
