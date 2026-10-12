@@ -7,6 +7,19 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
+### Docker Desktop から OrbStack へ乗り換えた（Step 5 の残り）
+
+- `brew install --cask orbstack`（計画どおり、nix-darwin までは GUI アプリは Homebrew の cask）。`docker` の接続先（context）は `orbstack` に切り替わった。旧環境・新環境どちらの zsh でも同じ OrbStack を使う
+- 乗り換え前に kind のクラスタ（`coffee-app`）を削除し、動いていたコンテナをすべて止めた（kind の中のデータは消えてよい、とユーザーが判断）
+- OrbStack の移行機能（`orb docker migrate`）は途中で止まった。手元でビルドしたイメージをレジストリから取ってこようとして失敗するため。移ったボリュームも中身が足りず（開発用 MongoDB が 43 ファイル中 18 ファイル）、移ったコンテナはネットワークがなく起動できなかった
+- そのため手で移した:
+  - 名前付きボリューム6つ（coffee-app の開発用・本番相当の MongoDB と Grafana、mlb-app と study-log の MongoDB）: Docker Desktop 側を読み取り専用でつなぎ、tar で OrbStack 側へコピー。ファイル数が一致することを確認
+  - 手元でビルドしたイメージ9つ（coffee-app と mlb-app）: `docker save` → `docker load`。1回でまとめて渡すと失敗したので1つずつ
+  - 公開されているイメージ（node・redis など）、名前なしのボリューム（node_modules の保護用）、ビルドキャッシュは移していない
+- 確認: OrbStack で開発用の MongoDB を compose で起動し、件数が Docker Desktop と同じ（記録21件・ユーザー4件など）
+- kind のクラスタを作り直し（3ノード Ready）、本番用イメージ3つを読み込んだ。マニフェストの適用はまだ（作業中の変更があるため、ユーザーが行う）
+- まだのこと: 本番相当の一式の起動確認、kind へのマニフェストの適用、Docker Desktop を終了して自動起動を止める（しばらくは消さずに残す。戻すときは `docker context use desktop-linux`）
+
 ### coffee-app を Mac 上で動かせるか確かめた（Step 5 の残り）
 
 - アプリ本体（frontend・backend・fastapi）は Mac 上（devShell）で、MongoDB だけ Docker で動かす形を、実際に起動して確認した
