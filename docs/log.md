@@ -7,6 +7,15 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
+### lazydocker・posting・astroterm を入れた
+
+- 「いい感じの CLI ツール」の2回目の候補から、ユーザーが選んだ。どれも Nix 環境だけで使える
+- lazydocker（`programs.lazydocker`）: Docker の画面。色は lazygit と同じ（操作中の枠は blue、選んでいる行は sel0）。lazydocker は `XDG_CONFIG_HOME` を優先して読むので、設定は `~/.config-nix/lazydocker/config.yml`
+  - そこに 10/10 にできた空の `config.yml`（0 バイト、以前 lazydocker を一度起動したときのもの）があり、home-manager とぶつかるので消した
+- posting: API を試す画面。入れただけ
+- astroterm: 今見える星空を描く。設定ファイルがなく、場所を指定しないと緯度 0・経度 0 の空になる。そこで zsh のエイリアスで `--city Tokyo --color --constellations --unicode` を付けた（埼玉 `Saitama` も選べる）
+- 確認: 3つとも Nix 版（lazydocker 0.25.2、posting 2.11.0、astroterm 1.2.0）が入り、lazydocker の設定ファイルに色が書かれ、zsh にエイリアスが入った。画面はまだ開いていない（ユーザーが試す）
+
 ### cava を入れ、ミュージック.app の音に反応させた
 
 - 音に合わせて棒グラフが動くビジュアライザー（`programs.cava`、1.0.0）。設定は `~/.config-nix/cava/config`（cava は `XDG_CONFIG_HOME` を見るので、そのまま読まれる）

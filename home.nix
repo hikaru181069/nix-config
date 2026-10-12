@@ -160,6 +160,8 @@ in
       lt = "eza --tree --level=2";
       lt3 = "eza --tree --level=3";
       lta = "eza --tree --level=2 -a";
+      # 東京から見える今の星空を、色付き・星座の線付きで（astroterm は設定ファイルがないのでオプションで指定する）
+      astroterm = "astroterm --city Tokyo --color --constellations --unicode";
     };
     # Ctrl-X Ctrl-E で、入力中のコマンドをエディタで編集する
     initContent = ''
@@ -241,6 +243,17 @@ in
   # OS・PC の情報をロゴと一緒に表示する。まずは初期設定のまま
   programs.fastfetch.enable = true;
 
+  # Docker のコンテナ・ログ・イメージを画面で見て操作する
+  programs.lazydocker = {
+    enable = true;
+    # 色は lazygit と同じ。いま操作している枠は青、選んでいる行は Neovim の選択範囲と同じ色
+    settings.gui.theme = {
+      activeBorderColor = [ palette.blue "bold" ];
+      inactiveBorderColor = [ palette.bg4 ];
+      selectedLineBgColor = [ palette.sel0 ];
+      optionsTextColor = [ palette.blue ];
+    };
+  };
   # Kubernetes（kind の coffee-app）を画面で見て操作する
   programs.k9s = {
     enable = true;
@@ -519,6 +532,10 @@ in
     pkgs.genact
     # ミュージック.app をターミナルから操作する（定義は上の let の中）
     amp
+    # API を試す画面（ターミナル版の Postman のようなもの）
+    pkgs.posting
+    # 今見える星空を描く（遊び）。オプションは zsh のエイリアスで指定
+    pkgs.astroterm
   ];
   launchd.agents.yabai = {
     enable = true;
