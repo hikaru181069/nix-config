@@ -31,6 +31,51 @@
   # （Nix のものより後ろ、/usr/bin などより前）
   environment.systemPath = lib.mkOrder 1100 [ "${config.homebrew.prefix}/bin" ];
 
+  # macOS の設定。2026-10-12 時点の値をそのまま宣言したもの（A）と、この機会に変えたもの（B）
+  system.defaults = {
+    NSGlobalDomain = {
+      # A: ダークモード。メニューバーは隠す（代わりに sketchybar を出す）
+      AppleInterfaceStyle = "Dark";
+      _HIHideMenuBar = true;
+      # B: キーを押しっぱなしにしたら、アクセント記号の候補ではなく文字をくり返す（Neovim で hjkl を押しっぱなしにできる）
+      ApplePressAndHoldEnabled = false;
+      # B: くり返しを速く。システム設定で選べるいちばん速い値（くり返しの間隔 2 = 30ms、始まるまで 15 = 225ms）
+      KeyRepeat = 2;
+      InitialKeyRepeat = 15;
+      # B: 文字の自動修正はすべてやめる（コードやコマンドを書くときに邪魔になる）
+      NSAutomaticCapitalizationEnabled = false;
+      NSAutomaticPeriodSubstitutionEnabled = false;
+      NSAutomaticQuoteSubstitutionEnabled = false;
+      NSAutomaticDashSubstitutionEnabled = false;
+      NSAutomaticSpellingCorrectionEnabled = false;
+      NSAutomaticInlinePredictionEnabled = false;
+    };
+    dock = {
+      # A: 左側に、自動で隠す、大きさ 40
+      autohide = true;
+      orientation = "left";
+      tilesize = 40;
+      # B: スペースを「最近使った順」に並び替えない（yabai・sketchybar のスペース番号がずれるため）
+      mru-spaces = false;
+    };
+    # A: Finder はカラム表示
+    finder.FXPreferredViewStyle = "clmv";
+    trackpad = {
+      # A: タップでクリックしない、3本指ドラッグなし、2本指で右クリック
+      Clicking = false;
+      TrackpadThreeFingerDrag = false;
+      TrackpadRightClick = true;
+    };
+    # A: スクリーンショットの保存先
+    screencapture.location = "${config.system.primaryUserHome}/screenshots";
+    WindowManager = {
+      # A: macOS のタイル機能で並べたときの余白なし
+      EnableTiledWindowMargins = false;
+      # B: 壁紙をクリックしてもウィンドウをよけない（ステージマネージャ使用時だけにする）
+      EnableStandardClickToShowDesktop = false;
+    };
+  };
+
   # Homebrew は GUI アプリ・フォント（cask）専用。宣言していないものは消さない（cleanup = "none"）
   # コマンド（formula）は旧環境で使っていたものが残っているが、少しずつ片付ける
   homebrew = {
