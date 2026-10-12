@@ -24,6 +24,25 @@ let
     };
     cargoHash = "sha256-AlMdC1yQGwSn/omF01aRwiJlmjoQoAl+l1cMyjbmQ1E=";
   };
+  # ミュージック.app をターミナルから操作する（helmedeiros/amp）。nixpkgs にないのでビルドする
+  # 中身は osascript でミュージック.app を動かすだけ（2026-10-12 にソースを確認）。amp が本体、amd は任意の常駐プログラム
+  amp = pkgs.buildGoModule {
+    pname = "amp";
+    version = "0.6.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "helmedeiros";
+      repo = "amp";
+      tag = "v0.6.0";
+      hash = "sha256-cuMZA3QT+AAxrVumO23BBeVXj8Q5pOKHjIL1zxJaLo0=";
+    };
+    vendorHash = "sha256-il19j8GN3EOsrJ5CrrkrWPpwl/QfFZLbkNAReqwPRgQ=";
+    subPackages = [ "cmd/amp" "cmd/amd" ];
+    # zsh で Tab を押すとコマンドやプレイリスト名を補完する
+    nativeBuildInputs = [ pkgs.installShellFiles ];
+    postInstall = ''
+      installShellCompletion --cmd amp --zsh <($out/bin/amp completion zsh)
+    '';
+  };
 in
 {
   home.username = "hikarusato";
@@ -478,6 +497,8 @@ in
     pkgs.sl
     # 忙しく作業しているふりをする（遊び）。hollywood は macOS で半分以上の画面が動かないので、こちらにした
     pkgs.genact
+    # ミュージック.app をターミナルから操作する（定義は上の let の中）
+    amp
   ];
   launchd.agents.yabai = {
     enable = true;
