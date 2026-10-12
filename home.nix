@@ -248,6 +248,21 @@ in
     skins.gruvbox-dark-hard = "${pkgs.k9s}/share/k9s/skins/gruvbox-dark-hard.yaml";
     settings.k9s.ui.skin = "gruvbox-dark-hard";
   };
+  # 音に合わせて棒グラフが動く（遊び）。macOS では既定の入力（マイク）の音に反応する。
+  # Mac で流している音に反応させるには BlackHole などの仮想の機器が要る（まだ入れていない）
+  programs.cava = {
+    enable = true;
+    settings.color = {
+      # 下から上へ Gruvbox の 水色 → 緑 → 黄 → オレンジ → 赤
+      gradient = 1;
+      gradient_count = 5;
+      gradient_color_1 = "'${palette.cyan}'";
+      gradient_color_2 = "'${palette.green}'";
+      gradient_color_3 = "'${palette.yellow}'";
+      gradient_color_4 = "'${palette.orange}'";
+      gradient_color_5 = "'${palette.red}'";
+    };
+  };
   # ターミナルで動くファイル操作の画面。`y` で開くと、閉じたときにそのフォルダへ移動する
   programs.yazi.enable = true;
   # コマンドの使い方を、よく使う例だけ短く見せる（コマンドは tldr）。説明はネットから取ってくるので自動で更新する
