@@ -476,6 +476,8 @@ in
     pkgs.glow
     # ls を sl と打ち間違えると SL が走る（遊び）
     pkgs.sl
+    # 忙しく作業しているふりをする（遊び）。hollywood は macOS で半分以上の画面が動かないので、こちらにした
+    pkgs.genact
   ];
   launchd.agents.yabai = {
     enable = true;

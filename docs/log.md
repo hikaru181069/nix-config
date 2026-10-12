@@ -7,6 +7,14 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-12
 
+### hollywood の代わりに genact を入れた
+
+- ユーザーは hollywood（ターミナルを分割して「ハッカー映画っぽい」画面を並べる）を希望した。だが macOS ではうまく動かないので見送った
+  - nixpkgs の hollywood は macOS では入らない。jp2a に「macOS では壊れている」印（`broken = isDarwin`）がある。ただし実際には作れて、画像も文字で描けた。さらに mlocate・atop・mplayer・ccze は macOS 用がない
+  - 17 ある画面のうち、7つは ccze（色付け）を使う。ほかにも locate・atop・mplayer・`/sys` など Linux にしかないものを使う画面がある。動くのは cmatrix・bmon・htop・世界地図・`/dev` のツリーの5つくらい（足りない画面は自動で閉じる仕組み）
+- 代わりに、macOS でもそのまま動く genact（忙しく作業しているふりをする）を `home.packages` に入れた
+- 確認: Nix 版（1.6.0）が入り、`genact -m cargo` で偽のダウンロード表示が流れた。表示の種類は `genact --list-modules`
+
 ### k9s・yazi・gping・dust・glow・sl・tealdeer を入れた
 
 - 「おもしろい CLI ツール」として候補を出し、ユーザーが選んだ。どれも旧環境にはなく、Nix 環境だけで使える
