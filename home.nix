@@ -536,6 +536,8 @@ in
     pkgs.posting
     # 今見える星空を描く（遊び）。オプションは zsh のエイリアスで指定
     pkgs.astroterm
+    # 英語のタイピング練習（時間制・単語数制などのモード、記録も残る）
+    pkgs.typioca
   ];
   launchd.agents.yabai = {
     enable = true;
