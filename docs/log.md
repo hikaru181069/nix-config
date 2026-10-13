@@ -5,6 +5,33 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ---
 
+## 2026-10-13
+
+### Homebrew を片付け、宣言したものだけにした（Step 6）
+
+**決めたこと**（ユーザーと相談）
+- Homebrew のコマンド 26 個を「消す」「Nix に移す」「残して宣言する」に分けた。旧環境のもの（nvm・pyenv・p10k など）も一緒に消すことにした
+- 開発への影響: Nix 環境では PATH で Nix のものが先に見つかり、nvm・pyenv・p10k も読み込まれていないので、ふだんの作業は変わらない
+- 気づいたこと（片付けとは別）: Nix 環境ではプロジェクトの外に `node`・`python` がない。devShell があるのは coffee-app の `chore/mac-native-dev`（`~/coffee-app-mac`）だけで、`~/coffee-app`・mlb-app・study-log-app・youtube-app で Mac 上で直接 `npm` などを打つと見つからない（Docker の中で動かすなら問題ない）
+
+**やったこと**
+- バックアップ: `~/old-env-backup-2026-10-13`（自分だけが読める）に、旧環境の設定ファイル一式（`.zshrc`・`.zprofile`・`.p10k.zsh`・`.gitconfig`・`~/.config` など）、片付け前の Brewfile、版の一覧、nvm・pyenv の版（Node v24.15.0・Python 3.13.13）、戻し方の README を置いた。`~/.nvm`（743MB）・`~/.pyenv`（738MB）は消していない
+- `darwin.nix`: `cleanup = "uninstall"` にし、残すものだけを宣言した
+  - cask 11 個（前と同じ）
+  - mongodb-community@8.0・mongodb-database-tools（tap は mongodb/brew）: mlb-app の MongoDB。Homebrew のサービスとして 27017 で動いている
+  - gh: Nix の gh が学内のネットワークでつながらない件の逃げ道（`/opt/homebrew/bin/gh` と打つ）
+- `home.nix`: kind・poppler（`poppler-utils`）・imagemagick・git-filter-repo を Nix に移した
+- 適用の前に、Nix が作った Brewfile で `brew bundle cleanup`（`--force` なし＝消さずに一覧を出すだけ）を試し、消えるものを確かめた
+  - Homebrew に「信頼していない tap のものは読み込まない」仕組みが入っていて、yabai・skhd・sketchybar・sketchybar-system-stats の Homebrew 版（使っていない古いもの）は片付けの対象から外れた。tap を外す処理が途中で止まるおそれがあるので、先にユーザーが `brew uninstall` で手で消した（私の削除のコマンドは Claude Code の安全確認で止められたため）
+
+**確認したこと**（`rebuild`、世代6）
+- Homebrew に残ったのは formula 11 個（gh・MongoDB の2つと、その依存の小さなライブラリ）・cask 11 個・tap 1つ（mongodb/brew）。片付け前は formula 102 個・tap 4つ
+- MongoDB は動いたまま（27017）。yabai・skhd・sketchybar（Nix 版）も動いたまま
+- 新しいシェルで kind・pdftoppm・magick・git-filter-repo は Nix 版。nvim・tmux・eza・lazygit など、ほかのコマンドも Nix 版。Homebrew の gh（2.92.0）も `/opt/homebrew/bin/gh` で使える
+- 戻し方: `brew bundle --file=~/old-env-backup-2026-10-13/Brewfile` で片付け前の Homebrew をまとめて入れ直せる
+
+---
+
 ## 2026-10-12
 
 ### macOS の設定を nix-darwin で宣言した（Step 6）
