@@ -628,7 +628,9 @@ in
       window-width = 130;
       window-height = 38;
       window-padding-x = 10;
-      window-padding-y = 10;
+      # 下は 0（tmux のステータスバーをウィンドウのいちばん下に置く）
+      # 上は 12: 全画面の高さのウィンドウ（2230px、1行 49px）で、行の高さで割り切れない余りが下に残らないようにした値
+      window-padding-y = "12,0";
       macos-titlebar-style = "hidden";
       scrollbar = "never";
     };

@@ -1,47 +1,21 @@
--- Padding item required because of bracket
-SBAR.add("item", { position = "right", width = PADDINGS + 6 })
-
-local cal_date = SBAR.add("item", "calendar.date", {
+-- 日付と時刻。カレンダーのアイコン + 1行（例: 10/13 22:05）
+-- 参考: falleco/dotfiles の sketchybar（2026-10-13、ユーザーが選んだ）。旧設定は日付と時刻（秒まで）の2段だった
+local cal = SBAR.add("item", "calendar", {
   position = "right",
-  padding_left = -5,
-  width = 0,
-  label = {
+  update_freq = 30,
+  icon = {
+    string = "\u{f073}", -- カレンダー（Nerd Font）
     color = COLORS.mauve,
-    font = {
-      size = 13.0,
-    },
   },
-  y_offset = 6,
-})
-
-local cal_time = SBAR.add("item", "calendar.time", {
-  position = "right",
-  padding_left = -5,
   label = {
-    color = COLORS.mauve,
-    font = {
-      size = 12.0,
-    },
+    color = COLORS.subtext0,
+    font = { size = 13.0 },
   },
-  y_offset = -6,
+  padding_left = 4,
+  padding_right = 6,
+  click_script = "open -a Calendar",
 })
 
--- Double border for calendar using a single item bracket
-local cal_bracket = SBAR.add("bracket", { cal_date.name, cal_time.name }, {
-  update_freq = 1,
-})
-
--- Padding item required because of bracket
-SBAR.add("item", { position = "right", width = PADDINGS })
-
-cal_bracket:subscribe({ "forced", "routine", "system_woke" }, function(env)
-  cal_date:set({ label = { string = os.date("%a %b %d") } })
-  cal_time:set({ label = { string = os.date("%H:%M:%S %p") } })
+cal:subscribe({ "forced", "routine", "system_woke" }, function()
+  cal:set({ label = { string = os.date("%m/%d %H:%M") } })
 end)
-
-local function click_event()
-  SBAR.exec("open -a Calendar")
-end
-
-cal_date:subscribe("mouse.clicked", click_event)
-cal_time:subscribe("mouse.clicked", click_event)

@@ -46,7 +46,6 @@ local function hide_stats()
     SBAR.set(item_name, { drawing = false })
   end
   SBAR.set("git_branch", { drawing = false })
-  SBAR.set("docker", { drawing = false })
   separator:set({ icon = { string = ICONS.stats_toggle.hide } })
 end
 
