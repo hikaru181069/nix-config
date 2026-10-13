@@ -76,15 +76,24 @@
     };
   };
 
-  # Homebrew は GUI アプリ・フォント（cask）専用。宣言していないものは消さない（cleanup = "none"）
-  # コマンド（formula）は旧環境で使っていたものが残っているが、少しずつ片付ける
+  # Homebrew は GUI アプリ・フォント（cask）と、Nix にないか Nix で困るものだけ
+  # ここに書いていないものは、適用のときに消す（cleanup = "uninstall"）。片付け前の一覧は ~/old-env-backup-2026-10-13
   homebrew = {
     enable = true;
     onActivation = {
       autoUpdate = false;
       upgrade = false;
-      cleanup = "none";
+      cleanup = "uninstall";
     };
+    taps = [ "mongodb/brew" ];
+    brews = [
+      # mlb-app の MongoDB（27017）。Homebrew のサービスとしてログイン時に起動している
+      "mongodb/brew/mongodb-community@8.0"
+      "mongodb/brew/mongodb-database-tools"
+      # Nix の gh（Go 1.27 で作られた版）が学内のネットワークで GitHub につながらないので、その間の逃げ道
+      # PATH では Nix の gh が先なので、使うときは /opt/homebrew/bin/gh と打つ
+      "gh"
+    ];
     # 2026-10-12 時点で入っていたものをそのまま宣言した
     casks = [
       "codex"

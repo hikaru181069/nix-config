@@ -534,6 +534,15 @@ in
     pkgs.astroterm
     # 英語のタイピング練習（時間制・単語数制などのモード、記録も残る）
     pkgs.typioca
+    # Homebrew から移したもの（2026-10-13）
+    # coffee-app の Kubernetes（kind のクラスタ）
+    pkgs.kind
+    # PDF を読む道具（Claude Code が PDF を読むときや、yazi のプレビューで使う）
+    pkgs.poppler-utils
+    # 画像を変換する道具（yazi のプレビューなどで使う）
+    pkgs.imagemagick
+    # git の履歴を書き換える道具（いざというとき用）
+    pkgs.git-filter-repo
   ];
   launchd.agents.yabai = {
     enable = true;
