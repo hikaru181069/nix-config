@@ -11,7 +11,9 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 **devShell**（ユーザーと相談し、coffee-app と同じく各リポジトリの中に置くことにした）
 - mlb-app・study-log-app・youtube-app に、`main` から `chore/nix-devshell` ブランチを作ってコミットした（`flake.nix`・`flake.lock`・`.envrc`）。別の作業フォルダ（git worktree）で作ったので、編集中の変更や今のブランチには触っていない
-- push して PR を作った（Nix の gh は学内でつながらず、Homebrew の gh を使った）: mlb-app #20・study-log-app #1・youtube-channel-manager #2。マージはまだ
+- push して PR を作った（Nix の gh は学内でつながらず、Homebrew の gh を使った）: mlb-app #20・study-log-app #1・youtube-channel-manager #2
+- 3つともマージし、手元の作業ブランチに取り込んで `direnv allow` した。取り込んだのは devShell の3ファイルだけで、編集中の変更はそのまま（mlb-app の `feature/nav-discovery-first` は main と同じ位置から始まっていたので、早送りで取り込まれた）
+- 確認: 各フォルダで `node` が Nix の v22.23.3、mlb-app は `python` が `.venv` のもので fastapi が読み込める
 - 中身: 3つとも Node.js 22 と mongosh。mlb-app は Python 3.13 と uv も入れ、`.envrc` で `.venv` を作る（coffee-app と同じ形）
 - Node 20 はサポート終了（2026-04-30）で nixpkgs から消えていたので 22 にした。mlb-app の Dockerfile は Node 20 のまま（別の機会に決める）
 - 確認: 3つとも `nix develop` で `node -v` が v22.23.3
