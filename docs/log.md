@@ -7,6 +7,14 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-14
 
+### tmux の中で claude が見つからず、nvim が初期状態になる問題を直した
+
+- 症状: tmux の新しいペインで `claude` が見つからない。nvim は起動するが、自分の設定が読まれず初期状態
+- 原因: tmux の本体（サーバー）は 10/9（envswitch のころ）から動きっぱなしで、そのとき環境にあった「設定は読み込み済み」の目印（`__HM_SESS_VARS_SOURCED=1` など）を持っている。新しいペインはこれを引き継ぐので、home-manager の設定（`home.sessionPath` の `~/.local/bin`、`home.sessionVariables` の `NVIM_APPNAME=nvim-nix`）を読み飛ばしていた。どちらも tmux の起動後（10/12）に足した設定
+  - `NVIM_APPNAME` がないと、nvim は `~/.config-nix/nvim`（ない）を探すので初期状態になる
+- 今すぐの直し: `tmux set-environment -gu` で動いている tmux から目印を3つ消した。開いているセッションはそのまま。新しいペインで `claude` が見つかり、nvim の設定の場所が `~/.config-nix/nvim-nix` になることを確認
+- 再発を防ぐ: `home.nix` の tmux の設定に、同じ3つを消す行を足した（`ZDOTDIR` を消している行の下）。ビルドが通ることを確認。適用（`rebuild`）はユーザーが行う
+
 ### 残りのプロジェクトに devShell を作り、旧環境の nvm・pyenv を消した
 
 **devShell**（ユーザーと相談し、coffee-app と同じく各リポジトリの中に置くことにした）

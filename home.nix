@@ -386,6 +386,12 @@ in
       # ペインの zsh に ZDOTDIR を渡さない。渡すと zsh は ~/.zshenv を飛ばして
       # ~/.config-nix/zsh/.zshenv を直接読むので、新しいタブと同じ順番で読み込ませる
       set-environment -gu ZDOTDIR
+      # 「設定は読み込み済み」という目印も渡さない。tmux を起動したシェルの目印が残っていると、
+      # ペインの zsh が home-manager・nix-darwin の設定（PATH の ~/.local/bin、NVIM_APPNAME など）を読み飛ばし、
+      # tmux を起動した後に足した設定が反映されない（claude が見つからない・nvim が初期状態になる）
+      set-environment -gu __HM_SESS_VARS_SOURCED
+      set-environment -gu __HM_ZSH_SESS_VARS_SOURCED
+      set-environment -gu __NIX_DARWIN_SET_ENVIRONMENT_DONE
 
       # コマンド入力（prefix + :）の行編集は Emacs 式（tmux-sensible と同じ）
       set -g status-keys emacs
