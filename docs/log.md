@@ -23,6 +23,9 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - 部品は、壊れた `.venv` の中に残っていた一覧（`*.dist-info`）から、同じ版を入れ直した。5つとも数が一致（33・49・3・31・30）
 - 確認: coffee-app の fastapi-service のテスト 10 件、mlb-app 12 件が通った。applied_programming_ii で numpy・pandas・matplotlib・ipykernel が読み込める
 - coffee-app・mlb-app の `fastapi-service/.venv` は、ふだんは使われていない古いもの（devShell はリポジトリ直下の `.venv` を使う）
+
+**`Hikaru` ユーザーを消した**
+- 10/9 に作って使わなくなったユーザー。消えたこと（`dscl` に無い、`/Users/Hikaru` も無い）を確認
 - 中身: 3つとも Node.js 22 と mongosh。mlb-app は Python 3.13 と uv も入れ、`.envrc` で `.venv` を作る（coffee-app と同じ形）
 - Node 20 はサポート終了（2026-04-30）で nixpkgs から消えていたので 22 にした。mlb-app の Dockerfile は Node 20 のまま（別の機会に決める）
 - 確認: 3つとも `nix develop` で `node -v` が v22.23.3
