@@ -7,6 +7,31 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-14
 
+### GitHub のいらないリポジトリを、アーカイブして非公開にした
+
+- ユーザーの判断: 使うのは coffee-app・mlb-app・nix-config だけ。ほかは消さずに「アーカイブ＋非公開」にする（いつでも戻せる）。プロフィールの自己紹介（`hikaru181069`）は公開のまま残す
+- 対象 10 個: study-log-app・youtube-channel-manager・netabare-app・dotfiles・atcoder・dev-notes・obsidian-dev-notes・nvim・nvim-config・desktop-tutorial
+- アーカイブすると設定を変えられないので、非公開にしてからアーカイブした。dotfiles はアーカイブ済みだったので、いったん外して非公開にし、またアーカイブした。学内なので Homebrew の gh を使った
+- 確認: `gh repo list` で 10 個とも PRIVATE・アーカイブ。公開は coffee-app・mlb-app・hikaru181069 だけ
+- 注意: アーカイブしたものには push できない。手元の `~/study-log-app`・`~/youtube-app`・`~/netabare-app`・`~/Documents/dev-notes` はそのまま使えるが、push するなら先に `gh repo unarchive` が要る
+- 戻し方: `gh repo unarchive hikaru181069/<名前>`、公開に戻すなら `gh repo edit hikaru181069/<名前> --visibility public --accept-visibility-change-consequences`
+
+### Mac の名前をさらに hikaru-mbp に変えた
+
+- `MacBook-Pro` はみんなが使う最初の名前なので、学校などのネットワークではまたかぶって番号が付きやすい。自分だけの名前にした
+- `darwin.nix` の `networking.computerName`・`networking.localHostName` を両方 `hikaru-mbp` に（画面に出る名前もそろえた）。`flake.nix` の `darwinConfigurations` の名前も `"hikaru-mbp"` に
+- ビルドが通り、`activate` に `scutil --set ComputerName hikaru-mbp`・`scutil --set LocalHostName hikaru-mbp` が入っていることを確認
+- 1回目の適用は名前を指定する: `sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config#hikaru-mbp`。ユーザーが適用し、ComputerName・LocalHostName とも `hikaru-mbp` になったことを確認
+
+### Mac の名前を MacBook-Pro-5 から MacBook-Pro にした
+
+- 理由: ローカルホスト名の `-5` は、ネットワーク上で名前がかぶったと macOS が判断して自動で付けた番号（ほかの機器や、ルーターなどが覚えていた自分の古い名前とかぶると増える）。画面に出る名前（ComputerName）も `MacBook  Pro` と空白が2つになっていた
+- `darwin.nix` に `networking.computerName = "MacBook Pro"` と `networking.localHostName = "MacBook-Pro"` を書いた。nix-darwin が適用のたびに `scutil --set` で名前を合わせ直す（ビルドしたものの `activate` に入っていることを確認）
+- `darwin-rebuild` は今のローカルホスト名で設定を選ぶので、`flake.nix` の `darwinConfigurations."MacBook-Pro-5"` も `"MacBook-Pro"` に変えた
+- 注意: 1回目の適用のときは Mac の名前がまだ `MacBook-Pro-5` なので、`rebuild` では設定が見つからない。名前を指定して適用する: `sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config#MacBook-Pro`。2回目からは `rebuild` でよい
+- ユーザーが `#MacBook-Pro` を付けて適用した（先に `rebuild` で試し、上の注意どおり「見つからない」になった）
+- 確認: ComputerName `MacBook Pro`、LocalHostName `MacBook-Pro`（`MacBook-Pro.local`）。名前を指定しない `darwin-rebuild build --flake ~/nix-config` でも設定が見つかる
+
 ### tmux の中で claude が見つからず、nvim が初期状態になる問題を直した
 
 - 症状: tmux の新しいペインで `claude` が見つからない。nvim は起動するが、自分の設定が読まれず初期状態

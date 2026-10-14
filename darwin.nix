@@ -9,6 +9,11 @@
   system.primaryUser = "hikarusato";
   users.users.hikarusato.home = "/Users/hikarusato";
 
+  # Mac の名前。ネットワーク上の名前（ローカルホスト名）は flake.nix の darwinConfigurations の名前と同じにする
+  # （darwin-rebuild はこの名前で設定を選ぶ）。ほかの人の MacBook-Pro とかぶらないよう、自分だけの名前にした
+  networking.computerName = "hikaru-mbp";
+  networking.localHostName = "hikaru-mbp";
+
   # Nix 本体（nix-daemon と /etc/nix/nix.conf）も nix-darwin で管理する
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

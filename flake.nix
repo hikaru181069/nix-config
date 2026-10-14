@@ -15,7 +15,7 @@
 
   outputs = { nixpkgs, home-manager, nix-darwin, ... }: {
     # 名前は Mac のローカルホスト名と同じにする（darwin-rebuild が自動でこれを選ぶ）
-    darwinConfigurations."MacBook-Pro-5" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."hikaru-mbp" = nix-darwin.lib.darwinSystem {
       modules = [
         ./darwin.nix
         # home-manager も nix-darwin の中で一緒に適用する
