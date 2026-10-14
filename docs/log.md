@@ -14,6 +14,15 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - push して PR を作った（Nix の gh は学内でつながらず、Homebrew の gh を使った）: mlb-app #20・study-log-app #1・youtube-channel-manager #2
 - 3つともマージし、手元の作業ブランチに取り込んで `direnv allow` した。取り込んだのは devShell の3ファイルだけで、編集中の変更はそのまま（mlb-app の `feature/nav-discovery-first` は main と同じ位置から始まっていたので、早送りで取り込まれた）
 - 確認: 各フォルダで `node` が Nix の v22.23.3、mlb-app は `python` が `.venv` のもので fastapi が読み込める
+- `~/coffee-app` の `feat/k8s-bootstrap` にも main（devShell・Node 22 化）を取り込んだ（push はしていない）。`IMPLEMENTATION.md` が両方で末尾に書き足されていてぶつかったので、両方の記録を残して日付順（10/5・10/7 の k8s → 10/10 の Nix）に並べ、「次に実装すべき」の番号を 21・22 にした。どちらの側の行も消えていないことを diff で確認。編集中の `k8s/backend.yaml` はそのまま
+
+**壊れていた `.venv` 5つを作り直した**
+- 対象: `~/applied_programming_i/report/venv`・`~/applied_programming_ii/.venv`・`~/python-practice/.venv`・`~/coffee-app/fastapi-service/.venv`・`~/mlb-app/fastapi-service/.venv`
+- Python は uv が管理する 3.13.13（`uv python install 3.13`、`~/.local/share/uv/python`）。Nix の Python で作ると、devShell の外では Nix の掃除（garbage collection）で消えて、また壊れるおそれがあるため
+  - そのとき `~/.local/bin/python3.13` も置かれた（uv の仕組み）。プロジェクトの外でも `python3.13` は使える
+- 部品は、壊れた `.venv` の中に残っていた一覧（`*.dist-info`）から、同じ版を入れ直した。5つとも数が一致（33・49・3・31・30）
+- 確認: coffee-app の fastapi-service のテスト 10 件、mlb-app 12 件が通った。applied_programming_ii で numpy・pandas・matplotlib・ipykernel が読み込める
+- coffee-app・mlb-app の `fastapi-service/.venv` は、ふだんは使われていない古いもの（devShell はリポジトリ直下の `.venv` を使う）
 - 中身: 3つとも Node.js 22 と mongosh。mlb-app は Python 3.13 と uv も入れ、`.envrc` で `.venv` を作る（coffee-app と同じ形）
 - Node 20 はサポート終了（2026-04-30）で nixpkgs から消えていたので 22 にした。mlb-app の Dockerfile は Node 20 のまま（別の機会に決める）
 - 確認: 3つとも `nix develop` で `node -v` が v22.23.3
