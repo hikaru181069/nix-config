@@ -5,6 +5,30 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ---
 
+## 2026-10-14
+
+### 残りのプロジェクトに devShell を作り、旧環境の nvm・pyenv を消した
+
+**devShell**（ユーザーと相談し、coffee-app と同じく各リポジトリの中に置くことにした）
+- mlb-app・study-log-app・youtube-app に、`main` から `chore/nix-devshell` ブランチを作ってコミットした（`flake.nix`・`flake.lock`・`.envrc`）。別の作業フォルダ（git worktree）で作ったので、編集中の変更や今のブランチには触っていない。push・main への取り込みはまだ
+- 中身: 3つとも Node.js 22 と mongosh。mlb-app は Python 3.13 と uv も入れ、`.envrc` で `.venv` を作る（coffee-app と同じ形）
+- Node 20 はサポート終了（2026-04-30）で nixpkgs から消えていたので 22 にした。mlb-app の Dockerfile は Node 20 のまま（別の機会に決める）
+- 確認: 3つとも `nix develop` で `node -v` が v22.23.3
+- `~/coffee-app` の `feat/k8s-bootstrap` には devShell がまだない（`main` を取り込めば入る）
+
+**mlb-app の `.venv` を作り直した**
+- pyenv の Python で作られていたので、Nix の Python 3.13.15 で作り直し、`requirements.txt` を入れた。fastapi-service のテスト 12 件が通った
+
+**片付け**
+- `~/.nvm`（743MB）・`~/.pyenv`（738MB）を消した。nvm にあった codex は Homebrew 版（cask）が使われているので影響なし
+- nix-config の stash（sketchybar の右側を島にした試作）を捨てた
+- 気づいたこと: 次の `.venv` は pyenv の Python で作られていて、**10/13 の Homebrew の片付けの時点で、もう動かなくなっていた**（pyenv の Python が Homebrew の gettext を使っていたため）。中の部品は `.venv` に残っているので作り直せる
+  - `~/applied_programming_i/report/venv`・`~/applied_programming_ii/.venv`・`~/python-practice/.venv`・`~/coffee-app/fastapi-service/.venv`・`~/mlb-app/fastapi-service/.venv`
+- 10/11 から開いたままの Neovim（`nvim backend`、旧環境の Mason の LSP）が nvm の node で動いていた。動いている間はそのままだが、LSP を再起動すると失敗する
+- `~/Library/LaunchAgents` に旧環境の yabai・skhd の起動設定（`com.asmvik.yabai`・`com.koekeishiya.skhd`）が残っている。読み込まれてはいない（今は nix-darwin の `org.nix-community.home.*` が動いている）
+
+---
+
 ## 2026-10-13
 
 ### sketchybar と Ghostty の小さな変更
