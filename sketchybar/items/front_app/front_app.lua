@@ -34,3 +34,19 @@ front_app:subscribe("front_app_switched", function(env)
   front_app_icon:set({ icon = { string = app_icons[env.INFO] or ":default:" } })
   front_app:set({ label = { string = env.INFO } })
 end)
+
+-- 矢印の見た目: アプリ名もスペースと同じ暗い帯に入れ、最後に三角で帯を閉じる
+if BAR_STYLE == "arrows" then
+  local PL = require("helpers.powerline")
+  front_app_icon:set({
+    padding_left = 0,
+    icon = { padding_left = 8, padding_right = 4 },
+    background = PL.block(COLORS.bg0),
+  })
+  front_app:set({
+    padding_right = 0,
+    label = { padding_left = 4, padding_right = 8 },
+    background = PL.block(COLORS.bg0),
+  })
+  SBAR.add("item", "front_app.end", PL.arrow(PL.R, COLORS.bg0, COLORS.transparent))
+end

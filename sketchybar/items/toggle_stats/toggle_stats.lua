@@ -17,6 +17,10 @@ local stats_items = {
   "widgets.download_speed",
   "widgets.ram",
 }
+-- 矢印の見た目の区切り（items/init.lua の right_gap）も一緒に隠す
+if BAR_STYLE == "arrows" then
+  table.insert(stats_items, "/rsep\\.stats\\..*/")
+end
 
 -- 创建 separator_right item
 local separator = SBAR.add("item", "separator_right", {
@@ -46,6 +50,9 @@ local function hide_stats()
     SBAR.set(item_name, { drawing = false })
   end
   SBAR.set("git_branch", { drawing = false })
+  if BAR_STYLE == "arrows" then
+    SBAR.set("/rsep\\.git.*/", { drawing = false })
+  end
   separator:set({ icon = { string = ICONS.stats_toggle.hide } })
 end
 

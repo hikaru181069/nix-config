@@ -27,13 +27,21 @@ for i = 1, max_items, 1 do
   menu_items[i] = menu
 end
 
-SBAR.add("bracket", { "/menu\\..*/" }, {
-  background = { color = COLORS.transparent, border_color = COLORS.surface1 },
-})
+-- 矢印の見た目では、メニューもスペースと同じ暗い帯に入れる（枠とすき間はなし）
+if BAR_STYLE == "arrows" then
+  local PL = require("helpers.powerline")
+  for _, menu in ipairs(menu_items) do
+    menu:set({ padding_left = 0, padding_right = 0, background = PL.block(COLORS.bg0) })
+  end
+else
+  SBAR.add("bracket", { "/menu\\..*/" }, {
+    background = { color = COLORS.transparent, border_color = COLORS.surface1 },
+  })
+end
 
 local menu_padding = SBAR.add("item", "menu.padding", {
   drawing = false,
-  width = 5,
+  width = BAR_STYLE == "arrows" and 0 or 5,
 })
 
 local function update_menus(env)

@@ -28,22 +28,27 @@ if [ -n "$CWD" ] && git -C "$CWD" rev-parse --is-inside-work-tree >/dev/null 2>&
 fi
 ]]
 
+-- git の項目を出す・隠す。矢印の見た目では、左隣の区切り（items/init.lua の right_gap("git")）も一緒に
+local function set_git_drawing(drawing, label)
+  git_branch:set({ drawing = drawing, label = label })
+  if BAR_STYLE == "arrows" then
+    SBAR.set("/rsep\\.git.*/", { drawing = drawing })
+  end
+end
+
 local function refresh_git_branch(env)
   if STATS_VISIBLE == false then
-    git_branch:set({ drawing = false })
+    set_git_drawing(false)
     return
   end
   if env and env.INFO and env.INFO ~= "Ghostty" and env.INFO ~= "WezTerm" then
-    git_branch:set({ drawing = false })
+    set_git_drawing(false)
     return
   end
 
   SBAR.exec(GIT_BRANCH_CMD, function(result)
     local branch = result:gsub("%s+$", "")
-    git_branch:set({
-      drawing = branch ~= "",
-      label = branch,
-    })
+    set_git_drawing(branch ~= "", branch)
   end)
 end
 

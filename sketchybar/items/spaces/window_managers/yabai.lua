@@ -45,6 +45,14 @@ function Window_Manager:init()
 		space:subscribe("mouse.exited", function(_)
 			space:set({ popup = { drawing = false } })
 		end)
+
+		-- 矢印の見た目では、アイコンが番号とは別の項目なので、押したときの動きを同じにする
+		local parts = sbar_utils.parts[space.name]
+		if parts then
+			parts.apps:subscribe("mouse.clicked", function(env)
+				self:perform_switch_desktop(env.BUTTON, tostring(i), space)
+			end)
+		end
 	end
 end
 

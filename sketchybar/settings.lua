@@ -3,6 +3,12 @@
 --- @type "macos_native" | "aerospace" | "yabai"
 WINDOW_MANAGER = "yabai"
 
+-- バーの見た目
+-- "arrows": 左は tmux のウィンドウ一覧のように矢印でつなぎ、右は Neovim のステータスラインのように細い三角で区切る
+-- "islands": 前の見た目（項目ごとの枠と、すき間）
+--- @type "arrows" | "islands"
+BAR_STYLE = "arrows"
+
 FONT = {
   icon_font = "Maple Mono NF",
   label_font = "Maple Mono NF",
