@@ -7,6 +7,14 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-15
 
+### Ghostty の作業中のバーの色をオレンジにした（tmux の中の Claude で出す工夫は、やめた）
+
+- ウィンドウの上の細いバーは、Ghostty が作業中の合図（OSC 9;4）を受けて出すもの。Ghostty の設定は出す・出さない（`progress-style`）だけで、色は macOS のアクセントカラー（決まった8色）
+- `darwin.nix`: `system.defaults.CustomUserPreferences."com.mitchellh.ghostty".AppleAccentColor = 1`（Ghostty だけオレンジ。Ghostty を開き直すと効く）。Gruvbox の色にはできない
+- 分かったこと: Claude Code は `TERM_PROGRAM` が ghostty（1.2.0 以上）か iTerm.app のときだけ合図を出し、tmux の中では tmux のパススルー（`\ePtmux;…`）で送る。tmux の中では `TERM_PROGRAM=tmux` なので出さない（プログラムの中の判定を読んで確認）
+- 試して、やめたこと（ユーザーの判断: 設定が複雑になるだけ）: zsh で `claude` を `TERM_PROGRAM=ghostty` 付きで起動する関数、tmux の `allow-passthrough on`、`terminal-features` の `xterm-ghostty:progressbar`。どれも取り消し、動いている tmux からも外した
+- tmux の外で動かした Claude や、ほかのプログラムのバーはオレンジになる
+
 ### sketchybar を矢印の見た目にした（左は tmux のウィンドウ一覧、右は Neovim のステータスライン）
 
 **決めたこと**（ユーザーの希望）

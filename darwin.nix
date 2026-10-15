@@ -87,6 +87,9 @@
       # B: 壁紙をクリックしてもウィンドウをよけない（ステージマネージャ使用時だけにする）
       EnableStandardClickToShowDesktop = false;
     };
+    # B: Ghostty だけアクセントカラーをオレンジ（1）にする。作業中のバー（ウィンドウの上。OSC 9;4）がこの色になる。
+    # Ghostty にはバーの色の設定がなく、macOS のアクセントカラーは決まった8色だけ（Gruvbox の色にはできない）
+    CustomUserPreferences."com.mitchellh.ghostty".AppleAccentColor = 1;
   };
 
   # Homebrew は GUI アプリ・フォント（cask）と、Nix にないか Nix で困るものだけ
