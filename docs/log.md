@@ -7,6 +7,25 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-10-14
 
+### 手入れを自動にした（古い世代の掃除・同じファイルをまとめる）と README
+
+- 背景: `/nix/store` が 12GB。世代は Mac 全体 14 個、ユーザー側に home-manager 44 個・profile 36 個（nix-darwin を入れる前の、home-manager 単独のころのもの）がたまっていた
+- `darwin.nix`: `nix.gc`（毎週日曜 3:15、`--delete-older-than 14d`）と `nix.optimise`（毎週日曜 4:15）。root で動く
+- `home.nix`: ユーザーの世代（`~/.local/state/nix/profiles`）は root の掃除では消えないので、`launchd.agents.nix-gc-user` を自分で書いた（毎週日曜 3:00、ログは `~/Library/Logs/nix-gc-user.log`）
+  - home-manager の `nix.gc` を使わなかった理由: Mac では `options` を1つの引数のまま渡すので、`nix-collect-garbage` が `unrecognised flag '--delete-older-than 14d'` で失敗する（手で確かめた）
+- 14 日にした理由: 変更でおかしくなったと気づいて戻すには2週間あれば足りる。その前の世代には戻せなくなる
+- devShell は nix-direnv が掃除から守っているので、プロジェクトの環境は消えない
+- 確認: ビルドが通り、できた起動設定3つの中身（コマンドと引数、曜日・時刻）を確認した。ユーザーが `rebuild` で適用し、`org.nixos.nix-gc`・`org.nixos.nix-optimise`（/Library/LaunchDaemons）と `org.nix-community.home.nix-gc-user` が登録されたことを確認
+- `README.md` を足した（公開したので、何のリポジトリか・使い方を短く）
+
+### 旧環境の起動設定（LaunchAgents）を消した
+
+- `~/Library/LaunchAgents` から4つ消した。どれも読み込まれておらず、起動するプログラム（Homebrew の yabai・skhd・sketchybar・stats_provider）ももう無い
+  - `com.asmvik.yabai.plist`・`com.koekeishiya.skhd.plist`・`homebrew.mxcl.sketchybar.plist`: `~/old-env-backup-2026-10-13/LaunchAgents/` に写してから消した
+  - `com.sketchybar.stats-provider.plist`: `~/dotfiles` の中のファイルへのリンクだったので、リンクだけ消した（元のファイルは残っている）
+- 残したもの: MongoDB（使っている）、Google の3つ、Nix の `org.nix-community.home.*`
+- 確認: Nix の yabai・skhd・sketchybar・sketchybar-stats と MongoDB は動いたまま
+
 ### GitHub のいらないリポジトリを、アーカイブして非公開にした
 
 - ユーザーの判断: 使うのは coffee-app・mlb-app・nix-config だけ。ほかは消さずに「アーカイブ＋非公開」にする（いつでも戻せる）。プロフィールの自己紹介（`hikaru181069`）は公開のまま残す

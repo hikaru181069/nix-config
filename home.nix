@@ -550,6 +550,18 @@ in
     # git の履歴を書き換える道具（いざというとき用）
     pkgs.git-filter-repo
   ];
+  # ユーザーの世代（~/.local/state/nix/profiles）の掃除。Mac 全体の掃除（darwin.nix の nix.gc）は root で動き、ここまで届かない
+  # home-manager の nix.gc は Mac だと options を1つの引数で渡してしまい、nix-collect-garbage が受け付けないので、自分で書く
+  # Mac 全体の掃除（日曜 3:15）より先に動かす
+  launchd.agents.nix-gc-user = {
+    enable = true;
+    config = {
+      ProgramArguments = [ "${pkgs.nix}/bin/nix-collect-garbage" "--delete-older-than" "14d" ];
+      StartCalendarInterval = [ { Weekday = 7; Hour = 3; Minute = 0; } ];
+      StandardOutPath = "${config.home.homeDirectory}/Library/Logs/nix-gc-user.log";
+      StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/nix-gc-user.log";
+    };
+  };
   launchd.agents.yabai = {
     enable = true;
     config = {

@@ -16,6 +16,14 @@
 
   # Nix 本体（nix-daemon と /etc/nix/nix.conf）も nix-darwin で管理する
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # 手入れの自動化。毎週日曜の朝に、14 日より古い世代を消してから使われていないものを掃除し、そのあと同じファイルを1つにまとめる
+  # その時間に眠っていたら、起きたときに行う。消すのは Mac 全体の世代だけ（ユーザーの世代は home.nix の nix-gc-user）
+  # 14 日より前の世代には戻せなくなる
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 14d";
+  };
+  nix.optimise.automatic = true;
 
   # sudo を Touch ID で通す（/etc/pam.d/sudo_local。macOS のアップデートでも消えない場所）
   # reattach は tmux の中でも Touch ID を使えるようにするため（ないとパスワードしか聞かれない）
