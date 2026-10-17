@@ -27,6 +27,9 @@ vim.o.clipboard = "unnamedplus"
 
 vim.keymap.set("n", "<leader>nh", "<cmd>nohlsearch<cr>", { desc = "検索のハイライトを消す" })
 
+-- ノーマル・ビジュアルのモードでは日本語入力を使えなくする（理由と仕組みは lua/ime.lua）
+require("ime")
+
 -- プラグインは Neovim 標準の vim.pack で入れる。版はこのディレクトリの nvim-pack-lock.json に記録される
 vim.pack.add({
   -- 配色（tmux・Ghostty などと揃える）

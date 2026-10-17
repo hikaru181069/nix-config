@@ -549,6 +549,8 @@ in
     pkgs.imagemagick
     # git の履歴を書き換える道具（いざというとき用）
     pkgs.git-filter-repo
+    # 入力ソース（日本語・英字）をコマンドで切り替える。Neovim で編集モードを抜けたときに英字へ戻すのに使う（nvim/init.lua）
+    pkgs.macism
   ];
   # ユーザーの世代（~/.local/state/nix/profiles）の掃除。Mac 全体の掃除（darwin.nix の nix.gc）は root で動き、ここまで届かない
   # home-manager の nix.gc は Mac だと options を1つの引数で渡してしまい、nix-collect-garbage が受け付けないので、自分で書く
