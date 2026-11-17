@@ -5,6 +5,23 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ---
 
+## 2026-11-17
+
+### ウィンドウを割り込ませるキーを足した（yabai の warp）
+
+- 4つのウィンドウを田の字に並べたいが、今までのキー（入れ替え）では場所が変わるだけで、並びの形は変えられなかった
+- `skhd/skhdrc` に `ctrl + shift + alt - h/j/k/l` → `yabai -m window --warp 方向` を足した。選んだウィンドウが、その方向のウィンドウの隣に割り込む
+- 田の字にする手順: 割り込ませて形を作り、`alt - e`（均等にする）で大きさをそろえる
+- skhd は `~/nix-config/skhd/skhdrc` を直接読むので、`rebuild` は要らない（skhd を読み込み直せば効く）
+
+## 2026-11-10
+
+### opencode を入れた
+
+- これまでは `nix run nixpkgs#opencode` で一時的に動かしていただけで、新しいターミナルでは `opencode` が見つからなかった
+- `home.nix` の `home.packages` に `pkgs.opencode`（1.18.34）を足した。メインは Claude Code で、opencode は試しに使う用
+- 設定は `~/.config-nix/opencode/opencode.jsonc`（中身はほぼ空）。AI を選ばないと opencode の無料の `big-pickle` が使われる
+
 ## 2026-10-18
 
 ### Neovim のノーマルモードで日本語入力の文字が本文に入る原因が分かり、対策を足した
