@@ -376,6 +376,7 @@ vim.lsp.enable({
   "ruff", -- 新規（Python の lint）
   "lua_ls",
   "nixd", -- 新規（この設定の home.nix などを書くため）
+  "rust_analyzer", -- Rust。本体は Nix ではなく rustup で入れる（ツールチェーンと版を合わせるため）
 })
 
 -- treesitter で色付けする（パーサとプラグインは home.nix で入れている）

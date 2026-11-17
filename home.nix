@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   palette = import ./palette.nix;
@@ -36,7 +41,10 @@ let
       hash = "sha256-cuMZA3QT+AAxrVumO23BBeVXj8Q5pOKHjIL1zxJaLo0=";
     };
     vendorHash = "sha256-il19j8GN3EOsrJ5CrrkrWPpwl/QfFZLbkNAReqwPRgQ=";
-    subPackages = [ "cmd/amp" "cmd/amd" ];
+    subPackages = [
+      "cmd/amp"
+      "cmd/amd"
+    ];
     # zsh で Tab を押すとコマンドやプレイリスト名を補完する
     nativeBuildInputs = [ pkgs.installShellFiles ];
     postInstall = ''
@@ -56,7 +64,10 @@ in
   programs.home-manager.enable = true;
 
   # Claude Code（claude）と uv は自分で ~/.local/bin に入れているので、PATH に足す
-  home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.local/bin"
+    "${config.home.homeDirectory}/.cargo/bin"
+  ];
 
   # git は ~/.gitconfig（旧環境）も読んでしまうので、Nix 環境では読む先を1つに絞る
   home.sessionVariables.GIT_CONFIG_GLOBAL = "${config.xdg.configHome}/git/config";
@@ -85,7 +96,12 @@ in
       commit.gpgSign = true;
       tag.gpgSign = true;
     };
-    ignores = [ ".DS_Store" ".direnv/" "result" "**/.claude/settings.local.json" ];
+    ignores = [
+      ".DS_Store"
+      ".direnv/"
+      "result"
+      "**/.claude/settings.local.json"
+    ];
   };
   # GitHub の CLI。Nix 環境では設定の置き場所が ~/.config-nix に変わり、旧環境の ~/.config/gh を読まないので、ここで用意する
   # トークンはファイルではなく macOS のキーチェーンにあり、ユーザー名を書いておけば旧環境と同じものを使う
@@ -155,7 +171,8 @@ in
       lt3 = "eza --tree --level=3";
       lta = "eza --tree --level=2 -a";
       # Nix の設定（home.nix・darwin.nix）を Mac に適用する。sudo は決まった場所しか探さないのでフルパスで書く
-      rebuild = "sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config";
+      # 反映したあと、読み込み済みの目印を消してシェルを入れ替え、新しい設定（PATH など）をすぐ使えるようにする
+      rebuild = "sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config && unset __HM_SESS_VARS_SOURCED __HM_ZSH_SESS_VARS_SOURCED __NIX_DARWIN_SET_ENVIRONMENT_DONE && exec zsh";
       # 東京から見える今の星空を、色付き・星座の線付きで（astroterm は設定ファイルがないのでオプションで指定する）
       astroterm = "astroterm --city Tokyo --color --constellations --unicode";
     };
@@ -244,7 +261,10 @@ in
     enable = true;
     # 色は lazygit と同じ。いま操作している枠は青、選んでいる行は Neovim の選択範囲と同じ色
     settings.gui.theme = {
-      activeBorderColor = [ palette.blue "bold" ];
+      activeBorderColor = [
+        palette.blue
+        "bold"
+      ];
       inactiveBorderColor = [ palette.bg4 ];
       selectedLineBgColor = [ palette.sel0 ];
       optionsTextColor = [ palette.blue ];
@@ -295,9 +315,15 @@ in
       git.diffRenderers = [ { command = "delta --paging=never"; } ];
       # 色は palette.nix から。いま操作している枠は青、選んでいる行は Neovim の選択範囲と同じ色
       gui.theme = {
-        activeBorderColor = [ palette.blue "bold" ];
+        activeBorderColor = [
+          palette.blue
+          "bold"
+        ];
         inactiveBorderColor = [ palette.bg4 ];
-        searchingActiveBorderColor = [ palette.yellow "bold" ];
+        searchingActiveBorderColor = [
+          palette.yellow
+          "bold"
+        ];
         optionsTextColor = [ palette.blue ];
         selectedLineBgColor = [ palette.sel0 ];
         inactiveViewSelectedLineBgColor = [ palette.bg2 ];
@@ -377,7 +403,16 @@ in
       rThin = builtins.fromJSON ''"\ue0b1"'';
       l = builtins.fromJSON ''"\ue0b2"'';
       # 右端の虹色の三角。前の色の上に次の色の三角を重ねていく
-      rainbow = [ p.bg0 p.red p.orange p.yellow p.green p.cyan p.blue p.bg0 ];
+      rainbow = [
+        p.bg0
+        p.red
+        p.orange
+        p.yellow
+        p.green
+        p.cyan
+        p.blue
+        p.bg0
+      ];
       rainbowArrows = lib.concatStrings (
         lib.zipListsWith (bg: fg: "#[fg=${fg},bg=${bg}]${l}") (lib.init rainbow) (lib.tail rainbow)
       );
@@ -469,23 +504,25 @@ in
     # 構文解析（色付けなど）。パーサはコンパイル済みのものを nixpkgs から取る（Mason や実行時のビルドは使わない）
     # nvim-treesitter のクエリはパーサの版と合わせる必要があるので、これだけは vim.pack ではなく Nix で入れる
     plugins = [
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
-        bash
-        css
-        html
-        javascript
-        json
-        lua
-        markdown
-        markdown_inline
-        nix
-        python
-        regex # noice がコマンド入力の色付けに使う
-        tsx
-        typescript
-        vim
-        vimdoc
-      ]))
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (
+        p: with p; [
+          bash
+          css
+          html
+          javascript
+          json
+          lua
+          markdown
+          markdown_inline
+          nix
+          python
+          regex # noice がコマンド入力の色付けに使う
+          tsx
+          typescript
+          vim
+          vimdoc
+        ]
+      ))
       # 補完。あいまい検索の部品（Rust）のコンパイル済みのものが要るので、vim.pack ではなく Nix で入れる
       pkgs.vimPlugins.blink-cmp
     ];
@@ -499,6 +536,7 @@ in
       ruff # Python の lint・整形
       lua-language-server
       nixd # Nix（この設定を書くため）
+      nixfmt # Nix の整形（nixd が保存のときに使う）
       # 整形（conform.nvim が使う）。プロジェクトの node_modules に prettier があれば、そちらが優先される
       prettier
       stylua
@@ -551,6 +589,8 @@ in
     pkgs.git-filter-repo
     # 入力ソース（日本語・英字）をコマンドで切り替える。Neovim で編集モードを抜けたときに英字へ戻すのに使う（nvim/init.lua）
     pkgs.macism
+    # ターミナルで使う AI のコーディング道具（メインは Claude Code。試しに使う用）
+    pkgs.opencode
   ];
   # ユーザーの世代（~/.local/state/nix/profiles）の掃除。Mac 全体の掃除（darwin.nix の nix.gc）は root で動き、ここまで届かない
   # home-manager の nix.gc は Mac だと options を1つの引数で渡してしまい、nix-collect-garbage が受け付けないので、自分で書く
@@ -558,8 +598,18 @@ in
   launchd.agents.nix-gc-user = {
     enable = true;
     config = {
-      ProgramArguments = [ "${pkgs.nix}/bin/nix-collect-garbage" "--delete-older-than" "14d" ];
-      StartCalendarInterval = [ { Weekday = 7; Hour = 3; Minute = 0; } ];
+      ProgramArguments = [
+        "${pkgs.nix}/bin/nix-collect-garbage"
+        "--delete-older-than"
+        "14d"
+      ];
+      StartCalendarInterval = [
+        {
+          Weekday = 7;
+          Hour = 3;
+          Minute = 0;
+        }
+      ];
       StandardOutPath = "${config.home.homeDirectory}/Library/Logs/nix-gc-user.log";
       StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/nix-gc-user.log";
     };
@@ -568,21 +618,32 @@ in
     enable = true;
     config = {
       # -c で設定を指定する（指定しないと旧環境の ~/.config/yabai/yabairc を読む）
-      ProgramArguments = [ (lib.getExe pkgs.yabai) "-c" "${config.home.homeDirectory}/nix-config/yabai/yabairc" ];
+      ProgramArguments = [
+        (lib.getExe pkgs.yabai)
+        "-c"
+        "${config.home.homeDirectory}/nix-config/yabai/yabairc"
+      ];
       # yabairc の中で yabai コマンドを呼ぶので、Nix のコマンドが見えるようにする
       EnvironmentVariables.PATH = "${config.home.profileDirectory}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
       ProcessType = "Interactive";
       Nice = -20;
       RunAtLoad = true;
       # 落ちたときだけ起こし直す（Homebrew の起動設定と同じ）
-      KeepAlive = { Crashed = true; SuccessfulExit = false; };
+      KeepAlive = {
+        Crashed = true;
+        SuccessfulExit = false;
+      };
       StandardOutPath = "${config.home.homeDirectory}/Library/Logs/yabai/yabai.out.log";
       StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/yabai/yabai.err.log";
     };
   };
   services.skhd.enable = true;
   launchd.agents.skhd.config = {
-    ProgramArguments = lib.mkForce [ (lib.getExe pkgs.skhd) "-c" "${config.home.homeDirectory}/nix-config/skhd/skhdrc" ];
+    ProgramArguments = lib.mkForce [
+      (lib.getExe pkgs.skhd)
+      "-c"
+      "${config.home.homeDirectory}/nix-config/skhd/skhdrc"
+    ];
     # キーに割り当てたコマンドは $SHELL で動く。zsh だと ~/.zshenv などまで読んで遅くなるので、sh にする
     EnvironmentVariables = {
       PATH = "${config.home.profileDirectory}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
@@ -618,10 +679,14 @@ in
     config = {
       ProgramArguments = [
         "${sketchybar-system-stats}/bin/stats_provider"
-        "--cpu" "usage"
-        "--memory" "ram_usage"
-        "--network" "en0"
-        "--interval" "1"
+        "--cpu"
+        "usage"
+        "--memory"
+        "ram_usage"
+        "--network"
+        "en0"
+        "--interval"
+        "1"
         "--no-units"
       ];
       ProcessType = "Interactive";
@@ -642,7 +707,10 @@ in
     enable = true;
     package = null;
     settings = {
-      font-family = [ "Maple Mono NF" "Maple Mono NF CN" ];
+      font-family = [
+        "Maple Mono NF"
+        "Maple Mono NF CN"
+      ];
       font-size = 18.5;
       theme = "Gruvbox Dark Hard";
       window-width = 130;
@@ -653,6 +721,8 @@ in
       window-padding-y = "12,0";
       macos-titlebar-style = "hidden";
       scrollbar = "never";
+      # 文字を打っている間はマウスの矢印を隠す（マウスを動かすとまた出る）
+      mouse-hide-while-typing = true;
     };
   };
 
