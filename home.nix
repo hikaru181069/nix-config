@@ -183,25 +183,6 @@ in
       bindkey '^X^E' edit-command-line
       # キーチェーンに保存したパスフレーズで SSH 鍵を ssh-agent に読み込む（コミット署名に必要）
       /usr/bin/ssh-add --apple-load-keychain -q 2>/dev/null
-
-      # rebuild のあと、ほかのシェル（tmux の各ペインなど）も、次にプロンプトが出たときに新しい設定で起動し直す
-      # この .zshrc は home-manager-files（rebuild で home-manager の設定が変わると、新しい場所になる）を指すので、
-      # 起動したときの行き先を覚えておき、プロンプトのたびに見比べる。zstat は zsh の中だけで済むので、プロンプトは遅くならない
-      # 起動し直す前に、rebuild の別名と同じく「読み込み済み」の目印を消す（新しい PATH などを読み込ませるため）
-      zmodload -F zsh/stat b:zstat
-      # 行き先は -A で変数に直接入れる（$(...) で受け取ると、プロンプトのたびにプロセスが1つ起動してしまう）
-      typeset -ga _zshrc_link
-      zstat -L -A _zshrc_link +link -- "$ZDOTDIR/.zshrc" 2>/dev/null
-      _reload_if_rebuilt() {
-        local -a now
-        zstat -L -A now +link -- "$ZDOTDIR/.zshrc" 2>/dev/null
-        if [[ -n $now[1] && $now[1] != $_zshrc_link[1] ]]; then
-          unset __HM_SESS_VARS_SOURCED __HM_ZSH_SESS_VARS_SOURCED __NIX_DARWIN_SET_ENVIRONMENT_DONE
-          exec zsh
-        fi
-      }
-      autoload -Uz add-zsh-hook
-      add-zsh-hook precmd _reload_if_rebuilt
     '';
   };
 
