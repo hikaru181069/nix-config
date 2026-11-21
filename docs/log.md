@@ -7,6 +7,12 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-22
 
+### おもしろいツールを試した（入れていない）
+
+- wttr.in: `curl 'wttr.in/Tokyo?lang=ja'` で天気予報を出せる。入れるものはいらない
+- vhs: 台本（.tape）のとおりにキーを打って、ターミナルの操作を GIF にする。`nix shell` で vhs・ttyd・ffmpeg を呼び、ブラウザは入っている Google Chrome を使って作れた。今は使い道がないので入れていない
+- nyancat・moon-buggy: pty で起動して、落ちずに動くことを確かめた。`nix run nixpkgs#名前` で遊ぶ（moon-buggy は Space/j でジャンプ、a/l でレーザー、q で終わる）
+
 ### rebuild のあと、ほかのシェルも次のプロンプトで自動で起動し直すようにした
 
 - tmux の各ペインの zsh は、rebuild より前に起動していると古い設定のまま（atuin の Ctrl-R が効かなかった）。毎回 `exec zsh` を打つのが手間（ユーザーの報告）
