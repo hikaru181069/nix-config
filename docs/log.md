@@ -5,6 +5,36 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ---
 
+## 2026-11-22
+
+### ターミナルと sketchybar のフォントを JetBrains Mono にした
+
+- 長く同じフォント（Maple Mono）だったので、気分を変えたい（ユーザーの希望）
+- `pkgs.nerd-fonts.jetbrains-mono`（3.5.0）を入れ、Ghostty の `font-family` を `"JetBrainsMono Nerd Font"` にした。日本語は入っていないので、2番目の Maple Mono NF CN に任せる
+- 名前はフォントのファイルの name テーブルで確かめた（family は `JetBrainsMono Nerd Font`）。上下の高さ（ascender 1020・descender 300・UPM 1000）が Maple Mono と同じなので、行の高さと `window-padding-y` の計算は変わらない見込み
+- sketchybar も JetBrains Mono にした（`sketchybar/settings.lua` の `FONT`）。上下の高さが同じなので、三角の大きさの計算（`HEIGHT / 1.32`）はそのまま。三角の横幅も前と同じ 13 だった
+- ユーザーが気に入ったので、この形に決めた
+
+### MacBook を閉じて開いたあと、sketchybar のバーが数秒消える原因を調べた（対策は逆効果で、やめた）
+
+- 読み込み直しの速さ: `sketchybar --reload` から全部の項目が出るまで約 1.4 秒。部分ごとに測ると、Lua の処理はほぼ 0 で、項目（134 個）をまとめて渡す `end_config` が約 0.4 秒
+- 閉じて開いたときに読み込み直しているわけではなかった: sketchybar は 11/8 に起動してから一度も起動し直されていない（launchd の runs = 1）。Hammerspoon・yabai・skhd にも読み込み直しの命令はない
+- 見立て: 閉じると内蔵の画面がつながっていない状態になり、開いて macOS から「画面がつながった」と知らせが来てから、sketchybar がバーを作り直す。その待ち時間がバーの消えている時間ではないか
+- 確かめるため、一時的な記録の仕組みを足した（`sketchybar/items/debug/wake_log.lua`）: `system_will_sleep`・`system_woke`・`display_change` を受け取った時刻を、ミリ秒まで `~/Library/Logs/sketchybar/wake.log` に書く。`pmset -g log` の Wake の時刻と比べる。調べ終わったら消す
+- 1回目の記録（00:18 に閉じて開いた）: ふたを開けて画面がついたのが 00:18:39、`display_change` が約 2 秒後、`system_woke` が約 6.5 秒後（0.4 秒の間に3回）。ユーザーによると、ロックを解除してからさらに数秒待ってバーが出る
+- sketchybar 2.24.0 の元のプログラム（GitHub）で確かめたこと
+  - スリープに入ると `sleeps = true` になり、描き直し（`bar_manager_update`）を全部止める。`false` に戻すのは `system_woke` だけ
+  - `system_woke` は、macOS の `NSWorkspaceDidWakeNotification` と `com.apple.screenIsUnlocked` から来る
+  - `sketchybar --trigger system_woke` は項目に知らせるだけで、`sleeps` は戻らない
+  - `--reload` は `bar_manager_init` で中身を作り直し、`sleeps = false` に戻る
+- 対策（`sketchybar/items/wake_fix.lua`）: `system_will_sleep` を覚えておき、3 秒以上たってから `display_change` が来たら `sketchybar --reload` する。閉じるときの画面の知らせで読み込み直さないよう、3 秒の待ちを入れた
+  - 手で知らせを送って試した: 4 秒後の `display_change` では 0.3 秒後に読み込み直しが起き、1 秒後では起きなかった
+  - 見込み: バーが出るのは、開いてから約 3.5 秒後（画面の知らせ 2 秒 + 読み込み直し 1.4 秒）。次に閉じて開いたときの記録で確かめる
+- 2回目の記録（00:24 に閉じて開いた）: 画面がついてから約 3.2 秒後に `display_change` で読み込み直しが始まり、約 4.0 秒後に設定が読み込まれた。`system_woke` は約 6.7 秒後。記録の上では約 2.5 秒早く描き始めた
+- ところが、ユーザーには「むしろ遅く感じた」。読み込み直しでバーがいったん消え、そのあと本物の `system_woke` でも画面に合わせてバーを作り直すので、消える時間が2回に分かれたためと考えられる
+- 対策（`wake_fix.lua`）も、調べるための記録（`debug/wake_log.lua` と `wake.log`）も消して、元に戻した
+- 結論: 遅れの大部分は、macOS が復帰・ロック解除の合図を出すまでの時間。sketchybar の設定で縮める、よい方法は今のところない
+
 ## 2026-11-21
 
 ### tmux のステータスバーの左右の空白を、Ghostty の余白の塗り方で埋めた

@@ -9,9 +9,11 @@ WINDOW_MANAGER = "yabai"
 --- @type "arrows" | "islands"
 BAR_STYLE = "arrows"
 
+-- ターミナル（Ghostty）と同じ JetBrains Mono。上下の高さ（ascender 1020・descender 300）が前の Maple Mono と同じなので、
+-- 三角の大きさの計算（helpers/powerline.lua の HEIGHT / 1.32）はそのまま使える
 FONT = {
-  icon_font = "Maple Mono NF",
-  label_font = "Maple Mono NF",
+  icon_font = "JetBrainsMono Nerd Font",
+  label_font = "JetBrainsMono Nerd Font",
   style_map = {
     ["Regular"] = "Regular",
     ["Semibold"] = "SemiBold",

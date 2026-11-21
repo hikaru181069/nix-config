@@ -11,7 +11,7 @@ M.L_THIN = "\u{e0b3}" -- 左向きの三角（線だけ）
 -- tmux のステータスライン（ターミナルの1行）と同じ高さにする: Ghostty の font-size 18.5 × 1.32 = 24.42 を
 -- Ghostty が Retina の点に丸めて 24.5。sketchybar の高さは整数なので 25
 M.HEIGHT = 25
--- Maple Mono NF の三角は、文字の上端（ascent 1020）から下端（descent 300）まで、ちょうど 1.32 文字ぶんの高さ。
+-- Maple Mono NF と JetBrains Mono NF の三角は、文字の上端（ascent 1020）から下端（descent 300）まで、ちょうど 1.32 文字ぶんの高さ。
 -- sketchybar は文字をこの上端〜下端の真ん中で縦にそろえるので、大きさを 高さ ÷ 1.32 にすると背景と同じ高さになる
 M.FONT_SIZE = M.HEIGHT / 1.32
 

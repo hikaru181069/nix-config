@@ -560,6 +560,8 @@ in
     pkgs.yabai
     # sketchybar でアプリのアイコンを出すフォント（~/Library/Fonts/HomeManager に入る）
     pkgs.sketchybar-app-font
+    # ターミナル（Ghostty）のフォント
+    pkgs.nerd-fonts.jetbrains-mono
     # ping の応答時間をグラフで見る
     pkgs.gping
     # どのフォルダが容量を食っているかを見る
@@ -707,8 +709,10 @@ in
     enable = true;
     package = null;
     settings = {
+      # 英字は JetBrains Mono（Nerd Font 版）。日本語は入っていないので、Maple Mono CN に任せる
+      # JetBrains Mono の上下の高さ（ascender 1020・descender 300）は Maple Mono と同じなので、行の高さは変わらない
       font-family = [
-        "Maple Mono NF"
+        "JetBrainsMono Nerd Font"
         "Maple Mono NF CN"
       ];
       font-size = 18.5;
