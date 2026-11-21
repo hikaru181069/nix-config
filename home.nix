@@ -716,6 +716,8 @@ in
       window-width = 130;
       window-height = 38;
       window-padding-x = 10;
+      # 余白を、隣のマスの背景の色で塗る（tmux のステータスバーの行は、左右の余白もバーの色になる）
+      window-padding-color = "extend";
       # 下は 0（tmux のステータスバーをウィンドウのいちばん下に置く）
       # 上は 12: 全画面の高さのウィンドウ（2230px、1行 49px）で、行の高さで割り切れない余りが下に残らないようにした値
       window-padding-y = "12,0";

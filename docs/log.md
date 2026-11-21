@@ -7,6 +7,23 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-21
 
+### tmux のステータスバーの左右の空白を、Ghostty の余白の塗り方で埋めた
+
+- 空白の正体: Ghostty の左右の余白（`window-padding-x = 10`）と、マス目で割り切れない右端の余り。tmux はマス目にしか描けないので、そこはターミナルの背景（bg1）のままで、バー（bg0）とずれて見えていた
+- `window-padding-color = "extend"` にした: 余白を、隣のマスの背景の色で塗る。バーの行は左右もバーの色になり、ふだんの行は背景と同じ色のままなので文字の余白は残る
+  - 余白をなくす案（`window-padding-x = 0`）は、すべての行で文字が端にくっつくので、こちらにした
+- 反映: `rebuild` → Ghostty で `Cmd + Shift + ,`
+- ユーザーが見て「いい感じ」とのことで、この形に決めた
+
+### ターミナル全体（Neovim を含む）を半透明にしてみたが、元に戻した
+
+- Ghostty（`home.nix`）: `background-opacity = 0.85`・`background-blur = 20`（後ろをぼかす）。macOS では、Ghostty を一度終わらせて開き直さないと効かない
+- Neovim（`nvim/init.lua`）: gruvbox.nvim の `transparent_mode = true`。左端の列（git や診断の印）は本文と同じ色で塗っていたので、ここも塗らない（`NONE`）にした。カーソル行・ステータスライン・浮かぶウィンドウは、色が残る
+  - `--headless` で、Normal・SignColumn の背景が塗られていない（nil）こと、カーソル行は `#3c3836` のままなことを確かめた
+- tmux（`home.nix`）: ペインの区切り線の背景を塗らない（`bg=default`）。ステータスバーは bg0 のまま
+- 反映: `rebuild` → Ghostty を開き直す → tmux で `prefix + r`
+- ユーザーの希望で元に戻した（`git checkout -- home.nix nvim/init.lua`）
+
 ### sketchybar のバー全体の背景を、tmux のステータスバーと同じ色にした
 
 - バー全体（項目のないところ）は透明だったのを、tmux の `status-style` の背景と同じ bg0（`#282828`）にした（`sketchybar/style.lua`）
