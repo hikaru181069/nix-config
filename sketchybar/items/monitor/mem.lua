@@ -1,33 +1,25 @@
-local ram = SBAR.add("graph", "widgets.ram", 48, {
+-- メモリの使用率。アイコンと「%」だけ（前はグラフだったが、ほかの項目と形をそろえた）
+-- macOS はメモリをたくさん使うのがふつうなので、赤くするのは 90% から
+local ram = SBAR.add("item", "widgets.ram", {
   position = "right",
-  graph = { color = COLORS.red },
-  background = {
-    height = 26,
-    color = { alpha = 0 },
-    border_color = { alpha = 0 },
-    drawing = true,
-  },
   icon = {
     string = ICONS.ram,
-    color = COLORS.red,
+    color = COLORS.subtext0,
     font = { size = 15.0 },
-    padding_left = 6,
-    padding_right = 6,
   },
   label = {
-    string = "RAM ??%",
-    font = { size = 12.0 },
-    align = "right",
-    padding_left = 4,
-    padding_right = 0,
-    width = 0,
-    y_offset = 4,
+    string = "??%",
+    color = COLORS.subtext0,
+    font = { size = 13.0 },
   },
-  update_freq = 3,
-  updates = "when_shown",
   padding_right = PADDINGS,
 })
 
 ram:subscribe({ "system_stats" }, function(env)
-  GRAPH_UTILS.update_graph(env.RAM_USAGE, ram, "RAM", COLORS.red)
+  local usage = tonumber(env.RAM_USAGE) or 0
+  local color = usage >= 90 and COLORS.red or COLORS.subtext0
+  ram:set({
+    icon = { color = color },
+    label = { string = string.format("%d%%", usage), color = color },
+  })
 end)

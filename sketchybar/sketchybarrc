@@ -15,7 +15,6 @@ sbar = SBAR
 require("settings")
 COLORS = require("colors")
 ICONS = require("icons")
-GRAPH_UTILS = require("helpers.graph_utils")
 
 SBAR.begin_config()
 require("style")

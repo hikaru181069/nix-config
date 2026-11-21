@@ -1,7 +1,8 @@
 -- バー全体と、すべての項目に共通の見た目（旧設定 ~/.config/sketchybar/init.lua の compact と同じ値。色だけ palette.nix のもの）
 
 SBAR.bar({
-  color = COLORS.transparent,
+  -- tmux のステータスバーと同じ背景色（status-style の bg）
+  color = COLORS.bg0,
   -- ノッチのある MacBook のメニューバーの高さ（38pt）。これより低いと、最大化したウィンドウの上に隙間ができる
   height = 38,
   border_width = 0,

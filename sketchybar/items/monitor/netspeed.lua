@@ -1,34 +1,31 @@
+-- 通信量。1行に「↓受信 ↑送信」と並べる（前は小さい文字で上下2行に重ねていたが、読みにくいので
+-- ほかの項目と同じ大きさにした）。通信していないときは暗い色にする
+-- 右側の項目は右端から順に並ぶので、送信（右）を先に足す
 local upload_speed = SBAR.add("item", "widgets.upload_speed", {
   position = "right",
-  padding_left = -5,
-  width = 0,
+  padding_left = 0,
   icon = {
-    padding_right = 0,
-    font = { size = 11.0 },
+    padding_right = 2,
+    font = { size = 13.0 },
     string = ICONS.wifi.upload,
   },
   label = {
-    font = { size = 11.0 },
-    color = COLORS.red,
+    font = { size = 13.0 },
     string = "??? KB/s",
   },
-  y_offset = 7,
 })
 
 local download_speed = SBAR.add("item", "widgets.download_speed", {
   position = "right",
-  padding_left = -5,
   icon = {
-    padding_right = 0,
-    font = { size = 11.0 },
+    padding_right = 2,
+    font = { size = 13.0 },
     string = ICONS.wifi.download,
   },
   label = {
-    font = { size = 11.0 },
-    color = COLORS.blue,
+    font = { size = 13.0 },
     string = "??? KB/s",
   },
-  y_offset = -7,
 })
 
 local function format_speed(speed_str)
@@ -43,24 +40,15 @@ local function format_speed(speed_str)
 end
 
 upload_speed:subscribe("system_stats", function(env)
-  local up_color = (env.NETWORK_TX_en0 == "0") and COLORS.grey or COLORS.red
-  local down_color = (env.NETWORK_RX_en0 == "0") and COLORS.grey or COLORS.blue
-
-  local tx = format_speed(env.NETWORK_TX_en0)
-  local rx = format_speed(env.NETWORK_RX_en0)
-  -- make tx, rx string length equal for better alignment
-  if #tx < #rx then
-    tx = string.rep("0", #rx - #tx) .. tx
-  elseif #rx < #tx then
-    rx = string.rep("0", #tx - #rx) .. rx
-  end
+  local up_color = (env.NETWORK_TX_en0 == "0") and COLORS.grey or COLORS.subtext0
+  local down_color = (env.NETWORK_RX_en0 == "0") and COLORS.grey or COLORS.subtext0
 
   upload_speed:set({
     icon = { color = up_color },
-    label = { string = tx, color = up_color },
+    label = { string = format_speed(env.NETWORK_TX_en0), color = up_color },
   })
   download_speed:set({
     icon = { color = down_color },
-    label = { string = rx, color = down_color },
+    label = { string = format_speed(env.NETWORK_RX_en0), color = down_color },
   })
 end)

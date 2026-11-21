@@ -5,7 +5,7 @@ local apple = SBAR.add("item", {
   icon = {
     font = { size = 22.0 },
     string = ICONS.apple,
-    color = COLORS.red,
+    color = COLORS.subtext0,
     padding_right = 8,
     padding_left = 8,
   },
@@ -22,7 +22,7 @@ if BAR_STYLE == "arrows" then
   apple:set({
     padding_left = 0,
     padding_right = 0,
-    icon = { font = { size = 18.0 }, color = COLORS.red, padding_left = 16, padding_right = 4 },
+    icon = { font = { size = 18.0 }, color = COLORS.subtext0, padding_left = 16, padding_right = 4 },
     background = PL.block(COLORS.bg0),
   })
   SBAR.add("item", "apple.arrow", PL.arrow(PL.R, COLORS.bg0, COLORS.bg0))

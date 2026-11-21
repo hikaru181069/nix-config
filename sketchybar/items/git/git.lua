@@ -8,7 +8,7 @@ local git_branch = SBAR.add("item", "git_branch", {
   position = "right",
   drawing = false,
   updates = true, -- see items/docker/docker.lua for why this is needed
-  icon = { string = ICONS.git_branch, color = COLORS.yellow },
+  icon = { string = ICONS.git_branch, color = COLORS.subtext0 },
   label = { string = "" },
   update_freq = 5,
 })

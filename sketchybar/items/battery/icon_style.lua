@@ -13,7 +13,7 @@ battery:subscribe({ "routine", "power_source_change", "system_woke" }, function(
     elseif battery_percent <= 40 then
       return COLORS.peach
     else
-      return COLORS.green
+      return COLORS.subtext0
     end
   end
 

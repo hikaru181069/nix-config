@@ -27,7 +27,7 @@ local separator = SBAR.add("item", "separator_right", {
   position = "right",
   icon = {
     string = ICONS.stats_toggle.show,
-    color = COLORS.lavender,
+    color = COLORS.subtext0,
   },
   label = { drawing = false },
   background = {

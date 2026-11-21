@@ -76,3 +76,30 @@ right_gap("stats.mem")
 require("items.monitor.mem")
 right_gap("stats.net")
 require("items.monitor.netspeed")
+-- 通信速度の左にも区切りを置く（stats を隠すと一緒に隠れる）
+right_gap("stats.net_left")
+
+-- 矢印の見た目では、右側全体の背景を左側と同じ色（bg0）にする。項目ごとではなく、まとめて1枚で囲む
+-- （間の区切りや余白の項目も隙間なく塗るため）。隠した項目（stats や git）は囲みから外れ、背景もそのぶん縮む
+if BAR_STYLE == "arrows" then
+  local PL = require("helpers.powerline")
+  SBAR.add("bracket", "right.bg", {
+    "calendar",
+    "battery",
+    "wifi",
+    "widgets.volume",
+    "separator_right",
+    "/rsep\\..*/",
+    "git_branch",
+    "widgets.cpu",
+    "widgets.ram",
+    "widgets.upload_speed",
+    "widgets.download_speed",
+  }, { background = PL.block(COLORS.bg0) })
+  -- 右側の左端を、左側の終わり（front_app.end）と同じく三角で尖らせる。最後に足すので、いつも右側のいちばん左に来る
+  local start = PL.arrow(PL.L, COLORS.bg0, COLORS.transparent)
+  start.position = "right"
+  -- 三角の平らな辺が文字の枠の右端に少し届かず、背景との間に細い隙間が見えるので、1 だけ背景に重ねる
+  start.padding_right = -1
+  SBAR.add("item", "right.start", start)
+end

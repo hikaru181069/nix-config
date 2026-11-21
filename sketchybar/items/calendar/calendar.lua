@@ -5,7 +5,7 @@ local cal = SBAR.add("item", "calendar", {
   update_freq = 30,
   icon = {
     string = "\u{f073}", -- カレンダー（Nerd Font）
-    color = COLORS.mauve,
+    color = COLORS.subtext0,
   },
   label = {
     color = COLORS.subtext0,

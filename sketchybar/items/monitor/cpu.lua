@@ -1,33 +1,27 @@
-local cpu = SBAR.add("graph", "widgets.cpu", 48, {
+-- CPU の使用率。アイコンと「%」だけ（前はグラフだったが、ほかの項目と形をそろえた）
+-- ふだんは文字と同じ色で、使いすぎのときだけ赤くする
+local cpu = SBAR.add("item", "widgets.cpu", {
   position = "right",
-  graph = { color = COLORS.peach },
-  background = {
-    height = 26,
-    color = { alpha = 0 },
-    border_color = { alpha = 0 },
-    drawing = true,
-  },
   icon = {
     string = ICONS.cpu,
-    color = COLORS.peach,
+    color = COLORS.subtext0,
     font = { size = 15.0 },
-    padding_left = 6,
-    padding_right = 6,
   },
   label = {
-    string = "CPU ??%",
-    font = { size = 12.0 },
-    align = "right",
-    padding_left = 4,
-    padding_right = 0,
-    width = 0,
-    y_offset = 4,
+    string = "??%",
+    color = COLORS.subtext0,
+    font = { size = 13.0 },
   },
-  padding_right = PADDINGS + 10,
+  padding_right = PADDINGS,
 })
 
 cpu:subscribe({ "system_stats" }, function(env)
-  GRAPH_UTILS.update_graph(env.CPU_USAGE, cpu, "CPU", COLORS.peach)
+  local usage = tonumber(env.CPU_USAGE) or 0
+  local color = usage >= 80 and COLORS.red or COLORS.subtext0
+  cpu:set({
+    icon = { color = color },
+    label = { string = string.format("%d%%", usage), color = color },
+  })
 end)
 
 cpu:subscribe("mouse.clicked", function(env)

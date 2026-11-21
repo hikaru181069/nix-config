@@ -6,12 +6,12 @@ local volume_icon = SBAR.add("item", "widgets.volume", {
     string = ICONS.volume._100,
     width = 0,
     align = "left",
-    color = COLORS.sky,
+    color = COLORS.subtext0,
   },
   label = {
     width = 25,
     align = "left",
-    color = COLORS.sky,
+    color = COLORS.subtext0,
   },
 })
 

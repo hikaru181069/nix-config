@@ -46,7 +46,7 @@ local function add_arrow_space(space_id, space_label)
     padding_right = 0,
     icon = { drawing = false },
     label = {
-      string = "—",
+      string = "",
       padding_left = 6,
       padding_right = 8,
       color = COLORS.comment,
@@ -115,6 +115,7 @@ end
 function space_api:highlight_focused_space(space_item, is_selected)
   local parts = self.parts[space_item.name]
   if parts then
+    parts.selected = is_selected
     -- 色は tmux の window-status-current-format / window-status-format と同じ
     local num_bg = is_selected and COLORS.fg1 or COLORS.bg0
     local apps_bg = is_selected and COLORS.fg3 or COLORS.bg0
@@ -141,7 +142,12 @@ function space_api:highlight_focused_space(space_item, is_selected)
       },
       background = { color = apps_bg },
     })
-    arrow(parts.right, PL.R, is_selected and COLORS.comment or COLORS.bg0, COLORS.bg0)
+    -- アプリのないスペースは番号だけなので、右端の三角は番号のブロックの色で続ける
+    local right_fg = COLORS.bg0
+    if is_selected then
+      right_fg = parts.empty and num_bg or COLORS.comment
+    end
+    arrow(parts.right, PL.R, right_fg, COLORS.bg0)
     return
   end
 
@@ -174,7 +180,6 @@ function space_api:update_space(space_id, app_names)
     end
   end
 
-  icon_line = icon_line ~= "" and icon_line or "—"
 
   local space = self.created_spaces[space_id]
   local parts = space and self.parts[space.name]
@@ -186,6 +191,17 @@ function space_api:update_space(space_id, app_names)
   SBAR.animate("tanh", 10, function()
     target:set({ label = icon_line })
   end)
+
+  -- アプリのないスペースは、前は「—」を出していたが、何か欠けて見えるので、番号だけにする
+  -- （番号の右の区切りとアイコンの部分を隠し、右端の三角の色を合わせ直す）
+  if parts then
+    parts.empty = icon_line == ""
+    parts.mid:set({ drawing = not parts.empty })
+    parts.apps:set({ drawing = not parts.empty })
+    if parts.selected ~= nil then
+      self:highlight_focused_space(space, parts.selected)
+    end
+  end
 end
 
 return space_api
