@@ -183,6 +183,25 @@ in
       bindkey '^X^E' edit-command-line
       # キーチェーンに保存したパスフレーズで SSH 鍵を ssh-agent に読み込む（コミット署名に必要）
       /usr/bin/ssh-add --apple-load-keychain -q 2>/dev/null
+
+      # rebuild のあと、ほかのシェル（tmux の各ペインなど）も、次にプロンプトが出たときに新しい設定で起動し直す
+      # この .zshrc は home-manager-files（rebuild で home-manager の設定が変わると、新しい場所になる）を指すので、
+      # 起動したときの行き先を覚えておき、プロンプトのたびに見比べる。zstat は zsh の中だけで済むので、プロンプトは遅くならない
+      # 起動し直す前に、rebuild の別名と同じく「読み込み済み」の目印を消す（新しい PATH などを読み込ませるため）
+      zmodload -F zsh/stat b:zstat
+      # 行き先は -A で変数に直接入れる（$(...) で受け取ると、プロンプトのたびにプロセスが1つ起動してしまう）
+      typeset -ga _zshrc_link
+      zstat -L -A _zshrc_link +link -- "$ZDOTDIR/.zshrc" 2>/dev/null
+      _reload_if_rebuilt() {
+        local -a now
+        zstat -L -A now +link -- "$ZDOTDIR/.zshrc" 2>/dev/null
+        if [[ -n $now[1] && $now[1] != $_zshrc_link[1] ]]; then
+          unset __HM_SESS_VARS_SOURCED __HM_ZSH_SESS_VARS_SOURCED __NIX_DARWIN_SET_ENVIRONMENT_DONE
+          exec zsh
+        fi
+      }
+      autoload -Uz add-zsh-hook
+      add-zsh-hook precmd _reload_if_rebuilt
     '';
   };
 
@@ -216,6 +235,8 @@ in
     defaultCommand = "fd --type f --hidden --exclude .git";
     fileWidget.command = "fd --type f --hidden --exclude .git";
     changeDirWidget.command = "fd --type d --hidden --exclude .git";
+    # Ctrl-R（履歴検索）は atuin に任せる（空にすると、fzf は Ctrl-R を使わない）
+    historyWidget.command = "";
     # 背景は端末のまま。選んでいる行は Neovim の選択範囲と同じ色
     colors = {
       fg = palette.fg2;
@@ -230,6 +251,20 @@ in
       spinner = palette.magenta;
       header = palette.comment;
       border = palette.bg4;
+    };
+  };
+  # 履歴検索（Ctrl-R）を atuin にする。フォルダ・セッションごとに探せて、日時・かかった時間・成功したかも残る
+  # fzf の Ctrl-T・Alt-C はそのまま。上矢印は今までどおり「1つ前のコマンド」にする
+  # 記録は手元（~/.local/share/atuin）だけ。ほかの Mac との共有と、新しい版の確認は切る
+  programs.atuin = {
+    enable = true;
+    flags = [ "--disable-up-arrow" ];
+    settings = {
+      auto_sync = false;
+      sync_frequency = "0";
+      update_check = false;
+      style = "compact";
+      inline_height = 20;
     };
   };
 
@@ -562,6 +597,18 @@ in
     pkgs.sketchybar-app-font
     # ターミナル（Ghostty）のフォント
     pkgs.nerd-fonts.jetbrains-mono
+    # よく打つコマンドに名前を付けて呼ぶ（プロジェクトの justfile に書く。Makefile の代わり）
+    pkgs.just
+    # テトリス風の落ちものパズル（tetris で起動）
+    # そのままだと、メニューで Enter を押すと trace trap で落ちる。設定をメモするとき、入れ物の最後の4文字の欄（tp_key[4]）に
+    # 長い名前を書く昔の C の書き方で、メモリは足りているのに、文字列のはみ出しの見張り（fortify）が勘違いして止めるため
+    # Nix の指定だけでなく macOS の開発キットも見張りを付けるので、-D_FORTIFY_SOURCE=0 でも外す
+    (pkgs.vitetris.overrideAttrs (old: {
+      hardeningDisable = [ "fortify" ];
+      env = (old.env or { }) // {
+        NIX_CFLAGS_COMPILE = "-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0";
+      };
+    }))
     # ping の応答時間をグラフで見る
     pkgs.gping
     # どのフォルダが容量を食っているかを見る

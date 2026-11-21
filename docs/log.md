@@ -7,6 +7,31 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-22
 
+### rebuild のあと、ほかのシェルも次のプロンプトで自動で起動し直すようにした
+
+- tmux の各ペインの zsh は、rebuild より前に起動していると古い設定のまま（atuin の Ctrl-R が効かなかった）。毎回 `exec zsh` を打つのが手間（ユーザーの報告）
+- `home.nix` の zsh の `initContent` に足した: `$ZDOTDIR/.zshrc` は home-manager-files を指していて、rebuild で home-manager の設定が変わると行き先が変わる。起動したときの行き先を覚えておき、プロンプトのたび（precmd）に見比べて、変わっていたら `exec zsh`
+  - 行き先は `zstat -L -A` で変数に直接入れる（`$(...)` だとプロンプトのたびにプロセスが起動する）
+  - 起動し直す前に、rebuild の別名と同じく `__HM_SESS_VARS_SOURCED` などの目印を消す（新しい PATH などを読み込ませるため）
+  - 試しの場所でリンクを付け替えて、変わる前は何もせず、変わったら起動し直すと判断することを確かめた
+- 使い方: rebuild のあと、各ペインで Enter を1回押す。ただし、この仕組みを入れる前から開いているシェルは、最初の1回だけ手で `exec zsh` が要る
+
+### atuin（履歴検索）と just（コマンドに名前を付ける）を入れた（試し中）
+
+- atuin（`programs.atuin`）: `Ctrl-R` の履歴検索を atuin にした。フォルダ・セッションごとに探せて、日時・かかった時間・成功したかも残る
+  - 上矢印は今までどおり「1つ前のコマンド」（`--disable-up-arrow`）。共有（`auto_sync`）と新しい版の確認は切った。記録は手元の `~/.local/share/atuin` だけ
+  - fzf も `Ctrl-R` を設定していて、home-manager が注意を出したので、fzf の `historyWidget.command = ""` で fzf の `Ctrl-R` を切った（`Ctrl-T`・`Alt-C` はそのまま）
+  - 入れたあと、`atuin import zsh` で今までの履歴を取り込む
+- just（`pkgs.just`）: プロジェクトの `justfile` に、よく打つコマンドを名前付きで書いて `just 名前` で呼ぶ
+
+### テトリス（vitetris）を入れた。メニューで落ちる問題を直した
+
+- `nix run nixpkgs#vitetris` で遊ぼうとすると、`zsh: trace trap` で落ちた（ユーザーの報告）
+- pty で再現した: 起動して最初の Enter で SIGTRAP。lldb を横からつなぐと、`addopt` の `strcpy` で `__strcpy_chk` → `__chk_fail_overflow`（文字列のはみ出しの見張り）
+- 元のプログラム（`src/options.c`・`options.h`）を読むと、`struct option` の最後の `char tp_key[4]` に長いキーを書く昔の書き方で、`malloc` で長さぶん多めに取っているので、実際にははみ出していない。見張りの勘違い
+- Nix の `hardeningDisable = [ "fortify" ]` だけでは直らなかった（macOS の開発キットも自分で `_FORTIFY_SOURCE` を付けるため）。`-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0` も足して組み立て直すと、メニューを進めてゲームを始めても落ちない
+- `home.nix` の `home.packages` に、この直したもの（`pkgs.vitetris.overrideAttrs`）を足した。`tetris` で起動する
+
 ### ターミナルと sketchybar のフォントを JetBrains Mono にした
 
 - 長く同じフォント（Maple Mono）だったので、気分を変えたい（ユーザーの希望）
