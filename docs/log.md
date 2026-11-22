@@ -28,6 +28,23 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
   - Neovim は rose-pine/neovim（リポジトリ名が neovim なので、`name = "rose-pine"` で入れた）の main。`--headless` で、背景 `#191724`・文字 `#e0def4` になることを確かめた
   - theme.nix を一時的に rose-pine にして組み立て、Ghostty・Neovim・k9s・壁紙（`wallpaper-191724.png`）がそのテーマになることを確かめた（theme.nix は元に戻した）
   - tmux のステータスバーの右端の三角が、ピンク・黄・青緑を行ったり来たりしてちぐはぐだった（ユーザーの指摘）。テーマのファイルに `rainbow`（6色）を書けるようにし、Rosé Pine は love → iris → foam の間をなめらかにつないだ色にした。書いていないテーマは今までどおり赤 → 青
+- Nord も足した（`themes/nord.nix`）。暗くした Nord（nordic）と迷ったが、ユーザーの希望で公式の Nord（背景 `#2e3440`。ほかのテーマより明るい）
+  - バー（bg0）は Nord に無いので、nord0 を黒に 15% 寄せた `#272c36`（ほかのテーマと同じく、ターミナルの背景より少し暗い）。ステータスラインの文字は、Nord と同じく nord4
+  - Ghostty・bat は `Nord`、btop・k9s は `nord`（どれも最初から入っている）。Neovim は gbprod/nord.nvim。`--headless` で、背景 `#2e3440`・文字 `#d8dee9` になることを確かめた
+  - theme.nix を一時的に nord にして組み立て、Ghostty・Neovim・tmux・k9s・壁紙（`wallpaper-2e3440.png`）がそのテーマになることを確かめた（theme.nix は元に戻した）
+- Tokyo Night（night）・Kanagawa（dragon）・Everforest（dark hard）も足した。どれもいちばん暗い種類。色は各 Neovim のテーマの色の一覧（tokyonight.nvim・kanagawa.nvim・everforest-nvim）から取り、公式の値が無いところ（差分の _emph、Everforest のバー）だけ混ぜて作った
+  - Ghostty は最初から入っているもの（TokyoNight Night・Kanagawa Dragon・Everforest Dark Hard）。btop も3つとも入っている。k9s は Kanagawa・Everforest だけ（Tokyo Night は標準の見た目）。bat はどれも入っていないので `ansi`
+  - Kanagawa: 左端の列が既定では本文より明るいので、`bg_gutter = "none"` で本文と同じにした
+  - Everforest: Ghostty の Everforest Dark Hard は背景が bg_dim（`#1e2326`）で、Neovim の hard の背景（`#272e33`）より暗い。`colours_override` で Neovim の背景を palette の bg1 に合わせた
+  - `--headless` で、3つとも Neovim の背景がターミナルと同じになることを確かめた。theme.nix を一時的にそれぞれにして組み立て、Ghostty・Neovim・btop・k9s・壁紙がそのテーマになることを確かめた（theme.nix は元に戻した）
+- OneDark darker の Neovim で、カーソル行の左端の印の列にだけ色が付き、行番号で帯が途切れて見えた（ユーザーの指摘）。Gruvbox のときの `CursorLineSign` の上書きをまねていたため。ほかの多くのテーマ（Catppuccin・Rosé Pine・Nord・Tokyo Night・Kanagawa・Everforest）と同じく、帯は本文のところだけにする（上書きを消した）
+  - そのあと、ユーザーの希望で、逆に全部のテーマを Gruvbox と同じ形（帯が印の列・行番号までつながる）にそろえた。テーマごとに書かず、テーマを読み込んだあと（と `ColorScheme` のとき）に、CursorLine の背景を CursorLineNr・CursorLineSign・CursorLineFold にも付ける共通の処理（`extend_cursorline`）にした。Gruvbox の `CursorLineSign` の上書きも、これに任せて消した
+  - `--headless` で、8つのテーマ全部で3つの背景がそろうことを確かめた
+- Material の Darker と Deep Ocean も足した（`themes/material-darker.nix`・`material-deep-ocean.nix`）。色は marko-cerovac/material.nvim の `colors/init.lua`。5つの種類のうち、Ghostty と Neovim の両方にあるのがこの2つだった
+  - Ghostty の Material Darker・Material Ocean は、背景は Neovim と同じだが、文字の色が違う（Ocean は `#8f93a2`、Neovim は `#a6accd`）。ターミナルと Neovim で文字がずれないよう、Ghostty は palette の色を直接使う（`ghostty = null`）
+  - バーは bg_alt（Darker `#1a1a1a`・Deep Ocean `#090b10`）。コメントの色はバーの文字には暗すぎるので、comment の役割には fg_dark を使った。bat・btop・k9s には入っていないので、`ansi`・`TTY`・標準の見た目
+  - Neovim は material.nvim。どちらの種類かは `vim.g.material_style`（"darker"・"deep ocean"）で決める。`--headless` と、theme.nix を一時的にそれぞれにした組み立てで確かめた（theme.nix は元に戻した）
+  - Deep Ocean の tmux のステータスバーがまとまらなかった（ユーザーの指摘）。ユーザー名のかたまり（fg2 `#717cb4`・青紫で鮮やか）、番号（fg1 `#a6accd`）、フォルダ名（fg3 `#3b3f51`）で色みも明るさもばらばらだったため。灰色の役割を色みの少ない青灰色の明るさの段にそろえた: comment・fg2 → `#8f93a2`（Ghostty の Material Ocean の文字の色）、fg3 → `#464b5d`（disabled）
 - 壁紙も、テーマのターミナルの背景（bg1）と同じ色の無地にした（ユーザーの希望）
   - `home.nix` の `wallpaper`: ImageMagick で 64x64 の無地の PNG を作る。名前に色を入れる（`wallpaper-1d2021.png`）ので、テーマごとに別の画像になる
   - `theme 名前` の最後に、新しくできた theme コマンドの `--set-wallpaper` を呼び、`osascript`（System Events の `set picture`）で壁紙にする

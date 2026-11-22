@@ -39,6 +39,11 @@ vim.pack.add({
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
   -- リポジトリの名前が neovim なので、名前を rose-pine にして入れる
   { src = "https://github.com/rose-pine/neovim", name = "rose-pine" },
+  "https://github.com/gbprod/nord.nvim",
+  "https://github.com/folke/tokyonight.nvim",
+  "https://github.com/rebelot/kanagawa.nvim",
+  "https://github.com/neanias/everforest-nvim",
+  "https://github.com/marko-cerovac/material.nvim",
   -- C-hjkl で Neovim の分割と tmux のペインを区別なく移動（tmux 側にも同じプラグインがある）
   "https://github.com/christoomey/vim-tmux-navigator",
   -- ファイル・文字列・バッファなどを絞り込んで探す（plenary は telescope が使う部品）
@@ -102,8 +107,6 @@ if theme == "gruvbox" then
       GruvboxPurpleSign = same_as_body,
       GruvboxAquaSign = same_as_body,
       GruvboxOrangeSign = same_as_body,
-      -- カーソル行は、左端もカーソル行の色にして帯が途切れないようにする
-      CursorLineSign = { bg = require("palette").bg3 },
     },
   })
   vim.cmd.colorscheme("gruvbox")
@@ -115,17 +118,57 @@ elseif theme == "rose-pine" then
   -- Rosé Pine の main（いちばん暗い種類）
   require("rose-pine").setup({ variant = "main" })
   vim.cmd.colorscheme("rose-pine")
+elseif theme == "nord" then
+  -- Nord（公式の色）
+  require("nord").setup({})
+  vim.cmd.colorscheme("nord")
+elseif theme == "tokyonight" then
+  -- Tokyo Night の night（いちばん暗い種類）
+  require("tokyonight").setup({ style = "night" })
+  vim.cmd.colorscheme("tokyonight-night")
+elseif theme == "kanagawa" then
+  -- Kanagawa の dragon（いちばん暗い種類）
+  -- 左端の列（git や診断の印が出る列）は、既定では本文より明るいので、本文と同じ背景にする
+  require("kanagawa").setup({
+    theme = "dragon",
+    background = { dark = "dragon" },
+    colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
+  })
+  vim.cmd.colorscheme("kanagawa-dragon")
+elseif theme == "everforest" then
+  -- Everforest の hard。Ghostty の Everforest Dark Hard は背景が bg_dim（#1e2326）で、Neovim の hard の背景（#272e33）より暗いので、
+  -- Neovim の背景を Ghostty に合わせる（Neovim を開いたところだけ明るく見えないように）
+  require("everforest").setup({
+    background = "hard",
+    colours_override = function(palette)
+      palette.bg0 = require("palette").bg1
+    end,
+  })
+  vim.cmd.colorscheme("everforest")
+elseif theme == "material-darker" or theme == "material-deep-ocean" then
+  -- Material の darker / deep ocean（どちらにするかは vim.g.material_style で決める）
+  vim.g.material_style = theme == "material-darker" and "darker" or "deep ocean"
+  require("material").setup({})
+  vim.cmd.colorscheme("material")
 else
   -- OneDark の darker。左端の列は、onedark.nvim では最初から本文と同じ背景なので、上書きはいらない
-  require("onedark").setup({
-    style = "darker",
-    highlights = {
-      -- カーソル行は、左端もカーソル行の色にして帯が途切れないようにする
-      CursorLineSign = { bg = "$bg1" },
-    },
-  })
+  require("onedark").setup({ style = "darker" })
   require("onedark").load()
 end
+
+-- カーソル行の帯を、左端の印の列と行番号までつなげる（どのテーマでも、Gruvbox と同じ形にそろえる）
+-- 本文のカーソル行（CursorLine）の背景を、行番号（CursorLineNr）・印の列（CursorLineSign）・折りたたみの列（CursorLineFold）にも付ける
+-- 文字の色はテーマのまま。テーマを読み込み直したとき（ColorScheme）も付け直す
+local function extend_cursorline()
+  local bg = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false }).bg
+  for _, name in ipairs({ "CursorLineNr", "CursorLineSign", "CursorLineFold" }) do
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    hl.bg = bg
+    vim.api.nvim_set_hl(0, name, hl)
+  end
+end
+extend_cursorline()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = extend_cursorline })
 
 -- telescope: 入力欄を上に置き、結果も上から並べる（旧設定と同じ）
 require("telescope").setup({

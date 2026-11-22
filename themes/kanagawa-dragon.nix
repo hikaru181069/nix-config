@@ -1,0 +1,50 @@
+# Kanagawa（Dragon。いちばん暗い種類）。Neovim の rebelot/kanagawa.nvim の色（lua/kanagawa/colors.lua と themes.lua の dragon）
+# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。kanagawa.nvim での名前は、それぞれのコメントに書いた
+{
+  # 各ツールで使う、最初から入っているテーマの名前
+  ghostty = "Kanagawa Dragon"; # Ghostty に入っているので、そのまま使う
+  nvim = "kanagawa"; # kanagawa.nvim の dragon（nvim/init.lua）
+  bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の Kanagawa Dragon）をそのまま使う
+  btop = "kanagawa-dragon";
+  k9s = "kanagawa";
+
+  palette = {
+    # 色（dragon のターミナルの色）
+    black = "#0d0c0c"; # dragonBlack0
+    red = "#c4746e"; # dragonRed
+    green = "#8a9a7b"; # dragonGreen2
+    yellow = "#c4b28a"; # dragonYellow
+    blue = "#8ba4b0"; # dragonBlue2
+    magenta = "#a292a3"; # dragonPink
+    cyan = "#8ea4a2"; # dragonAqua
+    cyan_light = "#bbc8c7"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
+    white = "#c8c093"; # oldWhite
+    orange = "#b6927b"; # dragonOrange
+    pink = "#a292a3"; # dragonPink
+
+    comment = "#737c73"; # dragonAsh（dragon のコメントの色）
+
+    bg0 = "#12120f"; # バー・浮かぶウィンドウ・選んでいないタブ（dragonBlack1。通常の背景より少し暗い）
+    bg1 = "#181616"; # 通常の背景（ターミナル・エディタ。dragonBlack3）
+    bg2 = "#282727"; # dragonBlack4
+    bg3 = "#393836"; # カーソル行（dragonBlack5）
+    bg4 = "#625e5a"; # 枠線（dragonBlack6）
+
+    fg0 = "#c5c9c5"; # 明るい文字（dragonWhite）
+    fg1 = "#c5c9c5"; # 通常の文字（dragonWhite）
+    fg2 = "#a6a69c"; # 暗い文字（ステータスライン。dragonGray）
+    fg3 = "#625e5a"; # さらに暗い文字（行番号。dragonBlack6）
+
+    sel0 = "#393836"; # 選んでいる行の背景（fzf・lazygit など。dragonBlack5）
+    sel1 = "#2d4f67"; # 検索結果などの背景（waveBlue2。kanagawa.nvim の検索の背景）
+
+    # 差分の背景（kanagawa.nvim の値）
+    # 行の中で実際に変わった部分（_emph）は、kanagawa.nvim に無いので、green / red を背景に 30% 混ぜた色
+    diff_add = "#2b3328"; # winterGreen
+    diff_delete = "#43242b"; # winterRed
+    diff_change = "#252535"; # winterBlue
+    diff_text = "#49443c"; # winterYellow
+    diff_add_emph = "#3a3e34";
+    diff_delete_emph = "#4c3230";
+  };
+}
