@@ -7,6 +7,93 @@
 
 let
   palette = import ./palette.nix;
+  # 使うテーマ（theme.nix）。色は palette、各ツールのテーマの名前（ghostty・bat・btop・k9s）はここから取る
+  theme = import ./theme.nix;
+  # Ghostty の色: テーマが Ghostty に入っていれば、その名前を使う。入っていなければ、palette の色を直接決める
+  ghosttyColors =
+    if theme.ghostty != null then
+      { theme = theme.ghostty; }
+    else
+      {
+        background = palette.bg1;
+        foreground = palette.fg1;
+        cursor-color = palette.fg1;
+        selection-background = palette.sel1;
+        selection-foreground = palette.fg0;
+        # ターミナルの16色（0〜7 がふつう、8〜15 が明るい色。明るい色も同じ色を使う）
+        palette = [
+          "0=${palette.black}"
+          "1=${palette.red}"
+          "2=${palette.green}"
+          "3=${palette.yellow}"
+          "4=${palette.blue}"
+          "5=${palette.magenta}"
+          "6=${palette.cyan}"
+          "7=${palette.fg1}"
+          "8=${palette.fg3}"
+          "9=${palette.red}"
+          "10=${palette.green}"
+          "11=${palette.yellow}"
+          "12=${palette.blue}"
+          "13=${palette.magenta}"
+          "14=${palette.cyan}"
+          "15=${palette.fg0}"
+        ];
+      };
+  # 壁紙: ターミナルの背景（palette の bg1）と同じ色の無地の画像。色ごとに別の名前になるので、テーマを変えると別の画像になる
+  # Ghostty は色を sRGB で出すので、画像にも macOS の sRGB の色の基準を付ける（付けないと、macOS が別の基準の色と受け取り、ずれて見える）
+  wallpaper = pkgs.runCommand "wallpaper-${lib.removePrefix "#" palette.bg1}.png" {
+    nativeBuildInputs = [ pkgs.imagemagick ];
+  } "magick -size 64x64 'xc:${palette.bg1}' -type TrueColor -profile '/System/Library/ColorSync/Profiles/sRGB Profile.icc' PNG24:$out";
+  # テーマを切り替える（`theme 名前`。`theme` だけで一覧）
+  # theme.nix を書き換えて rebuild し、tmux・sketchybar・Ghostty に読み込み直させる（Ghostty は SIGUSR2 で読み込み直す）
+  # Neovim は開き直すと新しい色になる
+  theme-switch = pkgs.writeShellApplication {
+    name = "theme";
+    text = ''
+      dir="$HOME/nix-config"
+      current=$(sed -n 's|^import ./themes/\(.*\)\.nix$|\1|p' "$dir/theme.nix")
+      list() {
+        echo "使えるテーマ（* が今のテーマ）:"
+        for f in "$dir"/themes/*.nix; do
+          n=$(basename "$f" .nix)
+          if [ "$n" = "$current" ]; then echo "  * $n"; else echo "    $n"; fi
+        done
+      }
+      write_theme() {
+        printf '%s\nimport ./themes/%s.nix\n' \
+          "# 使うテーマ（themes/ の中のファイル名）。\`theme 名前\` で書き換えて rebuild する（\`theme\` だけで一覧）" \
+          "$1" >"$dir/theme.nix"
+      }
+      if [ $# -eq 0 ]; then
+        list
+        exit 0
+      fi
+      # 壁紙だけを、このコマンドの作られたときのテーマの色にする（切り替えのあと、新しい theme コマンドから呼ばれる）
+      if [ "$1" = "--set-wallpaper" ]; then
+        osascript -e 'tell application "System Events" to tell every desktop to set picture to "${wallpaper}"'
+        exit 0
+      fi
+      name=$1
+      if [ ! -f "$dir/themes/$name.nix" ]; then
+        echo "テーマ「''${name}」はありません" >&2
+        list >&2
+        exit 1
+      fi
+      write_theme "$name"
+      if ! sudo /run/current-system/sw/bin/darwin-rebuild switch --flake "$dir"; then
+        echo "rebuild に失敗したので、テーマを「''${current}」に戻しました" >&2
+        write_theme "$current"
+        exit 1
+      fi
+      tmux source-file "${config.xdg.configHome}/tmux/tmux.conf" 2>/dev/null || true
+      sketchybar --reload 2>/dev/null || true
+      pkill -USR2 -x ghostty 2>/dev/null || true
+      # 壁紙を、新しいテーマのターミナルの背景と同じ色の無地にする（新しくできた theme コマンドに入っている画像を使う）
+      "$(command -v theme)" --set-wallpaper || true
+      echo "テーマを「''${name}」にしました。Neovim は開き直すと新しい色になります"
+    '';
+  };
   # sketchybar の Apple ロゴ・アプリのメニューが使う小さなプログラム（旧設定の helpers/menus。毎回 make していたものを Nix でビルドする）
   sketchybar-menus = pkgs.stdenv.mkDerivation {
     name = "sketchybar-menus";
@@ -136,18 +223,18 @@ in
     enableGitIntegration = true;
     options = {
       navigate = true;
-      # 構文の色は bat に最初から入っている Gruvbox（gruvbox-dark）、追加・削除の背景は palette.nix の差分の色
-      syntax-theme = "gruvbox-dark";
+      # 構文の色は bat に最初から入っているテーマ（theme.nix の bat）、追加・削除の背景は palette.nix の差分の色
+      syntax-theme = theme.bat;
       plus-style = "syntax ${palette.diff_add}";
       plus-emph-style = "syntax ${palette.diff_add_emph}";
       minus-style = "syntax ${palette.diff_delete}";
       minus-emph-style = "syntax ${palette.diff_delete_emph}";
     };
   };
-  # delta は構文の色を bat の配色から取る。Gruvbox は bat に最初から入っている
+  # delta は構文の色を bat の配色から取る。テーマ（theme.nix の bat）は bat に最初から入っている
   programs.bat = {
     enable = true;
-    config.theme = "gruvbox-dark";
+    config.theme = theme.bat;
   };
 
   programs.zsh = {
@@ -262,8 +349,8 @@ in
   programs.btop = {
     enable = true;
     settings = {
-      # btop に最初から入っている Gruvbox。背景は塗らずにターミナルの色（palette.nix の bg1）を使う
-      color_theme = "gruvbox_dark_v2";
+      # btop に最初から入っているテーマ（theme.nix の btop）。背景は塗らずにターミナルの色（palette.nix の bg1）を使う
+      color_theme = theme.btop;
       theme_background = false;
       # Neovim と同じく hjkl で動く
       vim_keys = true;
@@ -289,9 +376,11 @@ in
   # Kubernetes（kind の coffee-app）を画面で見て操作する
   programs.k9s = {
     enable = true;
-    # k9s に最初から入っている Gruvbox Dark Hard（背景は palette.nix の bg1 と同じ #1d2021）
-    skins.gruvbox-dark-hard = "${pkgs.k9s}/share/k9s/skins/gruvbox-dark-hard.yaml";
-    settings.k9s.ui.skin = "gruvbox-dark-hard";
+  }
+  # k9s に最初から入っているスキン（theme.nix の k9s）。入っていないテーマ（null）は、k9s の標準の見た目
+  // lib.optionalAttrs (theme.k9s != null) {
+    skins.${theme.k9s} = "${pkgs.k9s}/share/k9s/skins/${theme.k9s}.yaml";
+    settings.k9s.ui.skin = theme.k9s;
   };
   # 音に合わせて棒グラフが動く（遊び）。ミュージック.app などの Mac から出ている音に反応する
   # cava 1.0 は macOS 14.2 からの公式の仕組み（Core Audio tap）に対応しているので、BlackHole などの仮想の機器は要らない
@@ -419,16 +508,21 @@ in
       rThin = builtins.fromJSON ''"\ue0b1"'';
       l = builtins.fromJSON ''"\ue0b2"'';
       # 右端の虹色の三角。前の色の上に次の色の三角を重ねていく
+      # 色はテーマのファイルの rainbow（6色）で決められる。決めていなければ、赤 → オレンジ → 黄 → 緑 → 水色 → 青
       rainbow = [
         p.bg0
-        p.red
-        p.orange
-        p.yellow
-        p.green
-        p.cyan
-        p.blue
-        p.bg0
-      ];
+      ]
+      ++ (
+        theme.rainbow or [
+          p.red
+          p.orange
+          p.yellow
+          p.green
+          p.cyan
+          p.blue
+        ]
+      )
+      ++ [ p.bg0 ];
       rainbowArrows = lib.concatStrings (
         lib.zipListsWith (bg: fg: "#[fg=${fg},bg=${bg}]${l}") (lib.init rainbow) (lib.tail rainbow)
       );
@@ -560,6 +654,8 @@ in
   };
   # palette.nix の色を Neovim の Lua から require("palette") で読めるようにする（色の定義を1か所に保つ）
   xdg.dataFile."nvim-nix/site/lua/palette.lua".text = "return " + lib.generators.toLua { } palette;
+  # Neovim で使うテーマの名前（nvim/init.lua が読む）
+  xdg.dataFile."nvim-nix/site/lua/theme.lua".text = "return " + lib.generators.toLua { } { inherit (theme) nvim; };
   # Nix で入れたプラグインは、データ置き場の site/pack/hm へのリンクから読み込まれる。
   # home-manager は ~/.local/share/nvim（旧環境の置き場）に作るので、NVIM_APPNAME に合わせた場所に移す
   xdg.dataFile."nvim/site/pack/hm".enable = lib.mkForce false;
@@ -578,6 +674,8 @@ in
     pkgs.sketchybar-app-font
     # ターミナル（Ghostty）のフォント
     pkgs.nerd-fonts.jetbrains-mono
+    # テーマを切り替える（theme 名前）
+    theme-switch
     # よく打つコマンドに名前を付けて呼ぶ（プロジェクトの justfile に書く。Makefile の代わり）
     pkgs.just
     # テトリス風の落ちものパズル（tetris で起動）
@@ -744,7 +842,6 @@ in
         "Maple Mono NF CN"
       ];
       font-size = 18.5;
-      theme = "Gruvbox Dark Hard";
       window-width = 130;
       window-height = 38;
       window-padding-x = 10;
@@ -757,7 +854,8 @@ in
       scrollbar = "never";
       # 文字を打っている間はマウスの矢印を隠す（マウスを動かすとまた出る）
       mouse-hide-while-typing = true;
-    };
+    }
+    // ghosttyColors;
   };
 
   # Ghostty は Dock から起動するので ~/.config-nix を見ない。old / nix どちらのシェルでも使うため、

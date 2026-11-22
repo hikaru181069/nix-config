@@ -7,6 +7,45 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-22
 
+### テーマをコマンド一発で切り替えられるようにした（theme コマンド）
+
+- 気分によってテーマを変えたい（ユーザーの希望）
+- `themes/` にテーマごとのファイル（`gruvbox-dark-hard.nix`・`onedark-darker.nix`）を置いた（Gruvbox は最初 `gruvbox.nix` だったが、どの種類かわかるよう名前を変えた）。中身は色（`palette`）と、各ツールで使う最初から入っているテーマの名前（`ghostty`・`nvim`・`bat`・`btop`・`k9s`）
+- `theme.nix` は、どのテーマを使うかの1行（`import ./themes/名前.nix`）だけ。`palette.nix` はそのテーマの色を返す（ほかのファイルは今までどおり `palette.nix` を読む）
+- Ghostty: テーマが Ghostty に入っていればその名前（Gruvbox Dark Hard）、入っていなければ palette の色を直接決める（`ghosttyColors`）
+- Neovim: gruvbox.nvim と onedark.nvim の両方を入れ、home.nix が書き出す `theme.lua` の名前で選ぶ
+- `theme` コマンド（`pkgs.writeShellApplication`）: `theme` で一覧、`theme 名前` で theme.nix を書き換えて rebuild し、tmux（`source-file`）・sketchybar（`--reload`）・Ghostty（`SIGUSR2`。Ghostty 1.3.1 はこれで設定を読み込み直す）に読み込み直させる。rebuild に失敗したら theme.nix を元に戻す。Neovim は開き直す
+  - 一覧と、ないテーマ名のときのエラーを試した。`$name」` のように変数の後ろに日本語が続くと、変数名の一部と読まれて止まったので、`''${name}` で囲った
+  - Gruvbox を選んで組み立て、Ghostty・Neovim・tmux・bat が Gruvbox になることを確かめた（theme.nix は元に戻した）
+- 新しいテーマを足すときは、`themes/` にファイルを足して `git add` する（flake は git に入っているファイルしか見ない）
+- Catppuccin Mocha も足した（`themes/catppuccin-mocha.nix`）。色は公式の値で、役割ごとに Catppuccin での名前をコメントに書いた。差分の色は決まった値が無いので、green / red / blue を base に混ぜた
+  - Ghostty・bat は最初から入っている「Catppuccin Mocha」。btop と k9s には入っていないので、btop は「TTY」（ターミナルの16色を使う）、k9s は標準の見た目（`k9s = null` のときはスキンを設定しない）
+  - Neovim は catppuccin/nvim（リポジトリ名が nvim なので、`name = "catppuccin"` で入れた）の mocha。`--headless` で、背景 `#1e1e2e`・文字 `#cdd6f4` になることを確かめた
+  - theme.nix を一時的に catppuccin-mocha にして組み立て、Ghostty・Neovim・btop・壁紙（`wallpaper-1e1e2e.png`）がそのテーマになることを確かめた（theme.nix は元に戻した）
+- Rosé Pine も足した（`themes/rose-pine.nix`）。3つの種類のうち、いちばん暗い main（ユーザーの希望）。色は rose-pine/neovim の `palette.lua`
+  - バー（bg0）は `_nc` `#16141f`（ほかのテーマと同じく、ターミナルの背景より少し暗い）。緑・水色・オレンジがないので、ターミナルの色の割り当て（Ghostty の Rose Pine）に合わせ、green は pine、cyan と orange は rose
+  - Ghostty は「Rose Pine」、k9s は `rose-pine`（どちらも最初から入っている）。bat と btop には入っていないので、ターミナルの16色を使う `ansi`・`TTY`
+  - Neovim は rose-pine/neovim（リポジトリ名が neovim なので、`name = "rose-pine"` で入れた）の main。`--headless` で、背景 `#191724`・文字 `#e0def4` になることを確かめた
+  - theme.nix を一時的に rose-pine にして組み立て、Ghostty・Neovim・k9s・壁紙（`wallpaper-191724.png`）がそのテーマになることを確かめた（theme.nix は元に戻した）
+  - tmux のステータスバーの右端の三角が、ピンク・黄・青緑を行ったり来たりしてちぐはぐだった（ユーザーの指摘）。テーマのファイルに `rainbow`（6色）を書けるようにし、Rosé Pine は love → iris → foam の間をなめらかにつないだ色にした。書いていないテーマは今までどおり赤 → 青
+- 壁紙も、テーマのターミナルの背景（bg1）と同じ色の無地にした（ユーザーの希望）
+  - `home.nix` の `wallpaper`: ImageMagick で 64x64 の無地の PNG を作る。名前に色を入れる（`wallpaper-1d2021.png`）ので、テーマごとに別の画像になる
+  - `theme 名前` の最後に、新しくできた theme コマンドの `--set-wallpaper` を呼び、`osascript`（System Events の `set picture`）で壁紙にする
+  - 試しに今の色（Gruvbox の `#1d2021`）の画像で壁紙を変え、macOS の壁紙の設定（`com.apple.wallpaper/Store/Index.plist`）に `wallpaper-1d2021.png` が入ったことを確かめた（`get picture` は新しい macOS では値を返さない）
+  - ユーザーには、壁紙とターミナルの背景が違う色に見えた。画像に「sRGB の色」という印がなく（`cHRM` だけ）、macOS が別の基準の色として受け取っていたため。Ghostty は `window-colorspace = srgb`
+  - macOS の `/System/Library/ColorSync/Profiles/sRGB Profile.icc` を `-profile` で付けると、`sRGB` の区切りが入り、`sips` でも「sRGB IEC61966-2.1」と読める。試しの画像を壁紙にして、色が合うことをユーザーが確かめた（Nix の sandbox は切ってあるので、組み立てのときにこのファイルを読める）
+
+### 配色を Gruvbox Dark Hard から OneDark darker にした（このあと、テーマの1つとして themes/ に移した）
+
+- ユーザーが OneDark darker（Neovim の onedark.nvim の style = "darker"）に興味を持った
+- `palette.nix`: onedark.nvim の `lua/onedark/palette.lua` の darker の色にした。役割の名前は今までどおりで、onedark.nvim での名前をコメントに書いた
+  - バー（bg0）は bg_d `#181b20`（ターミナルの背景 `#1f2329` より少し暗い）、カーソル行（bg3）は bg2 `#30363f`
+  - darker に無い色（明るい文字 fg0・white）は、同じ OneDark の dark の fg `#abb2bf`。差分の `_emph` は green / red を bg1 に 30% 混ぜた色
+- Ghostty: 同じテーマが入っていないので、`theme` をやめて、`background`・`foreground`・`palette`（16色）などを palette.nix から直接決めた
+- Neovim: gruvbox.nvim → onedark.nvim（`style = "darker"`）。左端の列は onedark.nvim では最初から本文と同じ背景なので、Gruvbox のときの上書きは消した。`--headless` で、Normal の背景が `#1f2329`、文字が `#a0a8b7` になることを確かめた
+- bat・delta → `OneHalfDark`、btop → `onedark`、k9s → `one-dark`（どれも最初から入っているもの）
+- tmux・sketchybar・starship・fzf・lazygit などは palette.nix から色を取るので、自動で変わる
+
 ### おもしろいツールを試した（入れていない）
 
 - wttr.in: `curl 'wttr.in/Tokyo?lang=ja'` で天気予報を出せる。入れるものはいらない

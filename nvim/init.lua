@@ -32,8 +32,13 @@ require("ime")
 
 -- プラグインは Neovim 標準の vim.pack で入れる。版はこのディレクトリの nvim-pack-lock.json に記録される
 vim.pack.add({
-  -- 配色（tmux・Ghostty などと揃える）
+  -- 配色（tmux・Ghostty などと揃える）。どちらを使うかは ~/nix-config/theme.nix で決める
   "https://github.com/ellisonleao/gruvbox.nvim",
+  "https://github.com/navarasu/onedark.nvim",
+  -- リポジトリの名前が nvim なので、名前を catppuccin にして入れる
+  { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+  -- リポジトリの名前が neovim なので、名前を rose-pine にして入れる
+  { src = "https://github.com/rose-pine/neovim", name = "rose-pine" },
   -- C-hjkl で Neovim の分割と tmux のペインを区別なく移動（tmux 側にも同じプラグインがある）
   "https://github.com/christoomey/vim-tmux-navigator",
   -- ファイル・文字列・バッファなどを絞り込んで探す（plenary は telescope が使う部品）
@@ -79,27 +84,48 @@ vim.pack.add({
   "https://github.com/windwp/nvim-ts-autotag",
 })
 
--- Gruvbox の背景を暗いほう（hard）にする（Ghostty の Gruvbox Dark Hard と同じ背景 #1d2021）
--- 左端の列（git や診断の印が出る列）と、その上の印の背景を、Gruvbox の既定（本文より明るい色）から本文と同じ色にする
-local body = require("palette").bg1
-local same_as_body = { bg = body }
-require("gruvbox").setup({
-  contrast = "hard",
-  overrides = {
-    SignColumn = same_as_body,
-    FoldColumn = same_as_body,
-    GruvboxRedSign = same_as_body,
-    GruvboxGreenSign = same_as_body,
-    GruvboxYellowSign = same_as_body,
-    GruvboxBlueSign = same_as_body,
-    GruvboxPurpleSign = same_as_body,
-    GruvboxAquaSign = same_as_body,
-    GruvboxOrangeSign = same_as_body,
-    -- カーソル行は、左端もカーソル行の色にして帯が途切れないようにする
-    CursorLineSign = { bg = require("palette").bg3 },
-  },
-})
-vim.cmd.colorscheme("gruvbox")
+-- 配色。どのテーマを使うかは ~/nix-config/theme.nix で決める（home.nix が theme.lua に書き出す）
+local theme = require("theme").nvim
+if theme == "gruvbox" then
+  -- Gruvbox の背景を暗いほう（hard）にする（Ghostty の Gruvbox Dark Hard と同じ背景 #1d2021）
+  -- 左端の列（git や診断の印が出る列）と、その上の印の背景を、Gruvbox の既定（本文より明るい色）から本文と同じ色にする
+  local same_as_body = { bg = require("palette").bg1 }
+  require("gruvbox").setup({
+    contrast = "hard",
+    overrides = {
+      SignColumn = same_as_body,
+      FoldColumn = same_as_body,
+      GruvboxRedSign = same_as_body,
+      GruvboxGreenSign = same_as_body,
+      GruvboxYellowSign = same_as_body,
+      GruvboxBlueSign = same_as_body,
+      GruvboxPurpleSign = same_as_body,
+      GruvboxAquaSign = same_as_body,
+      GruvboxOrangeSign = same_as_body,
+      -- カーソル行は、左端もカーソル行の色にして帯が途切れないようにする
+      CursorLineSign = { bg = require("palette").bg3 },
+    },
+  })
+  vim.cmd.colorscheme("gruvbox")
+elseif theme == "catppuccin" then
+  -- Catppuccin Mocha。左端の列は、最初から本文と同じ背景
+  require("catppuccin").setup({ flavour = "mocha" })
+  vim.cmd.colorscheme("catppuccin")
+elseif theme == "rose-pine" then
+  -- Rosé Pine の main（いちばん暗い種類）
+  require("rose-pine").setup({ variant = "main" })
+  vim.cmd.colorscheme("rose-pine")
+else
+  -- OneDark の darker。左端の列は、onedark.nvim では最初から本文と同じ背景なので、上書きはいらない
+  require("onedark").setup({
+    style = "darker",
+    highlights = {
+      -- カーソル行は、左端もカーソル行の色にして帯が途切れないようにする
+      CursorLineSign = { bg = "$bg1" },
+    },
+  })
+  require("onedark").load()
+end
 
 -- telescope: 入力欄を上に置き、結果も上から並べる（旧設定と同じ）
 require("telescope").setup({
