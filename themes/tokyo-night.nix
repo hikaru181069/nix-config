@@ -7,6 +7,16 @@
   bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の TokyoNight Night）をそのまま使う
   btop = "tokyo-night";
   k9s = null; # k9s には入っていないので、k9s の標準の見た目
+  # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
+  # 色み（H）だけをテーマの赤から青へ等間隔に変えた
+  rainbow = [
+    "#fb90a1"
+    "#f0a058"
+    "#b7bd53"
+    "#59ce9c"
+    "#23c9e6"
+    "#8fb3ff"
+  ];
 
   palette = {
     # 色

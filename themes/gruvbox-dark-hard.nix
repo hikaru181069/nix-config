@@ -7,6 +7,16 @@
   bat = "gruvbox-dark"; # bat・delta の構文の色
   btop = "gruvbox_dark_v2";
   k9s = "gruvbox-dark-hard";
+  # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
+  # 色み（H）だけをテーマの赤から青へ等間隔に変えた
+  rainbow = [
+    "#f88572"
+    "#ed9142"
+    "#d3a31e"
+    "#aab438"
+    "#72c16a"
+    "#12c79c"
+  ];
 
   palette = {
     # 色（暗い背景で使う、明るいほうの Gruvbox の色）

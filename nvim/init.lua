@@ -148,7 +148,9 @@ elseif theme == "everforest" then
 elseif theme == "material-darker" or theme == "material-deep-ocean" then
   -- Material の darker / deep ocean（どちらにするかは vim.g.material_style で決める）
   vim.g.material_style = theme == "material-darker" and "darker" or "deep ocean"
-  require("material").setup({})
+  -- material.nvim はカーソルに色を付ける（ターミナルにカーソルの色を頼む）。閉じるときに色を戻すが、Ghostty はそのときの
+  -- 設定の色を覚えたままになり、あとでテーマを替えてもカーソルの色が変わらなくなったので、切る（ほかのテーマと同じく、ターミナルの色）
+  require("material").setup({ disable = { colored_cursor = true } })
   vim.cmd.colorscheme("material")
 else
   -- OneDark の darker。左端の列は、onedark.nvim では最初から本文と同じ背景なので、上書きはいらない

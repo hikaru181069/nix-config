@@ -7,6 +7,16 @@
   bat = "Catppuccin Mocha"; # bat・delta の構文の色
   btop = "TTY"; # btop には入っていないので、ターミナルの16色（Ghostty の Catppuccin Mocha）をそのまま使う
   k9s = null; # k9s には入っていないので、k9s の標準の見た目
+  # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
+  # 色み（H）だけをテーマの赤から青へ等間隔に変えた
+  rainbow = [
+    "#ffacc1"
+    "#fbb689"
+    "#d0cc7d"
+    "#8fdbad"
+    "#70daea"
+    "#a8c9ff"
+  ];
 
   palette = {
     # 色

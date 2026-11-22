@@ -7,6 +7,16 @@
   bat = "OneHalfDark"; # bat・delta の構文の色（OneDark に近い）
   btop = "onedark";
   k9s = "one-dark";
+  # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
+  # 色み（H）だけをテーマの赤から青へ等間隔に変えた
+  rainbow = [
+    "#e68285"
+    "#d99249"
+    "#a9aa45"
+    "#5cba81"
+    "#03bac2"
+    "#5caaec"
+  ];
 
   palette = {
     # 色

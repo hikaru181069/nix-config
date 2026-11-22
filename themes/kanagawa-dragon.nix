@@ -7,6 +7,16 @@
   bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の Kanagawa Dragon）をそのまま使う
   btop = "kanagawa-dragon";
   k9s = "kanagawa";
+  # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
+  # 色み（H）だけをテーマの赤から青へ等間隔に変えた
+  rainbow = [
+    "#bc918c"
+    "#b4977a"
+    "#a19f79"
+    "#88a68a"
+    "#76a8a3"
+    "#7aa4b7"
+  ];
 
   palette = {
     # 色（dragon のターミナルの色）

@@ -8,6 +8,16 @@
   bat = "Nord"; # bat・delta の構文の色
   btop = "nord";
   k9s = "nord";
+  # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
+  # 色み（H）だけをテーマの赤から青へ等間隔に変えた
+  rainbow = [
+    "#d89397"
+    "#cf9d71"
+    "#acad6e"
+    "#7db892"
+    "#62b8bf"
+    "#7faddb"
+  ];
 
   palette = {
     # 色（ターミナルの色の割り当ては Ghostty の Nord と同じ）

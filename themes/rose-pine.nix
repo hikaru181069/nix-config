@@ -8,15 +8,15 @@
   bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の Rose Pine）をそのまま使う
   btop = "TTY"; # btop には入っていないので、ターミナルの16色をそのまま使う
   k9s = "rose-pine";
-  # tmux のステータスバーの右端の三角（6色）。Rosé Pine には赤から青へ並べられる色がそろっていないので、
-  # love（ピンク）→ iris（紫）→ foam（水色）の間をなめらかにつないだ色にする（love と iris、iris と foam を混ぜた）
+  # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
+  # 色み（H）だけをテーマの赤から青へ等間隔に変えた
   rainbow = [
-    "#eb6f92" # love
-    "#db85b4"
-    "#cc9cd6"
-    "#bcafe4"
-    "#acbfde"
-    "#9ccfd8" # foam
+    "#e09bab"
+    "#dfa084"
+    "#c9ae71"
+    "#a2bc81"
+    "#79c3a7"
+    "#6bc0cf"
   ];
 
   palette = {

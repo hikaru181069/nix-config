@@ -89,6 +89,12 @@ let
       tmux source-file "${config.xdg.configHome}/tmux/tmux.conf" 2>/dev/null || true
       sketchybar --reload 2>/dev/null || true
       pkill -USR2 -x ghostty 2>/dev/null || true
+      # Ghostty は読み込み直しても、開いている画面のカーソルの色だけは前のテーマの色のまま残る。
+      # 読み込み直しが終わるのを少し待ってから、tmux につながっている画面に「カーソルの色を設定の色に戻して」（OSC 112）を送る
+      sleep 0.5
+      for client in $(tmux list-clients -F '#{client_name}' 2>/dev/null); do
+        printf '\033]112\007' >"$client" 2>/dev/null || true
+      done
       # 壁紙を、新しいテーマのターミナルの背景と同じ色の無地にする（新しくできた theme コマンドに入っている画像を使う）
       "$(command -v theme)" --set-wallpaper || true
       echo "テーマを「''${name}」にしました。Neovim は開き直すと新しい色になります"

@@ -9,6 +9,16 @@
   bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の Everforest Dark Hard）をそのまま使う
   btop = "everforest-dark-hard";
   k9s = "everforest-dark";
+  # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
+  # 色み（H）だけをテーマの赤から青へ等間隔に変えた
+  rainbow = [
+    "#e69898"
+    "#e0a077"
+    "#cbac68"
+    "#a9b973"
+    "#81c293"
+    "#62c4b8"
+  ];
 
   palette = {
     # 色

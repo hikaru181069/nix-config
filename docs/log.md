@@ -45,6 +45,20 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
   - バーは bg_alt（Darker `#1a1a1a`・Deep Ocean `#090b10`）。コメントの色はバーの文字には暗すぎるので、comment の役割には fg_dark を使った。bat・btop・k9s には入っていないので、`ansi`・`TTY`・標準の見た目
   - Neovim は material.nvim。どちらの種類かは `vim.g.material_style`（"darker"・"deep ocean"）で決める。`--headless` と、theme.nix を一時的にそれぞれにした組み立てで確かめた（theme.nix は元に戻した）
   - Deep Ocean の tmux のステータスバーがまとまらなかった（ユーザーの指摘）。ユーザー名のかたまり（fg2 `#717cb4`・青紫で鮮やか）、番号（fg1 `#a6accd`）、フォルダ名（fg3 `#3b3f51`）で色みも明るさもばらばらだったため。灰色の役割を色みの少ない青灰色の明るさの段にそろえた: comment・fg2 → `#8f93a2`（Ghostty の Material Ocean の文字の色）、fg3 → `#464b5d`（disabled）
+- tmux の右端の三角が、Rosé Pine 以外は赤 → 青の虹の順に、テーマの決まった6色を並べただけで、段がはっきりしてグラデーションに見えなかった（ユーザーの指摘）。全部のテーマで、テーマらしい色を2〜4色選び、その間を混ぜたなめらかな6色（`rainbow`）にした
+  - Gruvbox: red → orange → yellow / OneDark: red → purple → blue / Catppuccin: peach → pink → mauve → lavender / Nord: Frost（nord7 → nord10） / Tokyo Night: magenta → blue → cyan / Kanagawa: dragonRed → dragonOrange → dragonYellow / Everforest: green → aqua → blue / Material: purple → blue → cyan
+  - 見たうえで、ユーザーは「やはり虹がいい」。縞の虹ではなく、なめらかな虹にした（Rosé Pine も同じ形）: OKLCH で、明るさ（L）と鮮やかさ（C）をテーマの赤・オレンジ・黄・緑・水色・青の平均にそろえ、色み（H）だけをテーマの赤から青へ等間隔に変えた6色。画面に出せない色は鮮やかさを少し下げた
+- 色はできるだけテーマのパレットから選ぶことにした（ユーザーの希望）。計算で作るのは、差分の背景だけ（背景に赤や緑を混ぜないと見分けにくく、Neovim のテーマ自身も計算で作っている）
+  - 三角: パレットの全部の色（Gruvbox の light_* / neutral_*、Catppuccin の maroon / sky、Rosé Pine の leaf、Tokyo Night の green1、Material の dark* など）から、虹の順に、明るさ（OKLCH の L）のそろうものを選んだ。機械的にいちばん近い色を選ぶと、黄が抜けたり最後に灰色が入ったりしたので、順番を守って候補を比べた
+  - cyan_light: 水色の系統でもっと明るい色がパレットにあればそれ（Tokyo Night の blue6、Material Deep Ocean の accent）、なければいちばん明るい文字の色
+  - バーの背景: Nord は nord1、Everforest は bg0（どちらもパレットに背景より暗い色がないので、バーはターミナルより少し明るくなる）
+  - Material Deep Ocean の comment・fg2 の `#8f93a2` は、Material Theme の Ocean の文字の色（パレットの色）
+  - 見たうえで、違和感があったので、ユーザーの希望でなめらかな虹（計算）に戻した。cyan_light と Nord・Everforest のバーの背景も、前の計算の色に戻した
+- Gruvbox Dark Hard に切り替えても、カーソルが青みのあるグレー（Material Deep Ocean の cursor-color `#a6accd`）のままだった（ユーザーの指摘）
+  - Ghostty の設定（`+show-config`）は `cursor-color = #ebdbb2` で正しかった。tmux の `cursor-colour` も none。SIGUSR2 で読み込み直しても変わらず、ターミナルに OSC 112（カーソルの色を設定の色に戻す）を送ると治った。プログラムが途中でカーソルの色を書き換え、それが残っていた
+  - 入っている Neovim のテーマで、カーソルの色を変えるのは material.nvim だけ（`colored_cursor` が既定で有効。`guicursor` に `a:Cursor/Cursor` を足し、閉じるときに外す）。閉じるときの戻しで、Ghostty がそのときの設定の色を覚えたままになったと考えられる
+  - material.nvim の `disable = { colored_cursor = true }` で切った。カーソルは、ほかのテーマと同じくターミナルの設定の色
+  - それでも、テーマを替えるたびにカーソルだけ前のテーマの色で残った（ユーザーの報告）。Ghostty は SIGUSR2 で読み込み直しても、開いている画面のカーソルの色を更新しないらしい（OSC 112 で治るので）。`theme` コマンドで、読み込み直しの 0.5 秒後に、tmux につながっている画面（`tmux list-clients` の端末）へ OSC 112 を送るようにした
 - 壁紙も、テーマのターミナルの背景（bg1）と同じ色の無地にした（ユーザーの希望）
   - `home.nix` の `wallpaper`: ImageMagick で 64x64 の無地の PNG を作る。名前に色を入れる（`wallpaper-1d2021.png`）ので、テーマごとに別の画像になる
   - `theme 名前` の最後に、新しくできた theme コマンドの `--set-wallpaper` を呼び、`osascript`（System Events の `set picture`）で壁紙にする
