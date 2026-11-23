@@ -599,7 +599,7 @@ in
       set -g message-style "fg=${p.fg2},bg=${p.bg0}"
       set -g message-command-style "fg=${p.fg2},bg=${p.bg0}"
       set -g pane-border-style "fg=${p.bg1},bg=${p.bg1}"
-      set -g pane-active-border-style "fg=${p.bg3},bg=${p.bg1}"
+      set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg3},bg=${p.bg1}"
 
       set -g status on
       set -g status-interval 1
@@ -890,6 +890,8 @@ in
       # 上は 12: 全画面の高さのウィンドウ（2230px、1行 49px）で、行の高さで割り切れない余りが下に残らないようにした値
       window-padding-y = "12,0";
       macos-titlebar-style = "hidden";
+      # ウィンドウの影を消す（影と一緒に付く、まわりの細い線も消える）
+      macos-window-shadow = false;
       scrollbar = "never";
       # 文字を打っている間はマウスの矢印を隠す（マウスを動かすとまた出る）
       mouse-hide-while-typing = true;
