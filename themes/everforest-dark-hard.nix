@@ -6,7 +6,7 @@
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "Everforest Dark Hard"; # Ghostty に入っているので、そのまま使う
   nvim = "everforest"; # everforest-nvim の hard（nvim/init.lua）
-  bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の Everforest Dark Hard）をそのまま使う
+  bat = "everforest-dark-hard"; # bat には入っていないので、Neovim（neanias/everforest-nvim）の実際の色の割り当てから作って足した（bat/everforest-dark-hard.tmTheme）
   btop = "everforest-dark-hard";
   k9s = "everforest-dark";
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、

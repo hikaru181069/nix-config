@@ -4,7 +4,7 @@
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "TokyoNight Night"; # Ghostty に入っているので、そのまま使う
   nvim = "tokyonight"; # tokyonight.nvim の night（nvim/init.lua）
-  bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の TokyoNight Night）をそのまま使う
+  bat = "tokyo-night"; # bat には入っていないので、Neovim（folke/tokyonight.nvim）の実際の色の割り当てから作って足した（bat/tokyo-night.tmTheme）
   btop = "tokyo-night";
   k9s = null; # k9s には入っていないので、k9s の標準の見た目
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、

@@ -5,7 +5,7 @@
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "Rose Pine"; # Ghostty に入っているので、そのまま使う
   nvim = "rose-pine"; # rose-pine/neovim の main（nvim/init.lua）
-  bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の Rose Pine）をそのまま使う
+  bat = "rose-pine"; # bat には入っていないので、Neovim（rose-pine/neovim）の実際の色の割り当てから作って足した（bat/rose-pine.tmTheme）
   btop = "TTY"; # btop には入っていないので、ターミナルの16色をそのまま使う
   k9s = "rose-pine";
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、

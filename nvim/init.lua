@@ -44,6 +44,8 @@ vim.pack.add({
   "https://github.com/rebelot/kanagawa.nvim",
   "https://github.com/neanias/everforest-nvim",
   "https://github.com/marko-cerovac/material.nvim",
+  "https://github.com/savq/melange-nvim",
+  "https://github.com/projekt0n/github-nvim-theme",
   -- C-hjkl で Neovim の分割と tmux のペインを区別なく移動（tmux 側にも同じプラグインがある）
   "https://github.com/christoomey/vim-tmux-navigator",
   -- ファイル・文字列・バッファなどを絞り込んで探す（plenary は telescope が使う部品）
@@ -152,6 +154,14 @@ elseif theme == "material-darker" or theme == "material-deep-ocean" then
   -- 設定の色を覚えたままになり、あとでテーマを替えてもカーソルの色が変わらなくなったので、切る（ほかのテーマと同じく、ターミナルの色）
   require("material").setup({ disable = { colored_cursor = true } })
   vim.cmd.colorscheme("material")
+elseif theme == "melange" then
+  -- Melange の dark（暗い背景か明るい背景かは background で決まる）
+  vim.o.background = "dark"
+  vim.cmd.colorscheme("melange")
+elseif theme == "github_dark_dimmed" then
+  -- GitHub の Dark Dimmed
+  require("github-theme").setup({})
+  vim.cmd.colorscheme("github_dark_dimmed")
 else
   -- OneDark の darker。左端の列は、onedark.nvim では最初から本文と同じ背景なので、上書きはいらない
   require("onedark").setup({ style = "darker" })

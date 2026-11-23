@@ -5,7 +5,7 @@
   # Ghostty の Material Darker は文字の色（#eeffff）が Neovim（#b0bec5）と違うので、palette の色を直接使う（home.nix）
   ghostty = null;
   nvim = "material-darker"; # material.nvim の darker（nvim/init.lua）
-  bat = "ansi"; # bat には入っていないので、ターミナルの16色をそのまま使う
+  bat = "material-darker"; # bat には入っていないので、Neovim（marko-cerovac/material.nvim）の実際の色の割り当てから作って足した（bat/material-darker.tmTheme）
   btop = "TTY"; # btop には入っていないので、ターミナルの16色をそのまま使う
   k9s = null; # k9s には入っていないので、k9s の標準の見た目
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、

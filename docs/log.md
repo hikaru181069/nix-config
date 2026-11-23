@@ -5,6 +5,41 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ---
 
+## 2026-11-23
+
+### bat に専用のテーマがない7つのテーマにも、bat 用のテーマを作った
+
+- GitHub Dark Dimmed で、Neovim に合わせた bat のテーマが「思ってた以上にいい感じ」だったので、ほかの `ansi` だったテーマ（Melange・Everforest・Kanagawa Dragon・Material 2つ・Tokyo Night・Rosé Pine）にも作った
+- 7つを手で読むのは大変なので、やり方を変えた: Neovim を画面なしで起動し（`--cmd` で theme・palette を差し替えて init.lua を読ませる）、各テーマを読みこんだときの実際の色（nvim_get_hl。無い役割は親の役割へさかのぼる）を取り出して、Neovim の役割49個を bat の方式（TextMate の scope）の名前に当てはめた。作ったファイルは `bat/<テーマ名>.tmTheme`
+- `programs.bat.themes` は、`bat/` の中のファイルを全部自動で足すようにした（builtins.readDir）。各テーマの bat はファイル名と同じ名前にした
+- bat の方式では `const x` の `x` を定数（variable.other.constant）として扱い、Neovim ではふつうの変数なので、定数の色を当てないようにした（GitHub Dark Dimmed も同じく直した）
+- 色を取り出す・当てはめる小さなスクリプトは一時置き場で使っただけで、リポジトリには入れていない。テーマのプラグインが色を変えたら、同じやり方で作り直す
+
+### テーマに GitHub Dark Dimmed を足した
+
+- ユーザーが GitHub テーマに興味を持ち、ダークの種類（Default・High Contrast・Dimmed）から Dark Dimmed を選んだ。`theme github-dark-dimmed` で切り替えられる
+- Ghostty は最初から入っている `GitHub Dark Dimmed` を使う。Neovim は projekt0n/github-nvim-theme を vim.pack に足した
+- bat に入っている GitHub は明るい背景用なので使わず `ansi`。btop は `TTY`、k9s は標準の見た目
+- github-nvim-theme の色の一部は、背景にほかの色を混ぜて作られる。プラグインを動かして値を出すのは止められたので、色の元データ（primitives/dark_dimmed.lua）を取ってきて、同じ式で計算した
+- 差分の背景（行全体）は github-nvim-theme の決まった色をそのまま使った
+- lazygit（delta）のコードの色が Neovim と違うのが残念、という話になった。bat に GitHub のダーク用が無く `ansi`（16色の割り当てを bat が決める）だったため
+  - GitHub 公式の VS Code のテーマ（primer/github-vscode-theme 6.3.5、MIT）を Open VSX から取り、themes/dark-dimmed.json を bat 用の `bat/github-dark-dimmed.tmTheme` に書き直した。VS Code と bat はどちらも TextMate の方式なので、色の決まり（tokenColors 49個）をそのまま写せる
+  - `programs.bat.themes` で足し、`themes/github-dark-dimmed.nix` の bat を `github-dark-dimmed` にした。delta も bat のテーマを使うので、lazygit の差分も同じ色になる
+  - ただ、bat（公式の VS Code の割り当て）と Neovim（github-nvim-theme の割り当て）でかなり差があった。そこで、github-nvim-theme の色の役割の表（palette/github_dark_dimmed.lua の syntax）と細かい上書き（group/modules/treesitter.lua）を見て、bat の方式の名前に当てはめて作り直した（36個）。もとにした Neovim の役割は、ファイルの各 name に書いた
+  - 読み取り方の差（Neovim は treesitter、bat は TextMate）は残るので、完全には同じにならない
+  - 反映しても lazygit に `[bat warning]: Unknown theme 'github-dark-dimmed'` と出て、標準の色のままだった。rebuild のときに bat の控え（キャッシュ）を作る home-manager の処理（home.activation.batCache）が、設定の置き場所（~/.config-nix）を知らずに ~/.config/bat を見ていたため。同じ処理に `BAT_CONFIG_DIR` を足したものに置きかえた（lib.mkForce）
+- カーソルが青かった。Ghostty の GitHub Dark Dimmed はカーソルが青（#539bf5）だが、github-nvim-theme（README のプレビュー）は通常の文字の色（灰色 #adbac7）。テーマのファイルに `ghosttyOverride`（Ghostty のテーマの色のうち上書きするもの）を書けるようにして、灰色に合わせた
+
+### テーマに Melange を足した
+
+- ユーザーが Melange（savq/melange-nvim）に興味を持ったので、`themes/melange.nix` を作った。`theme melange` で切り替えられる
+- あたたかい色（こげ茶の背景・クリーム色の文字）のテーマ。dark と light しかないので dark を使う
+- Ghostty は最初から入っている `Melange Dark` を使う。Neovim は melange-nvim を vim.pack に足し、`background = "dark"` にして読み込む
+- bat・btop には入っていないので、ターミナルの16色をそのまま使う（bat は `ansi`、btop は `TTY`）。k9s は標準の見た目
+- 色は melange-nvim の `lua/melange/palettes/dark.lua` から取った（主に明るい色の b）。バーの背景（bg0）・虹・差分の背景は、ほかのテーマと同じ計算で作った
+
+---
+
 ## 2026-11-22
 
 ### テーマをコマンド一発で切り替えられるようにした（theme コマンド）

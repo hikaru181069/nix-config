@@ -4,7 +4,7 @@
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "Kanagawa Dragon"; # Ghostty に入っているので、そのまま使う
   nvim = "kanagawa"; # kanagawa.nvim の dragon（nvim/init.lua）
-  bat = "ansi"; # bat には入っていないので、ターミナルの16色（Ghostty の Kanagawa Dragon）をそのまま使う
+  bat = "kanagawa-dragon"; # bat には入っていないので、Neovim（rebelot/kanagawa.nvim）の実際の色の割り当てから作って足した（bat/kanagawa-dragon.tmTheme）
   btop = "kanagawa-dragon";
   k9s = "kanagawa";
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、

@@ -12,7 +12,8 @@ let
   # Ghostty の色: テーマが Ghostty に入っていれば、その名前を使う。入っていなければ、palette の色を直接決める
   ghosttyColors =
     if theme.ghostty != null then
-      { theme = theme.ghostty; }
+      # ghosttyOverride: Ghostty のテーマの色のうち、上書きしたいもの（テーマのファイルに書いたときだけ）
+      { theme = theme.ghostty; } // (theme.ghosttyOverride or { })
     else
       {
         background = palette.bg1;
@@ -237,11 +238,32 @@ in
       minus-emph-style = "syntax ${palette.diff_delete_emph}";
     };
   };
-  # delta は構文の色を bat の配色から取る。テーマ（theme.nix の bat）は bat に最初から入っている
+  # delta は構文の色を bat の配色から取る。テーマ（theme.nix の bat）は、ほとんど bat に最初から入っているもの
   programs.bat = {
     enable = true;
     config.theme = theme.bat;
+    # bat に入っていないので足したテーマ（bat/ の中のファイル全部。名前はファイル名から .tmTheme を除いたもの。作り方はファイルの先頭に書いた）
+    themes = lib.mapAttrs' (
+      file: _:
+      lib.nameValuePair (lib.removeSuffix ".tmTheme" file) {
+        src = ./bat;
+        inherit file;
+      }
+    ) (builtins.readDir ./bat);
   };
+  # rebuild のときに bat がテーマの一覧の控え（キャッシュ）を作る処理は、設定の置き場所（~/.config-nix）を知らないので、
+  # ~/.config/bat を見て、足したテーマが入らない控えを作ってしまう。home-manager の処理と同じものに、置き場所（BAT_CONFIG_DIR）を足して置きかえる
+  home.activation.batCache = lib.mkForce (
+    lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+      (
+        export XDG_CACHE_HOME=${config.xdg.cacheHome}
+        export BAT_CONFIG_DIR=${config.xdg.configHome}/bat
+        verboseEcho "Rebuilding bat theme cache"
+        cd "${pkgs.emptyDirectory}"
+        run ${lib.getExe config.programs.bat.package} cache --build
+      )
+    ''
+  );
 
   programs.zsh = {
     enable = true;

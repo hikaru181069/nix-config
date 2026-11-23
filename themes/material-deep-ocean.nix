@@ -5,7 +5,7 @@
   # Ghostty の Material Ocean は文字の色（#8f93a2）が Neovim（#a6accd）と違うので、palette の色を直接使う（home.nix）
   ghostty = null;
   nvim = "material-deep-ocean"; # material.nvim の deep ocean（nvim/init.lua）
-  bat = "ansi"; # bat には入っていないので、ターミナルの16色をそのまま使う
+  bat = "material-deep-ocean"; # bat には入っていないので、Neovim（marko-cerovac/material.nvim）の実際の色の割り当てから作って足した（bat/material-deep-ocean.tmTheme）
   btop = "TTY"; # btop には入っていないので、ターミナルの16色をそのまま使う
   k9s = null; # k9s には入っていないので、k9s の標準の見た目
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
