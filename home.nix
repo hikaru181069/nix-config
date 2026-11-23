@@ -535,6 +535,12 @@ in
       r = builtins.fromJSON ''"\ue0b0"'';
       rThin = builtins.fromJSON ''"\ue0b1"'';
       l = builtins.fromJSON ''"\ue0b2"'';
+      # ユーザー名のブロックと右端の三角の色。テーマのファイルに tmuxUser があれば、その色にする
+      tmuxUser =
+        theme.tmuxUser or {
+          block = p.fg2;
+          arrow = p.fg1;
+        };
       # 右端の虹色の三角。前の色の上に次の色の三角を重ねていく
       # 色はテーマのファイルの rainbow（6色）で決められる。決めていなければ、赤 → オレンジ → 黄 → 緑 → 水色 → 青
       rainbow = [
@@ -606,7 +612,7 @@ in
 
       # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
       # 区切りの三角の一部は、旧環境と同じくブロックより1段明るい色にする（prefix 中の三角・ユーザー名の右端）
-      set -g status-left "#[fg=#{?client_prefix,${p.bg0},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg0}},bold] #S #[fg=#{?client_prefix,${p.cyan_light},${p.bg0}},bg=${p.fg2},nobold]${r}#[fg=${p.bg0},bg=${p.fg2},bold] #(whoami) #[fg=${p.fg1},bg=${p.bg0},nobold]${r}"
+      set -g status-left "#[fg=#{?client_prefix,${p.bg0},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg0}},bold] #S #[fg=#{?client_prefix,${p.cyan_light},${p.bg0}},bg=${tmuxUser.block},nobold]${r}#[fg=${p.bg0},bg=${tmuxUser.block},bold] #(whoami) #[fg=${tmuxUser.arrow},bg=${p.bg0},nobold]${r}"
       # 右: 虹色の三角とホスト名
       set -g status-right "${rainbowArrows}#[fg=${p.fg3},bg=${p.bg0},bold] #h "
 
@@ -854,7 +860,12 @@ in
   };
 
   # 色（palette.nix）と、アプリ名からアイコンを引く表（アイコンのフォントと同じパッケージのもの）を置く
-  xdg.configFile."sketchybar/palette.lua".text = "return " + lib.generators.toLua { } palette;
+  # テーマのファイルに frontApp があれば、今のアプリの名前とアイコンの色にする（sketchybar/items/front_app）
+  xdg.configFile."sketchybar/palette.lua".text =
+    "return "
+    + lib.generators.toLua { } (
+      palette // lib.optionalAttrs (theme ? frontApp) { front_app = theme.frontApp; }
+    );
   xdg.configFile."sketchybar/icon_map.lua".source =
     "${pkgs.sketchybar-app-font}/lib/sketchybar-app-font/icon_map.lua";
 

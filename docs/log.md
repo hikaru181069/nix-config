@@ -5,7 +5,31 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ---
 
+## 2026-11-24
+
+### GitHub Dark Default だけ、tmux のユーザー名の三角の色を Neovim のステータスラインに合わせた
+
+- ユーザー名のブロック（fg2）の右の三角が fg1（白に近い）で、浮いて見えた（ユーザーの指摘）
+- Neovim のノーマルモードと同じく、ブロックを fg3、三角を comment にした。はじめ全テーマ共通で変えたが、気になるのはこのテーマだけなので、テーマのファイルに `tmuxUser` を書いたときだけ変わるようにした（ほかのテーマは元のまま）
+
+### GitHub Dark Default だけ、sketchybar の今のアプリの名前とアイコンを明るくした
+
+- 明るい帯（bg3 #484f58）の上の文字が fg2（#7d8590）で読みにくかったので、明るくした。はじめ #b1bac4（gray[3]）にし、そのあと選んでいるデスクトップのアプリのアイコンと同じ色（fg0 #f0f6fc）にそろえた
+- テーマのファイルに `frontApp` を書いたときだけ変わる（ほかのテーマは fg2 のまま）
+
+### GitHub Dark Default の Neovim のカーソル行を暗くした
+
+- プラグインの色（#484f58）が明るすぎたので、Dark Dimmed と同じ決め方（背景に文字の色を1割混ぜる）の #23272d にした（nvim/init.lua の groups）。bat の行の強調の色も合わせた
+- palette の bg3 は sketchybar の帯などにも使うので、変えていない
+
 ## 2026-11-23
+
+### テーマに GitHub Dark Default を足した
+
+- Dark Dimmed のほかに、サポートが多くて暗いものとして Dark Default を選んだ（High Contrast も Ghostty・Neovim・公式の VS Code にあり、手元の道具での対応の数は同じ）。`theme github-dark-default`
+- 作り方は Dark Dimmed と同じ（Ghostty のカーソルは Neovim に合わせて文字の色に上書き）。bat は Neovim の実際の色から作った。Neovim の設定は Dark Dimmed と同じ枝にまとめた
+- 枠線（bg4）だけは、プラグインの border.default（gray[9] #161b22）が背景とほぼ同じで見えないので、GitHub の border.default（#30363d）にした
+- カーソル行（bg3 #484f58）は、このプラグインの Dark Default の決まりで、背景に対してかなり明るい
 
 ### bat に最初から入っているテーマを使っていた4つも、Neovim から作り直した
 

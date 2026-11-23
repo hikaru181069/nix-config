@@ -158,10 +158,13 @@ elseif theme == "melange" then
   -- Melange の dark（暗い背景か明るい背景かは background で決まる）
   vim.o.background = "dark"
   vim.cmd.colorscheme("melange")
-elseif theme == "github_dark_dimmed" then
-  -- GitHub の Dark Dimmed
-  require("github-theme").setup({})
-  vim.cmd.colorscheme("github_dark_dimmed")
+elseif theme == "github_dark_dimmed" or theme == "github_dark_default" then
+  -- GitHub の Dark Dimmed / Dark Default（名前がそのまま colorscheme の名前）
+  -- Dark Default のカーソル行は、プラグインの色（#484f58）だと明るすぎるので、Dark Dimmed と同じ決め方（背景に文字の色を1割混ぜる）の色にする
+  require("github-theme").setup({
+    groups = { github_dark_default = { CursorLine = { bg = "#23272d" } } },
+  })
+  vim.cmd.colorscheme(theme)
 else
   -- OneDark の darker。左端の列は、onedark.nvim では最初から本文と同じ背景なので、上書きはいらない
   require("onedark").setup({ style = "darker" })

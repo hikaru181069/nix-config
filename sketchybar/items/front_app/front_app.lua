@@ -2,6 +2,9 @@ local helpers_path = os.getenv("CONFIG_DIR") .. "/helpers/"
 -- アプリ名 → アイコンの対応表（スペース番号と同じもの）
 local app_icons = dofile(os.getenv("HOME") .. "/.config-nix/sketchybar/icon_map.lua")
 
+-- 名前とアイコンの色。テーマのファイルに frontApp があればその色（home.nix が palette.lua に足す）、なければバーのほかの文字と同じ
+local text_color = COLORS.front_app or COLORS.subtext0
+
 -- 矢印の見た目: 今のアプリは、スペースより1段明るい帯（bg3）に入れて、スペースのアイコンと見分けやすくする
 -- 帯の始まりの三角は、アイコンより先に足す（左から順に並ぶため）
 if BAR_STYLE == "arrows" then
@@ -19,7 +22,7 @@ local front_app_icon = SBAR.add("item", "front_app.icon", {
   padding_right = 0,
   icon = {
     font = "sketchybar-app-font:Regular:15.0",
-    color = COLORS.subtext0,
+    color = text_color,
   },
   label = { drawing = false },
   updates = true,
@@ -34,7 +37,7 @@ local front_app = SBAR.add("item", "front_app", {
   display = "active",
   padding_left = 0,
   icon = { drawing = false },
-  label = { color = COLORS.subtext0 },
+  label = { color = text_color },
   updates = true,
   click_script = helpers_path .. "sketchymenu/app_menu.sh toggle",
 })
