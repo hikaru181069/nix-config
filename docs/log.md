@@ -7,6 +7,17 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-23
 
+### bat に最初から入っているテーマを使っていた4つも、Neovim から作り直した
+
+- Gruvbox Dark Hard・Catppuccin Mocha・Nord・OneDark darker は、bat に最初から入っているテーマ（gruvbox-dark・Catppuccin Mocha・Nord・OneHalfDark）を使っていたが、よく見ると Neovim と色の割り当てが違った（作った人が違う。OneDark は bat に無く、似た OneHalfDark だった）
+- ほかの8つと同じやり方（Neovim で読みこんだ実際の色を取り出して当てはめる）で `bat/<テーマ名>.tmTheme` を作り、各テーマの bat をそれにした。これで12個すべてが Neovim と同じ割り当てになった
+- `nord`（作ったもの）と bat の `Nord` は別のテーマとして区別されることを確かめた
+
+### zoxide と fd を勧めたが、どちらもすでに入っていた
+
+- 作業効率化のツールとして zoxide と fd を勧め、ユーザーが入れてほしいと言ったが、足そうとしたらどちらも home.nix にすでにあった（`programs.zoxide.enable`、`programs.fd.enable`）。勧める前の確認もれ。変更はしていない
+- 使い方: `z <フォルダ名の一部>`（`zi` で候補から選ぶ）、`fd <名前>`
+
 ### bat に専用のテーマがない7つのテーマにも、bat 用のテーマを作った
 
 - GitHub Dark Dimmed で、Neovim に合わせた bat のテーマが「思ってた以上にいい感じ」だったので、ほかの `ansi` だったテーマ（Melange・Everforest・Kanagawa Dragon・Material 2つ・Tokyo Night・Rosé Pine）にも作った

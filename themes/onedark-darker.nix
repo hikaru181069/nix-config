@@ -4,7 +4,7 @@
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = null; # Ghostty には入っていないので、palette の色を直接使う（home.nix）
   nvim = "onedark"; # onedark.nvim の darker（nvim/init.lua）
-  bat = "OneHalfDark"; # bat・delta の構文の色（OneDark に近い）
+  bat = "onedark-darker"; # Neovim（navarasu/onedark.nvim）の実際の色の割り当てから作った（bat/onedark-darker.tmTheme）。bat に最初から入っている同じ名前のテーマは、割り当てが Neovim と違うので使わない
   btop = "onedark";
   k9s = "one-dark";
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、

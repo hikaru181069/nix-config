@@ -5,7 +5,7 @@
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "Nord"; # Ghostty に入っているので、そのまま使う
   nvim = "nord"; # gbprod/nord.nvim（nvim/init.lua）
-  bat = "Nord"; # bat・delta の構文の色
+  bat = "nord"; # Neovim（gbprod/nord.nvim）の実際の色の割り当てから作った（bat/nord.tmTheme）。bat に最初から入っている同じ名前のテーマは、割り当てが Neovim と違うので使わない
   btop = "nord";
   k9s = "nord";
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、

@@ -4,7 +4,7 @@
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "Gruvbox Dark Hard"; # Ghostty に入っているので、そのまま使う
   nvim = "gruvbox"; # gruvbox.nvim（nvim/init.lua）
-  bat = "gruvbox-dark"; # bat・delta の構文の色
+  bat = "gruvbox-dark-hard"; # Neovim（ellisonleao/gruvbox.nvim）の実際の色の割り当てから作った（bat/gruvbox-dark-hard.tmTheme）。bat に最初から入っている同じ名前のテーマは、割り当てが Neovim と違うので使わない
   btop = "gruvbox_dark_v2";
   k9s = "gruvbox-dark-hard";
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、

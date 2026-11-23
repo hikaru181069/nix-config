@@ -4,7 +4,7 @@
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "Catppuccin Mocha"; # Ghostty に入っているので、そのまま使う
   nvim = "catppuccin"; # catppuccin/nvim の mocha（nvim/init.lua）
-  bat = "Catppuccin Mocha"; # bat・delta の構文の色
+  bat = "catppuccin-mocha"; # Neovim（catppuccin/nvim）の実際の色の割り当てから作った（bat/catppuccin-mocha.tmTheme）。bat に最初から入っている同じ名前のテーマは、割り当てが Neovim と違うので使わない
   btop = "TTY"; # btop には入っていないので、ターミナルの16色（Ghostty の Catppuccin Mocha）をそのまま使う
   k9s = null; # k9s には入っていないので、k9s の標準の見た目
   # tmux のステータスバーの右端の三角（6色）。なめらかな虹: 明るさと鮮やかさ（OKLCH の L・C）をテーマの赤〜青の6色の平均にそろえ、
