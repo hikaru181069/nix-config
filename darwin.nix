@@ -66,6 +66,9 @@
     dock = {
       # A: 左側に、自動で隠す、大きさ 40
       autohide = true;
+      # アプリの起動は Spotlight だけなので、Dock は出さない（完全に消す設定はないので、出るまでの待ち時間を 1000 秒にする）
+      # 出したいときは Option-Cmd-D（隠す・隠さないの切り替え）
+      autohide-delay = 1000.0;
       orientation = "left";
       tilesize = 40;
       # B: スペースを「最近使った順」に並び替えない（yabai・sketchybar のスペース番号がずれるため）
