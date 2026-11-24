@@ -59,7 +59,7 @@ require("bufferline").setup({
     },
     -- ファイルツリーを開いているときは、その上を空けて見出しを出す
     offsets = {
-      { filetype = "NvimTree", text = "File Explorer", text_align = "center", separator = true, highlight = transparent and "TreeHeader" or nil },
+      { filetype = "NvimTree", text = "File Explorer", text_align = "center", separator = " ", highlight = transparent and "TreeHeader" or nil },
     },
   },
 })

@@ -46,25 +46,16 @@ local mode_sep_colors = {
   R = lighten(p.red, 0.4),
 }
 
--- Nerd Font のアイコン。見えない文字なので文字コードで書く
-local mode_icon_map = {
-  n = "\u{f0176}",
-  i = "\u{f040}",
-  v = "\u{f0208}",
-  V = "\u{f0208}",
-  ["\22"] = "\u{f0208}",
-  c = "\u{f4b5}",
-  R = "\u{f06d4}",
-}
-
+-- モードの名前。モードが変わっても幅が変わらないよう、3文字にそろえる（アイコンと頭文字から変えた。幅は同じ）
 local mode_name_map = {
-  n = "N",
-  i = "I",
-  v = "V",
-  V = "V",
-  ["\22"] = "V",
-  c = "C",
-  R = "R",
+  n = "NOR",
+  i = "INS",
+  v = "VIS",
+  V = "VLN", -- 行の選択
+  ["\22"] = "VBL", -- 矩形の選択
+  c = "CMD",
+  R = "REP",
+  t = "TER",
 }
 
 local function current_mode()
@@ -82,13 +73,10 @@ local function mode_sep_color()
 end
 
 local function mode_label()
-  local m = current_mode()
-  local icon = mode_icon_map[m] or "\u{f36f}"
-  local name = mode_name_map[m] or "N"
-  return (" %s %s "):format(icon, name)
+  return (" %s "):format(mode_name_map[current_mode()] or "NOR")
 end
 
-local function seg_dynamic(comp, bold)
+local function seg_dynamic(comp, bold, right)
   return {
     comp,
     color = function()
@@ -98,7 +86,7 @@ local function seg_dynamic(comp, bold)
         gui = bold and "bold" or nil,
       }
     end,
-    padding = { left = 1, right = 1 },
+    padding = { left = 1, right = right or 1 },
   }
 end
 
@@ -246,7 +234,8 @@ require("lualine").setup({
     lualine_z = {
       seg_left(C.dark, C.fog, "progress", true),
       sep_left_mode(C.dark),
-      seg_dynamic("location", true),
+      -- 右の空きは1マス少なくする（画面の右端では、Ghostty の余白も同じ色で塗られて右だけ長く見える）
+      seg_dynamic("location", true, 0),
     },
   },
 })
@@ -258,9 +247,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.wo.statusline = " "
   end,
 })
--- 半透明: 帯が塗られず、下地の標準のステータスラインの色（GitHub テーマでは青）が見えるので、なくす
-if require("theme").transparent then
-  for _, name in ipairs({ "NvimTreeStatusLine", "NvimTreeStatusLineNC" }) do
-    vim.api.nvim_set_hl(0, name, {})
+-- lualine が描かない部分（分割の線の真下の1マスと、ツリーの下の帯）も、ほかのステータスラインと同じ暗い色にする
+-- 決めないと標準のステータスラインの色が見える（GitHub テーマでは青）。ツリーの下は lualine が lualine_transparent の色で塗る
+local function fill_statusline()
+  local names = { "StatusLine", "StatusLineNC", "NvimTreeStatusLine", "NvimTreeStatusLineNC", "lualine_transparent" }
+  for _, name in ipairs(names) do
+    vim.api.nvim_set_hl(0, name, fill)
   end
 end
+fill_statusline()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = vim.schedule_wrap(fill_statusline) })

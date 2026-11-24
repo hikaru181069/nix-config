@@ -646,7 +646,8 @@ in
       set -g message-style "fg=${p.fg2},bg=${p.bg0}"
       set -g message-command-style "fg=${p.fg2},bg=${p.bg0}"
       # パネルの区切りは線だけに色を付け、背景は塗らない（不透明でも半透明でも Ghostty の背景と同じになる）
-      set -g pane-border-style "fg=${p.bg1},bg=default"
+      # 選んでいないパネルの間の線は描かない（hidden）。背景と同じ色で隠すと、半透明のときに黒い線として見えてしまう
+      set -g pane-border-style "fg=${p.bg1},bg=default,hidden"
       set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg3},bg=default"
 
       set -g status on

@@ -14,7 +14,8 @@ vim.o.cursorline = true
 -- 診断や git の印が出たり消えたりしても、本文が左右にずれないようにする
 vim.o.signcolumn = "yes"
 -- ファイルの終わりより下に出る ~ を消す
-vim.opt.fillchars = { eob = " " }
+-- 左右の分割の線も消す（マスは残るので、ファイルツリーと同じ背景にする。fill_separator）
+vim.opt.fillchars = { eob = " ", vert = " " }
 
 -- インデントは2スペース
 vim.o.tabstop = 2
@@ -313,6 +314,17 @@ require("nvim-tree").setup({
   view = { width = 25, side = "right" },
   renderer = { group_empty = true },
 })
+-- 左右の分割の線のマスは、ツリーと同じ背景にする（本文の色だと、カーソル行の帯とツリーの間に1マスの隙間が見える）
+-- ツリーの背景が決まっていないテーマでは、本文と同じ。nvim-tree が色を決めたあと（setup のあと）に行う
+local function fill_separator()
+  local tree = vim.api.nvim_get_hl(0, { name = "NvimTreeNormal", link = false }).bg
+  local bg = tree or (not require("theme").transparent and require("palette").bg1 or nil)
+  for _, name in ipairs({ "WinSeparator", "NvimTreeWinSeparator" }) do
+    vim.api.nvim_set_hl(0, name, { bg = bg })
+  end
+end
+fill_separator()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = vim.schedule_wrap(fill_separator) })
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "ファイルツリーを開閉" })
 
 -- ステータスライン（長いので lua/statusline.lua に分けた）
