@@ -12,6 +12,8 @@ let
   # true にすると、ターミナルを半透明にする。透けるのはテーマのメインの背景色（bg1）だけ。false のときの設定は何も変わらない
   # transparent.nix に書いてあり、`transparent` コマンドで切り替える
   transparent = import ./transparent.nix;
+  # 半透明のときの Ghostty の背景の透け具合（1 は不透明）
+  backgroundOpacity = "0.9";
   # Ghostty の色: テーマが Ghostty に入っていれば、その名前を使う。入っていなければ、palette の色を直接決める
   ghosttyColors =
     if theme.ghostty != null then
@@ -954,8 +956,19 @@ in
       # 文字を打っている間はマウスの矢印を隠す（マウスを動かすとまた出る）
       mouse-hide-while-typing = true;
     }
+    # 高さを変えて下に余りが出たとき、tmux のバーの色が伸びないよう、余りを背景色で塗る（ghostty/padding.glsl）
+    # 半透明のときは、背景と同じ透け具合で塗る
+    // {
+      custom-shader = "${pkgs.writeText "padding.glsl" (
+        builtins.replaceStrings
+          [ "opacity = 1.0" ]
+          [ "opacity = ${if transparent then backgroundOpacity else "1.0"}" ]
+          (builtins.readFile ./ghostty/padding.glsl)
+      )}";
+      custom-shader-animation = false;
+    }
     // lib.optionalAttrs transparent {
-      background-opacity = 0.9;
+      background-opacity = backgroundOpacity;
       background-blur = 20;
     }
     // ghosttyColors;
