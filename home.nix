@@ -643,8 +643,9 @@ in
       set -g mode-style "fg=${p.fg1},bg=${p.sel0}"
       set -g message-style "fg=${p.fg2},bg=${p.bg0}"
       set -g message-command-style "fg=${p.fg2},bg=${p.bg0}"
-      set -g pane-border-style "fg=${p.bg1},bg=${if transparent then "default" else p.bg1}"
-      set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg3},bg=${if transparent then "default" else p.bg1}"
+      # パネルの区切りは線だけに色を付け、背景は塗らない（不透明でも半透明でも Ghostty の背景と同じになる）
+      set -g pane-border-style "fg=${p.bg1},bg=default"
+      set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg3},bg=default"
 
       set -g status on
       set -g status-interval 1
