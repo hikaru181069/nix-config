@@ -7,6 +7,32 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-24
 
+### GitHub Dark Dimmed にも、GitHub Dark Default と同じ微調整をした
+
+- tmux のユーザー名のブロックと三角（tmuxUser）、sketchybar の今のアプリの名前とアイコン（frontApp）を、Dark Default と同じ役割の色にした
+- カーソル行（#30363d）と tmux のパネルの区切り線（#30363d）は、もともと暗いので変えていない（GitHub の枠線の色 #444c56 にすると逆に明るくなる）
+
+### テーマに One Dark Pro の onedark_dark を足した
+
+- `theme onedark-dark`。OneDark darker（navarasu/onedark.nvim）とは作者が違う olimorris/onedarkpro.nvim の、背景が真っ黒の種類。Ghostty は palette の色を直接使う（ghostty = null）。bat は Neovim の実際の色から作った。btop は16色、k9s は標準の見た目
+- 2つのプラグインはどちらも `onedark` という名前の配色を持っていて、一緒に読みこむと OneDark darker が標準の One Dark の色になってしまった。そこで、onedarkpro.nvim は init.lua の onedark_dark の枝の中で vim.pack.add し、このテーマのときだけ読みこむ
+- カーソル行は既定で切られているので、出すようにした
+
+### テーマに Nightfly を足した
+
+- `theme nightfly`。Moonfly と同じ作者の、紺色の背景（#011627）のテーマ。Ghostty に入っていないので、palette の色を直接使う（ghostty = null）。Neovim は bluz71/vim-nightfly-colors。bat は Neovim の実際の色から作った。btop は16色、k9s は標準の見た目
+
+### テーマに Moonfly を足した
+
+- `theme moonfly`。背景がほぼ黒（#080808）。Ghostty に入っている。Neovim は bluz71/vim-moonfly-colors。bat は Neovim の実際の色から作った。btop は16色、k9s は標準の見た目
+- これより暗い色を作れないので、バー（bg0）は本文より少し明るい #121212 にした（作者の tmux 用の設定も、バーは本文より明るい）
+
+### テーマに Iceberg（dark）と Flexoki（dark）を足した
+
+- `theme iceberg-dark`・`theme flexoki-dark`。Ghostty はどちらも入っている。Neovim は本家の cocopon/iceberg.vim と kepano/flexoki-neovim。bat は Neovim の実際の色から作った。btop は Flexoki だけ入っている。k9s はどちらも標準の見た目
+- Iceberg は行番号と印の列の背景が本文より明るいので、本文と同じにした
+- 行番号の色そのままだと暗く、tmux や Neovim のブロックの上の文字が読みにくいので、fg3 は少し明るい色（Iceberg は #5b6389、Flexoki は #6f6e69）にした
+
 ### GitHub Dark Default だけ、tmux のユーザー名の三角の色を Neovim のステータスラインに合わせた
 
 - ユーザー名のブロック（fg2）の右の三角が fg1（白に近い）で、浮いて見えた（ユーザーの指摘）

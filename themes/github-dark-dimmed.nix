@@ -24,6 +24,16 @@
     "#64a5f8"
   ];
 
+  # tmux のユーザー名のブロックと右端の三角。既定（fg2 と fg1）だと三角が明るくて浮くので、
+  # Neovim のステータスラインのノーマルモードと同じ色にする（GitHub Dark Default と同じ）
+  tmuxUser = {
+    block = "#636e7b"; # fg3
+    arrow = "#768390"; # comment
+  };
+
+  # sketchybar の今のアプリの名前とアイコンの色。選んでいるデスクトップのアプリのアイコンと同じ色にする（GitHub Dark Default と同じ）
+  frontApp = "#cdd9e5"; # fg0
+
   palette = {
     # 色
     black = "#545d68"; # gray[6]（ターミナルの0番と同じ）

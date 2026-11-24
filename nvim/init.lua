@@ -46,6 +46,10 @@ vim.pack.add({
   "https://github.com/marko-cerovac/material.nvim",
   "https://github.com/savq/melange-nvim",
   "https://github.com/projekt0n/github-nvim-theme",
+  "https://github.com/cocopon/iceberg.vim",
+  "https://github.com/kepano/flexoki-neovim",
+  "https://github.com/bluz71/vim-moonfly-colors",
+  "https://github.com/bluz71/vim-nightfly-colors",
   -- C-hjkl で Neovim の分割と tmux のペインを区別なく移動（tmux 側にも同じプラグインがある）
   "https://github.com/christoomey/vim-tmux-navigator",
   -- ファイル・文字列・バッファなどを絞り込んで探す（plenary は telescope が使う部品）
@@ -164,6 +168,40 @@ elseif theme == "github_dark_dimmed" or theme == "github_dark_default" then
   require("github-theme").setup({
     groups = { github_dark_default = { CursorLine = { bg = "#23272d" } } },
   })
+  vim.cmd.colorscheme(theme)
+elseif theme == "iceberg" then
+  -- Iceberg の dark。左端の列（行番号・印）は本文より明るい背景なので、本文と同じ背景にする
+  vim.o.background = "dark"
+  vim.cmd.colorscheme("iceberg")
+  for _, name in ipairs({
+    "LineNr",
+    "SignColumn",
+    "FoldColumn",
+    "GitGutterAdd",
+    "GitGutterChange",
+    "GitGutterChangeDelete",
+    "GitGutterDelete",
+    "DiagnosticSignError",
+    "DiagnosticSignWarn",
+    "DiagnosticSignInfo",
+    "DiagnosticSignHint",
+    "DiagnosticSignOk",
+  }) do
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    hl.bg = tonumber(require("palette").bg1:sub(2), 16)
+    vim.api.nvim_set_hl(0, name, hl)
+  end
+elseif theme == "flexoki" then
+  -- Flexoki の dark
+  vim.cmd.colorscheme("flexoki-dark")
+elseif theme == "onedark_dark" then
+  -- One Dark Pro の onedark_dark（背景が真っ黒の種類）
+  -- onedark.nvim と同じ onedark という名前の配色を持っていて、一緒に読みこむと OneDark darker の色が変わるので、このテーマのときだけ読みこむ
+  vim.pack.add({ "https://github.com/olimorris/onedarkpro.nvim" })
+  require("onedarkpro").setup({ options = { cursorline = true } })
+  vim.cmd.colorscheme("onedark_dark")
+elseif theme == "moonfly" or theme == "nightfly" then
+  -- Moonfly / Nightfly（同じ作者。名前がそのまま colorscheme の名前）
   vim.cmd.colorscheme(theme)
 else
   -- OneDark の darker。左端の列は、onedark.nvim では最初から本文と同じ背景なので、上書きはいらない
