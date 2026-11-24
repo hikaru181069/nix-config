@@ -96,6 +96,11 @@
       "rev": "8701bece920b38ea289b457f902e2ad184131a5d",
       "src": "https://github.com/rcarriga/nvim-notify"
     },
+    "nvim-surround": {
+      "rev": "2e93e154de9ff326def6480a4358bfc149d5da2c",
+      "src": "https://github.com/kylechui/nvim-surround",
+      "version": "4.0.0 - 5.0.0"
+    },
     "nvim-tree.lua": {
       "rev": "355bcc85a48f45b3e728219f10b880d569928965",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"

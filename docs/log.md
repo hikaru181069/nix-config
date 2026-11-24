@@ -7,6 +7,10 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-24
 
+### Neovim に nvim-surround を入れた
+
+- 囲む文字（かっこ・引用符・タグ）を足す（ys）・変える（cs）・消す（ds）。選択中は S。既定のキーのまま（ほかの設定と重ならないことを確かめた）。安定した 4.x を使う
+
 ### テーマに Nightfox を足した
 
 - `theme nightfox`。前に使っていたテーマ（Gruvbox に変える前）で、色と差分の値は当時のものを使った。Ghostty と k9s に入っている。Neovim は EdenEast/nightfox.nvim。bat は Neovim の実際の色から作った。btop は16色

@@ -94,6 +94,8 @@ vim.pack.add({
   "https://github.com/shortcuts/no-neck-pain.nvim",
   -- HTML・JSX のタグを自動で閉じ、開きタグを書き換えると閉じタグも揃える
   "https://github.com/windwp/nvim-ts-autotag",
+  -- 囲む文字（かっこ・引用符・タグ）を足す・変える・消す（ysiw" / cs"' / ds" など。選択中は S）。設定は要らない
+  { src = "https://github.com/kylechui/nvim-surround", version = vim.version.range("4.x") },
 })
 
 -- 配色。どのテーマを使うかは ~/nix-config/theme.nix で決める（home.nix が theme.lua に書き出す）
