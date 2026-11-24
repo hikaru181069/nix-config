@@ -5,8 +5,8 @@
 -- 右側の項目のまとまりの間を空ける（旧設定と同じ。見えない幅だけの項目）
 -- 矢印の見た目では、Neovim のステータスラインと同じ細い三角（）で区切る。
 -- フォントの記号（e0b3）は線が太い（Maple Mono NF で文字の 0.086 倍 ≒ 1.6pt）ので、Ghostty が tmux で描くのと同じ
--- 線の太さ 1pt・1文字ぶんの大きさ（幅 11・高さ 25）の画像（images/sep_thin_left.png、色は palette の fg3）を置く。
--- 画像の作り方: magick -size 22x50 xc:none -fill none -stroke '#7c6f64' -strokewidth 2 -draw "polyline 21,-1 1,25 21,51" sep_thin_left.png
+-- 線の太さ 1pt・1文字ぶんの大きさ（幅 11・高さ 25）の画像（sep_thin_left.png）を置く。
+-- 画像は home.nix がテーマの fg3 の色で作り、~/.config-nix/sketchybar に置く
 -- name を付けたものは、隣の項目と一緒に隠す（items/toggle_stats/toggle_stats.lua・items/git/git.lua）
 local function right_gap(name)
   if BAR_STYLE ~= "arrows" then
@@ -36,7 +36,7 @@ local function right_gap(name)
       border_width = 0,
       height = PL.HEIGHT,
       image = {
-        string = os.getenv("CONFIG_DIR") .. "/images/sep_thin_left.png",
+        string = os.getenv("HOME") .. "/.config-nix/sketchybar/sep_thin_left.png",
         scale = 0.5,
         corner_radius = 0,
         border_width = 0,

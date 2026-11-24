@@ -17,16 +17,22 @@ local function bufferline_highlights(defaults)
     numbers_visible = p.fg2,
     modified = p.yellow,
     modified_visible = p.yellow,
-    -- 斜めの区切りは背景と同じ色にして、タブの形だけを見せる
+    -- 斜めの区切りは背景と同じ色にして、選んでいるタブの形だけを見せる
     separator = p.bg0,
     separator_visible = p.bg0,
-    separator_selected = p.bg0,
+    separator_selected = p.bg1,
   }
   for name, color in pairs(fg) do
     hl[name].fg = color
   end
+  -- 区切りは、暗い背景（bg0）の上にタブの色の三角を描く（下の sep_chars も参照）
+  hl.separator_selected.bg = p.bg0
   return hl
 end
+
+-- 斜めの区切りの記号を裏返しにする（順番は右・左）。既定はタブの色の地に余白の色の三角で、Ghostty が上の余白を
+-- マスの背景の色（タブの色）で塗るため、区切りの上だけ隙間のように見えた
+require("bufferline.constants").sep_chars.slant = { "\u{e0b8}", "\u{e0ba}" }
 
 require("bufferline").setup({
   highlights = bufferline_highlights,
@@ -43,6 +49,11 @@ require("bufferline").setup({
     },
   },
 })
+-- 左の三角の隣の空白は、三角の背景（bg0）を引きついで暗い長方形に見えるので、三角の直後からタブの色にする
+local bufferline = _G.nvim_bufferline
+function _G.nvim_bufferline()
+  return (bufferline():gsub("%%#BufferLineSeparatorSelected#\u{e0ba}", "%0%%#BufferLineBufferSelected#"))
+end
 vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "次のバッファ" })
 vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "前のバッファ" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "バッファを閉じる" })

@@ -866,6 +866,10 @@ in
     + lib.generators.toLua { } (
       palette // lib.optionalAttrs (theme ? frontApp) { front_app = theme.frontApp; }
     );
+  # 右側の区切りの画像（sketchybar/items/init.lua）。テーマの fg3 の色で作る
+  xdg.configFile."sketchybar/sep_thin_left.png".source =
+    pkgs.runCommand "sep-thin-left.png" { nativeBuildInputs = [ pkgs.imagemagick ]; }
+      "magick -size 22x50 xc:none -fill none -stroke '${palette.fg3}' -strokewidth 2 -draw 'polyline 21,-1 1,25 21,51' PNG32:$out";
   xdg.configFile."sketchybar/icon_map.lua".source =
     "${pkgs.sketchybar-app-font}/lib/sketchybar-app-font/icon_map.lua";
 
@@ -885,10 +889,13 @@ in
       window-height = 38;
       window-padding-x = 10;
       # 余白を、隣のマスの背景の色で塗る（tmux のステータスバーの行は、左右の余白もバーの色になる）
-      window-padding-color = "extend";
+      # extend だと、三角などの記号がある行では上下に広がらず、Neovim のタブの行と sketchybar の間に隙間が見えるので、必ず広げる
+      window-padding-color = "extend-always";
       # 下は 0（tmux のステータスバーをウィンドウのいちばん下に置く）
-      # 上は 12: 全画面の高さのウィンドウ（2230px、1行 49px）で、行の高さで割り切れない余りが下に残らないようにした値
-      window-padding-y = "12,0";
+      # 上は 4: 全画面の高さのウィンドウ（2262px、1行 49px × 46行）で、行の高さで割り切れない余りが下に残らないようにした値
+      window-padding-y = "4,0";
+      # 枠をなくして、ウィンドウの四隅を角にする（hidden はタイトルバーだけ消えて、角は丸いまま）。Ghostty のタブは使えなくなるが、tmux を使っているので困らない
+      window-decoration = "none";
       macos-titlebar-style = "hidden";
       # ウィンドウの影を消す（影と一緒に付く、まわりの細い線も消える）
       macos-window-shadow = false;

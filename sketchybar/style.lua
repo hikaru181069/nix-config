@@ -10,6 +10,8 @@ SBAR.bar({
   corner_radius = 0,
   blur_radius = 0,
   shadow = { drawing = false },
+  -- ウィンドウより手前に出す（後ろだと、下に隠れているウィンドウの影が、バーの下端に黒い線として見える）
+  topmost = "window",
   sticky = true,
   font_smoothing = true,
   padding_right = PADDINGS,

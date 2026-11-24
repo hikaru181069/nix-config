@@ -7,11 +7,12 @@
 # （枠線や透明度が欲しくなったら SA が要る）
 yabai -m config layout bsp
 
+# ウィンドウ同士のすき間は 8、画面の端とのすき間はなし（最大サイズのウィンドウが画面いっぱいになる）
 yabai -m config window_gap 8
-yabai -m config top_padding 8
-yabai -m config bottom_padding 8
-yabai -m config left_padding 8
-yabai -m config right_padding 8
+yabai -m config top_padding 0
+yabai -m config bottom_padding 0
+yabai -m config left_padding 0
+yabai -m config right_padding 0
 
 # alt を押しながら、左ドラッグで移動、右ドラッグでサイズ変更、ドロップで入れ替え
 yabai -m config mouse_modifier alt
