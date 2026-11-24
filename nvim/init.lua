@@ -50,6 +50,7 @@ vim.pack.add({
   "https://github.com/kepano/flexoki-neovim",
   "https://github.com/bluz71/vim-moonfly-colors",
   "https://github.com/bluz71/vim-nightfly-colors",
+  "https://github.com/EdenEast/nightfox.nvim",
   -- C-hjkl で Neovim の分割と tmux のペインを区別なく移動（tmux 側にも同じプラグインがある）
   "https://github.com/christoomey/vim-tmux-navigator",
   -- ファイル・文字列・バッファなどを絞り込んで探す（plenary は telescope が使う部品）
@@ -191,9 +192,17 @@ elseif theme == "iceberg" then
     hl.bg = tonumber(require("palette").bg1:sub(2), 16)
     vim.api.nvim_set_hl(0, name, hl)
   end
+  -- タブ行とステータスラインは、色を反転する指定（reverse）で書かれている。bufferline の色がその上に重なると、
+  -- 文字と背景の色が入れかわってしまうので、反転を使わず、入れかえた色で書き直す（見た目は同じ）
+  for _, name in ipairs({ "TabLineFill", "StatusLine", "StatusLineNC" }) do
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    vim.api.nvim_set_hl(0, name, { fg = hl.bg, bg = hl.fg })
+  end
 elseif theme == "flexoki" then
   -- Flexoki の dark
   vim.cmd.colorscheme("flexoki-dark")
+elseif theme == "nightfox" then
+  vim.cmd.colorscheme("nightfox")
 elseif theme == "onedark_dark" then
   -- One Dark Pro の onedark_dark（背景が真っ黒の種類）
   -- onedark.nvim と同じ onedark という名前の配色を持っていて、一緒に読みこむと OneDark darker の色が変わるので、このテーマのときだけ読みこむ

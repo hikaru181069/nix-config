@@ -7,6 +7,20 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-24
 
+### テーマに Nightfox を足した
+
+- `theme nightfox`。前に使っていたテーマ（Gruvbox に変える前）で、色と差分の値は当時のものを使った。Ghostty と k9s に入っている。Neovim は EdenEast/nightfox.nvim。bat は Neovim の実際の色から作った。btop は16色
+
+### Iceberg で、Neovim の上のタブ（bufferline）が白や灰色になるのを直した
+
+- Iceberg だけが TabLineFill などを「色の反転」（reverse）で定義していて、bufferline の色と重なり、文字と背景の色が入れかわっていた。反転を使わず、入れかえた色で定義し直した（StatusLine・StatusLineNC も同じ）
+
+### ほかのテーマも、必要なものだけ三角とアプリ名の色を直した
+
+- 全テーマの色の差（コントラスト）を調べ、直す前の GitHub の2つと同じくらい気になるものだけ直した
+- 三角（tmuxUser）: Rosé Pine・Flexoki・Iceberg。アプリ名（frontApp）: Material Darker・OneDark darker
+- Material の2つに三角の調整を入れると、ユーザー名が読みにくく、三角の差も大きくなるので入れていない。区切り線は、ほかのテーマは目立たないので変えていない
+
 ### GitHub Dark Dimmed にも、GitHub Dark Default と同じ微調整をした
 
 - tmux のユーザー名のブロックと三角（tmuxUser）、sketchybar の今のアプリの名前とアイコン（frontApp）を、Dark Default と同じ役割の色にした

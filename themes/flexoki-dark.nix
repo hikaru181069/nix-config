@@ -18,6 +18,12 @@
     "#4095dc"
   ];
 
+  # tmux のユーザー名のブロックと右端の三角。既定（fg2 と fg1）だと三角が明るくて浮くので、Neovim のステータスラインのノーマルモードと同じ色にする
+  tmuxUser = {
+    block = "#6f6e69"; # fg3
+    arrow = "#878580"; # comment
+  };
+
   palette = {
     # 色
     black = "#1c1b1a"; # 950

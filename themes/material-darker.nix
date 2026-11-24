@@ -19,6 +19,9 @@
     "#9ebdfe"
   ];
 
+  # sketchybar の今のアプリの名前とアイコンの色。既定（fg2）だと帯（bg3）の上で読みにくいので、選んでいるデスクトップのアプリのアイコンと同じ色にする
+  frontApp = "#eeffff"; # fg0
+
   palette = {
     # 色（main）
     black = "#000000";
