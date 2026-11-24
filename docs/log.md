@@ -7,6 +7,24 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-25
 
+### 日本語のフォントに Moralerspace を試したが、Maple Mono のままにした
+
+- 試し用の Ghostty で、日本語だけ Moralerspace Neon にして見比べた。設定は変えていない
+
+### 前に使っていた Maple Mono も見比べたが、JetBrains Mono に戻した
+
+- Ghostty（試し用のウィンドウ）と sketchybar で試した。大きさは JetBrains Mono と同じ
+
+### Roboto Mono も試したが、JetBrains Mono に戻した
+
+- 18.5pt での幅と高さが JetBrains Mono（22px・49px）と同じフォントを計算で探し、Roboto Mono を Ghostty と sketchybar で試した。JetBrains Mono のほうがよかった
+- 同じ大きさ: Roboto Mono・Maple Mono。幅は同じで高さが 1px 低い（adjust-cell-height = 1 で同じになる）: Geist Mono・IBM Plex Mono（BlexMono）・Lilex
+
+### SF Mono を試したが、JetBrains Mono に戻した
+
+- Ghostty（試し用のウィンドウ）と sketchybar の文字で試し、JetBrains Mono のほうがよかった。SF Mono は nixpkgs にないので、Apple の dmg から取り出す部品を home.nix に書いて入れた（消した）
+- 分かったこと: 18.5pt の SF Mono は行の高さ 44px・幅 23px。adjust-cell-height と adjust-cursor-height を 5 にすると 49px になり、余白やシェーダーの計算はそのまま使える。ライセンスは、Apple 製品向けの画面の見本を作る用途に限られている
+
 ### Dock を出さないようにした
 
 - アプリの起動は Spotlight しか使わないので。macOS に Dock を完全に消す設定はないので、画面の端にマウスを当ててから出るまでの待ち時間（autohide-delay）を 1000 秒にした。出したいときは Option-Cmd-D
