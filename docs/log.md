@@ -7,6 +7,15 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-24
 
+### ターミナルの背景を半透明にできるようにした（お試し中）
+
+- `transparent on`・`transparent off` で切りかえる（transparent.nix を書き換え、theme コマンドで rebuild）。半透明のときは、`theme` で切りかえても壁紙を変えない。決まり: 不透明（false）のときの設定は何も変えない。透けるのはテーマのメインの背景色（bg1）だけ
+- Ghostty: background-opacity 0.9・background-blur 20（終了して開き直すと効く）。background-opacity-cells は、塗った色を透けた背景に重ねて描くので約 0.99 になり、使っていない
+- Neovim: 本文と同じ背景色の色をまとめて外す。選んでいるタブも塗らない
+- tmux: パネルの区切り線の背景を塗らない（線は残す）
+- タブの斜めの三角は透かせないので、半透明のときだけ四角いタブにした。斜めのままだと、余る 4pt を上に置けば区切りの上に隙間が、下に置けば tmux のバーの三角に段ができる（どちらも試してやめた）
+- はじめは sketchybar の高さなど配置まで変えたが、不透明のときの見た目も変わってしまうのでやめた
+
 ### テーマに Aura（dark）を足した
 
 - `theme aura-dark`。Ghostty に入っている。Neovim は公式の daltonmenezes/aura-theme（いろいろなアプリ用の大きなリポジトリで、手元では 89MB）の packages/neovim を、このテーマのときだけ読みこむ。bat は Neovim の実際の色から作った。btop は16色、k9s は標準の見た目

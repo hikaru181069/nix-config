@@ -159,7 +159,8 @@ elseif theme == "material-darker" or theme == "material-deep-ocean" then
   vim.g.material_style = theme == "material-darker" and "darker" or "deep ocean"
   -- material.nvim はカーソルに色を付ける（ターミナルにカーソルの色を頼む）。閉じるときに色を戻すが、Ghostty はそのときの
   -- 設定の色を覚えたままになり、あとでテーマを替えてもカーソルの色が変わらなくなったので、切る（ほかのテーマと同じく、ターミナルの色）
-  require("material").setup({ disable = { colored_cursor = true } })
+  -- async_loading: 半透明のときは、後から読みこまれて背景が塗り直されないよう、最初に全部読みこむ
+  require("material").setup({ disable = { colored_cursor = true }, async_loading = not require("theme").transparent })
   vim.cmd.colorscheme("material")
 elseif theme == "melange" then
   -- Melange の dark（暗い背景か明るい背景かは background で決まる）
@@ -270,6 +271,23 @@ local function extend_cursorline()
 end
 extend_cursorline()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = extend_cursorline })
+
+-- 半透明（home.nix の transparent）: メインの背景色（palette の bg1）だけを塗らず、Ghostty の背景を透かす。ほかの色はそのまま
+if require("theme").transparent then
+  local function clear_background()
+    local bg = tonumber(require("palette").bg1:sub(2), 16)
+    for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
+      if hl.bg == bg and not hl.reverse then
+        hl.bg = nil
+        vim.api.nvim_set_hl(0, name, hl)
+      end
+    end
+    -- 塗らないタブの下に隠れていた、タブの行の下地の色が出ないようにする
+    vim.api.nvim_set_hl(0, "TabLineFill", {})
+  end
+  clear_background()
+  vim.api.nvim_create_autocmd("ColorScheme", { callback = clear_background })
+end
 
 -- telescope: 入力欄を上に置き、結果も上から並べる（旧設定と同じ）
 require("telescope").setup({

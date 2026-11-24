@@ -9,6 +9,9 @@ let
   palette = import ./palette.nix;
   # 使うテーマ（theme.nix）。色は palette、各ツールのテーマの名前（ghostty・bat・btop・k9s）はここから取る
   theme = import ./theme.nix;
+  # true にすると、ターミナルを半透明にする。透けるのはテーマのメインの背景色（bg1）だけ。false のときの設定は何も変わらない
+  # transparent.nix に書いてあり、`transparent` コマンドで切り替える
+  transparent = import ./transparent.nix;
   # Ghostty の色: テーマが Ghostty に入っていれば、その名前を使う。入っていなければ、palette の色を直接決める
   ghosttyColors =
     if theme.ghostty != null then
@@ -72,7 +75,10 @@ let
       fi
       # 壁紙だけを、このコマンドの作られたときのテーマの色にする（切り替えのあと、新しい theme コマンドから呼ばれる）
       if [ "$1" = "--set-wallpaper" ]; then
-        osascript -e 'tell application "System Events" to tell every desktop to set picture to "${wallpaper}"'
+        # 半透明のときは壁紙が透けて見えるので、変えない
+        if [ "$(tail -n 1 "$dir/transparent.nix")" != true ]; then
+          osascript -e 'tell application "System Events" to tell every desktop to set picture to "${wallpaper}"'
+        fi
         exit 0
       fi
       name=$1
@@ -99,6 +105,45 @@ let
       # 壁紙を、新しいテーマのターミナルの背景と同じ色の無地にする（新しくできた theme コマンドに入っている画像を使う）
       "$(command -v theme)" --set-wallpaper || true
       echo "テーマを「''${name}」にしました。Neovim は開き直すと新しい色になります"
+    '';
+  };
+  # ターミナルの半透明を切り替える（`transparent on`・`transparent off`。`transparent` だけで今の状態）
+  # transparent.nix を書き換え、今のテーマで theme コマンドを呼ぶ（rebuild と読み込み直し）。失敗したら元に戻す
+  transparent-switch = pkgs.writeShellApplication {
+    name = "transparent";
+    text = ''
+      dir="$HOME/nix-config"
+      file="$dir/transparent.nix"
+      current=$(tail -n 1 "$file")
+      label() { if [ "$1" = true ]; then echo "半透明"; else echo "不透明"; fi; }
+      case "''${1:-}" in
+        on) new=true ;;
+        off) new=false ;;
+        "")
+          echo "今は$(label "$current")です（transparent on で半透明、transparent off で不透明）"
+          exit 0
+          ;;
+        *)
+          echo "使い方: transparent on / transparent off" >&2
+          exit 1
+          ;;
+      esac
+      if [ "$new" = "$current" ]; then
+        echo "もう$(label "$current")です"
+        exit 0
+      fi
+      write() {
+        printf '%s\n%s\n' \
+          "# ターミナルを半透明にするか。\`transparent on\`・\`transparent off\` で書き換えて rebuild する（\`transparent\` だけで今の状態）" \
+          "$1" >"$file"
+      }
+      write "$new"
+      if ! theme "$(sed -n 's|^import ./themes/\(.*\)\.nix$|\1|p' "$dir/theme.nix")"; then
+        write "$current"
+        echo "$(label "$current")に戻しました" >&2
+        exit 1
+      fi
+      echo "$(label "$new")にしました。Ghostty を Cmd-Q で終了して開き直し、Neovim も開き直してください"
     '';
   };
   # sketchybar の Apple ロゴ・アプリのメニューが使う小さなプログラム（旧設定の helpers/menus。毎回 make していたものを Nix でビルドする）
@@ -598,8 +643,8 @@ in
       set -g mode-style "fg=${p.fg1},bg=${p.sel0}"
       set -g message-style "fg=${p.fg2},bg=${p.bg0}"
       set -g message-command-style "fg=${p.fg2},bg=${p.bg0}"
-      set -g pane-border-style "fg=${p.bg1},bg=${p.bg1}"
-      set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg3},bg=${p.bg1}"
+      set -g pane-border-style "fg=${p.bg1},bg=${if transparent then "default" else p.bg1}"
+      set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg3},bg=${if transparent then "default" else p.bg1}"
 
       set -g status on
       set -g status-interval 1
@@ -689,7 +734,10 @@ in
   # palette.nix の色を Neovim の Lua から require("palette") で読めるようにする（色の定義を1か所に保つ）
   xdg.dataFile."nvim-nix/site/lua/palette.lua".text = "return " + lib.generators.toLua { } palette;
   # Neovim で使うテーマの名前（nvim/init.lua が読む）
-  xdg.dataFile."nvim-nix/site/lua/theme.lua".text = "return " + lib.generators.toLua { } { inherit (theme) nvim; };
+  xdg.dataFile."nvim-nix/site/lua/theme.lua".text = "return " + lib.generators.toLua { } {
+    inherit (theme) nvim;
+    inherit transparent;
+  };
   # Nix で入れたプラグインは、データ置き場の site/pack/hm へのリンクから読み込まれる。
   # home-manager は ~/.local/share/nvim（旧環境の置き場）に作るので、NVIM_APPNAME に合わせた場所に移す
   xdg.dataFile."nvim/site/pack/hm".enable = lib.mkForce false;
@@ -710,6 +758,8 @@ in
     pkgs.nerd-fonts.jetbrains-mono
     # テーマを切り替える（theme 名前）
     theme-switch
+    # 半透明を切り替える（transparent on / off）
+    transparent-switch
     # よく打つコマンドに名前を付けて呼ぶ（プロジェクトの justfile に書く。Makefile の代わり）
     pkgs.just
     # テトリス風の落ちものパズル（tetris で起動）
@@ -902,6 +952,10 @@ in
       scrollbar = "never";
       # 文字を打っている間はマウスの矢印を隠す（マウスを動かすとまた出る）
       mouse-hide-while-typing = true;
+    }
+    // lib.optionalAttrs transparent {
+      background-opacity = 0.9;
+      background-blur = 20;
     }
     // ghosttyColors;
   };

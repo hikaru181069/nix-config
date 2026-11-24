@@ -258,3 +258,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.wo.statusline = " "
   end,
 })
+-- 半透明: 帯が塗られず、下地の標準のステータスラインの色（GitHub テーマでは青）が見えるので、なくす
+if require("theme").transparent then
+  for _, name in ipairs({ "NvimTreeStatusLine", "NvimTreeStatusLineNC" }) do
+    vim.api.nvim_set_hl(0, name, {})
+  end
+end
