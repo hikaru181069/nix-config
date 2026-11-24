@@ -953,6 +953,8 @@ in
       # ウィンドウの影を消す（影と一緒に付く、まわりの細い線も消える）
       macos-window-shadow = false;
       scrollbar = "never";
+      # Cmd-U: 半透明と不透明を、そのウィンドウだけその場で切り替える（開き直すと半透明に戻る。transparent off のときは何も起きない）
+      keybind = [ "super+u=toggle_background_opacity" ];
       # 文字を打っている間はマウスの矢印を隠す（マウスを動かすとまた出る）
       mouse-hide-while-typing = true;
     }
