@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "aura-theme": {
+      "rev": "20924aa0a43975420edd0e0b2f919e07a3eff9c9",
+      "src": "https://github.com/daltonmenezes/aura-theme"
+    },
     "bufferline.nvim": {
       "rev": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
       "src": "https://github.com/akinsho/bufferline.nvim"

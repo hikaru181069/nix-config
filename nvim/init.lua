@@ -203,8 +203,45 @@ elseif theme == "iceberg" then
 elseif theme == "flexoki" then
   -- Flexoki の dark
   vim.cmd.colorscheme("flexoki-dark")
-elseif theme == "nightfox" then
-  vim.cmd.colorscheme("nightfox")
+elseif theme == "nightfox" or theme == "carbonfox" then
+  -- Nightfox / Carbonfox（同じプラグイン。名前がそのまま colorscheme の名前）
+  vim.cmd.colorscheme(theme)
+elseif theme == "aura-dark" then
+  -- Aura（dark）。いろいろなアプリ用の大きなリポジトリなので、このテーマのときだけ読みこみ、中の Neovim 用のフォルダを使う
+  vim.pack.add({ "https://github.com/daltonmenezes/aura-theme" })
+  vim.opt.rtp:append(vim.pack.get({ "aura-theme" })[1].path .. "/packages/neovim")
+  vim.cmd.colorscheme("aura-dark")
+  -- 細かい色分けが古い名前（TS〜）で書かれているので、今の Neovim の名前からつなぐ
+  for new, old in pairs({
+    ["@variable"] = "TSVariable",
+    ["@variable.parameter"] = "TSParameter",
+    ["@variable.member"] = "TSField",
+    ["@property"] = "TSProperty",
+    ["@constructor"] = "TSConstructor",
+    ["@function.method"] = "TSMethod",
+    ["@keyword.function"] = "TSKeywordFunction",
+    ["@punctuation.bracket"] = "TSPunctBracket",
+    ["@tag"] = "TSTag",
+    ["@tag.delimiter"] = "TSTagDelimiter",
+  }) do
+    vim.api.nvim_set_hl(0, new, { link = old })
+  end
+  -- カーソル行は背景と同じ色で見えず、選択範囲と差分は色の反転で明るすぎるので、決め直す
+  local p = require("palette")
+  for name, hl in pairs({
+    CursorLine = { bg = "#312e46" }, -- 公式の VS Code 版のカーソル行（紫を2割混ぜた色）
+    Visual = { bg = p.sel1 },
+    DiffAdd = { bg = p.diff_add },
+    DiffDelete = { bg = p.diff_delete },
+    DiffChange = { bg = p.diff_change },
+    DiffText = { bg = p.diff_text },
+    Added = { fg = p.green },
+    Removed = { fg = p.red },
+    Changed = { fg = p.yellow },
+    NormalFloat = { fg = p.fg1, bg = p.bg0 },
+  }) do
+    vim.api.nvim_set_hl(0, name, hl)
+  end
 elseif theme == "onedark_dark" then
   -- One Dark Pro の onedark_dark（背景が真っ黒の種類）
   -- onedark.nvim と同じ onedark という名前の配色を持っていて、一緒に読みこむと OneDark darker の色が変わるので、このテーマのときだけ読みこむ

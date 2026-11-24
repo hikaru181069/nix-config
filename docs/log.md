@@ -7,6 +7,16 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-24
 
+### テーマに Aura（dark）を足した
+
+- `theme aura-dark`。Ghostty に入っている。Neovim は公式の daltonmenezes/aura-theme（いろいろなアプリ用の大きなリポジトリで、手元では 89MB）の packages/neovim を、このテーマのときだけ読みこむ。bat は Neovim の実際の色から作った。btop は16色、k9s は標準の見た目
+- Neovim 版は作りが古く、細かい色分けが TSProperty などの古い名前なので、今の名前（@property など）からつないだ。カーソル行が見えない・選択範囲と差分が反転で明るすぎるのも直した（nvim/init.lua）
+- Ghostty の Aura は青と紫、緑と水色が同じ色。tmux や lazygit では、公式の別の色を水色（#82e2ff）と紫（#f694ff）に当てて見分けられるようにした
+
+### テーマに Carbonfox を足した
+
+- `theme carbonfox`。Nightfox と同じプラグイン（EdenEast/nightfox.nvim）の、背景がほぼ黒（#161616）の種類。Ghostty に入っている。bat は Neovim の実際の色から作った。btop は16色、k9s は標準の見た目
+
 ### sketchybar の右側の区切り（〈）が、どのテーマでも Gruvbox の色だったのを直した
 
 - 区切りは Gruvbox だけを使っていたころに作った固定の画像（#7c6f64）で、テーマを切りかえられるようにしたとき（11/22）に直し忘れていた。home.nix がテーマの fg3 の色で作るようにし、固定の画像は消した
