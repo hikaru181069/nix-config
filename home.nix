@@ -95,7 +95,7 @@ let
         exit 1
       fi
       write_theme "$name"
-      if ! sudo /run/current-system/sw/bin/darwin-rebuild switch --flake "$dir"; then
+      if ! ${lib.getExe config.programs.nh.package} darwin switch "$dir"; then
         echo "rebuild に失敗したので、テーマを「''${current}」に戻しました" >&2
         write_theme "$current"
         exit 1
@@ -151,6 +151,19 @@ let
       tmux list-clients -F '#{client_name}' | while read -r client; do
         tmux refresh-client -S -t "$client" || true
       done
+    '';
+  };
+  # tmux のセッションを選んで切り替える（tmux の prefix + g）。よく行くフォルダ（zoxide）を選ぶと、そこで新しいセッションを作る
+  sesh-pick = pkgs.writeShellApplication {
+    name = "sesh-pick";
+    runtimeInputs = [
+      pkgs.sesh
+      pkgs.fzf
+      pkgs.zoxide
+    ];
+    text = ''
+      name=$(sesh list --tmux --zoxide --icons | fzf --ansi --no-sort --layout=reverse --prompt="セッション > ") || exit 0
+      sesh connect "$name"
     '';
   };
   # フォントを切り替える（`font 名前`。`font` だけで一覧）
@@ -428,20 +441,31 @@ in
       lt = "eza --tree --level=2";
       lt3 = "eza --tree --level=3";
       lta = "eza --tree --level=2 -a";
-      # Nix の設定（home.nix・darwin.nix）を Mac に適用する。sudo は決まった場所しか探さないのでフルパスで書く
+      # Nix の設定（home.nix・darwin.nix）を Mac に適用する。nh は進み具合と、変わったものの一覧を出す（中で sudo を使う）
       # 反映したあと、読み込み済みの目印を消してシェルを入れ替え、新しい設定（PATH など）をすぐ使えるようにする
-      rebuild = "sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config && unset __HM_SESS_VARS_SOURCED __HM_ZSH_SESS_VARS_SOURCED __NIX_DARWIN_SET_ENVIRONMENT_DONE && exec zsh";
+      rebuild = "nh darwin switch ~/nix-config && unset __HM_SESS_VARS_SOURCED __HM_ZSH_SESS_VARS_SOURCED __NIX_DARWIN_SET_ENVIRONMENT_DONE && exec zsh";
       # 東京から見える今の星空を、色付き・星座の線付きで（astroterm は設定ファイルがないのでオプションで指定する）
       astroterm = "astroterm --city Tokyo --color --constellations --unicode";
     };
-    # Ctrl-X Ctrl-E で、入力中のコマンドをエディタで編集する
-    initContent = ''
-      autoload -Uz edit-command-line
-      zle -N edit-command-line
-      bindkey '^X^E' edit-command-line
-      # キーチェーンに保存したパスフレーズで SSH 鍵を ssh-agent に読み込む（コミット署名に必要）
-      /usr/bin/ssh-add --apple-load-keychain -q 2>/dev/null
-    '';
+    initContent = lib.mkMerge [
+      # fzf-tab: Tab の補完の候補を fzf で絞り込む。補完の準備（compinit）のあと、autosuggestions より前に読む
+      (lib.mkOrder 600 ''
+        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+        # 候補の一覧は fzf-tab に任せる。色は fzf の設定（テーマの色）を使う
+        zstyle ':completion:*' menu no
+        zstyle ':fzf-tab:*' use-fzf-default-opts yes
+        # cd の候補では、フォルダの中身を横に出す
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons=always $realpath'
+      '')
+      # Ctrl-X Ctrl-E で、入力中のコマンドをエディタで編集する
+      ''
+        autoload -Uz edit-command-line
+        zle -N edit-command-line
+        bindkey '^X^E' edit-command-line
+        # キーチェーンに保存したパスフレーズで SSH 鍵を ssh-agent に読み込む（コミット署名に必要）
+        /usr/bin/ssh-add --apple-load-keychain -q 2>/dev/null
+      ''
+    ];
   };
 
   # 時刻やホスト名は tmux / sketchybar に任せ、プロンプトには作業に要るものだけ出す
@@ -589,6 +613,11 @@ in
     };
   };
   # ターミナルで動くファイル操作の画面。`y` で開くと、閉じたときにそのフォルダへ移動する
+  # rebuild の進み具合と、何が変わったかを見やすく出す（nh darwin switch。flake の場所は覚えさせてある）
+  programs.nh = {
+    enable = true;
+    flake = "${config.home.homeDirectory}/nix-config";
+  };
   programs.yazi = {
     enable = true;
     theme.icon =
@@ -776,6 +805,8 @@ in
       bind - split-window -v
       bind | split-window -h
       bind m resize-pane -Z
+      # セッションを fzf で選んで切り替える
+      bind g display-popup -E -w 60% -h 60% ${lib.getExe sesh-pick}
 
       # コピーモード: v で選択開始、y か Enter でクリップボードへ
       bind -T copy-mode-vi v send-keys -X begin-selection
@@ -907,6 +938,8 @@ in
     pkgs.nerd-fonts.lilex
     # テーマを切り替える（theme 名前）
     theme-switch
+    # tmux のセッションを選んで切り替える（prefix + g は sesh-pick を使う）
+    pkgs.sesh
     # Claude Code の状態を tmux に伝える（hooks から呼ぶ）
     claude-tmux
     # フォントを切り替える（font 名前）

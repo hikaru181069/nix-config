@@ -7,6 +7,20 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-25
 
+### nh を入れ、rebuild と theme の中身を nh にした
+
+- `nh darwin switch`。進み具合と、増えた・消えた・版が変わったパッケージの一覧を出す。flake の場所は programs.nh で覚えさせた（NH_FLAKE）。rebuild（別名）と theme コマンドの中身を、darwin-rebuild から nh darwin switch に替えた（font・transparent は theme を呼ぶので一緒に替わる）。打つものは同じ。nh が動かないときは `sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config`
+
+### sesh を入れた（tmux のセッションを選んで切り替える）
+
+- tmux の prefix + g で、浮かぶ窓にセッションの一覧を fzf で出し、選んで切り替える（sesh-pick）。下に続くのは zoxide のよく行くフォルダで、選ぶとそこで新しいセッションを作る
+- prefix + s（tmux の標準の一覧）もそのまま
+
+### fzf-tab を入れた（Tab の補完を fzf で絞り込む）
+
+- 長いコマンドを打つのがだるいので。zsh-fzf-tab を、補完の準備（compinit）のあと・autosuggestions の前に読む。色は fzf の設定（テーマの色）を使う。cd の候補では、フォルダの中身を横に出す
+- fzf の `**` + Tab もそのまま使える
+
 ### ファイルのアイコンを、Neovim・eza・yazi・lazygit で Material 風にそろえた
 
 - Neovim: nvim-web-devicons を nvim-material-icon に入れかえた（同じ名前の部品を持つので、そのまま使える）
