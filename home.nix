@@ -13,9 +13,9 @@ let
   font = (import ./fonts.nix).${import ./font.nix};
   # true にすると、ターミナルを半透明にする。透けるのはテーマのメインの背景色（bg1）だけ。false のときの設定は何も変わらない
   # transparent.nix に書いてあり、`transparent` コマンドで切り替える
-  transparent = import ./transparent.nix;
+  transparent = (import ./transparent.nix).on;
   # 半透明のときの Ghostty の背景の透け具合（1 は不透明）
-  backgroundOpacity = "0.9";
+  backgroundOpacity = (import ./transparent.nix).opacity;
   # Ghostty の色: テーマが Ghostty に入っていれば、その名前を使う。入っていなければ、palette の色を直接決める
   ghosttyColors =
     if theme.ghostty != null then
@@ -80,7 +80,7 @@ let
       # 壁紙だけを、このコマンドの作られたときのテーマの色にする（切り替えのあと、新しい theme コマンドから呼ばれる）
       if [ "$1" = "--set-wallpaper" ]; then
         # 半透明のときは壁紙が透けて見えるので、変えない
-        if [ "$(tail -n 1 "$dir/transparent.nix")" != true ]; then
+        if ! grep -q "on = true;" "$dir/transparent.nix"; then
           osascript -e 'tell application "System Events" to tell every desktop to set picture to "${wallpaper}"'
         fi
         exit 0
@@ -196,43 +196,49 @@ let
       echo "フォントを「''${name}」にしました。Ghostty は Cmd-Q で終了して開き直してください"
     '';
   };
-  # ターミナルの半透明を切り替える（`transparent on`・`transparent off`。`transparent` だけで今の状態）
+  # ターミナルの半透明を切り替える（`transparent on`・`transparent off`・`transparent 0.8`。`transparent` だけで今の状態）
   # transparent.nix を書き換え、今のテーマで theme コマンドを呼ぶ（rebuild と読み込み直し）。失敗したら元に戻す
   transparent-switch = pkgs.writeShellApplication {
     name = "transparent";
     text = ''
       dir="$HOME/nix-config"
       file="$dir/transparent.nix"
-      current=$(tail -n 1 "$file")
-      label() { if [ "$1" = true ]; then echo "半透明"; else echo "不透明"; fi; }
+      on=$(sed -n 's/^{ on = \([a-z]*\);.*/\1/p' "$file")
+      opacity=$(sed -n 's/.*opacity = "\([0-9.]*\)".*/\1/p' "$file")
+      label() { if [ "$1" = true ]; then echo "半透明（$2）"; else echo "不透明"; fi; }
+      usage="使い方: transparent on / transparent off / transparent 0.8（0.1〜0.99。1 に近いほど透けない）"
       case "''${1:-}" in
-        on) new=true ;;
-        off) new=false ;;
+        on) new_on=true new_opacity=$opacity ;;
+        off) new_on=false new_opacity=$opacity ;;
+        0.[1-9] | 0.[1-9][0-9]) new_on=true new_opacity=$1 ;;
         "")
-          echo "今は$(label "$current")です（transparent on で半透明、transparent off で不透明）"
+          echo "今は$(label "$on" "$opacity")です"
+          echo "$usage"
           exit 0
           ;;
         *)
-          echo "使い方: transparent on / transparent off" >&2
+          echo "$usage" >&2
           exit 1
           ;;
       esac
-      if [ "$new" = "$current" ]; then
-        echo "もう$(label "$current")です"
+      if [ "$new_on $new_opacity" = "$on $opacity" ]; then
+        echo "もう$(label "$on" "$opacity")です"
         exit 0
       fi
       write() {
-        printf '%s\n%s\n' \
-          "# ターミナルを半透明にするか。\`transparent on\`・\`transparent off\` で書き換えて rebuild する（\`transparent\` だけで今の状態）" \
-          "$1" >"$file"
+        printf '%s\n%s\n{ on = %s; opacity = "%s"; }\n' \
+          "# ターミナルを半透明にするか（on）と、その透け具合（opacity。1 に近いほど透けない）" \
+          "# \`transparent on\`・\`transparent off\`・\`transparent 0.8\` で書き換えて rebuild する（\`transparent\` だけで今の状態）" \
+          "$1" "$2" >"$file"
       }
-      write "$new"
+      write "$new_on" "$new_opacity"
       if ! theme "$(sed -n 's|^import ./themes/\(.*\)\.nix$|\1|p' "$dir/theme.nix")"; then
-        write "$current"
-        echo "$(label "$current")に戻しました" >&2
+        write "$on" "$opacity"
+        echo "$(label "$on" "$opacity")に戻しました" >&2
         exit 1
       fi
-      echo "$(label "$new")にしました。Ghostty を Cmd-Q で終了して開き直し、Neovim も開き直してください"
+      echo "$(label "$new_on" "$new_opacity")にしました。Ghostty を Cmd-Q で終了して開き直してください"
+      if [ "$new_on" != "$on" ]; then echo "Neovim も開き直してください"; fi
     '';
   };
   # sketchybar の Apple ロゴ・アプリのメニューが使う小さなプログラム（旧設定の helpers/menus。毎回 make していたものを Nix でビルドする）
@@ -865,7 +871,7 @@ in
     claude-tmux
     # フォントを切り替える（font 名前）
     font-switch
-    # 半透明を切り替える（transparent on / off）
+    # 半透明を切り替える（transparent on / off / 0.8）
     transparent-switch
     # よく打つコマンドに名前を付けて呼ぶ（プロジェクトの justfile に書く。Makefile の代わり）
     pkgs.just
