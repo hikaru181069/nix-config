@@ -1,5 +1,5 @@
 # Material（Deep Ocean。いちばん暗い種類）。Neovim の marko-cerovac/material.nvim の色（lua/material/colors/init.lua の main と deep ocean）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。material.nvim での名前は、それぞれのコメントに書いた
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。material.nvim での名前は、それぞれのコメントに書いた
 {
   # 各ツールで使う、最初から入っているテーマの名前
   # Ghostty の Material Ocean は文字の色（#8f93a2）が Neovim（#a6accd）と違うので、palette の色を直接使う（home.nix）
@@ -37,19 +37,19 @@
     # material.nvim の fg_dark（#717cb4）は青紫で鮮やかすぎ、ほかの落ち着いた色から浮いてまとまらないので使わない
     comment = "#8f93a2"; # Ghostty の Material Ocean の文字の色（落ち着いた青灰色）
 
-    bg0 = "#090b10"; # バー・浮かぶウィンドウ・選んでいないタブ（bg_alt。通常の背景より少し暗い）
-    bg1 = "#0f111a"; # 通常の背景（ターミナル・エディタ。bg）
-    bg2 = "#1a1c25"; # active
-    bg3 = "#1f2233"; # カーソル行（highlight）
-    bg4 = "#464b5d"; # 枠線（disabled）
+    bg_bar = "#090b10"; # バー・浮かぶウィンドウ・選んでいないタブ（bg_alt。通常の背景より少し暗い）
+    bg = "#0f111a"; # 通常の背景（ターミナル・エディタ。bg）
+    bg_alt = "#1a1c25"; # active
+    bg_band = "#1f2233"; # 帯（sketchybar の今のアプリなど）（highlight）
+    border = "#464b5d"; # 枠線（disabled）
 
-    fg0 = "#eeffff"; # 明るい文字（white）
-    fg1 = "#a6accd"; # 通常の文字（fg）
-    fg2 = "#8f93a2"; # 暗い文字（ステータスライン。comment と同じ）
-    fg3 = "#464b5d"; # さらに暗い文字（disabled。line_numbers の #3b3f51 は、バーのかたまりには暗すぎるので1段明るいもの）
+    fg_bright = "#eeffff"; # 明るい文字（white）
+    fg = "#a6accd"; # 通常の文字（fg）
+    fg_dim = "#8f93a2"; # 暗い文字（ステータスライン。comment と同じ）
+    fg_muted = "#464b5d"; # さらに暗い文字（disabled。line_numbers の #3b3f51 は、バーのかたまりには暗すぎるので1段明るいもの）
 
-    sel0 = "#1f2233"; # 選んでいる行の背景（fzf・lazygit など。selection）
-    sel1 = "#232637"; # 検索結果などの背景（border）
+    selection = "#1f2233"; # 選んでいる行の背景（fzf・lazygit など。selection）
+    search = "#232637"; # 検索結果などの背景（border）
 
     # 差分の背景。green / red / blue を背景 bg に混ぜた色
     # 行全体は 15%、行の中で実際に変わった部分（_emph）と diff_text は 30%

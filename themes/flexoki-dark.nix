@@ -1,5 +1,5 @@
 # Flexoki（dark）。kepano/flexoki-neovim の色（lua/flexoki/palette.lua）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
 {
   # 各ツールで使うテーマの名前
   ghostty = "Flexoki Dark"; # Ghostty に入っているので、そのまま使う
@@ -18,9 +18,9 @@
     "#4095dc"
   ];
 
-  # tmux のユーザー名のブロックと右端の三角。既定（fg2 と fg1）だと三角が明るくて浮くので、Neovim のステータスラインのノーマルモードと同じ色にする
+  # tmux のユーザー名のブロックと右端の三角。既定（fg_dim と fg）だと三角が明るくて浮くので、Neovim のステータスラインのノーマルモードと同じ色にする
   tmuxUser = {
-    block = "#6f6e69"; # fg3
+    block = "#6f6e69"; # fg_muted
     arrow = "#878580"; # comment
   };
 
@@ -40,19 +40,19 @@
 
     comment = "#878580"; # tx-2。バーの文字などに使う
 
-    bg0 = "#0a0909"; # バー・浮かぶウィンドウ・選んでいないタブ（Flexoki に無いので、bg を黒に 40% 寄せた）
-    bg1 = "#100f0f"; # 通常の背景（bg）
-    bg2 = "#1c1b1a"; # bg-2
-    bg3 = "#343331"; # sketchybar のアプリ名の帯など（ui-2）
-    bg4 = "#403e3c"; # 枠線（ui-3）
+    bg_bar = "#0a0909"; # バー・浮かぶウィンドウ・選んでいないタブ（Flexoki に無いので、bg を黒に 40% 寄せた）
+    bg = "#100f0f"; # 通常の背景（bg）
+    bg_alt = "#1c1b1a"; # bg-2
+    bg_band = "#343331"; # sketchybar のアプリ名の帯など（ui-2）
+    border = "#403e3c"; # 枠線（ui-3）
 
-    fg0 = "#e6e4d9"; # 明るい文字（100）
-    fg1 = "#cecdc3"; # 通常の文字（tx）
-    fg2 = "#878580"; # 暗い文字（tx-2）
-    fg3 = "#6f6e69"; # さらに暗い文字（600）
+    fg_bright = "#e6e4d9"; # 明るい文字（100）
+    fg = "#cecdc3"; # 通常の文字（tx）
+    fg_dim = "#878580"; # 暗い文字（tx-2）
+    fg_muted = "#6f6e69"; # さらに暗い文字（600）
 
-    sel0 = "#282726"; # 選んでいる行の背景（ui）
-    sel1 = "#4d3a0b"; # 検索結果などの背景（yellow-900）
+    selection = "#282726"; # 選んでいる行の背景（ui）
+    search = "#4d3a0b"; # 検索結果などの背景（yellow-900）
 
     # 差分の背景。ほかのテーマとそろえて、green / red / blue を背景に混ぜた色（行全体は 15%、_emph と diff_text は 30%）
     diff_add = "#222415";

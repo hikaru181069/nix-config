@@ -2,7 +2,7 @@
 
 SBAR.bar({
   -- tmux のステータスバーと同じ背景色（status-style の bg）
-  color = COLORS.bg0,
+  color = COLORS.bg_bar,
   -- ノッチのある MacBook のメニューバーの高さ（38pt）。これより低いと、最大化したウィンドウの上に隙間ができる
   height = 38,
   border_width = 0,

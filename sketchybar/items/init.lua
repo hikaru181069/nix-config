@@ -6,7 +6,7 @@
 -- 矢印の見た目では、Neovim のステータスラインと同じ細い三角（）で区切る。
 -- フォントの記号（e0b3）は線が太い（Maple Mono NF で文字の 0.086 倍 ≒ 1.6pt）ので、Ghostty が tmux で描くのと同じ
 -- 線の太さ 1pt・1文字ぶんの大きさ（幅 11・高さ 25）の画像（sep_thin_left.png）を置く。
--- 画像は home.nix がテーマの fg3 の色で作り、~/.config-nix/sketchybar に置く
+-- 画像は home.nix がテーマの fg_muted の色で作り、~/.config-nix/sketchybar に置く
 -- name を付けたものは、隣の項目と一緒に隠す（items/toggle_stats/toggle_stats.lua・items/git/git.lua）
 local function right_gap(name)
   if BAR_STYLE ~= "arrows" then
@@ -79,7 +79,7 @@ require("items.monitor.netspeed")
 -- 通信速度の左にも区切りを置く（stats を隠すと一緒に隠れる）
 right_gap("stats.net_left")
 
--- 矢印の見た目では、右側全体の背景を左側と同じ色（bg0）にする。項目ごとではなく、まとめて1枚で囲む
+-- 矢印の見た目では、右側全体の背景を左側と同じ色（bg_bar）にする。項目ごとではなく、まとめて1枚で囲む
 -- （間の区切りや余白の項目も隙間なく塗るため）。隠した項目（stats や git）は囲みから外れ、背景もそのぶん縮む
 if BAR_STYLE == "arrows" then
   local PL = require("helpers.powerline")
@@ -95,9 +95,9 @@ if BAR_STYLE == "arrows" then
     "widgets.ram",
     "widgets.upload_speed",
     "widgets.download_speed",
-  }, { background = PL.block(COLORS.bg0) })
+  }, { background = PL.block(COLORS.bg_bar) })
   -- 右側の左端を、左側の終わり（front_app.end）と同じく三角で尖らせる。最後に足すので、いつも右側のいちばん左に来る
-  local start = PL.arrow(PL.L, COLORS.bg0, COLORS.transparent)
+  local start = PL.arrow(PL.L, COLORS.bg_bar, COLORS.transparent)
   start.position = "right"
   -- 三角の平らな辺が文字の枠の右端に少し届かず、背景との間に細い隙間が見えるので、1 だけ背景に重ねる
   start.padding_right = -1

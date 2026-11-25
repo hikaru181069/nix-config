@@ -14,7 +14,7 @@ let
   fileIcons = lib.importJSON ./icons/material.json;
   # 使うフォント（font.nix）。大きさなどは fonts.nix
   font = (import ./fonts.nix).${import ./font.nix};
-  # true にすると、ターミナルを半透明にする。透けるのはテーマのメインの背景色（bg1）だけ。false のときの設定は何も変わらない
+  # true にすると、ターミナルを半透明にする。透けるのはテーマのメインの背景色（bg）だけ。false のときの設定は何も変わらない
   # transparent.nix に書いてあり、`transparent` コマンドで切り替える
   transparent = (import ./transparent.nix).on;
   # 半透明のときの Ghostty の背景の透け具合（1 は不透明）
@@ -26,11 +26,11 @@ let
       { theme = theme.ghostty; } // (theme.ghosttyOverride or { })
     else
       {
-        background = palette.bg1;
-        foreground = palette.fg1;
-        cursor-color = palette.fg1;
-        selection-background = palette.sel1;
-        selection-foreground = palette.fg0;
+        background = palette.bg;
+        foreground = palette.fg;
+        cursor-color = palette.fg;
+        selection-background = palette.search;
+        selection-foreground = palette.fg_bright;
         # ターミナルの16色（0〜7 がふつう、8〜15 が明るい色。明るい色も同じ色を使う）
         palette = [
           "0=${palette.black}"
@@ -40,22 +40,22 @@ let
           "4=${palette.blue}"
           "5=${palette.magenta}"
           "6=${palette.cyan}"
-          "7=${palette.fg1}"
-          "8=${palette.fg3}"
+          "7=${palette.fg}"
+          "8=${palette.fg_muted}"
           "9=${palette.red}"
           "10=${palette.green}"
           "11=${palette.yellow}"
           "12=${palette.blue}"
           "13=${palette.magenta}"
           "14=${palette.cyan}"
-          "15=${palette.fg0}"
+          "15=${palette.fg_bright}"
         ];
       };
-  # 壁紙: ターミナルの背景（palette の bg1）と同じ色の無地の画像。色ごとに別の名前になるので、テーマを変えると別の画像になる
+  # 壁紙: ターミナルの背景（palette の bg）と同じ色の無地の画像。色ごとに別の名前になるので、テーマを変えると別の画像になる
   # Ghostty は色を sRGB で出すので、画像にも macOS の sRGB の色の基準を付ける（付けないと、macOS が別の基準の色と受け取り、ずれて見える）
-  wallpaper = pkgs.runCommand "wallpaper-${lib.removePrefix "#" palette.bg1}.png" {
+  wallpaper = pkgs.runCommand "wallpaper-${lib.removePrefix "#" palette.bg}.png" {
     nativeBuildInputs = [ pkgs.imagemagick ];
-  } "magick -size 64x64 'xc:${palette.bg1}' -type TrueColor -profile '/System/Library/ColorSync/Profiles/sRGB Profile.icc' PNG24:$out";
+  } "magick -size 64x64 'xc:${palette.bg}' -type TrueColor -profile '/System/Library/ColorSync/Profiles/sRGB Profile.icc' PNG24:$out";
   # テーマを切り替える（`theme 名前`。`theme` だけで一覧）
   # theme.nix を書き換えて rebuild し、tmux・sketchybar・Ghostty に読み込み直させる（Ghostty は SIGUSR2 で読み込み直す）
   # Neovim は開き直すと新しい色になる
@@ -544,9 +544,9 @@ in
     historyWidget.command = "";
     # 背景は端末のまま。選んでいる行は Neovim の選択範囲と同じ色
     colors = {
-      fg = palette.fg2;
-      "fg+" = palette.fg1;
-      "bg+" = palette.sel0;
+      fg = palette.fg_dim;
+      "fg+" = palette.fg;
+      "bg+" = palette.selection;
       hl = palette.blue;
       "hl+" = palette.cyan;
       info = palette.yellow;
@@ -555,7 +555,7 @@ in
       marker = palette.green;
       spinner = palette.magenta;
       header = palette.comment;
-      border = palette.bg4;
+      border = palette.border;
     };
   };
   # 履歴検索（Ctrl-R）を atuin にする。フォルダ・セッションごとに探せて、日時・かかった時間・成功したかも残る
@@ -586,7 +586,7 @@ in
   programs.btop = {
     enable = true;
     settings = {
-      # btop に最初から入っているテーマ（theme.nix の btop）。背景は塗らずにターミナルの色（palette.nix の bg1）を使う
+      # btop に最初から入っているテーマ（theme.nix の btop）。背景は塗らずにターミナルの色（palette.nix の bg）を使う
       color_theme = theme.btop;
       theme_background = false;
       # Neovim と同じく hjkl で動く
@@ -605,8 +605,8 @@ in
         palette.blue
         "bold"
       ];
-      inactiveBorderColor = [ palette.bg4 ];
-      selectedLineBgColor = [ palette.sel0 ];
+      inactiveBorderColor = [ palette.border ];
+      selectedLineBgColor = [ palette.selection ];
       optionsTextColor = [ palette.blue ];
     };
   };
@@ -688,20 +688,20 @@ in
           palette.blue
           "bold"
         ];
-        inactiveBorderColor = [ palette.bg4 ];
+        inactiveBorderColor = [ palette.border ];
         searchingActiveBorderColor = [
           palette.yellow
           "bold"
         ];
         optionsTextColor = [ palette.blue ];
-        selectedLineBgColor = [ palette.sel0 ];
-        inactiveViewSelectedLineBgColor = [ palette.bg2 ];
+        selectedLineBgColor = [ palette.selection ];
+        inactiveViewSelectedLineBgColor = [ palette.bg_alt ];
         cherryPickedCommitFgColor = [ palette.blue ];
-        cherryPickedCommitBgColor = [ palette.sel1 ];
+        cherryPickedCommitBgColor = [ palette.search ];
         markedBaseCommitFgColor = [ palette.blue ];
         markedBaseCommitBgColor = [ palette.yellow ];
         unstagedChangesColor = [ palette.red ];
-        defaultFgColor = [ palette.fg1 ];
+        defaultFgColor = [ palette.fg ];
       };
     };
   };
@@ -783,13 +783,13 @@ in
       # ユーザー名のブロックと右端の三角の色。テーマのファイルに tmuxUser があれば、その色にする
       tmuxUser =
         theme.tmuxUser or {
-          block = p.fg2;
-          arrow = p.fg1;
+          block = p.fg_dim;
+          arrow = p.fg;
         };
       # 右端の虹色の三角。前の色の上に次の色の三角を重ねていく
       # 色はテーマのファイルの rainbow（6色）で決められる。決めていなければ、赤 → オレンジ → 黄 → 緑 → 水色 → 青
       rainbow = [
-        p.bg0
+        p.bg_bar
       ]
       ++ (
         theme.rainbow or [
@@ -801,7 +801,7 @@ in
           p.blue
         ]
       )
-      ++ [ p.bg0 ];
+      ++ [ p.bg_bar ];
       rainbowArrows = lib.concatStrings (
         lib.zipListsWith (bg: fg: "#[fg=${fg},bg=${bg}]${l}") (lib.init rainbow) (lib.tail rainbow)
       );
@@ -842,18 +842,18 @@ in
       bind -T copy-mode-vi Escape send-keys -X cancel
 
       # ステータスライン（見た目は旧環境のまま、色だけ palette.nix のものに置き換え）
-      set -g mode-style "fg=${p.fg1},bg=${p.sel0}"
-      set -g message-style "fg=${p.fg2},bg=${p.bg0}"
-      set -g message-command-style "fg=${p.fg2},bg=${p.bg0}"
+      set -g mode-style "fg=${p.fg},bg=${p.selection}"
+      set -g message-style "fg=${p.fg_dim},bg=${p.bg_bar}"
+      set -g message-command-style "fg=${p.fg_dim},bg=${p.bg_bar}"
       # パネルの区切りは線だけに色を付け、背景は塗らない（不透明でも半透明でも Ghostty の背景と同じになる）
       # 選んでいないパネルの間の線は描かない（hidden）。背景と同じ色で隠すと、半透明のときに黒い線として見えてしまう
-      set -g pane-border-style "fg=${p.bg1},bg=default,hidden"
-      set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg3},bg=default"
+      set -g pane-border-style "fg=${p.bg},bg=default,hidden"
+      set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg_band},bg=default"
 
       set -g status on
       set -g status-interval 1
       set -g status-justify left
-      set -g status-style "fg=${p.fg2},bg=${p.bg0}"
+      set -g status-style "fg=${p.fg_dim},bg=${p.bg_bar}"
       set -g status-left-length 100
       set -g status-right-length 100
       set -g status-left-style NONE
@@ -861,17 +861,17 @@ in
 
       # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
       # 区切りの三角の一部は、旧環境と同じくブロックより1段明るい色にする（prefix 中の三角・ユーザー名の右端）
-      set -g status-left "#[fg=#{?client_prefix,${p.bg0},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg0}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan_light},${p.bg0}},bg=${tmuxUser.block},nobold]${r}#[fg=${p.bg0},bg=${tmuxUser.block},bold] #(whoami) #[fg=${tmuxUser.arrow},bg=${p.bg0},nobold]${r}"
+      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan_light},${p.bg_bar}},bg=${tmuxUser.block},nobold]${r}#[fg=${p.bg_bar},bg=${tmuxUser.block},bold] #(whoami) #[fg=${tmuxUser.arrow},bg=${p.bg_bar},nobold]${r}"
       # 右: 虹色の三角とホスト名
-      set -g status-right "${rainbowArrows}#[fg=${p.fg3},bg=${p.bg0},bold] #h "
+      set -g status-right "${rainbowArrows}#[fg=${p.fg_muted},bg=${p.bg_bar},bold] #h "
 
       # ウィンドウ一覧: 番号とディレクトリ名
       setw -g window-status-separator ""
-      setw -g window-status-style "fg=${p.comment},bg=${p.bg0}"
-      setw -g window-status-activity-style "underscore,fg=${p.comment},bg=${p.bg0}"
-      setw -g window-status-format "#[fg=${p.bg0},bg=${p.bg0}]${r}#[default] #I ${rThin} #{b:pane_current_path} ${claudeDot}#[fg=${p.bg0},bg=${p.bg0}]${r}"
+      setw -g window-status-style "fg=${p.comment},bg=${p.bg_bar}"
+      setw -g window-status-activity-style "underscore,fg=${p.comment},bg=${p.bg_bar}"
+      setw -g window-status-format "#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}#[default] #I ${rThin} #{b:pane_current_path} ${claudeDot}#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}"
       # 選んでいるウィンドウ: 番号の右の三角と右端の三角は、旧環境と同じくブロックより1段明るい色
-      setw -g window-status-current-format "#[fg=${p.bg0},bg=${p.fg1}]${r}#[fg=${p.fg3},bg=${p.fg1}] #I #[fg=${p.fg0},bg=${p.fg3}]${r} #{b:pane_current_path} ${claudeDot}#[fg=${p.comment},bg=${p.bg0}]${r}"
+      setw -g window-status-current-format "#[fg=${p.bg_bar},bg=${p.fg}]${r}#[fg=${p.fg_muted},bg=${p.fg}] #I #[fg=${p.fg_bright},bg=${p.fg_muted}]${r} #{b:pane_current_path} ${claudeDot}#[fg=${p.comment},bg=${p.bg_bar}]${r}"
     ''
   );
   # プロジェクトのフォルダに入ると、その .envrc（flake.nix の devShell）の環境に自動で切り替わる
@@ -1131,10 +1131,10 @@ in
     );
   # 文字のフォント（sketchybar/settings.lua が読む）
   xdg.configFile."sketchybar/font.lua".text = "return " + lib.generators.toLua { } font;
-  # 右側の区切りの画像（sketchybar/items/init.lua）。テーマの fg3 の色で作る
+  # 右側の区切りの画像（sketchybar/items/init.lua）。テーマの fg_muted の色で作る
   xdg.configFile."sketchybar/sep_thin_left.png".source =
     pkgs.runCommand "sep-thin-left.png" { nativeBuildInputs = [ pkgs.imagemagick ]; }
-      "magick -size 22x50 xc:none -fill none -stroke '${palette.fg3}' -strokewidth 2 -draw 'polyline 21,-1 1,25 21,51' PNG32:$out";
+      "magick -size 22x50 xc:none -fill none -stroke '${palette.fg_muted}' -strokewidth 2 -draw 'polyline 21,-1 1,25 21,51' PNG32:$out";
   xdg.configFile."sketchybar/icon_map.lua".source =
     "${pkgs.sketchybar-app-font}/lib/sketchybar-app-font/icon_map.lua";
 

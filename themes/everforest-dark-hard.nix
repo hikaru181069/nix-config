@@ -1,5 +1,5 @@
 # Everforest（Dark Hard。いちばん暗い種類）。Neovim の neanias/everforest-nvim の色（lua/everforest/colours.lua の hard と dark）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。everforest-nvim での名前は、それぞれのコメントに書いた
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。everforest-nvim での名前は、それぞれのコメントに書いた
 # Ghostty の Everforest Dark Hard は、背景に bg_dim（#1e2326）を使っていて、Neovim の hard の背景 bg0（#272e33）より暗い。
 # Neovim を開いたところだけ明るく見えないよう、Neovim の背景を Ghostty に合わせる（nvim/init.lua）
 {
@@ -36,19 +36,19 @@
 
     comment = "#859289"; # grey1
 
-    bg0 = "#1a1e20"; # バー・浮かぶウィンドウ・選んでいないタブ（Everforest に無いので、bg_dim を黒に 15% 寄せた。通常の背景より少し暗い）
-    bg1 = "#1e2326"; # 通常の背景（ターミナル・エディタ。bg_dim。Ghostty の Everforest Dark Hard と同じ）
-    bg2 = "#272e33"; # bg0
-    bg3 = "#2e383c"; # カーソル行（bg1）
-    bg4 = "#495156"; # 枠線（bg4）
+    bg_bar = "#1a1e20"; # バー・浮かぶウィンドウ・選んでいないタブ（Everforest に無いので、bg_dim を黒に 15% 寄せた。通常の背景より少し暗い）
+    bg = "#1e2326"; # 通常の背景（ターミナル・エディタ。bg_dim。Ghostty の Everforest Dark Hard と同じ）
+    bg_alt = "#272e33"; # bg0
+    bg_band = "#2e383c"; # 帯（sketchybar の今のアプリなど）（bg1）
+    border = "#495156"; # 枠線（bg4）
 
-    fg0 = "#d3c6aa"; # 明るい文字（fg）
-    fg1 = "#d3c6aa"; # 通常の文字（fg）
-    fg2 = "#9da9a0"; # 暗い文字（ステータスライン。grey2）
-    fg3 = "#7a8478"; # さらに暗い文字（行番号。grey0）
+    fg_bright = "#d3c6aa"; # 明るい文字（fg）
+    fg = "#d3c6aa"; # 通常の文字（fg）
+    fg_dim = "#9da9a0"; # 暗い文字（ステータスライン。grey2）
+    fg_muted = "#7a8478"; # さらに暗い文字（行番号。grey0）
 
-    sel0 = "#374145"; # 選んでいる行の背景（fzf・lazygit など。bg2）
-    sel1 = "#414b50"; # 検索結果などの背景（bg3）
+    selection = "#374145"; # 選んでいる行の背景（fzf・lazygit など。bg2）
+    search = "#414b50"; # 検索結果などの背景（bg3）
 
     # 差分の背景（everforest-nvim の hard の値）
     # 行の中で実際に変わった部分（_emph）は、everforest-nvim に無いので、green / red を背景に 30% 混ぜた色

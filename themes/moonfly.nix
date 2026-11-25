@@ -1,5 +1,5 @@
 # Moonfly。bluz71/vim-moonfly-colors の色（lua/moonfly/init.lua）。背景がほぼ黒（#080808）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
 {
   # 各ツールで使うテーマの名前
   ghostty = "Moonfly"; # Ghostty に入っているので、そのまま使う
@@ -34,19 +34,19 @@
 
     comment = "#949494"; # grey58（Comment）
 
-    bg0 = "#121212"; # バー・浮かぶウィンドウ・選んでいないタブ（grey7。背景がほぼ黒で、これより暗い色を作れないので、少し明るい色）
-    bg1 = "#080808"; # 通常の背景（black）
-    bg2 = "#1c1c1c"; # grey11
-    bg3 = "#2e2e2e"; # sketchybar のアプリ名の帯など（grey18）
-    bg4 = "#3a3a3a"; # 枠線（grey23）
+    bg_bar = "#121212"; # バー・浮かぶウィンドウ・選んでいないタブ（grey7。背景がほぼ黒で、これより暗い色を作れないので、少し明るい色）
+    bg = "#080808"; # 通常の背景（black）
+    bg_alt = "#1c1c1c"; # grey11
+    bg_band = "#2e2e2e"; # sketchybar のアプリ名の帯など（grey18）
+    border = "#3a3a3a"; # 枠線（grey23）
 
-    fg0 = "#e4e4e4"; # 明るい文字（grey89）
-    fg1 = "#c6c6c6"; # 通常の文字（white）
-    fg2 = "#9e9e9e"; # 暗い文字（grey62）
-    fg3 = "#626262"; # さらに暗い文字（grey39）
+    fg_bright = "#e4e4e4"; # 明るい文字（grey89）
+    fg = "#c6c6c6"; # 通常の文字（white）
+    fg_dim = "#9e9e9e"; # 暗い文字（grey62）
+    fg_muted = "#626262"; # さらに暗い文字（grey39）
 
-    sel0 = "#323437"; # 選んでいる行の背景（grey0（Visual））
-    sel1 = "#4d5d8d"; # 検索結果などの背景（bay）
+    selection = "#323437"; # 選んでいる行の背景（grey0（Visual））
+    search = "#4d5d8d"; # 検索結果などの背景（bay）
 
     # 差分の背景。ほかのテーマとそろえて、green / red / blue を背景に混ぜた色（行全体は 15%、_emph と diff_text は 30%）
     diff_add = "#1c2515";

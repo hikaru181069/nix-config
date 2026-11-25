@@ -1,5 +1,5 @@
 # Catppuccin Mocha。公式の色（https://catppuccin.com/palette）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。Catppuccin での名前は、それぞれのコメントに書いた
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。Catppuccin での名前は、それぞれのコメントに書いた
 {
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "Catppuccin Mocha"; # Ghostty に入っているので、そのまま使う
@@ -34,19 +34,19 @@
 
     comment = "#7f849c"; # overlay1
 
-    bg0 = "#181825"; # バー・浮かぶウィンドウ・選んでいないタブ（mantle。通常の背景より少し暗い）
-    bg1 = "#1e1e2e"; # 通常の背景（ターミナル・エディタ。base）
-    bg2 = "#313244"; # surface0
-    bg3 = "#45475a"; # カーソル行（surface1）
-    bg4 = "#585b70"; # 枠線（surface2）
+    bg_bar = "#181825"; # バー・浮かぶウィンドウ・選んでいないタブ（mantle。通常の背景より少し暗い）
+    bg = "#1e1e2e"; # 通常の背景（ターミナル・エディタ。base）
+    bg_alt = "#313244"; # surface0
+    bg_band = "#45475a"; # 帯（sketchybar の今のアプリなど）（surface1）
+    border = "#585b70"; # 枠線（surface2）
 
-    fg0 = "#cdd6f4"; # 明るい文字（text）
-    fg1 = "#bac2de"; # 通常の文字（subtext1）
-    fg2 = "#a6adc8"; # 暗い文字（ステータスライン。subtext0）
-    fg3 = "#6c7086"; # さらに暗い文字（行番号。overlay0）
+    fg_bright = "#cdd6f4"; # 明るい文字（text）
+    fg = "#bac2de"; # 通常の文字（subtext1）
+    fg_dim = "#a6adc8"; # 暗い文字（ステータスライン。subtext0）
+    fg_muted = "#6c7086"; # さらに暗い文字（行番号。overlay0）
 
-    sel0 = "#313244"; # 選んでいる行の背景（fzf・lazygit など。surface0）
-    sel1 = "#45475a"; # 検索結果などの背景（surface1）
+    selection = "#313244"; # 選んでいる行の背景（fzf・lazygit など。surface0）
+    search = "#45475a"; # 検索結果などの背景（surface1）
 
     # 差分の背景。Catppuccin に決まった値は無いので、green / red / blue を背景 base に混ぜた色
     # 行全体は 15%、行の中で実際に変わった部分（_emph）と diff_text は 30%

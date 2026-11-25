@@ -25,7 +25,7 @@ local function add_arrow_space(space_id, space_label)
     return SBAR.add("space", "space." .. space_id .. "." .. name, props)
   end
 
-  local left = part("l", PL.arrow(PL.R, COLORS.bg0, COLORS.bg0))
+  local left = part("l", PL.arrow(PL.R, COLORS.bg_bar, COLORS.bg_bar))
   local space = SBAR.add("space", "space." .. space_id, {
     space = space_id,
     padding_left = 0,
@@ -38,9 +38,9 @@ local function add_arrow_space(space_id, space_label)
       highlight_color = COLORS.comment,
     },
     label = { drawing = false },
-    background = PL.block(COLORS.bg0),
+    background = PL.block(COLORS.bg_bar),
   })
-  local mid = part("m", PL.arrow(PL.R_THIN, COLORS.comment, COLORS.bg0))
+  local mid = part("m", PL.arrow(PL.R_THIN, COLORS.comment, COLORS.bg_bar))
   local apps = part("apps", {
     padding_left = 0,
     padding_right = 0,
@@ -54,9 +54,9 @@ local function add_arrow_space(space_id, space_label)
       font = "sketchybar-app-font:Regular:15.0",
       y_offset = -1,
     },
-    background = PL.block(COLORS.bg0),
+    background = PL.block(COLORS.bg_bar),
   })
-  local right = part("r", PL.arrow(PL.R, COLORS.bg0, COLORS.bg0))
+  local right = part("r", PL.arrow(PL.R, COLORS.bg_bar, COLORS.bg_bar))
 
   space_api.parts[space.name] = { left = left, mid = mid, apps = apps, right = right }
   return space
@@ -117,37 +117,37 @@ function space_api:highlight_focused_space(space_item, is_selected)
   if parts then
     parts.selected = is_selected
     -- 色は tmux の window-status-current-format / window-status-format と同じ
-    local num_bg = is_selected and COLORS.fg1 or COLORS.bg0
-    local apps_bg = is_selected and COLORS.fg3 or COLORS.bg0
+    local num_bg = is_selected and COLORS.fg or COLORS.bg_bar
+    local apps_bg = is_selected and COLORS.fg_muted or COLORS.bg_bar
     local function arrow(item, glyph, fg, bg)
       item:set({ icon = { string = glyph, color = fg, highlight_color = fg }, background = { color = bg } })
     end
-    arrow(parts.left, PL.R, COLORS.bg0, num_bg)
+    arrow(parts.left, PL.R, COLORS.bg_bar, num_bg)
     space_item:set({
       icon = {
-        color = is_selected and COLORS.fg3 or COLORS.comment,
-        highlight_color = is_selected and COLORS.fg3 or COLORS.comment,
+        color = is_selected and COLORS.fg_muted or COLORS.comment,
+        highlight_color = is_selected and COLORS.fg_muted or COLORS.comment,
       },
       background = { color = num_bg },
     })
     if is_selected then
-      arrow(parts.mid, PL.R, COLORS.fg0, apps_bg)
+      arrow(parts.mid, PL.R, COLORS.fg_bright, apps_bg)
     else
       arrow(parts.mid, PL.R_THIN, COLORS.comment, apps_bg)
     end
     parts.apps:set({
       label = {
-        color = is_selected and COLORS.fg0 or COLORS.comment,
-        highlight_color = is_selected and COLORS.fg0 or COLORS.comment,
+        color = is_selected and COLORS.fg_bright or COLORS.comment,
+        highlight_color = is_selected and COLORS.fg_bright or COLORS.comment,
       },
       background = { color = apps_bg },
     })
     -- アプリのないスペースは番号だけなので、右端の三角は番号のブロックの色で続ける
-    local right_fg = COLORS.bg0
+    local right_fg = COLORS.bg_bar
     if is_selected then
       right_fg = parts.empty and num_bg or COLORS.comment
     end
-    arrow(parts.right, PL.R, right_fg, COLORS.bg0)
+    arrow(parts.right, PL.R, right_fg, COLORS.bg_bar)
     return
   end
 

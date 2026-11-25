@@ -1,5 +1,5 @@
 # Material（Darker）。Neovim の marko-cerovac/material.nvim の色（lua/material/colors/init.lua の main と darker）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。material.nvim での名前は、それぞれのコメントに書いた
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。material.nvim での名前は、それぞれのコメントに書いた
 {
   # 各ツールで使う、最初から入っているテーマの名前
   # Ghostty の Material Darker は文字の色（#eeffff）が Neovim（#b0bec5）と違うので、palette の色を直接使う（home.nix）
@@ -19,8 +19,8 @@
     "#9ebdfe"
   ];
 
-  # sketchybar の今のアプリの名前とアイコンの色。既定（fg2）だと帯（bg3）の上で読みにくいので、選んでいるデスクトップのアプリのアイコンと同じ色にする
-  frontApp = "#eeffff"; # fg0
+  # sketchybar の今のアプリの名前とアイコンの色。既定（fg_dim）だと帯（bg_band）の上で読みにくいので、選んでいるデスクトップのアプリのアイコンと同じ色にする
+  frontApp = "#eeffff"; # fg_bright
 
   palette = {
     # 色（main）
@@ -38,19 +38,19 @@
 
     comment = "#8c8b8b"; # fg_dark（darker のコメントの色 #515151 は、バーの文字には暗すぎるので）
 
-    bg0 = "#1a1a1a"; # バー・浮かぶウィンドウ・選んでいないタブ（bg_alt。通常の背景より少し暗い）
-    bg1 = "#212121"; # 通常の背景（ターミナル・エディタ。bg）
-    bg2 = "#323232"; # active
-    bg3 = "#3f3f3f"; # カーソル行（highlight）
-    bg4 = "#474747"; # 枠線（disabled）
+    bg_bar = "#1a1a1a"; # バー・浮かぶウィンドウ・選んでいないタブ（bg_alt。通常の背景より少し暗い）
+    bg = "#212121"; # 通常の背景（ターミナル・エディタ。bg）
+    bg_alt = "#323232"; # active
+    bg_band = "#3f3f3f"; # 帯（sketchybar の今のアプリなど）（highlight）
+    border = "#474747"; # 枠線（disabled）
 
-    fg0 = "#eeffff"; # 明るい文字（white）
-    fg1 = "#b0bec5"; # 通常の文字（fg）
-    fg2 = "#8c8b8b"; # 暗い文字（ステータスライン。fg_dark）
-    fg3 = "#424242"; # さらに暗い文字（行番号。line_numbers）
+    fg_bright = "#eeffff"; # 明るい文字（white）
+    fg = "#b0bec5"; # 通常の文字（fg）
+    fg_dim = "#8c8b8b"; # 暗い文字（ステータスライン。fg_dark）
+    fg_muted = "#424242"; # さらに暗い文字（行番号。line_numbers）
 
-    sel0 = "#404040"; # 選んでいる行の背景（fzf・lazygit など。selection）
-    sel1 = "#3f3f3f"; # 検索結果などの背景（highlight）
+    selection = "#404040"; # 選んでいる行の背景（fzf・lazygit など。selection）
+    search = "#3f3f3f"; # 検索結果などの背景（highlight）
 
     # 差分の背景。green / red / blue を背景 bg に混ぜた色
     # 行全体は 15%、行の中で実際に変わった部分（_emph）と diff_text は 30%

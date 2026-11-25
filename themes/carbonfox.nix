@@ -1,6 +1,6 @@
 # Carbonfox。EdenEast/nightfox.nvim の carbonfox（Nightfox の、背景がほぼ黒の種類）の色。プラグインの中で計算される色は、実際の値を取り出した
 # 黄色とオレンジは、Carbonfox では青緑
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
 {
   # 各ツールで使うテーマの名前
   ghostty = "Carbonfox"; # Ghostty に入っているので、そのまま使う
@@ -35,19 +35,19 @@
 
     comment = "#6e6f70";
 
-    bg0 = "#0c0c0c";
-    bg1 = "#161616";
-    bg2 = "#252525";
-    bg3 = "#353535";
-    bg4 = "#535353";
+    bg_bar = "#0c0c0c";
+    bg = "#161616";
+    bg_alt = "#252525";
+    bg_band = "#353535";
+    border = "#535353";
 
-    fg0 = "#f9fbff";
-    fg1 = "#f2f4f8";
-    fg2 = "#b6b8bb";
-    fg3 = "#7b7c7e";
+    fg_bright = "#f9fbff";
+    fg = "#f2f4f8";
+    fg_dim = "#b6b8bb";
+    fg_muted = "#7b7c7e";
 
-    sel0 = "#2a2a2a";
-    sel1 = "#525253";
+    selection = "#2a2a2a";
+    search = "#525253";
 
     # 差分の背景（nightfox.nvim の DiffAdd / DiffDelete / DiffChange / DiffText と同じ値。_emph は green / red を背景に 30% 混ぜた色）
     diff_add = "#172b20";

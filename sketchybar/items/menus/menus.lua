@@ -31,7 +31,7 @@ end
 if BAR_STYLE == "arrows" then
   local PL = require("helpers.powerline")
   for _, menu in ipairs(menu_items) do
-    menu:set({ padding_left = 0, padding_right = 0, background = PL.block(COLORS.bg0) })
+    menu:set({ padding_left = 0, padding_right = 0, background = PL.block(COLORS.bg_bar) })
   end
 else
   SBAR.add("bracket", { "/menu\\..*/" }, {

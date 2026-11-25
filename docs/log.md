@@ -7,6 +7,18 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-25
 
+### Neovim のステータスラインのコードを整理した（見た目は同じ）
+
+- 259行 → 135行。昔の設定の呼び名（C.ice など）への読みかえをやめ、パレットの名前を直接使う。似た部品9個を4個（block・arrow・text・separator）に、モードの名前・色・三角の色の3つの表を1つにまとめた。使われていない色は消した
+- 4テーマ × 9つの状態（モード7つ・左右の分割・ツリー）で、ステータスラインの行の文字・色・太字が前後で同じことを確かめた
+- テーマのファイルの bg_band の説明が「カーソル行」のままだったので「帯」に直した
+
+### パレットの色の名前を、Nightfox の番号の名前から役割の名前に変えた
+
+- bg0→bg_bar、bg1→bg、bg2→bg_alt、bg3→bg_band、bg4→border、fg0→fg_bright、fg1→fg、fg2→fg_dim、fg3→fg_muted、sel0→selection、sel1→search（説明は palette.nix）。これより前の記録は、前の名前のまま
+- `text`・`base` などは、sketchybar の読みかえの層（Catppuccin の名前。colors.lua）とぶつかって色が変わるので使わなかった
+- 確かめ方: 21個のテーマで、home-manager の出来上がりを前後で比べた（違いは色の名前だけで、値は同じ）。Neovim は 21テーマ × 不透明・半透明の画面、sketchybar は全部の色が前後で同じ
+
 ### nh を入れ、rebuild と theme の中身を nh にした
 
 - `nh darwin switch`。進み具合と、増えた・消えた・版が変わったパッケージの一覧を出す。flake の場所は programs.nh で覚えさせた（NH_FLAKE）。rebuild（別名）と theme コマンドの中身を、darwin-rebuild から nh darwin switch に替えた（font・transparent は theme を呼ぶので一緒に替わる）。打つものは同じ。nh が動かないときは `sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/nix-config`

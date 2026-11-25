@@ -1,5 +1,5 @@
 # Gruvbox Dark Hard。Ghostty 同梱の「Gruvbox Dark Hard」と、Neovim の gruvbox.nvim（contrast = "hard"）の値
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
 {
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "Gruvbox Dark Hard"; # Ghostty に入っているので、そのまま使う
@@ -34,19 +34,19 @@
 
     comment = "#928374"; # Gruvbox の gray
 
-    bg0 = "#282828"; # バー・浮かぶウィンドウ・選んでいないタブ（通常の背景と少しだけ変える）
-    bg1 = "#1d2021"; # 通常の背景（ターミナル・エディタ）
-    bg2 = "#32302f";
-    bg3 = "#3c3836"; # カーソル行
-    bg4 = "#504945"; # 枠線
+    bg_bar = "#282828"; # バー・浮かぶウィンドウ・選んでいないタブ（通常の背景と少しだけ変える）
+    bg = "#1d2021"; # 通常の背景（ターミナル・エディタ）
+    bg_alt = "#32302f";
+    bg_band = "#3c3836"; # 帯（sketchybar の今のアプリなど）
+    border = "#504945"; # 枠線
 
-    fg0 = "#fbf1c7"; # 明るい文字
-    fg1 = "#ebdbb2"; # 通常の文字
-    fg2 = "#bdae93"; # 暗い文字（ステータスライン）
-    fg3 = "#7c6f64"; # さらに暗い文字（行番号）
+    fg_bright = "#fbf1c7"; # 明るい文字
+    fg = "#ebdbb2"; # 通常の文字
+    fg_dim = "#bdae93"; # 暗い文字（ステータスライン）
+    fg_muted = "#7c6f64"; # さらに暗い文字（行番号）
 
-    sel0 = "#3c3836"; # 選んでいる行の背景（fzf・lazygit など）
-    sel1 = "#504945"; # 検索結果などの背景
+    selection = "#3c3836"; # 選んでいる行の背景（fzf・lazygit など）
+    search = "#504945"; # 検索結果などの背景
 
     # 差分の背景
     # 行の中で実際に変わった部分（_emph）は、Neovim の gruvbox.nvim の DiffAdd / DiffDelete と同じ色

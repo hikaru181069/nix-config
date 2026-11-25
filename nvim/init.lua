@@ -104,7 +104,7 @@ local theme = require("theme").nvim
 if theme == "gruvbox" then
   -- Gruvbox の背景を暗いほう（hard）にする（Ghostty の Gruvbox Dark Hard と同じ背景 #1d2021）
   -- 左端の列（git や診断の印が出る列）と、その上の印の背景を、Gruvbox の既定（本文より明るい色）から本文と同じ色にする
-  local same_as_body = { bg = require("palette").bg1 }
+  local same_as_body = { bg = require("palette").bg }
   require("gruvbox").setup({
     contrast = "hard",
     overrides = {
@@ -151,7 +151,7 @@ elseif theme == "everforest" then
   require("everforest").setup({
     background = "hard",
     colours_override = function(palette)
-      palette.bg0 = require("palette").bg1
+      palette.bg0 = require("palette").bg
     end,
   })
   vim.cmd.colorscheme("everforest")
@@ -193,7 +193,7 @@ elseif theme == "iceberg" then
     "DiagnosticSignOk",
   }) do
     local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
-    hl.bg = tonumber(require("palette").bg1:sub(2), 16)
+    hl.bg = tonumber(require("palette").bg:sub(2), 16)
     vim.api.nvim_set_hl(0, name, hl)
   end
   -- タブ行とステータスラインは、色を反転する指定（reverse）で書かれている。bufferline の色がその上に重なると、
@@ -232,7 +232,7 @@ elseif theme == "aura-dark" then
   local p = require("palette")
   for name, hl in pairs({
     CursorLine = { bg = "#312e46" }, -- 公式の VS Code 版のカーソル行（紫を2割混ぜた色）
-    Visual = { bg = p.sel1 },
+    Visual = { bg = p.search },
     DiffAdd = { bg = p.diff_add },
     DiffDelete = { bg = p.diff_delete },
     DiffChange = { bg = p.diff_change },
@@ -240,7 +240,7 @@ elseif theme == "aura-dark" then
     Added = { fg = p.green },
     Removed = { fg = p.red },
     Changed = { fg = p.yellow },
-    NormalFloat = { fg = p.fg1, bg = p.bg0 },
+    NormalFloat = { fg = p.fg, bg = p.bg_bar },
   }) do
     vim.api.nvim_set_hl(0, name, hl)
   end
@@ -273,10 +273,10 @@ end
 extend_cursorline()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = extend_cursorline })
 
--- 半透明（home.nix の transparent）: メインの背景色（palette の bg1）だけを塗らず、Ghostty の背景を透かす。ほかの色はそのまま
+-- 半透明（home.nix の transparent）: メインの背景色（palette の bg）だけを塗らず、Ghostty の背景を透かす。ほかの色はそのまま
 if require("theme").transparent then
   local function clear_background()
-    local bg = tonumber(require("palette").bg1:sub(2), 16)
+    local bg = tonumber(require("palette").bg:sub(2), 16)
     for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
       if hl.bg == bg and not hl.reverse then
         hl.bg = nil
@@ -318,7 +318,7 @@ require("nvim-tree").setup({
 -- ツリーの背景が決まっていないテーマでは、本文と同じ。nvim-tree が色を決めたあと（setup のあと）に行う
 local function fill_separator()
   local tree = vim.api.nvim_get_hl(0, { name = "NvimTreeNormal", link = false }).bg
-  local bg = tree or (not require("theme").transparent and require("palette").bg1 or nil)
+  local bg = tree or (not require("theme").transparent and require("palette").bg or nil)
   for _, name in ipairs({ "WinSeparator", "NvimTreeWinSeparator" }) do
     vim.api.nvim_set_hl(0, name, { bg = bg })
   end
@@ -467,11 +467,11 @@ require("zen-mode").setup({
 vim.keymap.set("n", "<leader>tz", "<cmd>ZenMode<cr>", { desc = "集中モード（zen-mode）" })
 
 local palette = require("palette")
-vim.api.nvim_set_hl(0, "NoNeckPainBg", { bg = palette.bg0 })
+vim.api.nvim_set_hl(0, "NoNeckPainBg", { bg = palette.bg_bar })
 require("no-neck-pain").setup({
   width = 110,
   buffers = {
-    colors = { background = palette.bg0, blend = 0 },
+    colors = { background = palette.bg_bar, blend = 0 },
     bo = { filetype = "no-neck-pain" },
     wo = { winfixwidth = true, winhighlight = "Normal:NoNeckPainBg,EndOfBuffer:NoNeckPainBg" },
   },

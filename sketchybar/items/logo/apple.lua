@@ -15,15 +15,15 @@ local apple = SBAR.add("item", {
   click_script = "sketchybar-menus -s 0",
 })
 
--- 矢印の見た目: 赤いりんごを、tmux のセッション名と同じ背景（bg0。バーと同じ色）に置く。
--- 右の帯も bg0 なのでひと続きになり、矢印は見えない（tmux の選んでいないウィンドウと同じく、場所だけ取る）
+-- 矢印の見た目: 赤いりんごを、tmux のセッション名と同じ背景（bg_bar。バーと同じ色）に置く。
+-- 右の帯も bg_bar なのでひと続きになり、矢印は見えない（tmux の選んでいないウィンドウと同じく、場所だけ取る）
 if BAR_STYLE == "arrows" then
   local PL = require("helpers.powerline")
   apple:set({
     padding_left = 0,
     padding_right = 0,
     icon = { font = { size = 18.0 }, color = COLORS.subtext0, padding_left = 16, padding_right = 4 },
-    background = PL.block(COLORS.bg0),
+    background = PL.block(COLORS.bg_bar),
   })
-  SBAR.add("item", "apple.arrow", PL.arrow(PL.R, COLORS.bg0, COLORS.bg0))
+  SBAR.add("item", "apple.arrow", PL.arrow(PL.R, COLORS.bg_bar, COLORS.bg_bar))
 end

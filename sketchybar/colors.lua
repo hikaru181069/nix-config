@@ -17,20 +17,20 @@ end
 
 local catppuccin = {
   -- 文字（明るい順）
-  text = palette.fg0,
-  subtext1 = palette.fg1,
-  subtext0 = palette.fg2,
-  overlay2 = palette.fg2,
+  text = palette.fg_bright,
+  subtext1 = palette.fg,
+  subtext0 = palette.fg_dim,
+  overlay2 = palette.fg_dim,
   overlay1 = palette.comment,
-  overlay0 = palette.fg3,
-  grey = palette.fg3,
+  overlay0 = palette.fg_muted,
+  grey = palette.fg_muted,
   -- 背景・枠（明るい順）
-  surface2 = palette.sel1,
-  surface1 = palette.bg4,
-  surface0 = palette.bg3,
-  base = palette.bg1,
-  mantle = palette.bg0,
-  crust = palette.bg0,
+  surface2 = palette.search,
+  surface1 = palette.border,
+  surface0 = palette.bg_band,
+  base = palette.bg,
+  mantle = palette.bg_bar,
+  crust = palette.bg_bar,
   -- 色
   rosewater = palette.pink,
   flamingo = palette.pink,

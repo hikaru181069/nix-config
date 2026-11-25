@@ -1,5 +1,5 @@
 # OneDark の darker。Neovim の onedark.nvim（style = "darker"）の色（lua/onedark/palette.lua）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。onedark.nvim での名前は、それぞれのコメントに書いた
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。onedark.nvim での名前は、それぞれのコメントに書いた
 {
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = null; # Ghostty には入っていないので、palette の色を直接使う（home.nix）
@@ -18,8 +18,8 @@
     "#5caaec"
   ];
 
-  # sketchybar の今のアプリの名前とアイコンの色。既定（fg2）だと帯（bg3）の上で読みにくいので、選んでいるデスクトップのアプリのアイコンと同じ色にする
-  frontApp = "#abb2bf"; # fg0
+  # sketchybar の今のアプリの名前とアイコンの色。既定（fg_dim）だと帯（bg_band）の上で読みにくいので、選んでいるデスクトップのアプリのアイコンと同じ色にする
+  frontApp = "#abb2bf"; # fg_bright
 
   palette = {
     # 色
@@ -37,19 +37,19 @@
 
     comment = "#7a818e"; # onedark.nvim の light_grey
 
-    bg0 = "#181b20"; # バー・浮かぶウィンドウ・選んでいないタブ（onedark.nvim の bg_d。通常の背景より少し暗い）
-    bg1 = "#1f2329"; # 通常の背景（ターミナル・エディタ。onedark.nvim の bg0）
-    bg2 = "#282c34"; # onedark.nvim の bg1
-    bg3 = "#30363f"; # カーソル行（onedark.nvim の bg2）
-    bg4 = "#535965"; # 枠線（onedark.nvim の grey）
+    bg_bar = "#181b20"; # バー・浮かぶウィンドウ・選んでいないタブ（onedark.nvim の bg_d。通常の背景より少し暗い）
+    bg = "#1f2329"; # 通常の背景（ターミナル・エディタ。onedark.nvim の bg0）
+    bg_alt = "#282c34"; # onedark.nvim の bg1
+    bg_band = "#30363f"; # 帯（sketchybar の今のアプリなど）（onedark.nvim の bg2）
+    border = "#535965"; # 枠線（onedark.nvim の grey）
 
-    fg0 = "#abb2bf"; # 明るい文字（darker には無いので、同じ OneDark の dark の fg）
-    fg1 = "#a0a8b7"; # 通常の文字（onedark.nvim の fg）
-    fg2 = "#7a818e"; # 暗い文字（ステータスライン。onedark.nvim の light_grey）
-    fg3 = "#535965"; # さらに暗い文字（行番号。onedark.nvim の grey）
+    fg_bright = "#abb2bf"; # 明るい文字（darker には無いので、同じ OneDark の dark の fg）
+    fg = "#a0a8b7"; # 通常の文字（onedark.nvim の fg）
+    fg_dim = "#7a818e"; # 暗い文字（ステータスライン。onedark.nvim の light_grey）
+    fg_muted = "#535965"; # さらに暗い文字（行番号。onedark.nvim の grey）
 
-    sel0 = "#30363f"; # 選んでいる行の背景（fzf・lazygit など。onedark.nvim の bg2）
-    sel1 = "#323641"; # 検索結果などの背景（onedark.nvim の bg3）
+    selection = "#30363f"; # 選んでいる行の背景（fzf・lazygit など。onedark.nvim の bg2）
+    search = "#323641"; # 検索結果などの背景（onedark.nvim の bg3）
 
     # 差分の背景（onedark.nvim の値）
     # 行の中で実際に変わった部分（_emph）は、onedark.nvim に無いので、green / red を背景 bg1 に 30% 混ぜた色

@@ -1,5 +1,5 @@
 # Melange（dark）。Neovim の savq/melange-nvim の色（lua/melange/palettes/dark.lua）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。Melange での名前は、それぞれのコメントに書いた
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。Melange での名前は、それぞれのコメントに書いた
 # Melange の色は a（背景・文字）、b（明るい色）、c（暗い色）、d（とても暗い色）に分かれている。ここでは主に b を使った
 {
   # 各ツールで使う、最初から入っているテーマの名前
@@ -35,19 +35,19 @@
 
     comment = "#c1a78e"; # a.com
 
-    bg0 = "#231f1d"; # バー・浮かぶウィンドウ・選んでいないタブ（Melange に無いので、a.bg を黒に 15% 寄せた。通常の背景より少し暗い）
-    bg1 = "#292522"; # 通常の背景（ターミナル・エディタ。a.bg）
-    bg2 = "#34302c"; # a.float
-    bg3 = "#403a36"; # カーソル行（a.sel）
-    bg4 = "#867462"; # 枠線（a.ui）
+    bg_bar = "#231f1d"; # バー・浮かぶウィンドウ・選んでいないタブ（Melange に無いので、a.bg を黒に 15% 寄せた。通常の背景より少し暗い）
+    bg = "#292522"; # 通常の背景（ターミナル・エディタ。a.bg）
+    bg_alt = "#34302c"; # a.float
+    bg_band = "#403a36"; # 帯（sketchybar の今のアプリなど）（a.sel）
+    border = "#867462"; # 枠線（a.ui）
 
-    fg0 = "#ece1d7"; # 明るい文字（a.fg）
-    fg1 = "#ece1d7"; # 通常の文字（a.fg）
-    fg2 = "#c1a78e"; # 暗い文字（ステータスライン。a.com）
-    fg3 = "#867462"; # さらに暗い文字（行番号。a.ui）
+    fg_bright = "#ece1d7"; # 明るい文字（a.fg）
+    fg = "#ece1d7"; # 通常の文字（a.fg）
+    fg_dim = "#c1a78e"; # 暗い文字（ステータスライン。a.com）
+    fg_muted = "#867462"; # さらに暗い文字（行番号。a.ui）
 
-    sel0 = "#403a36"; # 選んでいる行の背景（fzf・lazygit など。a.sel）
-    sel1 = "#8b7449"; # 検索結果などの背景（d.yellow）
+    selection = "#403a36"; # 選んでいる行の背景（fzf・lazygit など。a.sel）
+    search = "#8b7449"; # 検索結果などの背景（d.yellow）
 
     # 差分の背景。ほかのテーマとそろえて、green / red / blue を背景 a.bg に混ぜた色
     # 行全体は 15%、行の中で実際に変わった部分（_emph）と diff_text は 30%

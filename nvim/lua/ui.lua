@@ -3,25 +3,25 @@ local p = require("palette")
 local transparent = require("theme").transparent
 
 -- 開いているファイル（バッファ）をタブのように上に並べる
--- 旧設定の見た目に合わせ、すべての部品の背景を揃える。選んでいるタブは通常の背景（bg1）で1枚のタブに見せ、
--- ほかのタブと余白は暗い背景（bg0）にする。部品ごとに背景を指定しないと、名前だけ明るくなるなどまだらになる
+-- 旧設定の見た目に合わせ、すべての部品の背景を揃える。選んでいるタブは通常の背景（bg）で1枚のタブに見せ、
+-- ほかのタブと余白は暗い背景（bg_bar）にする。部品ごとに背景を指定しないと、名前だけ明るくなるなどまだらになる
 local function bufferline_highlights(defaults)
   local hl = {}
   for name, attrs in pairs(defaults.highlights) do
-    hl[name] = vim.tbl_extend("force", attrs, { bg = name:match("_selected$") and p.bg1 or p.bg0 })
+    hl[name] = vim.tbl_extend("force", attrs, { bg = name:match("_selected$") and p.bg or p.bg_bar })
   end
   -- 文字の色（旧設定と同じ考え方: ほかのタブは暗め、見えているタブは明るめ、変更ありは黄色）
   local fg = {
-    background = p.fg3,
-    buffer_visible = p.fg0,
-    numbers = p.fg3,
-    numbers_visible = p.fg2,
+    background = p.fg_muted,
+    buffer_visible = p.fg_bright,
+    numbers = p.fg_muted,
+    numbers_visible = p.fg_dim,
     modified = p.yellow,
     modified_visible = p.yellow,
     -- 斜めの区切りは余白と同じ色にして、選んでいるタブの形だけを見せる
-    separator = p.bg0,
-    separator_visible = p.bg0,
-    separator_selected = p.bg0,
+    separator = p.bg_bar,
+    separator_visible = p.bg_bar,
+    separator_selected = p.bg_bar,
   }
   for name, color in pairs(fg) do
     hl[name].fg = color
@@ -39,7 +39,7 @@ end
 
 -- 半透明: ツリーの上の見出し。色を決めないと、ツリーの背景の色になり、塗られないテーマがある
 if transparent then
-  vim.api.nvim_set_hl(0, "TreeHeader", { fg = p.fg1, bg = p.bg0 })
+  vim.api.nvim_set_hl(0, "TreeHeader", { fg = p.fg, bg = p.bg_bar })
 end
 
 require("bufferline").setup({
@@ -71,7 +71,7 @@ vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "バッファを�
 require("notify").setup({
   stages = "fade_in_slide_out",
   timeout = 1000,
-  background_colour = p.bg1,
+  background_colour = p.bg,
 })
 
 -- コマンド入力を画面の中央に出し、メッセージは通知にする

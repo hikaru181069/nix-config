@@ -1,5 +1,5 @@
 # Tokyo Night（Night。いちばん暗い種類）。Neovim の folke/tokyonight.nvim の色（lua/tokyonight/colors/storm.lua と night.lua）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。tokyonight.nvim での名前は、それぞれのコメントに書いた
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。tokyonight.nvim での名前は、それぞれのコメントに書いた
 {
   # 各ツールで使う、最初から入っているテーマの名前
   ghostty = "TokyoNight Night"; # Ghostty に入っているので、そのまま使う
@@ -34,19 +34,19 @@
 
     comment = "#737aa2"; # dark5（tokyonight.nvim の comment #565f89 は、バーの文字には暗すぎるので1段明るいもの）
 
-    bg0 = "#16161e"; # バー・浮かぶウィンドウ・選んでいないタブ（bg_dark。通常の背景より少し暗い）
-    bg1 = "#1a1b26"; # 通常の背景（ターミナル・エディタ。bg）
-    bg2 = "#292e42"; # bg_highlight
-    bg3 = "#3b4261"; # カーソル行（fg_gutter）
-    bg4 = "#545c7e"; # 枠線（dark3）
+    bg_bar = "#16161e"; # バー・浮かぶウィンドウ・選んでいないタブ（bg_dark。通常の背景より少し暗い）
+    bg = "#1a1b26"; # 通常の背景（ターミナル・エディタ。bg）
+    bg_alt = "#292e42"; # bg_highlight
+    bg_band = "#3b4261"; # 帯（sketchybar の今のアプリなど）（fg_gutter）
+    border = "#545c7e"; # 枠線（dark3）
 
-    fg0 = "#c0caf5"; # 明るい文字（fg）
-    fg1 = "#c0caf5"; # 通常の文字（fg）
-    fg2 = "#a9b1d6"; # 暗い文字（ステータスライン。fg_dark）
-    fg3 = "#545c7e"; # さらに暗い文字（行番号。dark3）
+    fg_bright = "#c0caf5"; # 明るい文字（fg）
+    fg = "#c0caf5"; # 通常の文字（fg）
+    fg_dim = "#a9b1d6"; # 暗い文字（ステータスライン。fg_dark）
+    fg_muted = "#545c7e"; # さらに暗い文字（行番号。dark3）
 
-    sel0 = "#292e42"; # 選んでいる行の背景（fzf・lazygit など。bg_highlight）
-    sel1 = "#3d59a1"; # 検索結果などの背景（blue0）
+    selection = "#292e42"; # 選んでいる行の背景（fzf・lazygit など。bg_highlight）
+    search = "#3d59a1"; # 検索結果などの背景（blue0）
 
     # 差分の背景。green / red / blue を背景 bg に混ぜた色
     # 行全体は 15%、行の中で実際に変わった部分（_emph）と diff_text は 30%

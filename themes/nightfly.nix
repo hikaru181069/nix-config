@@ -1,5 +1,5 @@
 # Nightfly。bluz71/vim-nightfly-colors の色（lua/nightfly/init.lua）。Moonfly と同じ作者
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
 {
   # 各ツールで使うテーマの名前
   ghostty = null; # Ghostty に入っていないので、下の色を直接使う（home.nix）
@@ -34,19 +34,19 @@
 
     comment = "#7c8f8f"; # grey_blue
 
-    bg0 = "#01101d"; # バー・浮かぶウィンドウ・選んでいないタブ（Nightfly に無いので、背景を黒に 25% 寄せた）
-    bg1 = "#011627"; # 通常の背景（black）
-    bg2 = "#092236"; # dark_blue
-    bg3 = "#1d3b53"; # sketchybar のアプリ名の帯など（regal_blue）
-    bg4 = "#334e65"; # 枠線（carbon_blue）
+    bg_bar = "#01101d"; # バー・浮かぶウィンドウ・選んでいないタブ（Nightfly に無いので、背景を黒に 25% 寄せた）
+    bg = "#011627"; # 通常の背景（black）
+    bg_alt = "#092236"; # dark_blue
+    bg_band = "#1d3b53"; # sketchybar のアプリ名の帯など（regal_blue）
+    border = "#334e65"; # 枠線（carbon_blue）
 
-    fg0 = "#d6deeb"; # 明るい文字（white_blue）
-    fg1 = "#c3ccdc"; # 通常の文字（white）
-    fg2 = "#a1aab8"; # 暗い文字（cadet_blue）
-    fg3 = "#4b6479"; # さらに暗い文字（steel_blue）
+    fg_bright = "#d6deeb"; # 明るい文字（white_blue）
+    fg = "#c3ccdc"; # 通常の文字（white）
+    fg_dim = "#a1aab8"; # 暗い文字（cadet_blue）
+    fg_muted = "#4b6479"; # さらに暗い文字（steel_blue）
 
-    sel0 = "#1d3b53"; # 選んでいる行の背景（regal_blue）
-    sel1 = "#24567f"; # 検索結果などの背景（bay_blue）
+    selection = "#1d3b53"; # 選んでいる行の背景（regal_blue）
+    search = "#24567f"; # 検索結果などの背景（bay_blue）
 
     # 差分の背景。ほかのテーマとそろえて、green / red / blue を背景に混ぜた色（行全体は 15%、_emph と diff_text は 30%）
     diff_add = "#19312f";

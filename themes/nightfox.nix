@@ -1,6 +1,6 @@
 # Nightfox。EdenEast/nightfox.nvim の nightfox の色（lua/nightfox/palette/nightfox.lua）
-# この環境で前に使っていたテーマで、bg0〜bg4・fg0〜fg3 などの名前は、もともと Nightfox のもの
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
+# この環境で前に使っていたテーマで、bg・fg などの名前は、もともと Nightfox のもの
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）
 {
   # 各ツールで使うテーマの名前
   ghostty = "Nightfox"; # Ghostty に入っているので、そのまま使う
@@ -35,19 +35,19 @@
 
     comment = "#738091";
 
-    bg0 = "#131a24";
-    bg1 = "#192330";
-    bg2 = "#212e3f";
-    bg3 = "#29394f";
-    bg4 = "#39506d";
+    bg_bar = "#131a24";
+    bg = "#192330";
+    bg_alt = "#212e3f";
+    bg_band = "#29394f";
+    border = "#39506d";
 
-    fg0 = "#d6d6d7";
-    fg1 = "#cdcecf";
-    fg2 = "#aeafb0";
-    fg3 = "#71839b";
+    fg_bright = "#d6d6d7";
+    fg = "#cdcecf";
+    fg_dim = "#aeafb0";
+    fg_muted = "#71839b";
 
-    sel0 = "#2b3b51";
-    sel1 = "#3c5372";
+    selection = "#2b3b51";
+    search = "#3c5372";
 
     # 差分の背景（nightfox.nvim の DiffAdd / DiffDelete / DiffChange / DiffText と同じ値。_emph は green / red を背景に 30% 混ぜた色）
     diff_add = "#26343c";

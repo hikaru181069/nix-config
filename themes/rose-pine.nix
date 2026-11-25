@@ -1,5 +1,5 @@
 # Rosé Pine（main。3つの種類のうち、いちばん暗いもの）。Neovim の rose-pine/neovim の色（lua/rose-pine/palette.lua）
-# 色の名前（bg0〜bg4・fg0〜fg3 など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。Rosé Pine での名前は、それぞれのコメントに書いた
+# 色の名前（bg・fg など）は、どのテーマでも同じ役割の名前（palette.nix の説明を参照）。Rosé Pine での名前は、それぞれのコメントに書いた
 # Rosé Pine には緑・水色がないので、ターミナルの色の割り当て（Ghostty の Rose Pine と同じ）に合わせた
 {
   # 各ツールで使う、最初から入っているテーマの名前
@@ -19,9 +19,9 @@
     "#6bc0cf"
   ];
 
-  # tmux のユーザー名のブロックと右端の三角。既定（fg2 と fg1）だと三角が明るくて浮くので、Neovim のステータスラインのノーマルモードと同じ色にする
+  # tmux のユーザー名のブロックと右端の三角。既定（fg_dim と fg）だと三角が明るくて浮くので、Neovim のステータスラインのノーマルモードと同じ色にする
   tmuxUser = {
-    block = "#6e6a86"; # fg3
+    block = "#6e6a86"; # fg_muted
     arrow = "#908caa"; # comment
   };
 
@@ -41,19 +41,19 @@
 
     comment = "#908caa"; # subtle
 
-    bg0 = "#16141f"; # バー・浮かぶウィンドウ・選んでいないタブ（_nc。通常の背景より少し暗い）
-    bg1 = "#191724"; # 通常の背景（ターミナル・エディタ。base）
-    bg2 = "#1f1d2e"; # surface
-    bg3 = "#26233a"; # カーソル行（overlay）
-    bg4 = "#524f67"; # 枠線（highlight_high）
+    bg_bar = "#16141f"; # バー・浮かぶウィンドウ・選んでいないタブ（_nc。通常の背景より少し暗い）
+    bg = "#191724"; # 通常の背景（ターミナル・エディタ。base）
+    bg_alt = "#1f1d2e"; # surface
+    bg_band = "#26233a"; # 帯（sketchybar の今のアプリなど）（overlay）
+    border = "#524f67"; # 枠線（highlight_high）
 
-    fg0 = "#e0def4"; # 明るい文字（text）
-    fg1 = "#e0def4"; # 通常の文字（text）
-    fg2 = "#908caa"; # 暗い文字（ステータスライン。subtle）
-    fg3 = "#6e6a86"; # さらに暗い文字（行番号。muted）
+    fg_bright = "#e0def4"; # 明るい文字（text）
+    fg = "#e0def4"; # 通常の文字（text）
+    fg_dim = "#908caa"; # 暗い文字（ステータスライン。subtle）
+    fg_muted = "#6e6a86"; # さらに暗い文字（行番号。muted）
 
-    sel0 = "#26233a"; # 選んでいる行の背景（fzf・lazygit など。overlay）
-    sel1 = "#403d52"; # 検索結果などの背景（highlight_med）
+    selection = "#26233a"; # 選んでいる行の背景（fzf・lazygit など。overlay）
+    search = "#403d52"; # 検索結果などの背景（highlight_med）
 
     # 差分の背景。決まった値は無いので、foam / love / rose を背景 base に混ぜた色
     # 行全体は 15%、行の中で実際に変わった部分（_emph）と diff_text は 30%
