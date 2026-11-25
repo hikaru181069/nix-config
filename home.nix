@@ -153,6 +153,14 @@ let
       done
     '';
   };
+  # "#rrggbb" を、ターミナルの色の指定（r;g;b）にする
+  rgb =
+    hex:
+    lib.concatMapStringsSep ";" (i: toString (lib.fromHexString (builtins.substring i 2 hex))) [
+      1
+      3
+      5
+    ];
   # tmux のセッションを選んで切り替える（tmux の prefix + g）。よく行くフォルダ（zoxide）を選ぶと、そこで新しいセッションを作る
   sesh-pick = pkgs.writeShellApplication {
     name = "sesh-pick";
@@ -162,7 +170,26 @@ let
       pkgs.zoxide
     ];
     text = ''
-      name=$(sesh list --tmux --zoxide --icons | fzf --ansi --no-sort --layout=reverse --prompt="セッション > ") || exit 0
+      # 1列目: 名前（sesh に渡す）、2列目: 見せる文字（アイコンと名前と、Claude Code の状態の ●）
+      # ● の色は tmux のバーと同じ（赤: 返事待ち / 黄: 作業中 / 緑: 指示待ち。セッションの中でいちばん急ぐもの）
+      # （macOS の awk は -v で改行の入った値を受け取れないので、環境変数で渡す）
+      states=$(tmux list-panes -a -F '#{session_name}	#{pane_current_command}	#{@claude}' 2>/dev/null || true)
+      name=$(
+        paste <(sesh list --tmux --zoxide) <(sesh list --tmux --zoxide --icons) | states="$states" awk -F '\t' '
+          function color(hex) { return sprintf("\033[38;2;%sm", hex) }
+          BEGIN {
+            rank["idle"] = 1; rank["working"] = 2; rank["waiting"] = 3
+            rgb[1] = "${rgb palette.green}"; rgb[2] = "${rgb palette.yellow}"; rgb[3] = "${rgb palette.red}"
+            n = split(ENVIRON["states"], lines, "\n")
+            for (i = 1; i <= n; i++) {
+              split(lines[i], f, "\t")
+              if (f[2] !~ /sh$/ && rank[f[3]] > best[f[1]]) best[f[1]] = rank[f[3]]
+            }
+          }
+          { print $1 "\t" $2 (best[$1] ? " " color(rgb[best[$1]]) "●\033[0m" : "") }
+        ' | fzf --ansi --no-sort --layout=reverse --delimiter="\t" --with-nth=2 --prompt="セッション > " | cut -f 1
+      ) || exit 0
+      [ -n "$name" ] || exit 0
       sesh connect "$name"
     '';
   };
