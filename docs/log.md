@@ -7,6 +7,19 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-25
 
+### Claude Code の状態を tmux のバーに出すようにした
+
+- herdr のような表示（どの AI が作業中か・返事待ちか）を、tmux のままで。ウィンドウの名前の右に ● を1つ出す。赤: 返事待ち、黄: 作業中、緑: 指示待ち（パネルが複数あるときは、この順で急ぐもの）。左端のセッション名の横には、ほかのセッションも含めた返事待ちの数だけ赤い ●
+- 仕組み: Claude Code の hooks（~/.claude/settings.json。Nix の外）が、状態の変わり目に claude-tmux を呼び、パネルのオプション @claude に記録する。tmux のバーはそれを読む。シェルに戻っているパネルの古い記録は見ない
+- 裏で動く Claude Code（デーモンにつながる形）は TMUX_PANE を持たないので、会話の番号と同じ番号の「claude attach 番号」（なければ親のプロセス）をたどり、端末（tty）が同じパネルを探す
+- 返事待ちは Notification（permission_prompt・elicitation_dialog）と、質問・計画の確認（AskUserQuestion・ExitPlanMode）で付き、次の道具の実行が終わると作業中に戻る
+
+### フォントを font コマンドで切り替えられるようにした
+
+- `font 名前`（`font` だけで一覧）。選べるのは jetbrains・lilex・blex・maple。定義は fonts.nix、今の値は font.nix。theme コマンドと同じように rebuild し、Ghostty と sketchybar が一緒に替わる（Ghostty は開き直す）
+- どれも 18.5pt で幅 22px。Lilex と Blex Mono は行の高さが 48px なので、1px 足して 49px にそろえる（余白とシェーダーは 49px で計算してある）。sketchybar の三角は、文字の高さの比率（lineRatio）で計算する
+- Lilex は IBM Plex Mono に合字を足したもの。Blex Mono（IBM Plex Mono の Nerd Font 版）には合字がない
+
 ### 日本語のフォントに Moralerspace を試したが、Maple Mono のままにした
 
 - 試し用の Ghostty で、日本語だけ Moralerspace Neon にして見比べた。設定は変えていない

@@ -9,11 +9,13 @@ WINDOW_MANAGER = "yabai"
 --- @type "arrows" | "islands"
 BAR_STYLE = "arrows"
 
--- ターミナル（Ghostty）と同じ JetBrains Mono。上下の高さ（ascender 1020・descender 300）が前の Maple Mono と同じなので、
--- 三角の大きさの計算（helpers/powerline.lua の HEIGHT / 1.32）はそのまま使える
+-- ターミナル（Ghostty）と同じフォント。font コマンドで選んだもの（home.nix が font.lua に書き出す）
+local font = dofile(os.getenv("HOME") .. "/.config-nix/sketchybar/font.lua")
 FONT = {
-  icon_font = "JetBrainsMono Nerd Font",
-  label_font = "JetBrainsMono Nerd Font",
+  icon_font = font.family,
+  label_font = font.family,
+  -- 文字の上端〜下端の高さ（文字の大きさの何倍か）。三角の大きさの計算に使う（helpers/powerline.lua）
+  line_ratio = font.lineRatio,
   style_map = {
     ["Regular"] = "Regular",
     ["Semibold"] = "SemiBold",

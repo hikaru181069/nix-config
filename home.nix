@@ -9,6 +9,8 @@ let
   palette = import ./palette.nix;
   # 使うテーマ（theme.nix）。色は palette、各ツールのテーマの名前（ghostty・bat・btop・k9s）はここから取る
   theme = import ./theme.nix;
+  # 使うフォント（font.nix）。大きさなどは fonts.nix
+  font = (import ./fonts.nix).${import ./font.nix};
   # true にすると、ターミナルを半透明にする。透けるのはテーマのメインの背景色（bg1）だけ。false のときの設定は何も変わらない
   # transparent.nix に書いてあり、`transparent` コマンドで切り替える
   transparent = import ./transparent.nix;
@@ -107,6 +109,87 @@ let
       # 壁紙を、新しいテーマのターミナルの背景と同じ色の無地にする（新しくできた theme コマンドに入っている画像を使う）
       "$(command -v theme)" --set-wallpaper || true
       echo "テーマを「''${name}」にしました。Neovim は開き直すと新しい色になります"
+    '';
+  };
+  # Claude Code の状態を、いまいる tmux のパネルに記録する（Claude Code の hooks から呼ばれる。~/.claude/settings.json）
+  # working: 作業中 / waiting: 返事待ち / idle: 指示待ち / clear: 終わった。tmux のバーの ● の色になる
+  claude-tmux = pkgs.writeShellApplication {
+    name = "claude-tmux";
+    text = ''
+      pane=''${TMUX_PANE:-}
+      # 裏で動く Claude Code は自分のパネルを知らない。画面側のプロセスの端末（tty）と同じパネルを探す
+      if [ -z "$pane" ]; then
+        panes=$(tmux list-panes -a -F '#{pane_tty} #{pane_id}' 2>/dev/null) || exit 0
+        pane_of() { awk -v t="/dev/$1" '$1 == t { print $2 }' <<<"$panes"; }
+        # 会話の番号（hooks は標準入力の JSON でも渡してくる）の頭で、つながっている「claude attach 番号」を探す
+        id=''${CLAUDE_CODE_SESSION_ID:-}
+        if [ -z "$id" ] && [ ! -t 0 ]; then
+          id=$(sed -n 's/.*"session_id" *: *"\([^"]*\)".*/\1/p' | head -n 1)
+        fi
+        if [ -n "$id" ]; then
+          tty=$(/bin/ps -axo tty=,command= | awk -v a="claude attach ''${id:0:8}" 'index($0, a) && !/awk/ { print $1; exit }')
+          [ -z "$tty" ] || pane=$(pane_of "$tty")
+        fi
+        # 見つからなければ、親のプロセスをたどる
+        pid=$PPID
+        while [ -z "$pane" ] && [ -n "$pid" ] && [ "$pid" -gt 1 ]; do
+          read -r parent tty <<<"$(/bin/ps -o ppid=,tty= -p "$pid")"
+          pane=$(pane_of "$tty")
+          pid=$parent
+        done
+      fi
+      [ -n "$pane" ] || exit 0
+      case "''${1:-}" in
+        working | waiting | idle) tmux set -p -t "$pane" @claude "$1" ;;
+        clear) tmux set -p -u -t "$pane" @claude ;;
+        *) exit 1 ;;
+      esac
+    '';
+  };
+  # フォントを切り替える（`font 名前`。`font` だけで一覧）
+  # font.nix を書き換え、今のテーマで theme コマンドを呼ぶ（rebuild と読み込み直し）。失敗したら元に戻す
+  font-switch = pkgs.writeShellApplication {
+    name = "font";
+    text = ''
+      dir="$HOME/nix-config"
+      file="$dir/font.nix"
+      current=$(tail -n 1 "$file" | tr -d '"')
+      names="${lib.concatStringsSep " " (lib.attrNames (import ./fonts.nix))}"
+      list() {
+        echo "使えるフォント（* が今のフォント）:"
+        for n in $names; do
+          if [ "$n" = "$current" ]; then echo "  * $n"; else echo "    $n"; fi
+        done
+      }
+      if [ $# -eq 0 ]; then
+        list
+        exit 0
+      fi
+      name=$1
+      case " $names " in
+        *" $name "*) ;;
+        *)
+          echo "フォント「''${name}」はありません" >&2
+          list >&2
+          exit 1
+          ;;
+      esac
+      if [ "$name" = "$current" ]; then
+        echo "もう「''${name}」です"
+        exit 0
+      fi
+      write() {
+        printf '%s\n"%s"\n' \
+          "# 使うフォント（fonts.nix の名前）。\`font 名前\` で書き換えて rebuild する（\`font\` だけで一覧）" \
+          "$1" >"$file"
+      }
+      write "$name"
+      if ! theme "$(sed -n 's|^import ./themes/\(.*\)\.nix$|\1|p' "$dir/theme.nix")"; then
+        write "$current"
+        echo "フォントを「''${current}」に戻しました" >&2
+        exit 1
+      fi
+      echo "フォントを「''${name}」にしました。Ghostty は Cmd-Q で終了して開き直してください"
     '';
   };
   # ターミナルの半透明を切り替える（`transparent on`・`transparent off`。`transparent` だけで今の状態）
@@ -582,6 +665,15 @@ in
       r = builtins.fromJSON ''"\ue0b0"'';
       rThin = builtins.fromJSON ''"\ue0b1"'';
       l = builtins.fromJSON ''"\ue0b2"'';
+      # Claude Code の状態（claude-tmux が記録した @claude）。ウィンドウの中のパネルを見て、いちばん急ぐものの色の ● を出す
+      # 赤: 返事待ち / 黄: 作業中 / 緑: 指示待ち。シェルに戻っているパネルの古い記録は見ない
+      claudePanes = "#{P:#{?#{m:*sh,#{pane_current_command}},,#{@claude}}}";
+      claudeDot =
+        "#{?#{m:*waiting*,${claudePanes}},#[fg=${p.red}]● ,"
+        + "#{?#{m:*working*,${claudePanes}},#[fg=${p.yellow}]● ,"
+        + "#{?#{m:*idle*,${claudePanes}},#[fg=${p.green}]● ,}}}";
+      # 返事待ちのパネルの数だけ赤い ●（ほかのセッションも含む）
+      claudeWaiting = "#[fg=${p.red}]#{S:#{W:#{P:#{?#{m:*sh,#{pane_current_command}},,#{?#{m:waiting,#{@claude}},● ,}}}}}";
       # ユーザー名のブロックと右端の三角の色。テーマのファイルに tmuxUser があれば、その色にする
       tmuxUser =
         theme.tmuxUser or {
@@ -661,7 +753,7 @@ in
 
       # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
       # 区切りの三角の一部は、旧環境と同じくブロックより1段明るい色にする（prefix 中の三角・ユーザー名の右端）
-      set -g status-left "#[fg=#{?client_prefix,${p.bg0},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg0}},bold] #S #[fg=#{?client_prefix,${p.cyan_light},${p.bg0}},bg=${tmuxUser.block},nobold]${r}#[fg=${p.bg0},bg=${tmuxUser.block},bold] #(whoami) #[fg=${tmuxUser.arrow},bg=${p.bg0},nobold]${r}"
+      set -g status-left "#[fg=#{?client_prefix,${p.bg0},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg0}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan_light},${p.bg0}},bg=${tmuxUser.block},nobold]${r}#[fg=${p.bg0},bg=${tmuxUser.block},bold] #(whoami) #[fg=${tmuxUser.arrow},bg=${p.bg0},nobold]${r}"
       # 右: 虹色の三角とホスト名
       set -g status-right "${rainbowArrows}#[fg=${p.fg3},bg=${p.bg0},bold] #h "
 
@@ -669,9 +761,9 @@ in
       setw -g window-status-separator ""
       setw -g window-status-style "fg=${p.comment},bg=${p.bg0}"
       setw -g window-status-activity-style "underscore,fg=${p.comment},bg=${p.bg0}"
-      setw -g window-status-format "#[fg=${p.bg0},bg=${p.bg0}]${r}#[default] #I ${rThin} #{b:pane_current_path} #[fg=${p.bg0},bg=${p.bg0}]${r}"
+      setw -g window-status-format "#[fg=${p.bg0},bg=${p.bg0}]${r}#[default] #I ${rThin} #{b:pane_current_path} ${claudeDot}#[fg=${p.bg0},bg=${p.bg0}]${r}"
       # 選んでいるウィンドウ: 番号の右の三角と右端の三角は、旧環境と同じくブロックより1段明るい色
-      setw -g window-status-current-format "#[fg=${p.bg0},bg=${p.fg1}]${r}#[fg=${p.fg3},bg=${p.fg1}] #I #[fg=${p.fg0},bg=${p.fg3}]${r} #{b:pane_current_path} #[fg=${p.comment},bg=${p.bg0}]${r}"
+      setw -g window-status-current-format "#[fg=${p.bg0},bg=${p.fg1}]${r}#[fg=${p.fg3},bg=${p.fg1}] #I #[fg=${p.fg0},bg=${p.fg3}]${r} #{b:pane_current_path} ${claudeDot}#[fg=${p.comment},bg=${p.bg0}]${r}"
     ''
   );
   # プロジェクトのフォルダに入ると、その .envrc（flake.nix の devShell）の環境に自動で切り替わる
@@ -760,8 +852,15 @@ in
     pkgs.sketchybar-app-font
     # ターミナル（Ghostty）のフォント
     pkgs.nerd-fonts.jetbrains-mono
+    # font コマンドで選べるフォント（fonts.nix。Maple Mono は cask で入れている）
+    pkgs.nerd-fonts.blex-mono
+    pkgs.nerd-fonts.lilex
     # テーマを切り替える（theme 名前）
     theme-switch
+    # Claude Code の状態を tmux に伝える（hooks から呼ぶ）
+    claude-tmux
+    # フォントを切り替える（font 名前）
+    font-switch
     # 半透明を切り替える（transparent on / off）
     transparent-switch
     # よく打つコマンドに名前を付けて呼ぶ（プロジェクトの justfile に書く。Makefile の代わり）
@@ -920,6 +1019,8 @@ in
     + lib.generators.toLua { } (
       palette // lib.optionalAttrs (theme ? frontApp) { front_app = theme.frontApp; }
     );
+  # 文字のフォント（sketchybar/settings.lua が読む）
+  xdg.configFile."sketchybar/font.lua".text = "return " + lib.generators.toLua { } font;
   # 右側の区切りの画像（sketchybar/items/init.lua）。テーマの fg3 の色で作る
   xdg.configFile."sketchybar/sep_thin_left.png".source =
     pkgs.runCommand "sep-thin-left.png" { nativeBuildInputs = [ pkgs.imagemagick ]; }
@@ -932,12 +1033,14 @@ in
     enable = true;
     package = null;
     settings = {
-      # 英字は JetBrains Mono（Nerd Font 版）。日本語は入っていないので、Maple Mono CN に任せる
-      # JetBrains Mono の上下の高さ（ascender 1020・descender 300）は Maple Mono と同じなので、行の高さは変わらない
+      # 英字は font コマンドで選んだもの（fonts.nix）。日本語は Maple Mono CN に任せる
+      # 行の高さがどのフォントでも 49px になるよう、足りない分を足す（カーソルも同じだけ高くする）
       font-family = [
-        "JetBrainsMono Nerd Font"
+        font.family
         "Maple Mono NF CN"
       ];
+      adjust-cell-height = font.adjust;
+      adjust-cursor-height = font.adjust;
       font-size = 18.5;
       window-width = 130;
       window-height = 38;
