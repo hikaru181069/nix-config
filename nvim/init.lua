@@ -61,8 +61,8 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
   -- 各言語のスニペット集（VS Code 形式。blink.cmp が読む）
   "https://github.com/rafamadriz/friendly-snippets",
-  -- ファイルツリー（devicons はファイルの種類のアイコン）
-  "https://github.com/nvim-tree/nvim-web-devicons",
+  -- ファイルツリー（material-icon はファイルの種類のアイコン。VS Code の Material Icon 風で、nvim-web-devicons の代わりにそのまま使える）
+  "https://github.com/DaikyXendo/nvim-material-icon",
   "https://github.com/nvim-tree/nvim-tree.lua",
   -- 保存時の整形（prettier・ruff・stylua を呼ぶ）
   "https://github.com/stevearc/conform.nvim",

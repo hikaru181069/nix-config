@@ -1,0 +1,7930 @@
+{
+ "extensions": {
+  ".zsh_history": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  ".zshrc": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "7z": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "a": {
+   "color": "#8bc34a",
+   "icon": "\udb85\udd17"
+  },
+  "a51": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "abc": {
+   "color": "#ff5821",
+   "icon": "\udb83\udf70"
+  },
+  "ac": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "accda": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "accdb": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "accdc": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "accde": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "accdp": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "accdr": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "accdt": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "accdu": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "act": {
+   "color": "#4fc3f7",
+   "icon": "\ue22b"
+  },
+  "ada": {
+   "color": "#0277bd",
+   "icon": "\udb85\uddc6"
+  },
+  "adb": {
+   "color": "#0277bd",
+   "icon": "\udb85\uddc6"
+  },
+  "ade": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "adp": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "ads": {
+   "color": "#0277bd",
+   "icon": "\udb85\uddc6"
+  },
+  "aea": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "afphoto": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "agc": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "age": {
+   "color": "#fed836",
+   "icon": "\ueafa"
+  },
+  "ags": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "ahk": {
+   "color": "#4caf51",
+   "icon": "\uf0fd"
+  },
+  "ai": {
+   "color": "#ffb74d",
+   "icon": "\ue669"
+  },
+  "aiff": {
+   "color": "#ee534f",
+   "icon": "\udb80\udf86"
+  },
+  "ait": {
+   "color": "#ffb74d",
+   "icon": "\ue669"
+  },
+  "ali": {
+   "color": "#0277bd",
+   "icon": "\udb85\uddc6"
+  },
+  "alloy": {
+   "color": "#ff6f00",
+   "icon": "\ue7f3"
+  },
+  "ami": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "amx": {
+   "color": "#ef6c02",
+   "icon": "\udb82\udc59"
+  },
+  "apex": {
+   "color": "#009ce5",
+   "icon": "\udb82\udc8e"
+  },
+  "apk": {
+   "color": "#8bc34a",
+   "icon": "\ue70e"
+  },
+  "applescript": {
+   "color": "#78919c",
+   "icon": "\uf302"
+  },
+  "apx": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "argus": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "asc": {
+   "color": "#25a79a",
+   "icon": "\udb80\udf06"
+  },
+  "ase": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "aseprite": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "asm": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "asp": {
+   "color": "#e44e27",
+   "icon": "\uf13b"
+  },
+  "astro": {
+   "color": "#ff6d00",
+   "icon": "\ue6b3"
+  },
+  "avi": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "avif": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "awk": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "azcli": {
+   "color": "#2088e5",
+   "icon": "\uebd8"
+  },
+  "azure-pipelines-main.yaml": {
+   "color": "#2088e5",
+   "icon": "\udb85\udcde"
+  },
+  "azure-pipelines-main.yml": {
+   "color": "#2088e5",
+   "icon": "\udb85\udcde"
+  },
+  "azure-pipelines.yaml": {
+   "color": "#2088e5",
+   "icon": "\udb85\udcde"
+  },
+  "azure-pipelines.yml": {
+   "color": "#2088e5",
+   "icon": "\udb85\udcde"
+  },
+  "b": {
+   "color": "#ff4081",
+   "icon": "\udb82\uddd1"
+  },
+  "bash": {
+   "color": "#ff7043",
+   "icon": "\uebca"
+  },
+  "bat": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "bats": {
+   "color": "#d2d2d2",
+   "icon": "\udb82\udf5f"
+  },
+  "bazel": {
+   "color": "#44a047",
+   "icon": "\ue63a"
+  },
+  "bbx": {
+   "color": "#f54436",
+   "icon": "\uf02d"
+  },
+  "bf": {
+   "color": "#ff4081",
+   "icon": "\udb82\uddd1"
+  },
+  "bib": {
+   "color": "#8bc34a",
+   "icon": "\udb85\udd17"
+  },
+  "bicep": {
+   "color": "#fbc02d",
+   "icon": "\udb83\udfd7"
+  },
+  "bin": {
+   "color": "#25a79a",
+   "icon": "\udb84\udea7"
+  },
+  "binsource": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "blade.php": {
+   "color": "#ff5252",
+   "icon": "\uf2f7"
+  },
+  "blend": {
+   "color": "#ed8f30",
+   "icon": "\udb80\udcab"
+  },
+  "bmap": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "bmp": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "bpg": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "br": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "brk": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "brotli": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "bz2": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "bzip2": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "bzl": {
+   "color": "#44a047",
+   "icon": "\ue63a"
+  },
+  "c": {
+   "color": "#0188d1",
+   "icon": "\ue649"
+  },
+  "c++": {
+   "color": "#0188d1",
+   "icon": "\ue646"
+  },
+  "cake": {
+   "color": "#ff7043",
+   "icon": "\uf1fd"
+  },
+  "cc": {
+   "color": "#0188d1",
+   "icon": "\ue646"
+  },
+  "cer": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "cert": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "cfc": {
+   "color": "#ff4081",
+   "icon": "\ue645"
+  },
+  "cfg": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "cfm": {
+   "color": "#ff4081",
+   "icon": "\ue645"
+  },
+  "cfml": {
+   "color": "#ff4081",
+   "icon": "\ue645"
+  },
+  "cjs.map": {
+   "color": "#ffca29",
+   "icon": "\ue60c"
+  },
+  "cl": {
+   "color": "#ef5351",
+   "icon": "\ue6b0"
+  },
+  "class": {
+   "color": "#2088e5",
+   "icon": "\uf0f4"
+  },
+  "clip": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "clj": {
+   "color": "#2ab6f6",
+   "icon": "\ue642"
+  },
+  "cljc": {
+   "color": "#2ab6f6",
+   "icon": "\ue642"
+  },
+  "cljs": {
+   "color": "#2ab6f6",
+   "icon": "\ue642"
+  },
+  "cmake": {
+   "color": "#e63936",
+   "icon": "\ue794"
+  },
+  "cmd": {
+   "color": "#ff7043",
+   "icon": "\uebc4"
+  },
+  "cmx": {
+   "color": "#ff9800",
+   "icon": "\ue67a"
+  },
+  "coafile": {
+   "color": "#90a4ae",
+   "icon": "\udb85\udf3f"
+  },
+  "coarc": {
+   "color": "#90a4ae",
+   "icon": "\udb85\udf3f"
+  },
+  "code-profile": {
+   "color": "#2296f3",
+   "icon": "\udb82\ude1e"
+  },
+  "code-search": {
+   "color": "#42a5f5",
+   "icon": "\udb83\udc7c"
+  },
+  "code-snippets": {
+   "color": "#2296f3",
+   "icon": "\udb82\ude1e"
+  },
+  "code-workplace": {
+   "color": "#2296f3",
+   "icon": "\udb82\ude1e"
+  },
+  "code-workspace": {
+   "color": "#2296f3",
+   "icon": "\udb82\ude1e"
+  },
+  "coffee": {
+   "color": "#6f4e38",
+   "icon": "\ue61b"
+  },
+  "command": {
+   "color": "#90a4ae",
+   "icon": "\udb81\ude33"
+  },
+  "comp": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "comp.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "comp.hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "component.js": {
+   "color": "#1976d3",
+   "icon": "\ued4b"
+  },
+  "component.ts": {
+   "color": "#1976d3",
+   "icon": "\ued4b"
+  },
+  "compute.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "compute.hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "computeshader": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "conf": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "config": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "cp": {
+   "color": "#0188d1",
+   "icon": "\ue646"
+  },
+  "cpp": {
+   "color": "#0188d1",
+   "icon": "\ue646"
+  },
+  "cpt": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "cr": {
+   "color": "#cfd8dd",
+   "icon": "\ue62f"
+  },
+  "crt": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "crx": {
+   "color": "#42a5f5",
+   "icon": "\uf268"
+  },
+  "cs": {
+   "color": "#0188d1",
+   "icon": "\udb80\udf1b"
+  },
+  "csh": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "csharp": {
+   "color": "#0188d1",
+   "icon": "\udb80\udf1b"
+  },
+  "cshtml": {
+   "color": "#42a5f5",
+   "icon": "\uf486"
+  },
+  "cson": {
+   "color": "#6f4e38",
+   "icon": "\ue61b"
+  },
+  "csproj": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "css": {
+   "color": "#42a5f5",
+   "icon": "\ue749"
+  },
+  "css.map": {
+   "color": "#42a5f5",
+   "icon": "\uf13c"
+  },
+  "csv": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude1b"
+  },
+  "csx": {
+   "color": "#0188d1",
+   "icon": "\udb80\udf1b"
+  },
+  "cur": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "cxx": {
+   "color": "#0188d1",
+   "icon": "\ue646"
+  },
+  "cy.js": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "cy.jsx": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "cy.tsx": {
+   "color": "#0188d1",
+   "icon": "\uf499"
+  },
+  "d": {
+   "color": "#f54436",
+   "icon": "\ue7af"
+  },
+  "d.cts": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "d.mts": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "d.ts": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "dart": {
+   "color": "#59b6f0",
+   "icon": "\ue64c"
+  },
+  "dat": {
+   "color": "#25a79a",
+   "icon": "\udb84\udea7"
+  },
+  "db": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "db3": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "dblite": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "dblite3": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "dds": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "deb": {
+   "color": "#d80651",
+   "icon": "\uebc5"
+  },
+  "debugsymbols": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "dex": {
+   "color": "#8bc34a",
+   "icon": "\ue70e"
+  },
+  "dfxp": {
+   "color": "#ff9800",
+   "icon": "\udb82\ude16"
+  },
+  "dhall": {
+   "color": "#78919c",
+   "icon": "\udb83\udd13"
+  },
+  "dhallb": {
+   "color": "#78919c",
+   "icon": "\udb83\udd13"
+  },
+  "diff": {
+   "color": "#42a5f5",
+   "icon": "\uf4d2"
+  },
+  "directive.js": {
+   "color": "#ab48bc",
+   "icon": "\ued4b"
+  },
+  "directive.ts": {
+   "color": "#ab48bc",
+   "icon": "\ued4b"
+  },
+  "django-html": {
+   "color": "#44a047",
+   "icon": "\ue71d"
+  },
+  "django-txt": {
+   "color": "#44a047",
+   "icon": "\ue71d"
+  },
+  "djt": {
+   "color": "#44a047",
+   "icon": "\ue71d"
+  },
+  "dlc": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "dll": {
+   "color": "#42a5f5",
+   "icon": "\udb84\udc7c"
+  },
+  "dmg": {
+   "color": "#b1bec5",
+   "icon": "\uede9"
+  },
+  "dmn": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "dng": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "doc": {
+   "color": "#0188d1",
+   "icon": "\udb80\ude2c"
+  },
+  "docx": {
+   "color": "#0188d1",
+   "icon": "\udb80\ude2c"
+  },
+  "drone.yml": {
+   "color": "#cfd8dd",
+   "icon": "\udb81\udc1d"
+  },
+  "dsc": {
+   "color": "#ffd550",
+   "icon": "\ue651"
+  },
+  "dtd": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "dtx": {
+   "color": "#42a5f5",
+   "icon": "\ue69b"
+  },
+  "duc": {
+   "color": "#ff5252",
+   "icon": "\udb80\udde5"
+  },
+  "duc.fbs": {
+   "color": "#ff5252",
+   "icon": "\udb80\udde5"
+  },
+  "dxf": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "e2e-spec.cjs": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "e2e-spec.js": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "e2e-spec.mjs": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "ecr": {
+   "color": "#cfd8dd",
+   "icon": "\ue62f"
+  },
+  "edge": {
+   "color": "#ef6c02",
+   "icon": "\uf486"
+  },
+  "eex": {
+   "color": "#9575ce",
+   "icon": "\ue62d"
+  },
+  "el": {
+   "color": "#805eb7",
+   "icon": "\ue632"
+  },
+  "elc": {
+   "color": "#805eb7",
+   "icon": "\ue632"
+  },
+  "elm": {
+   "color": "#60b6cc",
+   "icon": "\ue62c"
+  },
+  "eot": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "eps": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "erb": {
+   "color": "#f54436",
+   "icon": "\udb83\udd2d"
+  },
+  "erl": {
+   "color": "#f54436",
+   "icon": "\uf23f"
+  },
+  "esx": {
+   "color": "#ffca29",
+   "icon": "\udb80\udf1e"
+  },
+  "ex": {
+   "color": "#9575ce",
+   "icon": "\ue62d"
+  },
+  "exe": {
+   "color": "#e64a19",
+   "icon": "\uf2d0"
+  },
+  "exp": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "exr": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "exrc": {
+   "color": "#44a047",
+   "icon": "\ue62b"
+  },
+  "exs": {
+   "color": "#9575ce",
+   "icon": "\ue62d"
+  },
+  "f": {
+   "color": "#ff7043",
+   "icon": "\udb84\ude1a"
+  },
+  "f03": {
+   "color": "#ff7043",
+   "icon": "\udb84\ude1a"
+  },
+  "f08": {
+   "color": "#ff7043",
+   "icon": "\udb84\ude1a"
+  },
+  "f77": {
+   "color": "#ff7043",
+   "icon": "\udb84\ude1a"
+  },
+  "f90": {
+   "color": "#ff7043",
+   "icon": "\udb84\ude1a"
+  },
+  "f95": {
+   "color": "#ff7043",
+   "icon": "\udb84\ude1a"
+  },
+  "fast": {
+   "color": "#ef5351",
+   "icon": "\ue6b0"
+  },
+  "fbx": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "feature": {
+   "color": "#4caf51",
+   "icon": "\ue7b7"
+  },
+  "features": {
+   "color": "#4caf51",
+   "icon": "\ue7b7"
+  },
+  "fen": {
+   "color": "#cfd8dd",
+   "icon": "\udb82\udc57"
+  },
+  "fig": {
+   "color": "#f4521e",
+   "icon": "\uef47"
+  },
+  "fish": {
+   "color": "#ff7043",
+   "icon": "\udb80\ude3a"
+  },
+  "flac": {
+   "color": "#ee534f",
+   "icon": "\udb80\udf86"
+  },
+  "flv": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "fnt": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "font": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "fonts": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "fpx": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "frag": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "frag.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "fragment.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "fragmentshader": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "freezed.dart": {
+   "color": "#90a4ae",
+   "icon": "\ue64c"
+  },
+  "fs": {
+   "color": "#31b9db",
+   "icon": "\ue7a7"
+  },
+  "fs.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "fsi": {
+   "color": "#31b9db",
+   "icon": "\ue7a7"
+  },
+  "fsproj": {
+   "color": "#31b9db",
+   "icon": "\ue7a7"
+  },
+  "fsx": {
+   "color": "#31b9db",
+   "icon": "\ue7a7"
+  },
+  "g.dart": {
+   "color": "#90a4ae",
+   "icon": "\ue64c"
+  },
+  "g4": {
+   "color": "#f54436",
+   "icon": "\udb84\udc9a"
+  },
+  "gbr": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "gd": {
+   "color": "#42a5f5",
+   "icon": "\ue65f"
+  },
+  "gdextension": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "gdnlib": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "gdns": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "gdshader": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "gdshaderinc": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "gemini": {
+   "color": "#82c784",
+   "icon": "\udb81\udd9f"
+  },
+  "geom": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "geom.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "geom.hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "geometry.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "geometry.hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "geometryshader": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "gif": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "gifv": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "gitlab-ci.yml": {
+   "color": "#e63936",
+   "icon": "\uf296"
+  },
+  "glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "gmi": {
+   "color": "#82c784",
+   "icon": "\udb81\udd9f"
+  },
+  "gnu": {
+   "color": "#2088e5",
+   "icon": "\udb80\udd2a"
+  },
+  "go": {
+   "color": "#02acc1",
+   "icon": "\udb81\udfd3"
+  },
+  "godot": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "gpg": {
+   "color": "#25a79a",
+   "icon": "\udb80\udf06"
+  },
+  "gpl": {
+   "color": "#4fc3f7",
+   "icon": "\ue22b"
+  },
+  "gql": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "gradle": {
+   "color": "#0397a7",
+   "icon": "\ue660"
+  },
+  "graphql": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "gs.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "guard.js": {
+   "color": "#44a047",
+   "icon": "\ued4b"
+  },
+  "guard.ts": {
+   "color": "#44a047",
+   "icon": "\ued4b"
+  },
+  "gvimrc": {
+   "color": "#44a047",
+   "icon": "\ue62b"
+  },
+  "gz": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "gzip": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "h": {
+   "color": "#0188d1",
+   "icon": "\udb82\udc29"
+  },
+  "h++": {
+   "color": "#0188d1",
+   "icon": "\uf0fd"
+  },
+  "haml": {
+   "color": "#f4521e",
+   "icon": "\ue664"
+  },
+  "haxe": {
+   "color": "#fc8d00",
+   "icon": "\ue7fa"
+  },
+  "hbs": {
+   "color": "#ff7043",
+   "icon": "\udb85\uddde"
+  },
+  "hdd": {
+   "color": "#b1bec5",
+   "icon": "\uede9"
+  },
+  "heex": {
+   "color": "#9575ce",
+   "icon": "\ue62d"
+  },
+  "heic": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "heif": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "hex": {
+   "color": "#25a79a",
+   "icon": "\udb84\udea7"
+  },
+  "hh": {
+   "color": "#0188d1",
+   "icon": "\uf0fd"
+  },
+  "hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "hp": {
+   "color": "#0188d1",
+   "icon": "\uf0fd"
+  },
+  "hpp": {
+   "color": "#0188d1",
+   "icon": "\uf0fd"
+  },
+  "hs": {
+   "color": "#ffa726",
+   "icon": "\ue61f"
+  },
+  "htm": {
+   "color": "#e44e27",
+   "icon": "\uf13b"
+  },
+  "html": {
+   "color": "#e44e27",
+   "icon": "\uf13b"
+  },
+  "html_vm": {
+   "color": "#e44e27",
+   "icon": "\uf13b"
+  },
+  "http": {
+   "color": "#e63936",
+   "icon": "\udb81\udd9f"
+  },
+  "huff": {
+   "color": "#cfd8dd",
+   "icon": "\ued63"
+  },
+  "hx": {
+   "color": "#f68713",
+   "icon": "\ue666"
+  },
+  "hxml": {
+   "color": "#fc8d00",
+   "icon": "\ue7fa"
+  },
+  "hxx": {
+   "color": "#0188d1",
+   "icon": "\uf0fd"
+  },
+  "i": {
+   "color": "#0188d1",
+   "icon": "\ue649"
+  },
+  "ibc": {
+   "color": "#f54436",
+   "icon": "\udb81\uded3"
+  },
+  "iced": {
+   "color": "#6f4e38",
+   "icon": "\ue61b"
+  },
+  "icns": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "ico": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "ics": {
+   "color": "#42a5f5",
+   "icon": "\udb80\uddee"
+  },
+  "idr": {
+   "color": "#f54436",
+   "icon": "\udb81\uded3"
+  },
+  "ii": {
+   "color": "#0188d1",
+   "icon": "\ue646"
+  },
+  "ilk": {
+   "color": "#42a5f5",
+   "icon": "\udb84\udc7c"
+  },
+  "img": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "iml": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "inc": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "ini": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "inky.php": {
+   "color": "#ff5252",
+   "icon": "\uf2f7"
+  },
+  "inl": {
+   "color": "#0188d1",
+   "icon": "\uf0fd"
+  },
+  "ino": {
+   "color": "#01979d",
+   "icon": "\uf34b"
+  },
+  "ipa": {
+   "color": "#78919c",
+   "icon": "\uf302"
+  },
+  "ipynb": {
+   "color": "#f57d01",
+   "icon": "\udb82\udc2e"
+  },
+  "iso": {
+   "color": "#b1bec5",
+   "icon": "\uede9"
+  },
+  "iuml": {
+   "color": "#f06293",
+   "icon": "\ue8cb"
+  },
+  "j2": {
+   "color": "#bdbdbd",
+   "icon": "\ue66f"
+  },
+  "jade": {
+   "color": "#f0cca3",
+   "icon": "\ue686"
+  },
+  "jar": {
+   "color": "#f54436",
+   "icon": "\udb81\udeca"
+  },
+  "java": {
+   "color": "#f54436",
+   "icon": "\uf0f4"
+  },
+  "jb2": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "jbig2": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "jenkins": {
+   "color": "#f0d7b7",
+   "icon": "\uf2ec"
+  },
+  "jfif": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "jinja": {
+   "color": "#bdbdbd",
+   "icon": "\ue66f"
+  },
+  "jinja-html": {
+   "color": "#bdbdbd",
+   "icon": "\ue66f"
+  },
+  "jinja2": {
+   "color": "#bdbdbd",
+   "icon": "\ue66f"
+  },
+  "jl": {
+   "color": "#338a23",
+   "icon": "\ue624"
+  },
+  "jng": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "jpeg": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "jpg": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "jrxml": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "js": {
+   "color": "#ffca29",
+   "icon": "\udb80\udf1e"
+  },
+  "js.map": {
+   "color": "#ffca29",
+   "icon": "\ue60c"
+  },
+  "js.snap": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "json": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  "json5": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  "jsonc": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  "jsonl": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  "jsp": {
+   "color": "#f54436",
+   "icon": "\uf0f4"
+  },
+  "jsx": {
+   "color": "#ffca29",
+   "icon": "\ued46"
+  },
+  "jsx.snap": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "jxr": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "key": {
+   "color": "#25a79a",
+   "icon": "\udb80\udf06"
+  },
+  "kra": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "ksh": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "kt": {
+   "color": "#1a95d9",
+   "icon": "\ue634"
+  },
+  "kts": {
+   "color": "#1a95d9",
+   "icon": "\ue634"
+  },
+  "laccdb": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "lang": {
+   "color": "#7986cb",
+   "icon": "\udb81\uddca"
+  },
+  "ldb": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "leex": {
+   "color": "#9575ce",
+   "icon": "\ue62d"
+  },
+  "less": {
+   "color": "#0277bd",
+   "icon": "\ued48"
+  },
+  "lib": {
+   "color": "#8bc34a",
+   "icon": "\udb85\udd17"
+  },
+  "liquid": {
+   "color": "#2ab6f6",
+   "icon": "\uf043"
+  },
+  "lisp": {
+   "color": "#ef5351",
+   "icon": "\ue6b0"
+  },
+  "lock": {
+   "color": "#ffd550",
+   "icon": "\uf023"
+  },
+  "log": {
+   "color": "#afb42b",
+   "icon": "\uf0f6"
+  },
+  "lol": {
+   "color": "#ef5351",
+   "icon": "\udb80\udd1b"
+  },
+  "lrc": {
+   "color": "#4fc6ef",
+   "icon": "\udb80\ude23"
+  },
+  "ls": {
+   "color": "#317fac",
+   "icon": "\ue671"
+  },
+  "lsp": {
+   "color": "#ef5351",
+   "icon": "\ue6b0"
+  },
+  "ltx": {
+   "color": "#42a5f5",
+   "icon": "\ue69b"
+  },
+  "lua": {
+   "color": "#42a5f5",
+   "icon": "\ue620"
+  },
+  "luau": {
+   "color": "#007ABF",
+   "icon": "\ue620"
+  },
+  "lucee": {
+   "color": "#ff4081",
+   "icon": "\ue645"
+  },
+  "ly": {
+   "color": "#66bb6b",
+   "icon": "\uf001"
+  },
+  "lz4": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "lzma": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "m": {
+   "color": "#ff6f00",
+   "icon": "\ue649"
+  },
+  "m2v": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "m4a": {
+   "color": "#ee534f",
+   "icon": "\udb80\udf86"
+  },
+  "m4v": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "mam": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "manifest": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "maq": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "markdown": {
+   "color": "#42a5f5",
+   "icon": "\ueb1d"
+  },
+  "mca": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcaddon": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcfunction": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcgame": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mclevel": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcmeta": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcpack": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcproject": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcr": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcstructure": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mctemplate": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mcworld": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "md": {
+   "color": "#42a5f5",
+   "icon": "\ueb1d"
+  },
+  "mdb": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "mdp": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "mdw": {
+   "color": "#a22936",
+   "icon": "\udb84\udf8e"
+  },
+  "mdx": {
+   "color": "#ffca29",
+   "icon": "\ueb1d"
+  },
+  "merlin": {
+   "color": "#42a5f5",
+   "icon": "\ue673"
+  },
+  "mesh": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "mi": {
+   "color": "#0188d1",
+   "icon": "\ue649"
+  },
+  "mii": {
+   "color": "#0188d1",
+   "icon": "\ue646"
+  },
+  "mine": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mint": {
+   "color": "#44a047",
+   "icon": "\ue7a4"
+  },
+  "mitigus": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "mjs": {
+   "color": "#ffca29",
+   "icon": "\udb80\udf1e"
+  },
+  "mjs.map": {
+   "color": "#ffca29",
+   "icon": "\ue60c"
+  },
+  "mkv": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "ml": {
+   "color": "#ff9800",
+   "icon": "\ue67a"
+  },
+  "mli": {
+   "color": "#ff9800",
+   "icon": "\ue67a"
+  },
+  "mo": {
+   "color": "#7986cb",
+   "icon": "\udb81\uddca"
+  },
+  "module.js": {
+   "color": "#e63936",
+   "icon": "\ued4b"
+  },
+  "module.ts": {
+   "color": "#e63936",
+   "icon": "\ued4b"
+  },
+  "modulemap": {
+   "color": "#8bc34a",
+   "icon": "\uec05"
+  },
+  "mojo": {
+   "color": "#ff7043",
+   "icon": "\ue780"
+  },
+  "moon": {
+   "color": "#fbc02d",
+   "icon": "\uf186"
+  },
+  "mov": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "mp2": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "mp3": {
+   "color": "#ee534f",
+   "icon": "\udb80\udf86"
+  },
+  "mp4": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "mpe": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "mpeg": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "mpg": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "mpv": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "mqo": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "mrf": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "ms": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "msi": {
+   "color": "#e64a19",
+   "icon": "\uf2d0"
+  },
+  "mus": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "mustache": {
+   "color": "#ff7043",
+   "icon": "\udb85\uddde"
+  },
+  "mxml": {
+   "color": "#ffa726",
+   "icon": "\udb80\ude2e"
+  },
+  "nasm": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "ndjson": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  "ng-template": {
+   "color": "#e63936",
+   "icon": "\ued4b"
+  },
+  "nginx": {
+   "color": "#44a047",
+   "icon": "\ue776"
+  },
+  "nginxconf": {
+   "color": "#44a047",
+   "icon": "\ue776"
+  },
+  "nginxconfig": {
+   "color": "#44a047",
+   "icon": "\ue776"
+  },
+  "nim": {
+   "color": "#ffca29",
+   "icon": "\ue677"
+  },
+  "nimble": {
+   "color": "#ffca29",
+   "icon": "\ue677"
+  },
+  "nix": {
+   "color": "#5175c2",
+   "icon": "\uf313"
+  },
+  "njk": {
+   "color": "#388e3c",
+   "icon": "\ue679"
+  },
+  "ntf": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "nu": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "nunjucks": {
+   "color": "#388e3c",
+   "icon": "\ue679"
+  },
+  "o": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "obj": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "odp": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "ods": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude1b"
+  },
+  "odt": {
+   "color": "#0188d1",
+   "icon": "\udb80\ude2c"
+  },
+  "odttf": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "ogg": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "ogv": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "opam": {
+   "color": "#ff9800",
+   "icon": "\ue67a"
+  },
+  "option": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "ora": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "otf": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "p": {
+   "color": "#ef5351",
+   "icon": "\udb80\udfd2"
+  },
+  "pal": {
+   "color": "#4fc3f7",
+   "icon": "\ue22b"
+  },
+  "pas": {
+   "color": "#0188d1",
+   "icon": "\udb80\udfe3"
+  },
+  "passwd": {
+   "color": "#25a79a",
+   "icon": "\udb80\udf06"
+  },
+  "pbm": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "pdb": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "pdf": {
+   "color": "#ef5351",
+   "icon": "\uf1c1"
+  },
+  "pdn": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "pem": {
+   "color": "#25a79a",
+   "icon": "\udb80\udf06"
+  },
+  "pgf": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "pgm": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "pgn": {
+   "color": "#cfd8dd",
+   "icon": "\udb82\udc57"
+  },
+  "pgsql": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "php": {
+   "color": "#2088e5",
+   "icon": "\udb80\udf1f"
+  },
+  "pic": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "pine": {
+   "color": "#66bb6b",
+   "icon": "\udb81\udc05"
+  },
+  "pipe.js": {
+   "color": "#ff7043",
+   "icon": "\ued4b"
+  },
+  "pipe.ts": {
+   "color": "#ff7043",
+   "icon": "\ued4b"
+  },
+  "pipeline": {
+   "color": "#f57f19",
+   "icon": "\ue680"
+  },
+  "pixel.hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "pkb": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "pkl": {
+   "color": "#699f37",
+   "icon": "\uf013"
+  },
+  "pks": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "pl": {
+   "color": "#ef5351",
+   "icon": "\udb80\udfd2"
+  },
+  "plantuml": {
+   "color": "#f06293",
+   "icon": "\ue8cb"
+  },
+  "plist": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "plpgsql": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "pm": {
+   "color": "#9575ce",
+   "icon": "\ue769"
+  },
+  "pmd": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "pmx": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "png": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "pnm": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "po": {
+   "color": "#7986cb",
+   "icon": "\udb81\uddca"
+  },
+  "postgres": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "pot": {
+   "color": "#7986cb",
+   "icon": "\udb81\uddca"
+  },
+  "potm": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "potx": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "ppa": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "ppam": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "ppm": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "pps": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "ppsm": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "ppsx": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "ppt": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "pptm": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "pptx": {
+   "color": "#d14525",
+   "icon": "\udb80\ude27"
+  },
+  "prefs": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "prisma": {
+   "color": "#00bfa5",
+   "icon": "\ue684"
+  },
+  "pro": {
+   "color": "#ef5351",
+   "icon": "\udb80\udfd2"
+  },
+  "project": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "prop": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "properties": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "props": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "ps1": {
+   "color": "#04a9f4",
+   "icon": "\udb82\ude0a"
+  },
+  "ps1xml": {
+   "color": "#04a9f4",
+   "icon": "\udb82\ude0a"
+  },
+  "psb": {
+   "color": "#64b6f7",
+   "icon": "\ue67f"
+  },
+  "psc1": {
+   "color": "#04a9f4",
+   "icon": "\udb82\ude0a"
+  },
+  "psd": {
+   "color": "#64b6f7",
+   "icon": "\ue67f"
+  },
+  "psd1": {
+   "color": "#04a9f4",
+   "icon": "\udb82\ude0a"
+  },
+  "psdt": {
+   "color": "#64b6f7",
+   "icon": "\ue67f"
+  },
+  "psm1": {
+   "color": "#04a9f4",
+   "icon": "\udb82\ude0a"
+  },
+  "psql": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "pssc": {
+   "color": "#04a9f4",
+   "icon": "\udb82\ude0a"
+  },
+  "psv": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude1b"
+  },
+  "pu": {
+   "color": "#f06293",
+   "icon": "\ue8cb"
+  },
+  "pub": {
+   "color": "#25a79a",
+   "icon": "\udb80\udf06"
+  },
+  "pug": {
+   "color": "#f0cca3",
+   "icon": "\ue686"
+  },
+  "puml": {
+   "color": "#f06293",
+   "icon": "\ue8cb"
+  },
+  "puppet": {
+   "color": "#fbc02d",
+   "icon": "\ue631"
+  },
+  "pure": {
+   "color": "#42a5f5",
+   "icon": "\ue630"
+  },
+  "purs": {
+   "color": "#42a5f5",
+   "icon": "\ue630"
+  },
+  "pwn": {
+   "color": "#ef6c02",
+   "icon": "\udb82\udc59"
+  },
+  "px.hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "py": {
+   "color": "#3a87cb",
+   "icon": "\ued1b"
+  },
+  "qcow": {
+   "color": "#b1bec5",
+   "icon": "\uede9"
+  },
+  "qcow2": {
+   "color": "#b1bec5",
+   "icon": "\uede9"
+  },
+  "qed": {
+   "color": "#b1bec5",
+   "icon": "\uede9"
+  },
+  "qml": {
+   "color": "#42cd52",
+   "icon": "\uf375"
+  },
+  "qt": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "r": {
+   "color": "#1976d3",
+   "icon": "\ue68a"
+  },
+  "raku": {
+   "color": "#9575ce",
+   "icon": "\ue769"
+  },
+  "raml": {
+   "color": "#42a5f5",
+   "icon": "\udb81\ude26"
+  },
+  "rar": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "raw": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "rb": {
+   "color": "#f54436",
+   "icon": "\udb83\udd2d"
+  },
+  "rbs": {
+   "color": "#f54436",
+   "icon": "\udb83\udd2d"
+  },
+  "reason": {
+   "color": "#f54436",
+   "icon": "\ue687"
+  },
+  "reason_lisp": {
+   "color": "#f54436",
+   "icon": "\ue687"
+  },
+  "reb": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "res": {
+   "color": "#ef5351",
+   "icon": "\ue688"
+  },
+  "resi": {
+   "color": "#ffb300",
+   "icon": "\ue688"
+  },
+  "resolver.js": {
+   "color": "#ffc0cb",
+   "icon": "\ued4b"
+  },
+  "resolver.ts": {
+   "color": "#ffc0cb",
+   "icon": "\ued4b"
+  },
+  "rest": {
+   "color": "#e63936",
+   "icon": "\udb81\udd9f"
+  },
+  "resx": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "rm": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "rmd": {
+   "color": "#1976d3",
+   "icon": "\ue68a"
+  },
+  "rmvb": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "robot": {
+   "color": "#00bfa5",
+   "icon": "\udb85\ude7a"
+  },
+  "ron": {
+   "color": "#ff7043",
+   "icon": "\ue68b"
+  },
+  "routing.js": {
+   "color": "#44a047",
+   "icon": "\udb81\udc6a"
+  },
+  "routing.jsx": {
+   "color": "#44a047",
+   "icon": "\udb81\udc6a"
+  },
+  "routing.ts": {
+   "color": "#44a047",
+   "icon": "\udb81\udc6a"
+  },
+  "routing.tsx": {
+   "color": "#44a047",
+   "icon": "\udb81\udc6a"
+  },
+  "rs": {
+   "color": "#ff7043",
+   "icon": "\ue68b"
+  },
+  "rst": {
+   "color": "#42a5f5",
+   "icon": "\ueb1d"
+  },
+  "rtf": {
+   "color": "#0188d1",
+   "icon": "\udb80\ude2c"
+  },
+  "ruleset": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "s": {
+   "color": "#ff6e41",
+   "icon": "\udb81\ude28"
+  },
+  "sai": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "sass": {
+   "color": "#ec417a",
+   "icon": "\ue603"
+  },
+  "sbt": {
+   "color": "#0277bd",
+   "icon": "\ue68d"
+  },
+  "sbv": {
+   "color": "#ff9800",
+   "icon": "\udb82\ude16"
+  },
+  "sc": {
+   "color": "#f54436",
+   "icon": "\ue68e"
+  },
+  "scala": {
+   "color": "#f54436",
+   "icon": "\ue68e"
+  },
+  "scm": {
+   "color": "#f54436",
+   "icon": "\udb81\ude27"
+  },
+  "scss": {
+   "color": "#ec417a",
+   "icon": "\ue603"
+  },
+  "service.js": {
+   "color": "#ffca29",
+   "icon": "\ued4b"
+  },
+  "service.ts": {
+   "color": "#ffca29",
+   "icon": "\ued4b"
+  },
+  "settings": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "sh": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "shader": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "sketch": {
+   "color": "#ffc107",
+   "icon": "\udb80\uddc8"
+  },
+  "skp": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "slim": {
+   "color": "#f57f19",
+   "icon": "\ue692"
+  },
+  "sln": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "sln.dotsettings": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "sln.dotsettings.user": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "slnx": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "smali": {
+   "color": "#8bc34a",
+   "icon": "\ue70e"
+  },
+  "so": {
+   "color": "#42a5f5",
+   "icon": "\udb84\udc7c"
+  },
+  "sol": {
+   "color": "#0188d1",
+   "icon": "\ue656"
+  },
+  "spec-d.tsx": {
+   "color": "#0188d1",
+   "icon": "\uf499"
+  },
+  "spec.cjs": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "spec.js": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "spec.jsx": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "spec.mjs": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "spec.tsx": {
+   "color": "#0188d1",
+   "icon": "\uf499"
+  },
+  "sql": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "sqlite": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "sqlite3": {
+   "color": "#ffca29",
+   "icon": "\uf1c0"
+  },
+  "srt": {
+   "color": "#ff9800",
+   "icon": "\udb82\ude16"
+  },
+  "ss": {
+   "color": "#f54436",
+   "icon": "\udb81\ude27"
+  },
+  "ssa": {
+   "color": "#ff9800",
+   "icon": "\udb82\ude16"
+  },
+  "stl": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "stories.js": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "stories.jsx": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "stories.mdx": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "stories.svelte": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "stories.ts": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "stories.tsx": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "story.js": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "story.jsx": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "story.mdx": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "story.ts": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "story.tsx": {
+   "color": "#ff4082",
+   "icon": "\ue8b3"
+  },
+  "stp": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "sty": {
+   "color": "#42a5f5",
+   "icon": "\ue69b"
+  },
+  "styl": {
+   "color": "#c0ca33",
+   "icon": "\ue759"
+  },
+  "sub": {
+   "color": "#ff9800",
+   "icon": "\udb82\ude16"
+  },
+  "sublime-project": {
+   "color": "#ffb74d",
+   "icon": "\ue696"
+  },
+  "sublime-workspace": {
+   "color": "#ffb74d",
+   "icon": "\ue696"
+  },
+  "sui": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "suit": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "suo": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "sv": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf5b"
+  },
+  "svelte": {
+   "color": "#ff5821",
+   "icon": "\ue697"
+  },
+  "svelte.js": {
+   "color": "#ffca29",
+   "icon": "\ue697"
+  },
+  "svelte.ts": {
+   "color": "#0188d1",
+   "icon": "\ue697"
+  },
+  "svg": {
+   "color": "#ffb300",
+   "icon": "\udb81\udf21"
+  },
+  "svh": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf5b"
+  },
+  "svx": {
+   "color": "#ff5821",
+   "icon": "\ueb1d"
+  },
+  "swagger.json": {
+   "color": "#44a047",
+   "icon": "\ue8b8"
+  },
+  "swagger.yaml": {
+   "color": "#44a047",
+   "icon": "\ue8b8"
+  },
+  "swagger.yml": {
+   "color": "#44a047",
+   "icon": "\ue8b8"
+  },
+  "swift": {
+   "color": "#fe5e2f",
+   "icon": "\udb81\udee5"
+  },
+  "tar": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "tcc": {
+   "color": "#0188d1",
+   "icon": "\uf0fd"
+  },
+  "tcl": {
+   "color": "#ef5351",
+   "icon": "\udb81\uded3"
+  },
+  "tcsh": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "templ": {
+   "color": "#ffd550",
+   "icon": "\udb81\uddc0"
+  },
+  "template": {
+   "color": "#90a4ae",
+   "icon": "\udb81\ude13"
+  },
+  "tesc": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "tesc.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "tese": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "tese.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "tess.hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "tessellation.hlsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "test-d.tsx": {
+   "color": "#0188d1",
+   "icon": "\uf499"
+  },
+  "test.cjs": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "test.js": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "test.jsx": {
+   "color": "#ffca29",
+   "icon": "\uea79"
+  },
+  "test.mjs": {
+   "color": "#ffca29",
+   "icon": "\uf499"
+  },
+  "test.ts": {
+   "color": "#0188d1",
+   "icon": "\uf499"
+  },
+  "test.tsx": {
+   "color": "#0188d1",
+   "icon": "\uea79"
+  },
+  "tex": {
+   "color": "#42a5f5",
+   "icon": "\ue69b"
+  },
+  "tf": {
+   "color": "#5d6bc0",
+   "icon": "\ue69a"
+  },
+  "tf.json": {
+   "color": "#5d6bc0",
+   "icon": "\ue69a"
+  },
+  "tfbackend": {
+   "color": "#5d6bc0",
+   "icon": "\ue69a"
+  },
+  "tfstate": {
+   "color": "#5d6bc0",
+   "icon": "\ue69a"
+  },
+  "tfvars": {
+   "color": "#5d6bc0",
+   "icon": "\ue69a"
+  },
+  "tga": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "tgz": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "tif": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "tiff": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "tmlanguage": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "todo": {
+   "color": "#7cb442",
+   "icon": "\uf058"
+  },
+  "toml": {
+   "color": "#ef5351",
+   "icon": "\ue6b2"
+  },
+  "tpl": {
+   "color": "#ffcf03",
+   "icon": "\uf400"
+  },
+  "tree": {
+   "color": "#7cb442",
+   "icon": "\udb81\ude45"
+  },
+  "tres": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "ts": {
+   "color": "#0188d1",
+   "icon": "\udb81\udee6"
+  },
+  "ts.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "tsbuildinfo": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  "tscn": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "tsv": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude1b"
+  },
+  "tsx": {
+   "color": "#04bcd4",
+   "icon": "\ued46"
+  },
+  "tsx.snap": {
+   "color": "#0188d1",
+   "icon": "\uf499"
+  },
+  "ttc": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "ttf": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "ttml": {
+   "color": "#ff9800",
+   "icon": "\udb82\ude16"
+  },
+  "twig": {
+   "color": "#9bb92f",
+   "icon": "\ue61c"
+  },
+  "txt": {
+   "color": "#42a5f5",
+   "icon": "\udb80\ude19"
+  },
+  "txz": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "typ": {
+   "color": "#0397a7",
+   "icon": "\uf37f"
+  },
+  "tz": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "unity": {
+   "color": "#1976d3",
+   "icon": "\udb81\udeaf"
+  },
+  "uproject": {
+   "color": "#ffffff",
+   "icon": "\udb82\uddb1"
+  },
+  "url": {
+   "color": "#42a5f5",
+   "icon": "\udb80\udf39"
+  },
+  "v": {
+   "color": "#009ce5",
+   "icon": "\ue6ac"
+  },
+  "vac": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "vala": {
+   "color": "#9576ce",
+   "icon": "\ue8d1"
+  },
+  "vb": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "vbhtml": {
+   "color": "#42a5f5",
+   "icon": "\uf486"
+  },
+  "vbox": {
+   "color": "#009ce5",
+   "icon": "\udb80\udf22"
+  },
+  "vbox-prev": {
+   "color": "#009ce5",
+   "icon": "\udb80\udf22"
+  },
+  "vbs": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "vcxitems": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "vcxitems.filters": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "vcxproj": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "vcxproj.filters": {
+   "color": "#ab48bc",
+   "icon": "\udb81\ude10"
+  },
+  "vdi": {
+   "color": "#009ce5",
+   "icon": "\udb80\udf22"
+  },
+  "vdp": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "ved": {
+   "color": "#ff3e00",
+   "icon": "\ueed4"
+  },
+  "veda": {
+   "color": "#ff3e00",
+   "icon": "\ueed4"
+  },
+  "vedic": {
+   "color": "#ff3e00",
+   "icon": "\ueed4"
+  },
+  "vert": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "vert.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "vertex.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "vertexshader": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "vhd": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf5b"
+  },
+  "vim": {
+   "color": "#44a047",
+   "icon": "\ue62b"
+  },
+  "viminfo": {
+   "color": "#44a047",
+   "icon": "\ue62b"
+  },
+  "vimrc": {
+   "color": "#44a047",
+   "icon": "\ue62b"
+  },
+  "vmdk": {
+   "color": "#b1bec5",
+   "icon": "\uede9"
+  },
+  "vob": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "vox": {
+   "color": "#2ab6f6",
+   "icon": "\uea8c"
+  },
+  "vs.glsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "vscodeignore": {
+   "color": "#2296f3",
+   "icon": "\udb82\ude1e"
+  },
+  "vsix": {
+   "color": "#2296f3",
+   "icon": "\udb82\ude1e"
+  },
+  "vsixmanifest": {
+   "color": "#2296f3",
+   "icon": "\udb82\ude1e"
+  },
+  "vtt": {
+   "color": "#ff9800",
+   "icon": "\udb82\ude16"
+  },
+  "vue": {
+   "color": "#40b883",
+   "icon": "\ue6a0"
+  },
+  "wasm": {
+   "color": "#7d4dff",
+   "icon": "\ue6a1"
+  },
+  "wat": {
+   "color": "#7d4dff",
+   "icon": "\ue6a1"
+  },
+  "wav": {
+   "color": "#76b900",
+   "icon": "\udb80\udf86"
+  },
+  "webm": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "webp": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "wgsl": {
+   "color": "#ab48bd",
+   "icon": "\udb85\udd45"
+  },
+  "windi": {
+   "color": "#42a5f5",
+   "icon": "\uef16"
+  },
+  "wma": {
+   "color": "#ee534f",
+   "icon": "\udb80\udf86"
+  },
+  "wmv": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "woff": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "woff2": {
+   "color": "#f54436",
+   "icon": "\ue659"
+  },
+  "wsd": {
+   "color": "#f06293",
+   "icon": "\ue8cb"
+  },
+  "xaml": {
+   "color": "#42a5f5",
+   "icon": "\udb81\ude73"
+  },
+  "xcf": {
+   "color": "#25a6a0",
+   "icon": "\udb80\ude1f"
+  },
+  "xhtml": {
+   "color": "#e44e27",
+   "icon": "\uf13b"
+  },
+  "xls": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude1b"
+  },
+  "xlsm": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude1b"
+  },
+  "xlsx": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude1b"
+  },
+  "xml": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "xml.dist": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "xml.dist.sample": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "xquery": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "xsd": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "xsl": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "xslt": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "xz": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "yaml": {
+   "color": "#ff5252",
+   "icon": "\udb80\ude19"
+  },
+  "yaml-tmlanguage": {
+   "color": "#ff5252",
+   "icon": "\udb80\ude19"
+  },
+  "yaml.dist": {
+   "color": "#ff5252",
+   "icon": "\udb80\ude19"
+  },
+  "yang": {
+   "color": "#42a5f5",
+   "icon": "\ueee9"
+  },
+  "yml": {
+   "color": "#ff5252",
+   "icon": "\udb80\ude19"
+  },
+  "yml.dist": {
+   "color": "#ff5252",
+   "icon": "\udb80\ude19"
+  },
+  "yuv": {
+   "color": "#ff9800",
+   "icon": "\udb80\udf81"
+  },
+  "zig": {
+   "color": "#faa825",
+   "icon": "\ue6a9"
+  },
+  "zip": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  },
+  "zon": {
+   "color": "#faa825",
+   "icon": "\ue6a9"
+  },
+  "zsh": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "zst": {
+   "color": "#afb42b",
+   "icon": "\udb81\uddc4"
+  }
+ },
+ "filenames": {
+  "._sc_": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  ".astylerc": {
+   "color": "#ef5351",
+   "icon": "\udb80\udc68"
+  },
+  ".autorc": {
+   "color": "#f54436",
+   "icon": "\udb83\udf86"
+  },
+  ".babel-plugin-macrosrc": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.cjs": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.cts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.js": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.json": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.json5": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.jsonc": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.mjs": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.mts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.toml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.ts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.yaml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babel-plugin-macrosrc.yml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.cjs": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.cts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.js": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.json": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.json5": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.jsonc": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.mjs": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.mts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.toml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.ts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.yaml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".babelrc.yml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  ".bazelignore": {
+   "color": "#44a047",
+   "icon": "\ue63a"
+  },
+  ".bazelrc": {
+   "color": "#44a047",
+   "icon": "\ue63a"
+  },
+  ".bazelversion": {
+   "color": "#44a047",
+   "icon": "\ue63a"
+  },
+  ".bowerrc": {
+   "color": "#ef5734",
+   "icon": "\ue61a"
+  },
+  ".buildignore": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  ".bun-version": {
+   "color": "#fff8e2",
+   "icon": "\ue76f"
+  },
+  ".clang-format": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  ".clang-tidy": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  ".codecov.yaml": {
+   "color": "#ec417a",
+   "icon": "\ue797"
+  },
+  ".codecov.yml": {
+   "color": "#ec417a",
+   "icon": "\ue797"
+  },
+  ".coderabbit.yaml": {
+   "color": "#f4521e",
+   "icon": "\udb82\udd07"
+  },
+  ".coderabbit.yml": {
+   "color": "#f4521e",
+   "icon": "\udb82\udd07"
+  },
+  ".coffeelintignore": {
+   "color": "#339934",
+   "icon": "\ue61b"
+  },
+  ".commitlint.yaml": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlint.yml": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.cjs": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.cts": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.js": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.json": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.json5": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.jsonc": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.mjs": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.mts": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.toml": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.ts": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.yaml": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".commitlintrc.yml": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  ".coveralls.yml": {
+   "color": "#be564a",
+   "icon": "\ueb59"
+  },
+  ".cz.json": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  ".cz.toml": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  ".cz.yaml": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  ".cz.yml": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  ".czrc": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  ".ds_store": {
+   "color": "#78919c",
+   "icon": "\uf302"
+  },
+  ".editorconfig": {
+   "color": "#ffffff",
+   "icon": "\ue652"
+  },
+  ".ember-cli": {
+   "color": "#ff5821",
+   "icon": "\udb82\udf30"
+  },
+  ".ember-cli.js": {
+   "color": "#ff5821",
+   "icon": "\udb82\udf30"
+  },
+  ".env": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.alpha": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.defaults": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.dev": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.development": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.development.local": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.dist": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.e2e": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.example": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.local": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.preview": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.prod": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.production": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.production.local": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.qa": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.qa.local": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.sample": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.schema": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.stage": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.staging": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.staging.local": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.template": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.test": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.test.local": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.testing": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".env.uat": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".esformatter": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  ".eslintcache": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintignore": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc-jsdoc.js": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc-md.js": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.base.json": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.cjs": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.cts": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.js": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.json": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.json5": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.jsonc": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.mjs": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.mts": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.toml": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.ts": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.yaml": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".eslintrc.yml": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  ".esmrc": {
+   "color": "#4caf51",
+   "icon": "\ued0d"
+  },
+  ".firebaserc": {
+   "color": "#fbc02d",
+   "icon": "\udb82\udd67"
+  },
+  ".gcloudignore": {
+   "color": "#448bff",
+   "icon": "\udb84\uddf6"
+  },
+  ".gdignore": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  ".git": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".git-blame-ignore": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".git-blame-ignore-revs": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".git-for-windows-updater": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitattributes": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitattributes-global": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitattributes_global": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitconfig": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitignore": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitignore-global": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitignore_global": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitinclude": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitkeep": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitmessage": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitmodules": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".gitpreserve": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".graphqlconfig": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.cjs": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.cts": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.js": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.json": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.json5": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.jsonc": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.mjs": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.mts": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.toml": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.ts": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.yaml": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".graphqlrc.yml": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  ".hhconfig": {
+   "color": "#edeff1",
+   "icon": "\ue663"
+  },
+  ".huskyrc": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.cjs": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.cts": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.js": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.json": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.json5": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.jsonc": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.mjs": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.mts": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.toml": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.ts": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.yaml": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".huskyrc.yml": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  ".io-config.json": {
+   "color": "#508ff7",
+   "icon": "\ue66b"
+  },
+  ".istanbul.yml": {
+   "color": "#fed836",
+   "icon": "\udb86\udc27"
+  },
+  ".jestrc": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  ".jestrc.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  ".jestrc.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  ".jsbeautifyrc": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  ".jscsrc": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  ".jshintignore": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  ".jshintrc": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  ".k8s.yaml": {
+   "color": "#448bff",
+   "icon": "\udb84\udcfe"
+  },
+  ".k8s.yml": {
+   "color": "#448bff",
+   "icon": "\udb84\udcfe"
+  },
+  ".keep": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  ".knip.json": {
+   "color": "#ef6c02",
+   "icon": "\uf0c4"
+  },
+  ".knip.jsonc": {
+   "color": "#ef6c02",
+   "icon": "\uf0c4"
+  },
+  ".lighthouserc.cjs": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  ".lighthouserc.js": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  ".lighthouserc.json": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  ".lighthouserc.yaml": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  ".lighthouserc.yml": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  ".lintstagedrc": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  ".luacheckrc": {
+   "color": "#42a5f5",
+   "icon": "\ue620"
+  },
+  ".luaurc": {
+   "color": "#007ABF",
+   "icon": "\ue620"
+  },
+  ".mailmap": {
+   "color": "#42a5f5",
+   "icon": "\udb80\uddee"
+  },
+  ".mcattributes": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  ".mcdefinitions": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  ".mcignore": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  ".mincloudrc": {
+   "color": "#0188d1",
+   "icon": "\uf0c2"
+  },
+  ".mocharc.js": {
+   "color": "#a1887f",
+   "icon": "\ue61b"
+  },
+  ".mocharc.json": {
+   "color": "#a1887f",
+   "icon": "\ue61b"
+  },
+  ".mocharc.jsonc": {
+   "color": "#a1887f",
+   "icon": "\ue61b"
+  },
+  ".mocharc.yaml": {
+   "color": "#a1887f",
+   "icon": "\ue61b"
+  },
+  ".mocharc.yml": {
+   "color": "#a1887f",
+   "icon": "\ue61b"
+  },
+  ".modernizrrc": {
+   "color": "#e91e64",
+   "icon": "\ue720"
+  },
+  ".modernizrrc.js": {
+   "color": "#e91e64",
+   "icon": "\ue720"
+  },
+  ".modernizrrc.json": {
+   "color": "#e91e64",
+   "icon": "\ue720"
+  },
+  ".mrconfig": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  ".node-version": {
+   "color": "#4caf51",
+   "icon": "\ued0d"
+  },
+  ".nowignore": {
+   "color": "#cfd8dd",
+   "icon": "\udb81\udd36"
+  },
+  ".npmignore": {
+   "color": "#cc3837",
+   "icon": "\ued0e"
+  },
+  ".npmrc": {
+   "color": "#cc3837",
+   "icon": "\ued0e"
+  },
+  ".nuspec": {
+   "color": "#0188d1",
+   "icon": "\ue849"
+  },
+  ".nuxtignore": {
+   "color": "#06e676",
+   "icon": "\udb84\udd06"
+  },
+  ".nvmrc": {
+   "color": "#4caf51",
+   "icon": "\ued0d"
+  },
+  ".nycrc": {
+   "color": "#fed836",
+   "icon": "\udb86\udc27"
+  },
+  ".nycrc.json": {
+   "color": "#fed836",
+   "icon": "\udb86\udc27"
+  },
+  ".nycrc.yaml": {
+   "color": "#fed836",
+   "icon": "\udb86\udc27"
+  },
+  ".nycrc.yml": {
+   "color": "#fed836",
+   "icon": "\udb86\udc27"
+  },
+  ".oxlintrc.json": {
+   "color": "#91ede9",
+   "icon": "\udb80\udc31"
+  },
+  ".parcelrc": {
+   "color": "#ffb74d",
+   "icon": "\ued95"
+  },
+  ".php-cs-fixer.dist.php": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf1f"
+  },
+  ".php-cs-fixer.php": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf1f"
+  },
+  ".php_cs": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf1f"
+  },
+  ".php_cs.dist": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf1f"
+  },
+  ".php_cs.dist.php": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf1f"
+  },
+  ".php_cs.php": {
+   "color": "#ff7043",
+   "icon": "\udb80\udf1f"
+  },
+  ".postcssrc": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.cjs": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.cts": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.js": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.json": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.json5": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.jsonc": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.mjs": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.mts": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.toml": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.ts": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.yaml": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".postcssrc.yml": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  ".prettierignore": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.cjs": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.cts": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.js": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.json": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.json5": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.jsonc": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.mjs": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.mts": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.toml": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.ts": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.yaml": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".prettierrc.yml": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  ".pug-lintrc": {
+   "color": "#f0cca3",
+   "icon": "\ue686"
+  },
+  ".pug-lintrc.js": {
+   "color": "#f0cca3",
+   "icon": "\ue686"
+  },
+  ".pug-lintrc.json": {
+   "color": "#f0cca3",
+   "icon": "\ue686"
+  },
+  ".renovaterc": {
+   "color": "#ffb300",
+   "icon": "\uee72"
+  },
+  ".renovaterc.json": {
+   "color": "#ffb300",
+   "icon": "\uee72"
+  },
+  ".rhistory": {
+   "color": "#1976d3",
+   "icon": "\ue68a"
+  },
+  ".sentryclirc": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  ".slugignore": {
+   "color": "#faa825",
+   "icon": "\udb85\ude77"
+  },
+  ".stryker.conf.cjs": {
+   "color": "#ef5351",
+   "icon": "\udb80\udda3"
+  },
+  ".stryker.conf.js": {
+   "color": "#ef5351",
+   "icon": "\udb80\udda3"
+  },
+  ".stryker.conf.json": {
+   "color": "#ef5351",
+   "icon": "\udb80\udda3"
+  },
+  ".stryker.conf.mjs": {
+   "color": "#ef5351",
+   "icon": "\udb80\udda3"
+  },
+  ".stylelintcache": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintignore": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.cjs": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.cts": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.js": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.json": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.json5": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.jsonc": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.mjs": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.mts": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.toml": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.ts": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.yaml": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".stylelintrc.yml": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  ".svgrrc": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.cjs": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.cts": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.js": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.json": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.json5": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.jsonc": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.mjs": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.mts": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.toml": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.ts": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.yaml": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".svgrrc.yml": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  ".syncpackrc": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.cjs": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.cts": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.js": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.json": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.json5": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.jsonc": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.mjs": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.mts": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.toml": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.ts": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.yaml": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".syncpackrc.yml": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  ".taurignore": {
+   "color": "#ffca29",
+   "icon": "\ue8bb"
+  },
+  ".travis.yml": {
+   "color": "#7cb442",
+   "icon": "\ue77e"
+  },
+  ".vercelignore": {
+   "color": "#cfd8dd",
+   "icon": "\udb81\udd36"
+  },
+  ".watchmanconfig": {
+   "color": "#314fff",
+   "icon": "\udb82\udf94"
+  },
+  ".whitesource": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  ".xcode.env": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".xcode.env.local": {
+   "color": "#fbc02d",
+   "icon": "\udb81\ude6a"
+  },
+  ".yardopts": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  ".yarn-integrity": {
+   "color": "#0188d1",
+   "icon": "\ue6a7"
+  },
+  ".yarnclean": {
+   "color": "#0188d1",
+   "icon": "\ue6a7"
+  },
+  ".yarnrc": {
+   "color": "#0188d1",
+   "icon": "\ue6a7"
+  },
+  ".yarnrc.yaml": {
+   "color": "#0188d1",
+   "icon": "\ue6a7"
+  },
+  ".yarnrc.yml": {
+   "color": "#0188d1",
+   "icon": "\ue6a7"
+  },
+  "APACHECONF": {
+   "color": "#ba2249",
+   "icon": "\ue7c4"
+  },
+  "ARCHITECTURE": {
+   "color": "#66bb6b",
+   "icon": "\udb80\udf58"
+  },
+  "ARTISAN": {
+   "color": "#ff5252",
+   "icon": "\uf2f7"
+  },
+  "AUTHORS": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "AUTHORS.md": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "AUTHORS.rst": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "AUTHORS.txt": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "Apacheconf": {
+   "color": "#ba2249",
+   "icon": "\ue7c4"
+  },
+  "Architecture": {
+   "color": "#66bb6b",
+   "icon": "\udb80\udf58"
+  },
+  "Artisan": {
+   "color": "#ff5252",
+   "icon": "\uf2f7"
+  },
+  "Authors": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "CHANGELOG": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "CHANGELOG.md": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "CHANGELOG.rst": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "CHANGELOG.txt": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "CHANGES": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "CODEOWNERS": {
+   "color": "#afb42b",
+   "icon": "\udb80\udc08"
+  },
+  "CONFLUENCE": {
+   "color": "#2783ff",
+   "icon": "\uef3f"
+  },
+  "CONTAINERFILE": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "CONTRIBUTING": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "CONTRIBUTING.md": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "CONTRIBUTING.rst": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "CONTRIBUTING.txt": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "CONTRIBUTORS": {
+   "color": "#76b900",
+   "icon": "\uf4fd"
+  },
+  "COPYING": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "COPYRIGHT": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "CREDITS": {
+   "color": "#9ccd65",
+   "icon": "\udb80\ude60"
+  },
+  "Changelog": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "Changes": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "Codeowners": {
+   "color": "#afb42b",
+   "icon": "\udb80\udc08"
+  },
+  "Confluence": {
+   "color": "#2783ff",
+   "icon": "\uef3f"
+  },
+  "Containerfile": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "Contributing": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "Contributors": {
+   "color": "#76b900",
+   "icon": "\uf4fd"
+  },
+  "Copying": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "Copyright": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "Credits": {
+   "color": "#9ccd65",
+   "icon": "\udb80\ude60"
+  },
+  "DOCKERFILE": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "Dockerfile": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "GEMFILE": {
+   "color": "#e63936",
+   "icon": "\ueb48"
+  },
+  "GNUMAKEFILE": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "GRADLEW": {
+   "color": "#0397a7",
+   "icon": "\ue660"
+  },
+  "Gemfile": {
+   "color": "#e63936",
+   "icon": "\ueb48"
+  },
+  "Gnumakefile": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "Gradlew": {
+   "color": "#0397a7",
+   "icon": "\ue660"
+  },
+  "JENKINSFILE": {
+   "color": "#f0d7b7",
+   "icon": "\uf2ec"
+  },
+  "Jenkinsfile": {
+   "color": "#f0d7b7",
+   "icon": "\uf2ec"
+  },
+  "KBUILD": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "Kbuild": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "LICENSE": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "LICENSE.md": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "LICENSE.rst": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "LICENSE.txt": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "License": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "MAKEFILE": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "Makefile": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "OWNERS": {
+   "color": "#afb42b",
+   "icon": "\udb80\udc08"
+  },
+  "Owners": {
+   "color": "#afb42b",
+   "icon": "\udb80\udc08"
+  },
+  "PKLPROJECT": {
+   "color": "#699f37",
+   "icon": "\uf013"
+  },
+  "PODFILE": {
+   "color": "#f54436",
+   "icon": "\udb83\udd2d"
+  },
+  "PROCFILE": {
+   "color": "#6964ba",
+   "icon": "\ue607"
+  },
+  "Pklproject": {
+   "color": "#699f37",
+   "icon": "\uf013"
+  },
+  "Podfile": {
+   "color": "#f54436",
+   "icon": "\udb83\udd2d"
+  },
+  "Procfile": {
+   "color": "#6964ba",
+   "icon": "\ue607"
+  },
+  "README": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "README.md": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "README.rst": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "README.txt": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "Readme": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "SECURITY": {
+   "color": "#ffd550",
+   "icon": "\uf023"
+  },
+  "Security": {
+   "color": "#ffd550",
+   "icon": "\uf023"
+  },
+  "TODO.md": {
+   "color": "#7cb442",
+   "icon": "\uf058"
+  },
+  "VAGRANTFILE": {
+   "color": "#2a79ff",
+   "icon": "\ue8d0"
+  },
+  "Vagrantfile": {
+   "color": "#2a79ff",
+   "icon": "\ue8d0"
+  },
+  "_sc_": {
+   "color": "#66bb6b",
+   "icon": "\ue65f"
+  },
+  "apacheconf": {
+   "color": "#ba2249",
+   "icon": "\ue7c4"
+  },
+  "architecture": {
+   "color": "#66bb6b",
+   "icon": "\udb80\udf58"
+  },
+  "architecture.md": {
+   "color": "#66bb6b",
+   "icon": "\udb80\udf58"
+  },
+  "architecture.rst": {
+   "color": "#66bb6b",
+   "icon": "\udb80\udf58"
+  },
+  "architecture.txt": {
+   "color": "#66bb6b",
+   "icon": "\udb80\udf58"
+  },
+  "artisan": {
+   "color": "#ff5252",
+   "icon": "\uf2f7"
+  },
+  "astro.config.cjs": {
+   "color": "#ff6d00",
+   "icon": "\ue6b3"
+  },
+  "astro.config.cts": {
+   "color": "#ff6d00",
+   "icon": "\ue6b3"
+  },
+  "astro.config.js": {
+   "color": "#ff6d00",
+   "icon": "\ue6b3"
+  },
+  "astro.config.mjs": {
+   "color": "#ff6d00",
+   "icon": "\ue6b3"
+  },
+  "astro.config.mts": {
+   "color": "#ff6d00",
+   "icon": "\ue6b3"
+  },
+  "astro.config.ts": {
+   "color": "#ff6d00",
+   "icon": "\ue6b3"
+  },
+  "authors": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "authors.md": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "authors.rst": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "authors.txt": {
+   "color": "#f54436",
+   "icon": "\uf4fd"
+  },
+  "auto-config.js": {
+   "color": "#f54436",
+   "icon": "\udb83\udf86"
+  },
+  "auto-config.json": {
+   "color": "#f54436",
+   "icon": "\udb83\udf86"
+  },
+  "auto-config.ts": {
+   "color": "#f54436",
+   "icon": "\udb83\udf86"
+  },
+  "auto-config.yaml": {
+   "color": "#f54436",
+   "icon": "\udb83\udf86"
+  },
+  "auto-config.yml": {
+   "color": "#f54436",
+   "icon": "\udb83\udf86"
+  },
+  "auto.config.js": {
+   "color": "#f54436",
+   "icon": "\udb83\udf86"
+  },
+  "auto.config.ts": {
+   "color": "#f54436",
+   "icon": "\udb83\udf86"
+  },
+  "babel-plugin-macros.config.cjs": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.cts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.js": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.json": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.json5": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.jsonc": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.mjs": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.mts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.toml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.ts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.yaml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-plugin-macros.config.yml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel-transform.js": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.cjs": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.cts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.js": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.json": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.json5": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.jsonc": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.mjs": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.mts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.toml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.ts": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.yaml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "babel.config.yml": {
+   "color": "#fed836",
+   "icon": "\ue639"
+  },
+  "bitbucket-pipelines.yaml": {
+   "color": "#2088e5",
+   "icon": "\uf171"
+  },
+  "bitbucket-pipelines.yml": {
+   "color": "#2088e5",
+   "icon": "\uf171"
+  },
+  "bower.json": {
+   "color": "#ef5734",
+   "icon": "\ue61a"
+  },
+  "bun.lock": {
+   "color": "#fff8e2",
+   "icon": "\ue76f"
+  },
+  "bun.lockb": {
+   "color": "#fff8e2",
+   "icon": "\ue76f"
+  },
+  "bunfig.toml": {
+   "color": "#fff8e2",
+   "icon": "\ue76f"
+  },
+  "cargo.toml": {
+   "color": "#ef5351",
+   "icon": "\ue6b2"
+  },
+  "cdp.pid": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  "changelog": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "changelog.md": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "changelog.rst": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "changelog.txt": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "changes": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "changes.md": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "changes.rst": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "changes.txt": {
+   "color": "#8bc34a",
+   "icon": "\udb84\udc38"
+  },
+  "citation.cff": {
+   "color": "#2088e5",
+   "icon": "\udb80\ude7e"
+  },
+  "code_of_conduct": {
+   "color": "#cddc39",
+   "icon": "\udb80\udd4e"
+  },
+  "code_of_conduct.md": {
+   "color": "#cddc39",
+   "icon": "\udb80\udd4e"
+  },
+  "code_of_conduct.txt": {
+   "color": "#cddc39",
+   "icon": "\udb80\udd4e"
+  },
+  "codecov.yaml": {
+   "color": "#ec417a",
+   "icon": "\ue797"
+  },
+  "codecov.yml": {
+   "color": "#ec417a",
+   "icon": "\ue797"
+  },
+  "codeowners": {
+   "color": "#afb42b",
+   "icon": "\udb80\udc08"
+  },
+  "coffeelint.json": {
+   "color": "#339934",
+   "icon": "\ue61b"
+  },
+  "commit-msg": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "commitlint.config.cjs": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.cts": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.js": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.json": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.json5": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.jsonc": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.mjs": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.mts": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.toml": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.ts": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.yaml": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "commitlint.config.yml": {
+   "color": "#039688",
+   "icon": "\ueafc"
+  },
+  "compose.alpha.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.alpha.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.beta.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.beta.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.ci.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.ci.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.dev.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.dev.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.development.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.development.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.local.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.local.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.override.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.override.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.prod.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.prod.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.production.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.production.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.stage.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.stage.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.staging.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.staging.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.test.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.test.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.testing.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.testing.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.web.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.web.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.worker.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.worker.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "compose.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "composer.lock": {
+   "color": "#faa825",
+   "icon": "\ue60b"
+  },
+  "confluence": {
+   "color": "#2783ff",
+   "icon": "\uef3f"
+  },
+  "containerfile": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.alpha": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.beta": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.ci": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.dev": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.development": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.local": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.prod": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.production": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.stage": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.staging": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.test": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.testing": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.web": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "containerfile.worker": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "contributing": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "contributing.md": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "contributing.rst": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "contributing.txt": {
+   "color": "#ffca28",
+   "icon": "\udb80\udd4d"
+  },
+  "contributors": {
+   "color": "#76b900",
+   "icon": "\uf4fd"
+  },
+  "contributors.md": {
+   "color": "#76b900",
+   "icon": "\uf4fd"
+  },
+  "contributors.rst": {
+   "color": "#76b900",
+   "icon": "\uf4fd"
+  },
+  "contributors.txt": {
+   "color": "#76b900",
+   "icon": "\uf4fd"
+  },
+  "controller.js": {
+   "color": "#ffc107",
+   "icon": "\ue615"
+  },
+  "controller.ts": {
+   "color": "#ffc107",
+   "icon": "\ue615"
+  },
+  "copilot-instructions.md": {
+   "color": "#ffffff",
+   "icon": "\uec1e"
+  },
+  "copying": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "copying.md": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "copying.rst": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "copying.txt": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "copyright": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "copyright.md": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "copyright.rst": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "copyright.txt": {
+   "color": "#ff5821",
+   "icon": "\udb80\udd24"
+  },
+  "credits": {
+   "color": "#9ccd65",
+   "icon": "\udb80\ude60"
+  },
+  "credits.md": {
+   "color": "#9ccd65",
+   "icon": "\udb80\ude60"
+  },
+  "credits.rst": {
+   "color": "#9ccd65",
+   "icon": "\udb80\ude60"
+  },
+  "credits.txt": {
+   "color": "#9ccd65",
+   "icon": "\udb80\ude60"
+  },
+  "cypress.config.cjs": {
+   "color": "#05bfa5",
+   "icon": "\ue7b9"
+  },
+  "cypress.config.cts": {
+   "color": "#05bfa5",
+   "icon": "\ue7b9"
+  },
+  "cypress.config.js": {
+   "color": "#05bfa5",
+   "icon": "\ue7b9"
+  },
+  "cypress.config.mjs": {
+   "color": "#05bfa5",
+   "icon": "\ue7b9"
+  },
+  "cypress.config.mts": {
+   "color": "#05bfa5",
+   "icon": "\ue7b9"
+  },
+  "cypress.config.ts": {
+   "color": "#05bfa5",
+   "icon": "\ue7b9"
+  },
+  "cypress.env.json": {
+   "color": "#05bfa5",
+   "icon": "\ue7b9"
+  },
+  "cypress.json": {
+   "color": "#05bfa5",
+   "icon": "\ue7b9"
+  },
+  "cz.json": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  "cz.toml": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  "cz.yaml": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  "cz.yml": {
+   "color": "#64b6f7",
+   "icon": "\udb80\udea2"
+  },
+  "deno.json": {
+   "color": "#cfd8dd",
+   "icon": "\ue7c0"
+  },
+  "deno.jsonc": {
+   "color": "#cfd8dd",
+   "icon": "\ue7c0"
+  },
+  "deno.lock": {
+   "color": "#cfd8dd",
+   "icon": "\ue7c0"
+  },
+  "dependabot.yaml": {
+   "color": "#448bff",
+   "icon": "\uf4be"
+  },
+  "dependabot.yml": {
+   "color": "#448bff",
+   "icon": "\uf4be"
+  },
+  "docker-compose.alpha.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.alpha.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.beta.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.beta.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.ci.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.ci.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.dev.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.dev.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.development.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.development.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.local.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.local.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.override.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.override.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.prod.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.prod.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.production.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.production.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.stage.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.stage.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.staging.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.staging.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.test.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.test.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.testing.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.testing.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.web.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.web.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.worker.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.worker.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.yaml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "docker-compose.yml": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.alpha": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.beta": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.ci": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.dev": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.development": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.local": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.prod": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.production": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.stage": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.staging": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.test": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.testing": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.web": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "dockerfile.worker": {
+   "color": "#0088c9",
+   "icon": "\uf21f"
+  },
+  "ember-cli-builds.js": {
+   "color": "#ff5821",
+   "icon": "\udb82\udf30"
+  },
+  "eslint.config.cjs": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.cts": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.js": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.json": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.json5": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.jsonc": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.mjs": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.mts": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.toml": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.ts": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.yaml": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "eslint.config.yml": {
+   "color": "#3f52b5",
+   "icon": "\udb83\udc7a"
+  },
+  "fabric.mod.json": {
+   "color": "#4caf51",
+   "icon": "\udb80\udf73"
+  },
+  "favicon.ico": {
+   "color": "#cbcb41",
+   "icon": "\ue623"
+  },
+  "firebase.json": {
+   "color": "#fbc02d",
+   "icon": "\udb82\udd67"
+  },
+  "firestore.indexes.json": {
+   "color": "#fbc02d",
+   "icon": "\udb82\udd67"
+  },
+  "firestore.rules": {
+   "color": "#fbc02d",
+   "icon": "\udb82\udd67"
+  },
+  "funding.yml": {
+   "color": "#db62a2",
+   "icon": "\u2665"
+  },
+  "gatsby-browser.js": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-browser.tsx": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-config.js": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-config.mjs": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-config.ts": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-node.js": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-node.mjs": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-node.ts": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-ssr.js": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gatsby-ssr.tsx": {
+   "color": "#800080",
+   "icon": "\udb83\ude43"
+  },
+  "gemfile": {
+   "color": "#e63936",
+   "icon": "\ueb48"
+  },
+  "git-history": {
+   "color": "#e64a19",
+   "icon": "\udb80\udea2"
+  },
+  "gnumakefile": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "go.mod": {
+   "color": "#ec417a",
+   "icon": "\udb81\udfd3"
+  },
+  "go.sum": {
+   "color": "#ec417a",
+   "icon": "\udb81\udfd3"
+  },
+  "go.work": {
+   "color": "#ec417a",
+   "icon": "\udb81\udfd3"
+  },
+  "go.work.sum": {
+   "color": "#ec417a",
+   "icon": "\udb81\udfd3"
+  },
+  "gradle-wrapper.properties": {
+   "color": "#0397a7",
+   "icon": "\ue660"
+  },
+  "gradle.properties": {
+   "color": "#0397a7",
+   "icon": "\ue660"
+  },
+  "gradlew": {
+   "color": "#0397a7",
+   "icon": "\ue660"
+  },
+  "graphql.config.cjs": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.cts": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.js": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.json": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.json5": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.jsonc": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.mjs": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.mts": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.toml": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.ts": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.yaml": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "graphql.config.yml": {
+   "color": "#ec417a",
+   "icon": "\udb82\udc77"
+  },
+  "gruntfile.babel.coffee": {
+   "color": "#f9a924",
+   "icon": "\uf2e3"
+  },
+  "gruntfile.babel.js": {
+   "color": "#f9a924",
+   "icon": "\uf2e3"
+  },
+  "gruntfile.babel.ts": {
+   "color": "#f9a924",
+   "icon": "\uf2e3"
+  },
+  "gruntfile.cjs": {
+   "color": "#f9a924",
+   "icon": "\uf2e3"
+  },
+  "gruntfile.coffee": {
+   "color": "#f9a924",
+   "icon": "\uf2e3"
+  },
+  "gruntfile.cts": {
+   "color": "#f9a924",
+   "icon": "\uf2e3"
+  },
+  "gruntfile.js": {
+   "color": "#f9a924",
+   "icon": "\uf2e3"
+  },
+  "gruntfile.ts": {
+   "color": "#f9a924",
+   "icon": "\uf2e3"
+  },
+  "gulpfile.babel.js": {
+   "color": "#e63936",
+   "icon": "\ue610"
+  },
+  "gulpfile.cts": {
+   "color": "#e63936",
+   "icon": "\ue610"
+  },
+  "gulpfile.js": {
+   "color": "#e63936",
+   "icon": "\ue610"
+  },
+  "gulpfile.mjs": {
+   "color": "#e63936",
+   "icon": "\ue610"
+  },
+  "gulpfile.mts": {
+   "color": "#e63936",
+   "icon": "\ue610"
+  },
+  "gulpfile.ts": {
+   "color": "#e63936",
+   "icon": "\ue610"
+  },
+  "hardhat.config.js": {
+   "color": "#ffd603",
+   "icon": "\udb82\udd6f"
+  },
+  "hardhat.config.ts": {
+   "color": "#ffd603",
+   "icon": "\udb82\udd6f"
+  },
+  "husky.config.cjs": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.cts": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.js": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.json": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.json5": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.jsonc": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.mjs": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.mts": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.toml": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.ts": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.yaml": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "husky.config.yml": {
+   "color": "#90a4ae",
+   "icon": "\udb80\udfe9"
+  },
+  "ionic.config.json": {
+   "color": "#508ff7",
+   "icon": "\ue66b"
+  },
+  "jenkinsfile": {
+   "color": "#f0d7b7",
+   "icon": "\uf2ec"
+  },
+  "jest-e2e.config.cjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-e2e.config.cts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-e2e.config.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-e2e.config.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-e2e.config.mjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-e2e.config.mts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-e2e.config.ts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-e2e.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-github-actions-reporter.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-preset.cjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-preset.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-preset.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-preset.mjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest-unit.config.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.config.cjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.config.cts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.config.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.config.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.config.mjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.config.mts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.config.ts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.e2e.config.cjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.e2e.config.cts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.e2e.config.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.e2e.config.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.e2e.config.mjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.e2e.config.mts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.e2e.config.ts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.e2e.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.preset.cjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.preset.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.preset.json": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.preset.mjs": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.setup.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.setup.ts": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jest.teardown.js": {
+   "color": "#f4521e",
+   "icon": "\ue807"
+  },
+  "jsconfig.json": {
+   "color": "#ffca29",
+   "icon": "\ue60c"
+  },
+  "jvm.config": {
+   "color": "#ff7043",
+   "icon": "\ue82c"
+  },
+  "k8s.yaml": {
+   "color": "#448bff",
+   "icon": "\udb84\udcfe"
+  },
+  "k8s.yml": {
+   "color": "#448bff",
+   "icon": "\udb84\udcfe"
+  },
+  "karma-main.js": {
+   "color": "#3cbeae",
+   "icon": "\ue622"
+  },
+  "karma-main.ts": {
+   "color": "#3cbeae",
+   "icon": "\ue622"
+  },
+  "karma.conf.coffee": {
+   "color": "#3cbeae",
+   "icon": "\ue622"
+  },
+  "karma.conf.js": {
+   "color": "#3cbeae",
+   "icon": "\ue622"
+  },
+  "karma.conf.ts": {
+   "color": "#3cbeae",
+   "icon": "\ue622"
+  },
+  "karma.config.js": {
+   "color": "#3cbeae",
+   "icon": "\ue622"
+  },
+  "karma.config.ts": {
+   "color": "#3cbeae",
+   "icon": "\ue622"
+  },
+  "kbuild": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "knip.config.js": {
+   "color": "#ef6c02",
+   "icon": "\uf0c4"
+  },
+  "knip.config.ts": {
+   "color": "#ef6c02",
+   "icon": "\uf0c4"
+  },
+  "knip.js": {
+   "color": "#ef6c02",
+   "icon": "\uf0c4"
+  },
+  "knip.json": {
+   "color": "#ef6c02",
+   "icon": "\uf0c4"
+  },
+  "knip.jsonc": {
+   "color": "#ef6c02",
+   "icon": "\uf0c4"
+  },
+  "knip.ts": {
+   "color": "#ef6c02",
+   "icon": "\uf0c4"
+  },
+  "kubernetes.yaml": {
+   "color": "#448bff",
+   "icon": "\udb84\udcfe"
+  },
+  "kubernetes.yml": {
+   "color": "#448bff",
+   "icon": "\udb84\udcfe"
+  },
+  "launchscreen.storyboard": {
+   "color": "#8bc34a",
+   "icon": "\udb80\ude2e"
+  },
+  "license": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license-agpl": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license-apache": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license-bsd": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license-gpl": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license-lgpl": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license-mit": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license.md": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license.rst": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "license.txt": {
+   "color": "#ec6237",
+   "icon": "\udb80\udd24"
+  },
+  "lighthouserc.cjs": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  "lighthouserc.js": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  "lighthouserc.json": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  "lighthouserc.yaml": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  "lighthouserc.yml": {
+   "color": "#f4521e",
+   "icon": "\udb82\uddff"
+  },
+  "makefile": {
+   "color": "#ef5351",
+   "icon": "\ueba2"
+  },
+  "manifest.mf": {
+   "color": "#42a5f5",
+   "icon": "\uf013"
+  },
+  "maven.config": {
+   "color": "#ff7043",
+   "icon": "\ue82c"
+  },
+  "milestones.md": {
+   "color": "#25a79a",
+   "icon": "\uf503"
+  },
+  "milestones.txt": {
+   "color": "#25a79a",
+   "icon": "\uf503"
+  },
+  "mocha.opts": {
+   "color": "#a1887f",
+   "icon": "\ue61b"
+  },
+  "moon.yml": {
+   "color": "#7e57c2",
+   "icon": "\udb83\udf62"
+  },
+  "netlify.json": {
+   "color": "#05bfa5",
+   "icon": "\ue83c"
+  },
+  "netlify.toml": {
+   "color": "#05bfa5",
+   "icon": "\ue83c"
+  },
+  "netlify.yaml": {
+   "color": "#05bfa5",
+   "icon": "\ue83c"
+  },
+  "netlify.yml": {
+   "color": "#05bfa5",
+   "icon": "\ue83c"
+  },
+  "next.config.js": {
+   "color": "#cfd8dd",
+   "icon": "\ue83e"
+  },
+  "next.config.mjs": {
+   "color": "#cfd8dd",
+   "icon": "\ue83e"
+  },
+  "next.config.mts": {
+   "color": "#cfd8dd",
+   "icon": "\ue83e"
+  },
+  "next.config.ts": {
+   "color": "#cfd8dd",
+   "icon": "\ue83e"
+  },
+  "nginx.conf": {
+   "color": "#44a047",
+   "icon": "\ue776"
+  },
+  "nodemon-debug.json": {
+   "color": "#8bc34a",
+   "icon": "\ue844"
+  },
+  "nodemon.json": {
+   "color": "#8bc34a",
+   "icon": "\ue844"
+  },
+  "now.json": {
+   "color": "#cfd8dd",
+   "icon": "\udb81\udd36"
+  },
+  "nuget.config": {
+   "color": "#0188d1",
+   "icon": "\ue849"
+  },
+  "nuget.exe": {
+   "color": "#0188d1",
+   "icon": "\ue849"
+  },
+  "nuxt.config.js": {
+   "color": "#06e676",
+   "icon": "\udb84\udd06"
+  },
+  "nuxt.config.ts": {
+   "color": "#06e676",
+   "icon": "\udb84\udd06"
+  },
+  "nyc.config.js": {
+   "color": "#fed836",
+   "icon": "\udb86\udc27"
+  },
+  "openapi.json": {
+   "color": "#8bc34a",
+   "icon": "\ue852"
+  },
+  "openapi.yaml": {
+   "color": "#8bc34a",
+   "icon": "\ue852"
+  },
+  "openapi.yml": {
+   "color": "#8bc34a",
+   "icon": "\ue852"
+  },
+  "owners": {
+   "color": "#afb42b",
+   "icon": "\udb80\udc08"
+  },
+  "package-lock.json": {
+   "color": "#f54436",
+   "icon": "\ued0d"
+  },
+  "package.json": {
+   "color": "#4caf51",
+   "icon": "\ued0d"
+  },
+  "panda.config.cjs": {
+   "color": "#ffffff",
+   "icon": "\udb80\udfda"
+  },
+  "panda.config.js": {
+   "color": "#ffffff",
+   "icon": "\udb80\udfda"
+  },
+  "panda.config.mjs": {
+   "color": "#ffffff",
+   "icon": "\udb80\udfda"
+  },
+  "panda.config.mts": {
+   "color": "#ffffff",
+   "icon": "\udb80\udfda"
+  },
+  "panda.config.ts": {
+   "color": "#ffffff",
+   "icon": "\udb80\udfda"
+  },
+  "pklproject": {
+   "color": "#699f37",
+   "icon": "\uf013"
+  },
+  "pklproject.deps.json": {
+   "color": "#699f37",
+   "icon": "\uf013"
+  },
+  "playwright-ct.config.js": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "playwright-ct.config.mjs": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "playwright-ct.config.ts": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "playwright.config.base.js": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "playwright.config.base.mjs": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "playwright.config.base.ts": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "playwright.config.js": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "playwright.config.mjs": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "playwright.config.ts": {
+   "color": "#4caf51",
+   "icon": "\ueeb6"
+  },
+  "plopfile.cjs": {
+   "color": "#00bfa5",
+   "icon": "\udb83\ude0a"
+  },
+  "plopfile.js": {
+   "color": "#00bfa5",
+   "icon": "\udb83\ude0a"
+  },
+  "plopfile.mjs": {
+   "color": "#00bfa5",
+   "icon": "\udb83\ude0a"
+  },
+  "plopfile.ts": {
+   "color": "#00bfa5",
+   "icon": "\udb83\ude0a"
+  },
+  "podfile": {
+   "color": "#f54436",
+   "icon": "\udb83\udd2d"
+  },
+  "poetry.lock": {
+   "color": "#1976d3",
+   "icon": "\ue867"
+  },
+  "pom.xml": {
+   "color": "#ff7043",
+   "icon": "\ue82c"
+  },
+  "post-merge": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "postcss.config.cjs": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.cts": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.js": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.json": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.json5": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.jsonc": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.mjs": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.mts": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.toml": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.ts": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.yaml": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "postcss.config.yml": {
+   "color": "#e63936",
+   "icon": "\ue86a"
+  },
+  "pre-commit": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "pre-push": {
+   "color": "#ff7043",
+   "icon": "\udb80\udd8d"
+  },
+  "prettier.config.cjs": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.cts": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.js": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.json": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.json5": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.jsonc": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.mjs": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.mts": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.toml": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.ts": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.yaml": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prettier.config.yml": {
+   "color": "#ea5e5e",
+   "icon": "\ue6b4"
+  },
+  "prisma.yml": {
+   "color": "#00bfa5",
+   "icon": "\ue684"
+  },
+  "procfile": {
+   "color": "#6964ba",
+   "icon": "\ue607"
+  },
+  "procfile.windows": {
+   "color": "#6964ba",
+   "icon": "\ue607"
+  },
+  "readme": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "readme.md": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "readme.rst": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "readme.txt": {
+   "color": "#42a5f5",
+   "icon": "\uf05a"
+  },
+  "renovate-config.json": {
+   "color": "#ffb300",
+   "icon": "\uee72"
+  },
+  "renovate.json": {
+   "color": "#ffb300",
+   "icon": "\uee72"
+  },
+  "renovate.json5": {
+   "color": "#ffb300",
+   "icon": "\uee72"
+  },
+  "roadmap.md": {
+   "color": "#25a79a",
+   "icon": "\uf503"
+  },
+  "roadmap.txt": {
+   "color": "#25a79a",
+   "icon": "\uf503"
+  },
+  "robots.txt": {
+   "color": "#ff5252",
+   "icon": "\udb81\udea9"
+  },
+  "rollup-config.js": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup-config.mjs": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup-config.ts": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.base.js": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.base.mjs": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.base.ts": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.common.js": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.common.mjs": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.common.ts": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.dev.js": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.dev.mjs": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.dev.ts": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.js": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.mjs": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.prod.js": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.prod.mjs": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.prod.ts": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.prod.vendor.js": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.prod.vendor.mjs": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.prod.vendor.ts": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "rollup.config.ts": {
+   "color": "#f54436",
+   "icon": "\ue689"
+  },
+  "routes.js": {
+   "color": "#44a047",
+   "icon": "\udb81\udc6a"
+  },
+  "routes.jsx": {
+   "color": "#44a047",
+   "icon": "\udb81\udc6a"
+  },
+  "routes.ts": {
+   "color": "#44a047",
+   "icon": "\udb81\udc6a"
+  },
+  "routes.tsx": {
+   "color": "#44a047",
+   "icon": "\udb81\udc6a"
+  },
+  "security": {
+   "color": "#ffd550",
+   "icon": "\uf023"
+  },
+  "security.md": {
+   "color": "#ffd550",
+   "icon": "\uf023"
+  },
+  "security.txt": {
+   "color": "#ffd550",
+   "icon": "\uf023"
+  },
+  "sentry.client.config.cjs": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.client.config.cts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.client.config.js": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.client.config.mjs": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.client.config.mts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.client.config.ts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.edge.config.cjs": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.edge.config.cts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.edge.config.js": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.edge.config.mjs": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.edge.config.mts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.edge.config.ts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.server.config.cjs": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.server.config.cts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.server.config.js": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.server.config.mjs": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.server.config.mts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "sentry.server.config.ts": {
+   "color": "#f06293",
+   "icon": "\ue89f"
+  },
+  "stryker.conf.cjs": {
+   "color": "#ef5351",
+   "icon": "\udb80\udda3"
+  },
+  "stryker.conf.js": {
+   "color": "#ef5351",
+   "icon": "\udb80\udda3"
+  },
+  "stryker.conf.json": {
+   "color": "#ef5351",
+   "icon": "\udb80\udda3"
+  },
+  "stryker.conf.mjs": {
+   "color": "#ef5351",
+   "icon": "\udb80\udda3"
+  },
+  "stylelint.config.cjs": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.cts": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.js": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.json": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.json5": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.jsonc": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.mjs": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.mts": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.toml": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.ts": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.yaml": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "stylelint.config.yml": {
+   "color": "#cfd8dd",
+   "icon": "\ue695"
+  },
+  "supabase.js": {
+   "color": "#66bb6b",
+   "icon": "\ue8b6"
+  },
+  "supabase.py": {
+   "color": "#66bb6b",
+   "icon": "\ue8b6"
+  },
+  "svelte.config.cjs": {
+   "color": "#ff5821",
+   "icon": "\ue697"
+  },
+  "svelte.config.js": {
+   "color": "#ff5821",
+   "icon": "\ue697"
+  },
+  "svgr.config.cjs": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.cts": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.js": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.json": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.json5": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.jsonc": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.mjs": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.mts": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.toml": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.ts": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.yaml": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "svgr.config.yml": {
+   "color": "#f57f19",
+   "icon": "\ued46"
+  },
+  "swagger.json": {
+   "color": "#8bc34a",
+   "icon": "\ue852"
+  },
+  "swagger.yaml": {
+   "color": "#8bc34a",
+   "icon": "\ue852"
+  },
+  "swagger.yml": {
+   "color": "#8bc34a",
+   "icon": "\ue852"
+  },
+  "syncpack.config.cjs": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.cts": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.js": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.json": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.json5": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.jsonc": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.mjs": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.mts": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.toml": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.ts": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.yaml": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "syncpack.config.yml": {
+   "color": "#8bc34a",
+   "icon": "\uf46a"
+  },
+  "tailwind.config.cjs": {
+   "color": "#4db6ac",
+   "icon": "\udb84\udfff"
+  },
+  "tailwind.config.cts": {
+   "color": "#4db6ac",
+   "icon": "\udb84\udfff"
+  },
+  "tailwind.config.js": {
+   "color": "#4db6ac",
+   "icon": "\udb84\udfff"
+  },
+  "tailwind.config.mjs": {
+   "color": "#4db6ac",
+   "icon": "\udb84\udfff"
+  },
+  "tailwind.config.mts": {
+   "color": "#4db6ac",
+   "icon": "\udb84\udfff"
+  },
+  "tailwind.config.ts": {
+   "color": "#4db6ac",
+   "icon": "\udb84\udfff"
+  },
+  "tailwind.js": {
+   "color": "#4db6ac",
+   "icon": "\udb84\udfff"
+  },
+  "tailwind.ts": {
+   "color": "#4db6ac",
+   "icon": "\udb84\udfff"
+  },
+  "taskfile.dist.yaml": {
+   "color": "#69d3c8",
+   "icon": "\uf1b2"
+  },
+  "taskfile.dist.yml": {
+   "color": "#69d3c8",
+   "icon": "\uf1b2"
+  },
+  "taskfile.yaml": {
+   "color": "#69d3c8",
+   "icon": "\uf1b2"
+  },
+  "taskfile.yml": {
+   "color": "#69d3c8",
+   "icon": "\uf1b2"
+  },
+  "tauri.conf.json": {
+   "color": "#ffca29",
+   "icon": "\ue8bb"
+  },
+  "tauri.config.json": {
+   "color": "#ffca29",
+   "icon": "\ue8bb"
+  },
+  "tauri.linux.conf.json": {
+   "color": "#ffca29",
+   "icon": "\ue8bb"
+  },
+  "tauri.macos.conf.json": {
+   "color": "#ffca29",
+   "icon": "\ue8bb"
+  },
+  "tauri.windows.conf.json": {
+   "color": "#ffca29",
+   "icon": "\ue8bb"
+  },
+  "timeline.md": {
+   "color": "#25a79a",
+   "icon": "\uf503"
+  },
+  "timeline.txt": {
+   "color": "#25a79a",
+   "icon": "\uf503"
+  },
+  "todo.md": {
+   "color": "#7cb442",
+   "icon": "\uf058"
+  },
+  "todos.md": {
+   "color": "#7cb442",
+   "icon": "\uf058"
+  },
+  "tsconfig.app.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.base.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.build.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.cjs.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.config.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.doc.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.e2e.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.editor.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.eslint.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.esm.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.lib.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.lib.prod.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.main.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.mjs.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.node.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.paths.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.renderer.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.server.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.spec.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.test.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.vitest.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.web.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.webworker.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "tsconfig.worker.json": {
+   "color": "#0188d1",
+   "icon": "\ue628"
+  },
+  "typst.toml": {
+   "color": "#0397a7",
+   "icon": "\uf37f"
+  },
+  "v.mod": {
+   "color": "#009ce5",
+   "icon": "\ue6ac"
+  },
+  "vagrantfile": {
+   "color": "#2a79ff",
+   "icon": "\ue8d0"
+  },
+  "vercel.json": {
+   "color": "#cfd8dd",
+   "icon": "\udb81\udd36"
+  },
+  "vetur.config.js": {
+   "color": "#40b883",
+   "icon": "\ued4a"
+  },
+  "vetur.config.ts": {
+   "color": "#40b883",
+   "icon": "\ued4a"
+  },
+  "vite.config.cjs": {
+   "color": "#ffac00",
+   "icon": "\udb80\ude41"
+  },
+  "vite.config.cts": {
+   "color": "#ffac00",
+   "icon": "\udb80\ude41"
+  },
+  "vite.config.js": {
+   "color": "#ffac00",
+   "icon": "\udb80\ude41"
+  },
+  "vite.config.mjs": {
+   "color": "#ffac00",
+   "icon": "\udb80\ude41"
+  },
+  "vite.config.mts": {
+   "color": "#ffac00",
+   "icon": "\udb80\ude41"
+  },
+  "vite.config.ts": {
+   "color": "#ffac00",
+   "icon": "\udb80\ude41"
+  },
+  "vitest.config.cjs": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.config.cts": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.config.js": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.config.mjs": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.config.mts": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.config.ts": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.workspace.cjs": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.workspace.cts": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.workspace.js": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.workspace.mjs": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.workspace.mts": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "vitest.workspace.ts": {
+   "color": "#ffca29",
+   "icon": "\ue8d9"
+  },
+  "volar.config.js": {
+   "color": "#40b883",
+   "icon": "\ued4a"
+  },
+  "vpkg.json": {
+   "color": "#009ce5",
+   "icon": "\ue6ac"
+  },
+  "vue.config.js": {
+   "color": "#40b883",
+   "icon": "\ued4a"
+  },
+  "vue.config.ts": {
+   "color": "#40b883",
+   "icon": "\ued4a"
+  },
+  "webpack.base.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.base.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.base.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.base.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.base.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.base.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.client.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.client.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.client.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.client.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.client.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.client.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.common.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.common.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.common.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.common.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.common.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.common.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.babel.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.babel.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.babel.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.babel.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.babel.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.babel.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.babel.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.babel.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.babel.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.babel.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.babel.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.babel.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.base.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.client.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.client.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.client.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.client.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.client.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.client.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.coffee": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.babel.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.babel.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.babel.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.babel.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.babel.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.babel.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.common.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.babel.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.babel.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.babel.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.babel.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.babel.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.babel.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.dev.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.main.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.main.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.main.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.main.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.main.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.main.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.babel.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.babel.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.babel.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.babel.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.babel.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.babel.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.prod.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.babel.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.babel.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.babel.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.babel.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.babel.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.babel.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.production.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.renderer.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.renderer.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.renderer.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.renderer.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.renderer.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.renderer.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.server.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.server.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.server.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.server.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.server.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.server.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.babel.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.babel.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.babel.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.babel.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.babel.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.babel.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.staging.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.test.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.test.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.test.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.test.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.test.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.test.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.production.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.production.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.production.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.production.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.production.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.production.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.config.vendor.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dev.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dev.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dev.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dev.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dev.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dev.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.development.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.development.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.development.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.development.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.development.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.development.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dist.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dist.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dist.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dist.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dist.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.dist.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.mix.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.mix.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.mix.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.mix.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.mix.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.mix.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.config.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.config.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.config.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.config.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.config.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.config.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.prod.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.production.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.production.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.production.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.production.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.production.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.production.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.server.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.server.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.server.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.server.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.server.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.server.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.test.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.test.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.test.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.test.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.test.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.test.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpack.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpackfile.cjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpackfile.cts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpackfile.js": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpackfile.mjs": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpackfile.mts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "webpackfile.ts": {
+   "color": "#8fd6fb",
+   "icon": "\ue6a3"
+  },
+  "windi.config.cjs": {
+   "color": "#42a5f5",
+   "icon": "\uef16"
+  },
+  "windi.config.cts": {
+   "color": "#42a5f5",
+   "icon": "\uef16"
+  },
+  "windi.config.js": {
+   "color": "#42a5f5",
+   "icon": "\uef16"
+  },
+  "windi.config.json": {
+   "color": "#42a5f5",
+   "icon": "\uef16"
+  },
+  "windi.config.ts": {
+   "color": "#42a5f5",
+   "icon": "\uef16"
+  },
+  "wrangler.json": {
+   "color": "#f57f19",
+   "icon": "\ue792"
+  },
+  "wrangler.jsonc": {
+   "color": "#f57f19",
+   "icon": "\ue792"
+  },
+  "wrangler.toml": {
+   "color": "#f57f19",
+   "icon": "\ue792"
+  },
+  "wxt.config.cjs": {
+   "color": "#00c854",
+   "icon": "\udb82\ude66"
+  },
+  "wxt.config.cts": {
+   "color": "#00c854",
+   "icon": "\udb82\ude66"
+  },
+  "wxt.config.js": {
+   "color": "#00c854",
+   "icon": "\udb82\ude66"
+  },
+  "wxt.config.mjs": {
+   "color": "#00c854",
+   "icon": "\udb82\ude66"
+  },
+  "wxt.config.mts": {
+   "color": "#00c854",
+   "icon": "\udb82\ude66"
+  },
+  "wxt.config.ts": {
+   "color": "#00c854",
+   "icon": "\udb82\ude66"
+  },
+  "yarn-error.log": {
+   "color": "#f54436",
+   "icon": "\ue6a7"
+  },
+  "yarn.lock": {
+   "color": "#0188d1",
+   "icon": "\ue6a7"
+  }
+ }
+}

@@ -7,6 +7,13 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-25
 
+### ファイルのアイコンを、Neovim・eza・yazi・lazygit で Material 風にそろえた
+
+- Neovim: nvim-web-devicons を nvim-material-icon に入れかえた（同じ名前の部品を持つので、そのまま使える）
+- eza（ls）・yazi・lazygit: Neovim のアイコンの一覧を取り出した icons/material.json（絵と色）から、それぞれの設定を home.nix で作る。eza はファイル名などの色は変えない。lazygit はファイルの一覧にアイコンを出すようにした（nerdFontsVersion 3）。フォルダのアイコンはそれぞれの道具のまま
+- eza は名前の大文字と小文字を区別するので、Dockerfile・README.md・LICENSE などの書き方も足した
+- 絵はすべて、font コマンドで選べる4つのフォントに入っている。プラグインのアイコンが変わったら、一覧を作り直す
+
 ### 半透明の透け具合も transparent コマンドで変えられるようにした
 
 - `transparent 0.8`（0.1〜0.99。1 に近いほど透けない）。on / off はそのままで、on は最後に選んだ透け具合に戻る。値は transparent.nix（on と opacity）。余白を塗るシェーダーも同じ値を使う

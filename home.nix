@@ -9,6 +9,9 @@ let
   palette = import ./palette.nix;
   # 使うテーマ（theme.nix）。色は palette、各ツールのテーマの名前（ghostty・bat・btop・k9s）はここから取る
   theme = import ./theme.nix;
+  # ファイルの種類のアイコン（絵と色）。Neovim の nvim-material-icon から取り出したもので、eza・yazi・lazygit を同じにそろえる
+  # 作り直すとき: Neovim で require("nvim-web-devicons") の get_icons_by_filename / get_icons_by_extension を JSON にする
+  fileIcons = lib.importJSON ./icons/material.json;
   # 使うフォント（font.nix）。大きさなどは fonts.nix
   font = (import ./fonts.nix).${import ./font.nix};
   # true にすると、ターミナルを半透明にする。透けるのはテーマのメインの背景色（bg1）だけ。false のときの設定は何も変わらない
@@ -464,6 +467,21 @@ in
     enable = true;
     icons = "auto";
   };
+  # アイコンの絵と色だけを替える（ファイル名などの色は eza のまま）
+  home.sessionVariables.EZA_CONFIG_DIR = "${config.xdg.configHome}/eza";
+  xdg.configFile."eza/theme.yml".text = builtins.toJSON (
+    lib.mapAttrs (
+      _:
+      lib.mapAttrs (
+        _: i: {
+          icon = {
+            glyph = i.icon;
+            style.foreground = i.color;
+          };
+        }
+      )
+    ) { inherit (fileIcons) filenames extensions; }
+  );
   # Ctrl-R で履歴検索、Ctrl-T でファイル検索、Alt-C でディレクトリ移動
   # ファイル一覧は fd で作る（.gitignore を尊重し、隠しファイルも含める）
   programs.fzf = {
@@ -571,7 +589,23 @@ in
     };
   };
   # ターミナルで動くファイル操作の画面。`y` で開くと、閉じたときにそのフォルダへ移動する
-  programs.yazi.enable = true;
+  programs.yazi = {
+    enable = true;
+    theme.icon =
+      let
+        rules = lib.mapAttrsToList (
+          name: i: {
+            inherit name;
+            text = i.icon;
+            fg = i.color;
+          }
+        );
+      in
+      {
+        prepend_files = rules fileIcons.filenames;
+        prepend_exts = rules fileIcons.extensions;
+      };
+  };
   # コマンドの使い方を、よく使う例だけ短く見せる（コマンドは tldr）。説明はネットから取ってくるので自動で更新する
   # home-manager の settings は macOS だと ~/Library/Application Support に書くが、tealdeer は XDG_CONFIG_HOME（~/.config-nix）を
   # 優先して読むので、設定ファイルは自分で ~/.config-nix に置く
@@ -587,6 +621,12 @@ in
     settings = {
       git.diffRenderers = [ { command = "delta --paging=never"; } ];
       # 色は palette.nix から。いま操作している枠は青、選んでいる行は Neovim の選択範囲と同じ色
+      # ファイルの種類のアイコンを出す（絵と色は Neovim と同じ。拡張子には点を付けて書く）
+      gui.nerdFontsVersion = "3";
+      gui.customIcons = {
+        filenames = fileIcons.filenames;
+        extensions = lib.mapAttrs' (name: lib.nameValuePair ".${name}") fileIcons.extensions;
+      };
       gui.theme = {
         activeBorderColor = [
           palette.blue
