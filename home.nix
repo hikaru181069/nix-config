@@ -144,6 +144,10 @@ let
         clear) tmux set -p -u -t "$pane" @claude ;;
         *) exit 1 ;;
       esac
+      # バーは1秒ごとにしか書き換わらないので、つながっている画面のバーをすぐ書き換えさせる
+      tmux list-clients -F '#{client_name}' | while read -r client; do
+        tmux refresh-client -S -t "$client" || true
+      done
     '';
   };
   # フォントを切り替える（`font 名前`。`font` だけで一覧）

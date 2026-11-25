@@ -12,6 +12,7 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 - herdr のような表示（どの AI が作業中か・返事待ちか）を、tmux のままで。ウィンドウの名前の右に ● を1つ出す。赤: 返事待ち、黄: 作業中、緑: 指示待ち（パネルが複数あるときは、この順で急ぐもの）。左端のセッション名の横には、ほかのセッションも含めた返事待ちの数だけ赤い ●
 - 仕組み: Claude Code の hooks（~/.claude/settings.json。Nix の外）が、状態の変わり目に claude-tmux を呼び、パネルのオプション @claude に記録する。tmux のバーはそれを読む。シェルに戻っているパネルの古い記録は見ない
 - 裏で動く Claude Code（デーモンにつながる形）は TMUX_PANE を持たないので、会話の番号と同じ番号の「claude attach 番号」（なければ親のプロセス）をたどり、端末（tty）が同じパネルを探す
+- 記録したらすぐバーを書き換えさせる（refresh-client -S。バーの書き換えは1秒ごとなので）。許可待ちは、Notification だと遅れて来るので PermissionRequest も使う
 - 返事待ちは Notification（permission_prompt・elicitation_dialog）と、質問・計画の確認（AskUserQuestion・ExitPlanMode）で付き、次の道具の実行が終わると作業中に戻る
 
 ### フォントを font コマンドで切り替えられるようにした
