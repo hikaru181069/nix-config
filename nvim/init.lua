@@ -52,6 +52,7 @@ vim.pack.add({
   "https://github.com/bluz71/vim-moonfly-colors",
   "https://github.com/bluz71/vim-nightfly-colors",
   "https://github.com/EdenEast/nightfox.nvim",
+  "https://github.com/Aejkatappaja/sora",
   -- C-hjkl で Neovim の分割と tmux のペインを区別なく移動（tmux 側にも同じプラグインがある）
   "https://github.com/christoomey/vim-tmux-navigator",
   -- ファイル・文字列・バッファなどを絞り込んで探す（plenary は telescope が使う部品）
@@ -250,6 +251,9 @@ elseif theme == "onedark_dark" then
   vim.pack.add({ "https://github.com/olimorris/onedarkpro.nvim" })
   require("onedarkpro").setup({ options = { cursorline = true } })
   vim.cmd.colorscheme("onedark_dark")
+elseif theme == "sora" then
+  -- Sora
+  vim.cmd.colorscheme("sora")
 elseif theme == "moonfly" or theme == "nightfly" then
   -- Moonfly / Nightfly（同じ作者。名前がそのまま colorscheme の名前）
   vim.cmd.colorscheme(theme)
