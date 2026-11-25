@@ -7,6 +7,19 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-25
 
+### ファイルツリーや no-neck-pain を開くと、カーソル行の帯が欠けて見えるのを直した
+
+- 左右の分割の線のマスはツリーの背景だったが、多くのテーマではツリーの背景が本文と同じなので、帯が端の1マス手前で切れて見えた。ツリー・線のマス・no-neck-pain の余白を同じ1色（どのテーマでも、tmux・sketchybar などのバーと同じ bg_bar）にした。GitHub・Monokai Pro はもともとこの形
+- Material は後から読みこんだ色で線のマスが塗り直されるので、いつも最初に全部読みこむ（async_loading = false）
+- 34テーマ × 不透明・半透明で、帯がツリー・余白の端までつながることを確かめた
+
+### テーマを12個足した（vague・kanso-zen・solarized-osaka・oxocarbon・cyberdream・vesper・lackluster・poimandres・dracula・monokai-pro・night-owl・ayu-dark）
+
+- Neovim は、数が多いので `extra_themes` の表にまとめ、使うテーマのプラグインだけ読みこむ（前からあるテーマの読みこみは変えていない）。bat は Neovim の実際の色から作った
+- Ghostty: Solarized Osaka は Ghostty 版が Tokyo Night の色、Oxocarbon は赤が水色なので、使わずに palette の色を直接使う（Cyberdream・Lackluster は、もともと入っていない）。Night Owl・Poimandres は背景を Neovim 版にそろえた（ghosttyOverride）。Vesper・Poimandres は選択の色も変えた
+- Neovim の差分の背景が明るすぎる Dracula・Night Owl・Poimandres は、palette の色にした。Lackluster・Dracula・Monokai Pro はタブの色も決めていて共通の形とずれるので、消した
+- btop は Dracula・Night Owl・Ayu、k9s は Dracula だけ入っているものを使う。ほかは16色と標準の見た目
+
 ### テーマに Sora（空）を足した
 
 - `theme sora`。Aejkatappaja/sora。背景がほぼ黒（#0e1018）で、淡い水色が主役。Ghostty は palette の色を直接使う（ghostty = null）。bat は Neovim の実際の色から作った（nightfly.tmTheme の役割の名前49個を型にした。この型で nightfly を調べ直すと全部一致）。btop は16色、k9s は標準の見た目

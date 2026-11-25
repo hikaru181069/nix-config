@@ -14,7 +14,7 @@ vim.o.cursorline = true
 -- 診断や git の印が出たり消えたりしても、本文が左右にずれないようにする
 vim.o.signcolumn = "yes"
 -- ファイルの終わりより下に出る ~ を消す
--- 左右の分割の線も消す（マスは残るので、ファイルツリーと同じ背景にする。fill_separator）
+-- 左右の分割の線も消す（マスは残るので、ファイルツリーと同じ背景にする。fill_panel）
 vim.opt.fillchars = { eob = " ", vert = " " }
 
 -- インデントは2スペース
@@ -102,6 +102,23 @@ vim.pack.add({
 
 -- 配色。どのテーマを使うかは ~/nix-config/theme.nix で決める（home.nix が theme.lua に書き出す）
 local theme = require("theme").nvim
+-- 使うときだけ読みこむテーマ（数が多いので、使わないものは読みこまない）。名前がそのまま colorscheme の名前
+-- setup: 先に呼ぶ設定。diff: 差分の背景が明るすぎるので、palette の色にする
+local extra_themes = {
+  vague = { src = "vague-theme/vague.nvim" },
+  ["kanso-zen"] = { src = "webhooked/kanso.nvim" },
+  ["solarized-osaka"] = { src = "craftzdog/solarized-osaka.nvim", setup = { "solarized-osaka", { transparent = false } } },
+  oxocarbon = { src = "nyoom-engineering/oxocarbon.nvim" },
+  cyberdream = { src = "scottmckendry/cyberdream.nvim" },
+  vesper = { src = "datsfilipe/vesper.nvim" },
+  lackluster = { src = "slugbyte/lackluster.nvim" },
+  poimandres = { src = "olivercederborg/poimandres.nvim", setup = { "poimandres", {} }, diff = true },
+  dracula = { src = "Mofiqul/dracula.nvim", diff = true },
+  ["monokai-pro"] = { src = "loctvl842/monokai-pro.nvim", setup = { "monokai-pro", { filter = "pro", devicons = false, disabled_plugins = { "akinsho/bufferline.nvim" } } } },
+  ["night-owl"] = { src = "oxfist/night-owl.nvim", diff = true },
+  ["ayu-dark"] = { src = "Shatur/neovim-ayu" },
+}
+
 if theme == "gruvbox" then
   -- Gruvbox の背景を暗いほう（hard）にする（Ghostty の Gruvbox Dark Hard と同じ背景 #1d2021）
   -- 左端の列（git や診断の印が出る列）と、その上の印の背景を、Gruvbox の既定（本文より明るい色）から本文と同じ色にする
@@ -161,8 +178,8 @@ elseif theme == "material-darker" or theme == "material-deep-ocean" then
   vim.g.material_style = theme == "material-darker" and "darker" or "deep ocean"
   -- material.nvim はカーソルに色を付ける（ターミナルにカーソルの色を頼む）。閉じるときに色を戻すが、Ghostty はそのときの
   -- 設定の色を覚えたままになり、あとでテーマを替えてもカーソルの色が変わらなくなったので、切る（ほかのテーマと同じく、ターミナルの色）
-  -- async_loading: 半透明のときは、後から読みこまれて背景が塗り直されないよう、最初に全部読みこむ
-  require("material").setup({ disable = { colored_cursor = true }, async_loading = not require("theme").transparent })
+  -- async_loading: 後から読みこまれて、半透明の背景や分割の線のマスが塗り直されないよう、最初に全部読みこむ
+  require("material").setup({ disable = { colored_cursor = true }, async_loading = false })
   vim.cmd.colorscheme("material")
 elseif theme == "melange" then
   -- Melange の dark（暗い背景か明るい背景かは background で決まる）
@@ -251,6 +268,24 @@ elseif theme == "onedark_dark" then
   vim.pack.add({ "https://github.com/olimorris/onedarkpro.nvim" })
   require("onedarkpro").setup({ options = { cursorline = true } })
   vim.cmd.colorscheme("onedark_dark")
+elseif extra_themes[theme] then
+  local extra = extra_themes[theme]
+  vim.pack.add({ "https://github.com/" .. extra.src })
+  vim.o.background = "dark"
+  if extra.setup then
+    require(extra.setup[1]).setup(extra.setup[2])
+  end
+  vim.cmd.colorscheme(theme)
+  -- テーマが決めたタブの色（BufferLine〜）は消し、lua/ui.lua の共通の見た目にする
+  for _, name in ipairs(vim.fn.getcompletion("BufferLine", "highlight")) do
+    vim.api.nvim_set_hl(0, name, {})
+  end
+  if extra.diff then
+    local p = require("palette")
+    for name, bg in pairs({ DiffAdd = p.diff_add, DiffDelete = p.diff_delete, DiffChange = p.diff_change, DiffText = p.diff_text }) do
+      vim.api.nvim_set_hl(0, name, { bg = bg })
+    end
+  end
 elseif theme == "sora" then
   -- Sora
   vim.cmd.colorscheme("sora")
@@ -318,17 +353,20 @@ require("nvim-tree").setup({
   view = { width = 25, side = "right" },
   renderer = { group_empty = true },
 })
--- 左右の分割の線のマスは、ツリーと同じ背景にする（本文の色だと、カーソル行の帯とツリーの間に1マスの隙間が見える）
--- ツリーの背景が決まっていないテーマでは、本文と同じ。nvim-tree が色を決めたあと（setup のあと）に行う
-local function fill_separator()
-  local tree = vim.api.nvim_get_hl(0, { name = "NvimTreeNormal", link = false }).bg
-  local bg = tree or (not require("theme").transparent and require("palette").bg or nil)
-  for _, name in ipairs({ "WinSeparator", "NvimTreeWinSeparator" }) do
-    vim.api.nvim_set_hl(0, name, { bg = bg })
+-- ツリー・左右の分割の線のマス・no-neck-pain の余白を、同じ背景にする（本文と同じ色のマスがあると、カーソル行の帯が途中で欠けて見える）
+-- 色はバー（tmux・sketchybar・タブの行の空き）と同じ bg_bar。nvim-tree が色を決めたあと（setup のあと）に行う
+local function fill_panel()
+  local palette = require("palette")
+  for _, name in ipairs({ "NvimTreeNormal", "NvimTreeNormalNC", "NvimTreeEndOfBuffer", "NvimTreeSignColumn" }) do
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    vim.api.nvim_set_hl(0, name, { fg = hl.fg or (name:find("Normal") and palette.fg or nil), bg = palette.bg_bar })
+  end
+  for _, name in ipairs({ "WinSeparator", "NvimTreeWinSeparator", "NoNeckPainBg" }) do
+    vim.api.nvim_set_hl(0, name, { bg = palette.bg_bar })
   end
 end
-fill_separator()
-vim.api.nvim_create_autocmd("ColorScheme", { callback = vim.schedule_wrap(fill_separator) })
+fill_panel()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = vim.schedule_wrap(fill_panel) })
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "ファイルツリーを開閉" })
 
 -- ステータスライン（長いので lua/statusline.lua に分けた）
@@ -471,7 +509,6 @@ require("zen-mode").setup({
 vim.keymap.set("n", "<leader>tz", "<cmd>ZenMode<cr>", { desc = "集中モード（zen-mode）" })
 
 local palette = require("palette")
-vim.api.nvim_set_hl(0, "NoNeckPainBg", { bg = palette.bg_bar })
 require("no-neck-pain").setup({
   width = 110,
   buffers = {
