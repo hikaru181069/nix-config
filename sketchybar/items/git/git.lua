@@ -13,10 +13,11 @@ local git_branch = SBAR.add("item", "git_branch", {
   update_freq = 5,
 })
 
+-- フォルダは、シェルが知らせたもの（pane_path）。Ghostty が知らせると「kitty-shell-cwd://ホスト名/パス」の形なので、頭を取る
 local GIT_BRANCH_CMD = [[
 CWD=$(for SOCK in "$TMPDIR/tmux-$(id -u)/default" "/tmp/tmux-$(id -u)/default"; do
-  tmux -S "$SOCK" list-clients -F '#{client_activity} #{pane_current_path}' 2>/dev/null
-done | sort -rn | head -1 | cut -d' ' -f2-)
+  tmux -S "$SOCK" list-clients -F '#{client_activity} #{?pane_path,#{pane_path},#{pane_current_path}}' 2>/dev/null
+done | sort -rn | head -1 | cut -d' ' -f2- | sed -E 's|^[a-z-]+://[^/]*||')
 
 if [ -n "$CWD" ] && git -C "$CWD" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   BRANCH=$(git -C "$CWD" branch --show-current 2>/dev/null)

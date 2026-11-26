@@ -187,7 +187,7 @@ let
             }
           }
           { print $1 "\t" $2 (best[$1] ? " " color(rgb[best[$1]]) "●\033[0m" : "") }
-        ' | fzf --ansi --no-sort --layout=reverse --delimiter="\t" --with-nth=2 --prompt="セッション > " | cut -f 1
+        ' | fzf --ansi --no-sort --layout=reverse --delimiter="\t" --with-nth=2 --prompt="session > " | cut -f 1
       ) || exit 0
       [ -n "$name" ] || exit 0
       sesh connect "$name"
@@ -489,6 +489,11 @@ in
         autoload -Uz edit-command-line
         zle -N edit-command-line
         bindkey '^X^E' edit-command-line
+        # tmux の中では、プロンプトを出すたびに今のフォルダを tmux に知らせる（OSC 7。tmux のタブのフォルダ名に使う）
+        if [[ -n $TMUX ]]; then
+          _tmux_report_dir() { printf '\e]7;%s\e\\' "$PWD"; }
+          precmd_functions+=(_tmux_report_dir)
+        fi
         # キーチェーンに保存したパスフレーズで SSH 鍵を ssh-agent に読み込む（コミット署名に必要）
         /usr/bin/ssh-add --apple-load-keychain -q 2>/dev/null
       ''
@@ -773,6 +778,10 @@ in
       l = builtins.fromJSON ''"\ue0b2"'';
       # Claude Code の状態（claude-tmux が記録した @claude）。ウィンドウの中のパネルを見て、いちばん急ぐものの色の ● を出す
       # 赤: 返事待ち / 黄: 作業中 / 緑: 指示待ち。シェルに戻っているパネルの古い記録は見ない
+      # タブに出すフォルダ: シェルが知らせたフォルダ（pane_path。下の zsh の設定と、Ghostty のシェルの機能）。知らせていないときは、動いているコマンドのフォルダ
+      # Ghostty が知らせると「kitty-shell-cwd://ホスト名/パス」の形になるが、最後の名前（b:）だけ出すので同じに見える。b: は選ぶ式（#{?…}）の外にかけると効かないので、内側の2つにそれぞれかける
+      # （pane_current_path は tmux が毎回 macOS に聞くので、ls のようにすぐ終わるコマンドだと、たまに空になって名前が一瞬消える）
+      tmuxDir = "#{?pane_path,#{b:pane_path},#{b:pane_current_path}}";
       claudePanes = "#{P:#{?#{m:*sh,#{pane_current_command}},,#{@claude}}}";
       claudeDot =
         "#{?#{m:*waiting*,${claudePanes}},#[fg=${p.red}]● ,"
@@ -869,9 +878,9 @@ in
       setw -g window-status-separator ""
       setw -g window-status-style "fg=${p.comment},bg=${p.bg_bar}"
       setw -g window-status-activity-style "underscore,fg=${p.comment},bg=${p.bg_bar}"
-      setw -g window-status-format "#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}#[default] #I ${rThin} #{b:pane_current_path} ${claudeDot}#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}"
+      setw -g window-status-format "#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}#[default] #I ${rThin} ${tmuxDir} ${claudeDot}#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}"
       # 選んでいるウィンドウ: 番号の右の三角と右端の三角は、旧環境と同じくブロックより1段明るい色
-      setw -g window-status-current-format "#[fg=${p.bg_bar},bg=${p.fg}]${r}#[fg=${p.fg_muted},bg=${p.fg}] #I #[fg=${p.fg_bright},bg=${p.fg_muted}]${r} #{b:pane_current_path} ${claudeDot}#[fg=${p.comment},bg=${p.bg_bar}]${r}"
+      setw -g window-status-current-format "#[fg=${p.bg_bar},bg=${p.fg}]${r}#[fg=${p.fg_muted},bg=${p.fg}] #I #[fg=${p.fg_bright},bg=${p.fg_muted}]${r} ${tmuxDir} ${claudeDot}#[fg=${p.comment},bg=${p.bg_bar}]${r}"
     ''
   );
   # プロジェクトのフォルダに入ると、その .envrc（flake.nix の devShell）の環境に自動で切り替わる
