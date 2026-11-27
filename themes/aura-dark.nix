@@ -43,7 +43,7 @@
     fg_bright = "#edecee"; # 明るい文字（white）
     fg = "#edecee"; # 通常の文字（white）
     fg_dim = "#bdbdbd"; # 暗い文字（soft-text の white）
-    fg_muted = "#6d6d6d"; # さらに暗い文字（gray）
+    fg_muted = "#5b5b5d"; # さらに暗い文字（コメントの色を背景に 20% 寄せた。comment より暗くして、今アクティブなものの三角がブロックより明るくなるように）
 
     selection = "#2e2b38"; # 選んでいる行の背景（VS Code 版の選んでいる行）
     search = "#3d375e"; # 検索結果などの背景（purple_faded）

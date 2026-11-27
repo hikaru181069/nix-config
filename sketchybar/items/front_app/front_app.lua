@@ -2,10 +2,9 @@ local helpers_path = os.getenv("CONFIG_DIR") .. "/helpers/"
 -- アプリ名 → アイコンの対応表（スペース番号と同じもの）
 local app_icons = dofile(os.getenv("HOME") .. "/.config-nix/sketchybar/icon_map.lua")
 
--- 帯の色は tmux のユーザー名のブロックと同じ fg_dim。名前とアイコンは「今使っているもの」なので、
--- 今のデスクトップのアプリのアイコン・tmux の今のタブのフォルダ名と同じ fg_bright
-local band_color = COLORS.fg_dim
-local text_color = COLORS.fg_bright
+-- 帯と、名前・アイコンの色。tmux のユーザー名のブロックと同じ（地は fg_dim、文字は暗い bg_bar）
+local band_color = COLORS.block_fg_dim -- fg_dim をバーの地に寄せて暗くした色（palette.nix）
+local text_color = COLORS.bg_bar
 
 -- 矢印の見た目: 今のアプリは、tmux のユーザー名と同じ色の帯（band_color）に入れて、スペースのアイコンと見分けやすくする
 -- 帯の始まりの三角は、アイコンより先に足す（左から順に並ぶため）
@@ -39,7 +38,8 @@ local front_app = SBAR.add("item", "front_app", {
   display = "active",
   padding_left = 0,
   icon = { drawing = false },
-  label = { color = text_color },
+  -- 太字（tmux のユーザー名と同じ。sketchybar のほかの文字はふつうの太さ）
+  label = { color = text_color, font = { style = FONT.style_map["Bold"] } },
   updates = true,
   click_script = helpers_path .. "sketchymenu/app_menu.sh toggle",
 })

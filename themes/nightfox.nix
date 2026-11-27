@@ -43,7 +43,7 @@
     fg_bright = "#d6d6d7";
     fg = "#cdcecf";
     fg_dim = "#aeafb0";
-    fg_muted = "#71839b";
+    fg_muted = "#616d7e"; # さらに暗い文字（コメントの色を背景に 20% 寄せた。comment より暗くして、今アクティブなものの三角がブロックより明るくなるように）
 
     selection = "#2b3b51";
     search = "#3c5372";

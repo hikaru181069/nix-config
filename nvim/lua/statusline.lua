@@ -8,7 +8,8 @@ local bar = { fg = p.comment, bg = p.bg_bar }
 
 -- モードごとの名前とブロックの色（隣の三角も同じ色。tmux のセッション名・ユーザー名の三角と同じ）
 -- 名前は、モードが変わっても幅が変わらないよう3文字にそろえる
-local normal = { name = "NOR", block = p.fg_muted }
+-- ノーマル（と TER）は、tmux のユーザー名・sketchybar の今のアプリの帯と同じ fg_dim（灰色の地に暗い太字）
+local normal = { name = "NOR", block = p.block_fg_dim } -- fg_dim をバーの地に寄せて暗くした色（palette.nix）
 local function mode(name, color)
   return { name = name, block = color }
 end
@@ -50,20 +51,42 @@ local function arrow(glyph)
   }
 end
 
--- 部品: バーの上の文字
+-- 部品: バーの上の文字（ふつうの太さ。太字は両端のモードと行:列のブロックだけ）
 local function text(component, options)
-  return vim.tbl_extend("force", { component, color = { fg = p.fg_dim, bg = bar.bg, gui = "bold" }, padding = 1 }, options or {})
+  return vim.tbl_extend("force", { component, color = { fg = p.fg_dim, bg = bar.bg }, padding = 1 }, options or {})
 end
 
--- 部品: 細い区切り。left は左の空き（マスの数）
-local function separator(glyph, left)
+-- 部品: 細い区切り。left は左の空き（マスの数）。cond は出す条件（隣に中身があるときだけ出し、端に浮いた区切りを残さない）
+local function separator(glyph, left, cond)
   return {
     function()
       return glyph
     end,
-    color = bar,
+    color = { fg = p.block_comment, bg = bar.bg }, -- comment をバーの地に寄せて暗くした色（palette.nix。tmux・sketchybar の区切りと同じ）
     padding = { left = left or 0, right = 0 },
+    cond = cond,
   }
+end
+
+-- 変更行数は gitsigns（行の左の変更の印）の数を使う（区切りを出す条件と、表示をそろえるため）
+local function git_diff()
+  local g = vim.b.gitsigns_status_dict
+  if g then
+    return { added = g.added, modified = g.changed, removed = g.removed }
+  end
+end
+local function has_branch()
+  return (vim.b.gitsigns_head or "") ~= ""
+end
+local function has_diff()
+  local d = git_diff()
+  return d ~= nil and ((d.added or 0) + (d.modified or 0) + (d.removed or 0)) > 0
+end
+local function has_diagnostics()
+  return #vim.diagnostic.get(0) > 0
+end
+local function has_filetype()
+  return vim.bo.filetype ~= ""
 end
 
 -- Nerd Font の記号（見えない文字なので文字コードで書く）
@@ -91,16 +114,17 @@ require("lualine").setup({
     },
     lualine_b = {
       text("branch"),
-      separator(RIGHT_THIN),
-      text("diff", { symbols = { added = "\u{f0fe} ", modified = "\u{f14b} ", removed = "\u{f146} " } }),
-      separator(RIGHT_THIN),
+      separator(RIGHT_THIN, nil, has_branch),
+      text("diff", { source = git_diff, symbols = { added = "\u{f0fe} ", modified = "\u{f14b} ", removed = "\u{f146} " } }),
+      separator(RIGHT_THIN, nil, has_diff),
       text("filename"),
-      separator(RIGHT_THIN),
+      separator(RIGHT_THIN, nil, has_diagnostics),
     },
     lualine_c = { text("diagnostics") },
-    -- ファイルの種類のアイコンも文字と同じ色（sketchybar のアイコンと同じく1色）
-    lualine_x = { separator(LEFT_THIN), text("filetype", { colored = false }) },
-    lualine_y = { separator(LEFT_THIN, 1) },
+    -- ファイルの種類のアイコンは種類ごとの色（タブの行やツリーのアイコンと同じ）。文字は fg_dim
+    -- 右のかたまりの左端には区切りを置かない（tmux・sketchybar の右側と同じ）
+    lualine_x = { text("filetype") },
+    lualine_y = { separator(LEFT_THIN, 1, has_filetype) },
     lualine_z = {
       text("progress"),
       arrow(LEFT),

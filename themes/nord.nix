@@ -43,7 +43,7 @@
     fg_bright = "#eceff4"; # 明るい文字（nord6）
     fg = "#d8dee9"; # 通常の文字（nord4）
     fg_dim = "#d8dee9"; # 暗い文字（ステータスライン。Nord はステータスラインも nord4）
-    fg_muted = "#616e88"; # さらに暗い文字（行番号。nord3 を明るくしたもの）
+    fg_muted = "#57627a"; # さらに暗い文字（コメントの色を背景に 20% 寄せた。comment より暗くして、今アクティブなものの三角がブロックより明るくなるように）
 
     selection = "#434c5e"; # 選んでいる行の背景（fzf・lazygit など。nord2）
     search = "#4c566a"; # 検索結果などの背景（nord3）

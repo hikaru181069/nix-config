@@ -40,7 +40,7 @@ local function add_arrow_space(space_id, space_label)
     label = { drawing = false },
     background = PL.block(COLORS.bg_bar),
   })
-  local mid = part("m", PL.arrow(PL.R_THIN, COLORS.comment, COLORS.bg_bar))
+  local mid = part("m", PL.arrow(PL.R_THIN, COLORS.block_comment, COLORS.bg_bar))
   local apps = part("apps", {
     padding_left = 0,
     padding_right = 0,
@@ -117,35 +117,36 @@ function space_api:highlight_focused_space(space_item, is_selected)
   if parts then
     parts.selected = is_selected
     -- 色は tmux の window-status-current-format / window-status-format と同じ
-    local num_bg = is_selected and COLORS.fg or COLORS.bg_bar
-    local apps_bg = is_selected and COLORS.fg_muted or COLORS.bg_bar
+    -- 灰色のブロックは block_fg〜（palette.nix。fg〜をバーの地に寄せて暗くした色。tmux の今のタブと同じ）
+    local num_bg = is_selected and COLORS.block_fg or COLORS.bg_bar
+    local apps_bg = is_selected and COLORS.block_fg_muted or COLORS.bg_bar
     local function arrow(item, glyph, fg, bg)
       item:set(PL.arrow_state(glyph, fg, bg))
     end
     arrow(parts.left, PL.R, COLORS.bg_bar, num_bg)
     space_item:set({
       icon = {
-        color = is_selected and COLORS.fg_muted or COLORS.comment,
-        highlight_color = is_selected and COLORS.fg_muted or COLORS.comment,
+        color = is_selected and COLORS.block_fg_muted or COLORS.comment,
+        highlight_color = is_selected and COLORS.block_fg_muted or COLORS.comment,
       },
       background = { color = num_bg },
     })
     if is_selected then
-      arrow(parts.mid, PL.R, COLORS.fg_bright, apps_bg)
+      arrow(parts.mid, PL.R, COLORS.block_fg_bright, apps_bg)
     else
-      arrow(parts.mid, PL.R_THIN, COLORS.comment, apps_bg)
+      arrow(parts.mid, PL.R_THIN, COLORS.block_comment, apps_bg)
     end
     parts.apps:set({
       label = {
-        color = is_selected and COLORS.fg_bright or COLORS.comment,
-        highlight_color = is_selected and COLORS.fg_bright or COLORS.comment,
+        color = is_selected and COLORS.block_fg_bright or COLORS.comment,
+        highlight_color = is_selected and COLORS.block_fg_bright or COLORS.comment,
       },
       background = { color = apps_bg },
     })
     -- アプリのないスペースは番号だけなので、右端の三角は番号のブロックの色で続ける
     local right_fg = COLORS.bg_bar
     if is_selected then
-      right_fg = parts.empty and num_bg or COLORS.comment
+      right_fg = parts.empty and num_bg or COLORS.block_comment
     end
     arrow(parts.right, PL.R, right_fg, COLORS.bg_bar)
     return

@@ -871,7 +871,7 @@ in
       ];
       tmuxState =
         "#[bg=${p.bg_bar}] "
-        + lib.concatMapStringsSep " #[fg=${p.comment}]${lThin} " (
+        + lib.concatMapStringsSep " #[fg=${p.block_comment}]${lThin} " (
           s: "#[fg=#{?${s.on},${s.color},${p.fg_muted}}]${builtins.fromJSON s.icon}" + lib.optionalString (s ? extra) "#{?${s.on},${s.extra},}"
         ) tmuxStates
         + "  ";
@@ -977,7 +977,8 @@ in
 
       # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
       # 区切りの三角の一部は、旧環境と同じくブロックより1段明るい色にする（prefix 中の三角・ユーザー名の右端）
-      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan},${p.bg_bar}},bg=${p.fg_dim},nobold]${r}#[fg=${p.bg_bar},bg=${p.fg_dim},bold] #(whoami) #[fg=${p.fg_dim},bg=${p.bg_bar},nobold]${r}"
+      # 灰色のブロック（ユーザー名・今のタブ）は、ブロック・三角・中の文字とも block_fg〜（palette.nix。fg〜をバーの地に寄せて暗くした色）
+      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan},${p.bg_bar}},bg=${p.block_fg_dim},nobold]${r}#[fg=${p.bg_bar},bg=${p.block_fg_dim},bold] #(whoami) #[fg=${p.block_fg_dim},bg=${p.bg_bar},nobold]${r}"
       # 右: 虹色の三角とホスト名
       set -g status-right "${tmuxState}${rainbowArrows}#[fg=${p.comment},bg=${p.bg_bar},bold] #h "
 
@@ -985,9 +986,9 @@ in
       setw -g window-status-separator ""
       setw -g window-status-style "fg=${p.comment},bg=${p.bg_bar}"
       setw -g window-status-activity-style "underscore,fg=${p.comment},bg=${p.bg_bar}"
-      setw -g window-status-format "#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}#[default] #I ${rThin} ${tmuxDir} ${claudeDot}#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}"
+      setw -g window-status-format "#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}#[default] #I #[fg=${p.block_comment}]${rThin}#[default] ${tmuxDir} ${claudeDot}#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}"
       # 選んでいるウィンドウ: 番号の右の三角と右端の三角は、旧環境と同じくブロックより1段明るい色
-      setw -g window-status-current-format "#[fg=${p.bg_bar},bg=${p.fg}]${r}#[fg=${p.fg_muted},bg=${p.fg}] #I #[fg=${p.fg_bright},bg=${p.fg_muted}]${r} ${tmuxDir} ${claudeDot}#[fg=${p.comment},bg=${p.bg_bar}]${r}"
+      setw -g window-status-current-format "#[fg=${p.bg_bar},bg=${p.block_fg}]${r}#[fg=${p.block_fg_muted},bg=${p.block_fg}] #I #[fg=${p.block_fg_bright},bg=${p.block_fg_muted}]${r}#[fg=${p.block_fg_bright}] ${tmuxDir} ${claudeDot}#[fg=${p.block_comment},bg=${p.bg_bar}]${r}"
     ''
   );
   # プロジェクトのフォルダに入ると、その .envrc（flake.nix の devShell）の環境に自動で切り替わる
@@ -1242,10 +1243,10 @@ in
   xdg.configFile."sketchybar/palette.lua".text = "return " + lib.generators.toLua { } palette;
   # 文字のフォント（sketchybar/settings.lua が読む）
   xdg.configFile."sketchybar/font.lua".text = "return " + lib.generators.toLua { } font;
-  # 右側の細い区切りの画像（sketchybar/items/init.lua）。色は左側の区切りと tmux のバーの区切りと同じ comment
+  # 右側の細い区切りの画像（sketchybar/items/init.lua）。色は左側の区切りと tmux のバーの区切りと同じ block_comment（comment をバーの地に寄せて暗くした色）
   xdg.configFile."sketchybar/sep_thin_left.png".source =
     pkgs.runCommand "sep-thin-left.png" { nativeBuildInputs = [ pkgs.imagemagick ]; }
-      "magick -size 22x50 xc:none -fill none -stroke '${palette.comment}' -strokewidth 2 -draw 'polyline 21,-1 1,25 21,51' PNG32:$out";
+      "magick -size 22x50 xc:none -fill none -stroke '${palette.block_comment}' -strokewidth 2 -draw 'polyline 21,-1 1,25 21,51' PNG32:$out";
   # 塗りの三角の画像（sketchybar/helpers/powerline.lua）。文字の三角は sketchybar が約 0.75pt 下に描き、帯からはみ出すので、
   # 画像で描いて帯（高さ 25pt）にぴったり置く。palette のすべての色で、右向き（R）と左向き（L）を作る（ファイル名は色の16進）
   # 幅は三角の部品と同じ 13pt（Retina なので 26px）。8 倍の大きさで描いてから縮め、斜めの辺をなめらかにする

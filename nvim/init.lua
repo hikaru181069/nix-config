@@ -109,6 +109,7 @@ local theme = require("theme").nvim
 local extra_themes = {
   vague = { src = "vague-theme/vague.nvim" },
   ["kanso-zen"] = { src = "webhooked/kanso.nvim" },
+  ["kanso-ink"] = { src = "webhooked/kanso.nvim" },
   ["solarized-osaka"] = { src = "craftzdog/solarized-osaka.nvim", setup = { "solarized-osaka", { transparent = false } } },
   oxocarbon = { src = "nyoom-engineering/oxocarbon.nvim" },
   cyberdream = { src = "scottmckendry/cyberdream.nvim" },
@@ -129,6 +130,8 @@ local extra_themes = {
   embark = { src = "embark-theme/vim", name = "embark", diff = true },
   everblush = { src = "Everblush/nvim", name = "everblush" },
   mellow = { src = "mellow-theme/mellow.nvim", diff = true },
+  jellybeans = { src = "WTFox/jellybeans.nvim" },
+  ["doom-one"] = { src = "NTBBloodbath/doom-one.nvim" },
   -- 上で入れてあるプラグインの、別の種類
   ["catppuccin-macchiato"] = {},
   ["catppuccin-frappe"] = {},
@@ -139,6 +142,10 @@ local extra_themes = {
   ["kanagawa-wave"] = { setup = { "kanagawa", { colors = { theme = { all = { ui = { bg_gutter = "none" } } } } } } },
   terafox = {},
   duskfox = {},
+  -- OneDark の dark（Atom の元祖 One Dark）。onedark.nvim は colorscheme の名前が onedark で、種類は setup で決める
+  ["onedark-atom"] = { setup = { "onedark", { style = "dark" } }, colorscheme = "onedark" },
+  github_dark = {},
+  github_dark_colorblind = {},
 }
 
 if theme == "gruvbox" then
