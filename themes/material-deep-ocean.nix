@@ -28,7 +28,6 @@
     blue = "#82aaff";
     magenta = "#c792ea"; # purple
     cyan = "#89ddff";
-    cyan_light = "#b8ebff"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#eeffff";
     orange = "#f78c6c";
     pink = "#ff9cac"; # material.nvim で使われていない pink

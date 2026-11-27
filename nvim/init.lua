@@ -103,6 +103,8 @@ vim.pack.add({
 -- 配色。どのテーマを使うかは ~/nix-config/theme.nix で決める（home.nix が theme.lua に書き出す）
 local theme = require("theme").nvim
 -- 使うときだけ読みこむテーマ（数が多いので、使わないものは読みこまない）。名前がそのまま colorscheme の名前
+-- src: プラグイン（書いていないものは、上でもう入れてあるプラグインの別の種類）。name: 入れるときの名前（リポジトリの名前が
+-- nvim・vim のように分かりにくいもの）。colorscheme: colorscheme の名前がテーマの名前と違うもの
 -- setup: 先に呼ぶ設定。diff: 差分の背景が明るすぎるので、palette の色にする
 local extra_themes = {
   vague = { src = "vague-theme/vague.nvim" },
@@ -117,6 +119,26 @@ local extra_themes = {
   ["monokai-pro"] = { src = "loctvl842/monokai-pro.nvim", setup = { "monokai-pro", { filter = "pro", devicons = false, disabled_plugins = { "akinsho/bufferline.nvim" } } } },
   ["night-owl"] = { src = "oxfist/night-owl.nvim", diff = true },
   ["ayu-dark"] = { src = "Shatur/neovim-ayu" },
+  ["gruvbox-material"] = { src = "sainnhe/gruvbox-material" },
+  sonokai = { src = "sainnhe/sonokai" },
+  nordic = { src = "AlexvZyl/nordic.nvim" },
+  ["modus-vivendi"] = { src = "miikanissi/modus-themes.nvim", colorscheme = "modus_vivendi" },
+  mellifluous = { src = "ramojus/mellifluous.nvim" },
+  miasma = { src = "xero/miasma.nvim", diff = true },
+  oldworld = { src = "dgox16/oldworld.nvim" },
+  embark = { src = "embark-theme/vim", name = "embark", diff = true },
+  everblush = { src = "Everblush/nvim", name = "everblush" },
+  mellow = { src = "mellow-theme/mellow.nvim", diff = true },
+  -- 上で入れてあるプラグインの、別の種類
+  ["catppuccin-macchiato"] = {},
+  ["catppuccin-frappe"] = {},
+  ["tokyonight-storm"] = {},
+  ["tokyonight-moon"] = {},
+  ["rose-pine-moon"] = {},
+  -- Kanagawa の wave。dragon と同じく、左端の列を本文と同じ背景にする
+  ["kanagawa-wave"] = { setup = { "kanagawa", { colors = { theme = { all = { ui = { bg_gutter = "none" } } } } } } },
+  terafox = {},
+  duskfox = {},
 }
 
 if theme == "gruvbox" then
@@ -270,12 +292,14 @@ elseif theme == "onedark_dark" then
   vim.cmd.colorscheme("onedark_dark")
 elseif extra_themes[theme] then
   local extra = extra_themes[theme]
-  vim.pack.add({ "https://github.com/" .. extra.src })
+  if extra.src then
+    vim.pack.add({ { src = "https://github.com/" .. extra.src, name = extra.name } })
+  end
   vim.o.background = "dark"
   if extra.setup then
     require(extra.setup[1]).setup(extra.setup[2])
   end
-  vim.cmd.colorscheme(theme)
+  vim.cmd.colorscheme(extra.colorscheme or theme)
   -- テーマが決めたタブの色（BufferLine〜）は消し、lua/ui.lua の共通の見た目にする
   for _, name in ipairs(vim.fn.getcompletion("BufferLine", "highlight")) do
     vim.api.nvim_set_hl(0, name, {})
@@ -363,6 +387,15 @@ local function fill_panel()
   end
   for _, name in ipairs({ "WinSeparator", "NvimTreeWinSeparator", "NoNeckPainBg" }) do
     vim.api.nvim_set_hl(0, name, { bg = palette.bg_bar })
+  end
+  -- テーマがツリーの部品（フォルダのアイコンなど）の背景を本文の色で決めていると、ツリーの中にその1マスだけ本文の色が見える。
+  -- 背景を消してツリーの色を見せる。ツリーのカーソル行が本文の色のテーマ（Gruvbox Material）は、本文のカーソル行の色にする
+  local main = tonumber(palette.bg:sub(2), 16)
+  for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
+    if name:find("^NvimTree") and not hl.link and hl.bg == main then
+      hl.bg = name == "NvimTreeCursorLine" and vim.api.nvim_get_hl(0, { name = "CursorLine", link = false }).bg or nil
+      vim.api.nvim_set_hl(0, name, hl)
+    end
   end
 end
 fill_panel()

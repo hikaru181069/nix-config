@@ -14,8 +14,9 @@ local font = dofile(os.getenv("HOME") .. "/.config-nix/sketchybar/font.lua")
 FONT = {
   icon_font = font.family,
   label_font = font.family,
-  -- 文字の上端〜下端の高さ（文字の大きさの何倍か）。三角の大きさの計算に使う（helpers/powerline.lua）
+  -- 文字の上端〜下端の高さと、三角の記号の実際の高さ（どちらも文字の大きさの何倍か。fonts.nix）
   line_ratio = font.lineRatio,
+  arrow_ratio = font.arrowRatio,
   style_map = {
     ["Regular"] = "Regular",
     ["Semibold"] = "SemiBold",

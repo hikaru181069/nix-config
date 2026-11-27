@@ -19,9 +19,6 @@
     "#9ebdfe"
   ];
 
-  # sketchybar の今のアプリの名前とアイコンの色。既定（fg_dim）だと帯（bg_band）の上で読みにくいので、選んでいるデスクトップのアプリのアイコンと同じ色にする
-  frontApp = "#eeffff"; # fg_bright
-
   palette = {
     # 色（main）
     black = "#000000";
@@ -31,7 +28,6 @@
     blue = "#82aaff";
     magenta = "#c792ea"; # purple
     cyan = "#89ddff";
-    cyan_light = "#b8ebff"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#eeffff";
     orange = "#f78c6c";
     pink = "#ff9cac"; # material.nvim で使われていない pink

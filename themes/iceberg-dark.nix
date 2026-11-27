@@ -18,12 +18,6 @@
     "#8ab0e3"
   ];
 
-  # tmux のユーザー名のブロックと右端の三角。既定（fg_dim と fg）だと三角が明るくて浮くので、Neovim のステータスラインのノーマルモードと同じ色にする
-  tmuxUser = {
-    block = "#5b6389"; # fg_muted
-    arrow = "#6b7089"; # comment
-  };
-
   palette = {
     # 色
     black = "#1e2132";
@@ -33,7 +27,6 @@
     blue = "#84a0c6";
     magenta = "#a093c7";
     cyan = "#89b8c2";
-    cyan_light = "#b8d4da"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#c6c8d1";
     orange = "#e9b189"; # Iceberg に orange はないので、明るい yellow（ターミナルの11番）
     pink = "#ada0d3"; # Iceberg に pink はないので、明るい magenta（ターミナルの13番）

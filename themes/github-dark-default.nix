@@ -24,20 +24,6 @@
     "#62aeff"
   ];
 
-  # tmux のユーザー名のブロックと右端の三角。既定（fg_dim と fg）だと三角が白に近くて浮くので、
-  # Neovim のステータスラインのノーマルモードと同じ色にする
-  tmuxUser = {
-    block = "#6e7681"; # fg_muted
-    arrow = "#8b949e"; # comment
-  };
-
-  # tmux のパネルの区切り線（選んでいるパネルのまわり）。既定（bg_band）だと明るいので、GitHub の枠線の色にする
-  tmuxPaneBorder = "#30363d"; # border
-
-  # sketchybar の今のアプリの名前とアイコンの色。既定（fg_dim）だと、明るい帯（bg_band）の上で読みにくいので、
-  # 選んでいるデスクトップのアプリのアイコンと同じ色にする
-  frontApp = "#f0f6fc"; # fg_bright
-
   palette = {
     # 色
     black = "#484f58"; # gray[6]（ターミナルの0番と同じ）
@@ -47,7 +33,6 @@
     blue = "#58a6ff"; # blue.base（blue[4]）
     magenta = "#bc8cff"; # magenta.base（purple[4]）
     cyan = "#76e3ea"; # cyan.base
-    cyan_light = "#adeef2"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#b1bac4"; # white.base（gray[3]）
     orange = "#f0883e"; # orange（orange[4]）
     pink = "#f778ba"; # pink.base（pink[4]）

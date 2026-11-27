@@ -120,7 +120,7 @@ function space_api:highlight_focused_space(space_item, is_selected)
     local num_bg = is_selected and COLORS.fg or COLORS.bg_bar
     local apps_bg = is_selected and COLORS.fg_muted or COLORS.bg_bar
     local function arrow(item, glyph, fg, bg)
-      item:set({ icon = { string = glyph, color = fg, highlight_color = fg }, background = { color = bg } })
+      item:set(PL.arrow_state(glyph, fg, bg))
     end
     arrow(parts.left, PL.R, COLORS.bg_bar, num_bg)
     space_item:set({

@@ -28,7 +28,6 @@
     blue = "#a3a9ce"; # b.blue
     magenta = "#cf9bc2"; # b.magenta
     cyan = "#89b3b6"; # b.cyan
-    cyan_light = "#b8d1d3"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#c1a78e"; # a.com（ターミナルの7番と同じ）
     orange = "#e49b5d"; # Melange に orange はないので c.yellow（だいだい色）
     pink = "#cf9bc2"; # Melange に pink はないので b.magenta

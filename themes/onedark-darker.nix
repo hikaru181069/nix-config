@@ -18,9 +18,6 @@
     "#5caaec"
   ];
 
-  # sketchybar の今のアプリの名前とアイコンの色。既定（fg_dim）だと帯（bg_band）の上で読みにくいので、選んでいるデスクトップのアプリのアイコンと同じ色にする
-  frontApp = "#abb2bf"; # fg_bright
-
   palette = {
     # 色
     black = "#0e1013";
@@ -30,7 +27,6 @@
     blue = "#4fa6ed";
     magenta = "#bf68d9"; # onedark.nvim の purple
     cyan = "#48b0bd";
-    cyan_light = "#91d0d7"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#abb2bf"; # onedark.nvim の darker には無いので、同じ OneDark の dark の fg
     orange = "#cc9057";
     pink = "#bf68d9"; # OneDark に pink はないので purple と同じ

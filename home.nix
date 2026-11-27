@@ -161,7 +161,7 @@ let
       3
       5
     ];
-  # tmux のセッションを選んで切り替える（tmux の prefix + g）。よく行くフォルダ（zoxide）を選ぶと、そこで新しいセッションを作る
+  # tmux のセッションを選んで切り替える（tmux の prefix + s）。よく行くフォルダ（zoxide）を選ぶと、そこで新しいセッションを作る
   sesh-pick = pkgs.writeShellApplication {
     name = "sesh-pick";
     runtimeInputs = [
@@ -186,11 +186,68 @@ let
               if (f[2] !~ /sh$/ && rank[f[3]] > best[f[1]]) best[f[1]] = rank[f[3]]
             }
           }
+          $1 == "_stash" { next }  # しまったパネルの置き場（tmux-stash）は出さない
           { print $1 "\t" $2 (best[$1] ? " " color(rgb[best[$1]]) "●\033[0m" : "") }
         ' | fzf --ansi --no-sort --layout=reverse --delimiter="\t" --with-nth=2 --prompt="session > " | cut -f 1
       ) || exit 0
       [ -n "$name" ] || exit 0
       sesh connect "$name"
+    '';
+  };
+  # tmux のパネルを閉じずにしまう・戻す（prefix + h / u。hide と unhide）。しまったパネルは見えないセッション「_stash」に置くので、シェルは動いたまま
+  # 最初にしまうときにウィンドウの並び方を覚えておき、戻すときは全部まとめて元の場所・大きさに戻す
+  tmux-stash = pkgs.writeShellApplication {
+    name = "tmux-stash";
+    text = ''
+      action=$1 pane=$2 win=$3
+      opt() { tmux show -wqv -t "$win" "$1"; }
+      case "$action" in
+        hide)
+          if [ "$(tmux display -p -t "$win" '#{window_panes}')" -le 1 ]; then
+            tmux display-message "最後のパネルはしまえません"
+            exit 0
+          fi
+          # 1つ目をしまう前の並び方と、パネルの順番を覚える
+          if [ -z "$(opt @stash)" ]; then
+            tmux set -w -t "$win" @stash_layout "$(tmux display -p -t "$win" '#{window_layout}')"
+            tmux set -w -t "$win" @stash_order "$(tmux list-panes -t "$win" -F '#{pane_id}' | tr '\n' ' ')"
+          fi
+          # 置き場のセッションが無ければ作る（作るときにできる空のウィンドウは、しまったあとに消す）
+          placeholder=""
+          if ! tmux has-session -t =_stash 2>/dev/null; then
+            placeholder=$(tmux new-session -d -s _stash -P -F '#{window_id}')
+          fi
+          tmux break-pane -d -s "$pane" -t =_stash:
+          [ -z "$placeholder" ] || tmux kill-window -t "$placeholder"
+          tmux set -w -t "$win" @stash "$(opt @stash) $pane"
+          ;;
+        restore)
+          stashed=$(opt @stash)
+          if [ -z "$stashed" ]; then
+            tmux display-message "このウィンドウにしまったパネルはありません"
+            exit 0
+          fi
+          for p in $stashed; do
+            # しまっている間に終わったパネルは飛ばす
+            tmux join-pane -d -s "$p" -t "$pane" 2>/dev/null || true
+          done
+          order=$(opt @stash_order)
+          # パネルの数が覚えたときと同じなら、並び方を戻し、パネルを覚えた順番の場所に入れかえる
+          if [ "$(tmux display -p -t "$win" '#{window_panes}')" -eq "$(echo "$order" | wc -w)" ] &&
+            tmux select-layout -t "$win" "$(opt @stash_layout)" 2>/dev/null; then
+            i=1
+            for want in $order; do
+              now=$(tmux list-panes -t "$win" -F '#{pane_id}' | sed -n "''${i}p")
+              [ "$now" = "$want" ] || tmux swap-pane -d -s "$want" -t "$now"
+              i=$((i + 1))
+            done
+          fi
+          tmux select-pane -t "$pane"
+          tmux set -wu -t "$win" @stash
+          tmux set -wu -t "$win" @stash_layout
+          tmux set -wu -t "$win" @stash_order
+          ;;
+      esac
     '';
   };
   # フォントを切り替える（`font 名前`。`font` だけで一覧）
@@ -776,6 +833,48 @@ in
       r = builtins.fromJSON ''"\ue0b0"'';
       rThin = builtins.fromJSON ''"\ue0b1"'';
       l = builtins.fromJSON ''"\ue0b2"'';
+      lThin = builtins.fromJSON ''"\ue0b3"'';
+      # 右側に、tmux の状態のアイコンをいつも並べる（sketchybar の右側と同じく、バーの色の上に細い三角で区切って並べる）
+      # 普段は暗い色（fg_muted）で、その状態のときだけ色が付く（sketchybar と同じ: 動いているときは fg_dim、注意はオレンジ、危ないのは赤）。左から:
+      #   ZOOM: パネルを最大化している（prefix + z）  COPY: コピーモード（prefix + [）  HIDE: このウィンドウにしまったパネルがある（prefix + h）
+      #   ベル: ほかのウィンドウでベルが鳴った（オレンジ。鳴ったウィンドウの番号も出す。そのウィンドウを開くと消える）
+      #   SYNC: 打った文字がウィンドウの全パネルに入る（prefix + y。気づかないと危ないので赤。目に入りやすい右端に置く）
+      # Nerd Font の記号は文字コードで書く（4桁より大きいので、2つに分けた書き方。󰊓 U+F0293・󰆏 U+F018F・󰈉 U+F0209・󰓦 U+F04E6・󰂚 U+F009A）
+      tmuxStates = [
+        {
+          on = "window_zoomed_flag";
+          icon = ''"\udb80\ude93"'';
+          color = p.fg_dim;
+        }
+        {
+          on = "#{==:#{pane_mode},copy-mode}";
+          icon = ''"\udb80\udd8f"'';
+          color = p.fg_dim;
+        }
+        {
+          on = "#{@stash}";
+          icon = ''"\udb80\ude09"'';
+          color = p.fg_dim;
+        }
+        {
+          on = "session_alert";
+          icon = ''"\udb80\udc9a"'';
+          color = p.orange;
+          # 鳴ったウィンドウの番号（session_alerts は「2!,3!」のような形なので、印の ! を取る）
+          extra = " #{s/!//:session_alerts}";
+        }
+        {
+          on = "pane_synchronized";
+          icon = ''"\udb81\udce6"'';
+          color = p.red;
+        }
+      ];
+      tmuxState =
+        "#[bg=${p.bg_bar}] "
+        + lib.concatMapStringsSep " #[fg=${p.comment}]${lThin} " (
+          s: "#[fg=#{?${s.on},${s.color},${p.fg_muted}}]${builtins.fromJSON s.icon}" + lib.optionalString (s ? extra) "#{?${s.on},${s.extra},}"
+        ) tmuxStates
+        + "  ";
       # Claude Code の状態（claude-tmux が記録した @claude）。ウィンドウの中のパネルを見て、いちばん急ぐものの色の ● を出す
       # 赤: 返事待ち / 黄: 作業中 / 緑: 指示待ち。シェルに戻っているパネルの古い記録は見ない
       # タブに出すフォルダ: シェルが知らせたフォルダ（pane_path。下の zsh の設定と、Ghostty のシェルの機能）。知らせていないときは、動いているコマンドのフォルダ
@@ -789,12 +888,6 @@ in
         + "#{?#{m:*idle*,${claudePanes}},#[fg=${p.green}]● ,}}}";
       # 返事待ちのパネルの数だけ赤い ●（ほかのセッションも含む）
       claudeWaiting = "#[fg=${p.red}]#{S:#{W:#{P:#{?#{m:*sh,#{pane_current_command}},,#{?#{m:waiting,#{@claude}},● ,}}}}}";
-      # ユーザー名のブロックと右端の三角の色。テーマのファイルに tmuxUser があれば、その色にする
-      tmuxUser =
-        theme.tmuxUser or {
-          block = p.fg_dim;
-          arrow = p.fg;
-        };
       # 右端の虹色の三角。前の色の上に次の色の三角を重ねていく
       # 色はテーマのファイルの rainbow（6色）で決められる。決めていなければ、赤 → オレンジ → 黄 → 緑 → 水色 → 青
       rainbow = [
@@ -841,8 +934,22 @@ in
       bind - split-window -v
       bind | split-window -h
       bind m resize-pane -Z
+      # パネルを閉じずにしまう・まとめて元の場所に戻す（tmux-stash。hide の h と unhide の u）
+      # h は上の customPaneNavigationAndResize の「左のパネルへ移る」を上書きする（C-h でもできる）。H（左へ広げる）はそのまま
+      # 打った文字を、ウィンドウの全パネルに同時に入れる（もう一度で戻す）。入っている間は、右側の SYNC のアイコンが赤くなる
+      bind y setw synchronize-panes
+      # ベルが鳴ったウィンドウのタブは、標準では色が反転して三角の形が崩れるので、変えない（鳴ったことは右側のアイコンで分かる）
+      setw -g window-status-bell-style default
+      bind h run-shell "${lib.getExe tmux-stash} hide '#{pane_id}' '#{window_id}'"
+      bind u run-shell "${lib.getExe tmux-stash} restore '#{pane_id}' '#{window_id}'"
+      # 前の割り当て（g: sesh、S: 戻す）を消す。読みこみ直しでは前の割り当ては消えないので、書いておく
+      unbind g
+      unbind S
+      # パネルを閉じずにどける・戻す（シェルは動いたまま）。prefix + ! は標準の「今のパネルを新しいウィンドウへ移す」
+      # prefix + @ は一覧からパネルを選んで、今のパネルの右に戻す（移したあと、空になったウィンドウは自動で消える）
+      bind @ choose-tree -Z "join-pane -h -s '%%'"
       # セッションを fzf で選んで切り替える
-      bind g display-popup -E -w 60% -h 60% ${lib.getExe sesh-pick}
+      bind s display-popup -E -w 60% -h 60% ${lib.getExe sesh-pick}
 
       # コピーモード: v で選択開始、y か Enter でクリップボードへ
       bind -T copy-mode-vi v send-keys -X begin-selection
@@ -857,7 +964,7 @@ in
       # パネルの区切りは線だけに色を付け、背景は塗らない（不透明でも半透明でも Ghostty の背景と同じになる）
       # 選んでいないパネルの間の線は描かない（hidden）。背景と同じ色で隠すと、半透明のときに黒い線として見えてしまう
       set -g pane-border-style "fg=${p.bg},bg=default,hidden"
-      set -g pane-active-border-style "fg=${theme.tmuxPaneBorder or p.bg_band},bg=default"
+      set -g pane-active-border-style "fg=${p.bg_band},bg=default"
 
       set -g status on
       set -g status-interval 1
@@ -870,9 +977,9 @@ in
 
       # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
       # 区切りの三角の一部は、旧環境と同じくブロックより1段明るい色にする（prefix 中の三角・ユーザー名の右端）
-      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan_light},${p.bg_bar}},bg=${tmuxUser.block},nobold]${r}#[fg=${p.bg_bar},bg=${tmuxUser.block},bold] #(whoami) #[fg=${tmuxUser.arrow},bg=${p.bg_bar},nobold]${r}"
+      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan},${p.bg_bar}},bg=${p.fg_dim},nobold]${r}#[fg=${p.bg_bar},bg=${p.fg_dim},bold] #(whoami) #[fg=${p.fg_dim},bg=${p.bg_bar},nobold]${r}"
       # 右: 虹色の三角とホスト名
-      set -g status-right "${rainbowArrows}#[fg=${p.fg_muted},bg=${p.bg_bar},bold] #h "
+      set -g status-right "${tmuxState}${rainbowArrows}#[fg=${p.comment},bg=${p.bg_bar},bold] #h "
 
       # ウィンドウ一覧: 番号とディレクトリ名
       setw -g window-status-separator ""
@@ -974,7 +1081,7 @@ in
     pkgs.nerd-fonts.lilex
     # テーマを切り替える（theme 名前）
     theme-switch
-    # tmux のセッションを選んで切り替える（prefix + g は sesh-pick を使う）
+    # tmux のセッションを選んで切り替える（prefix + s は sesh-pick を使う。標準のセッションの一覧の代わり）
     pkgs.sesh
     # Claude Code の状態を tmux に伝える（hooks から呼ぶ）
     claude-tmux
@@ -1132,18 +1239,33 @@ in
   };
 
   # 色（palette.nix）と、アプリ名からアイコンを引く表（アイコンのフォントと同じパッケージのもの）を置く
-  # テーマのファイルに frontApp があれば、今のアプリの名前とアイコンの色にする（sketchybar/items/front_app）
-  xdg.configFile."sketchybar/palette.lua".text =
-    "return "
-    + lib.generators.toLua { } (
-      palette // lib.optionalAttrs (theme ? frontApp) { front_app = theme.frontApp; }
-    );
+  xdg.configFile."sketchybar/palette.lua".text = "return " + lib.generators.toLua { } palette;
   # 文字のフォント（sketchybar/settings.lua が読む）
   xdg.configFile."sketchybar/font.lua".text = "return " + lib.generators.toLua { } font;
-  # 右側の区切りの画像（sketchybar/items/init.lua）。テーマの fg_muted の色で作る
+  # 右側の細い区切りの画像（sketchybar/items/init.lua）。色は左側の区切りと tmux のバーの区切りと同じ comment
   xdg.configFile."sketchybar/sep_thin_left.png".source =
     pkgs.runCommand "sep-thin-left.png" { nativeBuildInputs = [ pkgs.imagemagick ]; }
-      "magick -size 22x50 xc:none -fill none -stroke '${palette.fg_muted}' -strokewidth 2 -draw 'polyline 21,-1 1,25 21,51' PNG32:$out";
+      "magick -size 22x50 xc:none -fill none -stroke '${palette.comment}' -strokewidth 2 -draw 'polyline 21,-1 1,25 21,51' PNG32:$out";
+  # 塗りの三角の画像（sketchybar/helpers/powerline.lua）。文字の三角は sketchybar が約 0.75pt 下に描き、帯からはみ出すので、
+  # 画像で描いて帯（高さ 25pt）にぴったり置く。palette のすべての色で、右向き（R）と左向き（L）を作る（ファイル名は色の16進）
+  # 幅は三角の部品と同じ 13pt（Retina なので 26px）。8 倍の大きさで描いてから縮め、斜めの辺をなめらかにする
+  # 高さは帯（25pt）より 1pt 高い 26pt（52px）にして、三角は上の 25pt に描く。バーの高さ 38 の真ん中に置くと、帯（背景）は 6pt の位置に
+  # 切り捨てて描かれるが、帯と同じ高さの画像は 6.5pt の位置に描かれて 0.5pt 下にずれる。1pt 高い画像なら 6pt の位置に置かれ、帯と重なる（画素で測った）
+  xdg.configFile."sketchybar/arrows".source =
+    pkgs.runCommand "sketchybar-arrows" { nativeBuildInputs = [ pkgs.imagemagick ]; } (
+      "mkdir $out
+"
+      + lib.concatMapStrings (
+        hex:
+        let
+          name = lib.removePrefix "#" (lib.toLower hex);
+        in
+        ''
+          magick -size 208x416 xc:none -fill '${hex}' -draw 'polygon 0,0 208,200 0,400' -resize 26x52! PNG32:$out/R_${name}.png
+          magick -size 208x416 xc:none -fill '${hex}' -draw 'polygon 208,0 0,200 208,400' -resize 26x52! PNG32:$out/L_${name}.png
+        ''
+      ) (lib.unique (builtins.attrValues palette))
+    );
   xdg.configFile."sketchybar/icon_map.lua".source =
     "${pkgs.sketchybar-app-font}/lib/sketchybar-app-font/icon_map.lua";
 

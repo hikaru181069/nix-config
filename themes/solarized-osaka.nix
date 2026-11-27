@@ -28,7 +28,6 @@
     blue = "#268bd3";
     magenta = "#d23681";
     cyan = "#29a298";
-    cyan_light = "#7fc7c1"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#adb7b7";
     orange = "#c94c16";
     pink = "#d23681";

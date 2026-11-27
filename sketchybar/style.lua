@@ -26,14 +26,14 @@ SBAR.default({
   padding_left = PADDINGS,
   padding_right = PADDINGS,
   icon = {
-    font = { family = FONT.icon_font, style = FONT.style_map["Bold"], size = 16.0 },
+    font = { family = FONT.icon_font, style = FONT.style_map["Regular"], size = 16.0 },
     color = COLORS.subtext0,
     padding_left = PADDINGS,
     padding_right = PADDINGS,
     background = { image = { corner_radius = 9 } },
   },
   label = {
-    font = { family = FONT.label_font, style = FONT.style_map["Bold"], size = 13.0 },
+    font = { family = FONT.label_font, style = FONT.style_map["Regular"], size = 13.0 },
     color = COLORS.subtext0,
     padding_left = PADDINGS,
     padding_right = PADDINGS,
@@ -67,7 +67,7 @@ SBAR.default({
     knob = {
       string = "\u{f111}", -- 丸（Nerd Font）
       -- フォントを指定しないと sketchybar の既定のフォントになり、この記号がなく豆腐になる（旧設定は指定がなかった）
-      font = { family = FONT.icon_font, style = FONT.style_map["Bold"], size = 16.0 },
+      font = { family = FONT.icon_font, style = FONT.style_map["Regular"], size = 16.0 },
       drawing = true,
       color = COLORS.lavender,
     },

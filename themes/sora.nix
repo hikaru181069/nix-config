@@ -27,7 +27,6 @@
     blue = "#80c8e0"; # cyan（このテーマの主役の色）
     magenta = "#b0a0d8"; # purple
     cyan = "#78b8b0"; # teal
-    cyan_light = "#aed4d0"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#c8d0e0";
     orange = "#d0a888"; # peach
     pink = "#d0909c"; # rose

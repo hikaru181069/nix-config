@@ -2,22 +2,15 @@
 -- 左: モード | ブランチ | 変更行数 | ファイル名 | 診断　　右: ファイルの種類 | 位置（%）| 行:列
 local p = require("palette")
 
--- バー全体の色（両端のブロック以外）
+-- バー全体の色（両端のブロック以外）。fg は細い区切りと、選んでいないウィンドウの文字の色
+-- 3つのバー（Neovim・tmux・sketchybar）で同じ決まり: 区切りと選んでいないものは comment、情報の文字とアイコンは fg_dim
 local bar = { fg = p.comment, bg = p.bg_bar }
 
--- 色を白に4割寄せる（三角を、隣のブロックより少し明るくする）
-local function lighten(hex)
-  return (hex:gsub("%x%x", function(c)
-    local n = tonumber(c, 16)
-    return string.format("%02x", math.floor(n + (255 - n) * 0.4 + 0.5))
-  end))
-end
-
--- モードごとの名前・ブロックの色・隣の三角の色
+-- モードごとの名前とブロックの色（隣の三角も同じ色。tmux のセッション名・ユーザー名の三角と同じ）
 -- 名前は、モードが変わっても幅が変わらないよう3文字にそろえる
-local normal = { name = "NOR", block = p.fg_muted, arrow = p.comment }
+local normal = { name = "NOR", block = p.fg_muted }
 local function mode(name, color)
-  return { name = name, block = color, arrow = lighten(color) }
+  return { name = name, block = color }
 end
 local modes = {
   n = normal,
@@ -27,7 +20,7 @@ local modes = {
   ["\22"] = mode("VBL", p.magenta), -- 矩形の選択（Ctrl-V）
   c = mode("CMD", p.yellow),
   R = mode("REP", p.red),
-  t = { name = "TER", block = normal.block, arrow = normal.arrow },
+  t = { name = "TER", block = normal.block },
 }
 local function current()
   return modes[vim.fn.mode()] or normal
@@ -51,7 +44,7 @@ local function arrow(glyph)
       return glyph
     end,
     color = function()
-      return { fg = current().arrow, bg = p.bg_bar }
+      return { fg = current().block, bg = p.bg_bar }
     end,
     padding = 0,
   }
@@ -59,7 +52,7 @@ end
 
 -- 部品: バーの上の文字
 local function text(component, options)
-  return vim.tbl_extend("force", { component, color = { fg = bar.fg, bg = bar.bg, gui = "bold" }, padding = 1 }, options or {})
+  return vim.tbl_extend("force", { component, color = { fg = p.fg_dim, bg = bar.bg, gui = "bold" }, padding = 1 }, options or {})
 end
 
 -- 部品: 細い区切り。left は左の空き（マスの数）
@@ -105,7 +98,8 @@ require("lualine").setup({
       separator(RIGHT_THIN),
     },
     lualine_c = { text("diagnostics") },
-    lualine_x = { separator(LEFT_THIN), text("filetype") },
+    -- ファイルの種類のアイコンも文字と同じ色（sketchybar のアイコンと同じく1色）
+    lualine_x = { separator(LEFT_THIN), text("filetype", { colored = false }) },
     lualine_y = { separator(LEFT_THIN, 1) },
     lualine_z = {
       text("progress"),

@@ -49,10 +49,6 @@ local icons = {
     disconnected = "󰖪",
     router = "󰑩",
   },
-  stats_toggle = {
-    show = "",
-    hide = "",
-  },
   media = {
     play = "",
     pause = "",

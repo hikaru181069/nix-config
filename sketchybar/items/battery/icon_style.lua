@@ -1,9 +1,16 @@
--- 🔋 icon version (with popup)
+-- 🔋 icon version (with popup)。アイコンの右に残りの「%」も出す（CPU・メモリと同じ形）
 local battery = SBAR.add("item", "battery", {
   position = "right",
-  icon = { font = { size = 19.0 } },
-  label = { drawing = false },
-  update_freq = 180,
+  icon = { font = { size = 16.0 } },
+  label = {
+    string = "??%",
+    font = { size = 13.0 },
+    -- CPU・メモリと同じく、いちばん長い「100%」が入る幅に決めて右に寄せる（桁数で幅が変わると、左の項目が動くので）
+    width = 38,
+    align = "right",
+  },
+  -- 数字を出すので、前（3分ごと）より細かく1分ごとに読む
+  update_freq = 60,
 })
 
 battery:subscribe({ "routine", "power_source_change", "system_woke" }, function()
@@ -63,7 +70,11 @@ battery:subscribe({ "routine", "power_source_change", "system_woke" }, function(
         end
       end
     end
-    battery:set({ icon = { string = icon, color = getColor(charge) } })
+    local color = charge and getColor(charge) or COLORS.subtext0
+    battery:set({
+      icon = { string = icon, color = color },
+      label = { string = charge and (charge .. "%") or "?%", color = color },
+    })
   end)
 end)
 

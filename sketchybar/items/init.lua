@@ -6,8 +6,8 @@
 -- 矢印の見た目では、Neovim のステータスラインと同じ細い三角（）で区切る。
 -- フォントの記号（e0b3）は線が太い（Maple Mono NF で文字の 0.086 倍 ≒ 1.6pt）ので、Ghostty が tmux で描くのと同じ
 -- 線の太さ 1pt・1文字ぶんの大きさ（幅 11・高さ 25）の画像（sep_thin_left.png）を置く。
--- 画像は home.nix がテーマの fg_muted の色で作り、~/.config-nix/sketchybar に置く
--- name を付けたものは、隣の項目と一緒に隠す（items/toggle_stats/toggle_stats.lua・items/git/git.lua）
+-- 画像は home.nix がテーマの comment の色で作り、~/.config-nix/sketchybar に置く
+-- name を付けたものは、隣の項目と一緒に隠す（items/git/git.lua）
 local function right_gap(name)
   if BAR_STYLE ~= "arrows" then
     SBAR.add("item", { position = "right", width = 10 })
@@ -66,8 +66,6 @@ right_gap()
 require("items.monitor.wifi")
 right_gap()
 require("items.volume.volume")
-right_gap()
-require("items.toggle_stats.toggle_stats")
 right_gap("git")
 require("items.git.git")
 right_gap("stats.cpu")
@@ -76,8 +74,10 @@ right_gap("stats.mem")
 require("items.monitor.mem")
 right_gap("stats.net")
 require("items.monitor.netspeed")
--- 通信速度の左にも区切りを置く（stats を隠すと一緒に隠れる）
-right_gap("stats.net_left")
+-- いちばん左（右側の始まりの三角の隣）には区切りを置かず、余白だけ取る（tmux の右側と同じく、端には区切りを置かない）
+if BAR_STYLE == "arrows" then
+  SBAR.add("item", "rsep.stats.edge", { position = "right", width = PADDINGS })
+end
 
 -- 矢印の見た目では、右側全体の背景を左側と同じ色（bg_bar）にする。項目ごとではなく、まとめて1枚で囲む
 -- （間の区切りや余白の項目も隙間なく塗るため）。隠した項目（stats や git）は囲みから外れ、背景もそのぶん縮む
@@ -88,7 +88,6 @@ if BAR_STYLE == "arrows" then
     "battery",
     "wifi",
     "widgets.volume",
-    "separator_right",
     "/rsep\\..*/",
     "git_branch",
     "widgets.cpu",

@@ -28,7 +28,6 @@
     blue = "#81a1c1"; # nord9
     magenta = "#b48ead"; # nord15
     cyan = "#88c0d0"; # nord8
-    cyan_light = "#b8d9e3"; # cyan を白に4割寄せた色（tmux の prefix 中の三角など、ブロックより1段明るい区切りに使う）
     white = "#e5e9f0"; # nord5
     orange = "#d08770"; # nord12
     pink = "#b48ead"; # Nord に pink はないので nord15

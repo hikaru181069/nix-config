@@ -11,7 +11,7 @@ local cal = SBAR.add("item", "calendar", {
     color = COLORS.subtext0,
     font = { size = 13.0 },
   },
-  padding_left = 4,
+  -- 左の余白はほかの項目と同じ（区切りの両側をそろえる）。右は画面の端なので少し広く
   padding_right = 6,
   click_script = "open -a Calendar",
 })
