@@ -48,6 +48,10 @@
       "rev": "c3e2251e813d29d885a7cbbe9808a7af234d845d",
       "src": "https://github.com/kepano/flexoki-neovim"
     },
+    "fluoromachine.nvim": {
+      "rev": "a279f667168e742df059caf1f1f4daf1de24f4f8",
+      "src": "https://github.com/maxmx03/fluoromachine.nvim"
+    },
     "friendly-snippets": {
       "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",
       "src": "https://github.com/rafamadriz/friendly-snippets"
@@ -87,6 +91,10 @@
     "lackluster.nvim": {
       "rev": "70dd682e564784893b984deb51dd5ddd263c8cc7",
       "src": "https://github.com/slugbyte/lackluster.nvim"
+    },
+    "laserwave.nvim": {
+      "rev": "c2c22c2d86ef1d03b6da5473f6644a3b5517746f",
+      "src": "https://github.com/lettertwo/laserwave.nvim"
     },
     "lazygit.nvim": {
       "rev": "9ffc6103926718f7070fb4017694543cd7dc9718",
@@ -237,6 +245,10 @@
       "rev": "504df4913c55dd9ad658e331b172f86b0537b439",
       "src": "https://github.com/Aejkatappaja/sora"
     },
+    "synthweave.nvim": {
+      "rev": "0520bc260674745cdd3b5465f322de5731217dc6",
+      "src": "https://github.com/samharju/synthweave.nvim"
+    },
     "telescope.nvim": {
       "rev": "40aedd8a68c78a656a10a8d62d80c54af59420fb",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
@@ -256,6 +268,10 @@
     "vesper.nvim": {
       "rev": "1717b1ad657c94bec3fc2bdebb0c55452d9fe46d",
       "src": "https://github.com/datsfilipe/vesper.nvim"
+    },
+    "vim-colors-xcode": {
+      "rev": "2329a3ed092b4f72e9361a94567a5431e36e7d9c",
+      "src": "https://github.com/lunacookies/vim-colors-xcode"
     },
     "vim-moonfly-colors": {
       "rev": "2c883835f5b7b380a0a9e80695c420f7efebdfe4",

@@ -7,6 +7,40 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-26
 
+### テーマに Xcode Dark HC・Xcode WWDC を足した（全部で66個）
+
+- vim-colors-xcode の別の種類（xcodedarkhc・xcodewwdc）。Ghostty の Xcode Dark hc・Xcode WWDC と、背景・文字の色が一致
+- 色の表・bat は前と同じやり方で作り、2つとも不透明・半透明でタブの行とツリーのカーソル行のつながりを確かめた。WWDC は、ターミナルの青が紫寄り
+
+### テーマに Xcode Dark を足した（全部で64個）
+
+- VS Code の macOS Modern Theme（davidbwaters/macos-modern-vscode-theme）は、コードの色分けが Xcode の配色なので、Neovim の定番の Xcode の配色（lunacookies/vim-colors-xcode の xcodedark）を足した（ユーザーの希望）
+- Ghostty の Xcode Dark と背景が一致（#292a30）。色の表・bat は前と同じやり方で作り、不透明・半透明でタブの行とツリーのカーソル行のつながりを確かめた
+- Xcode のターミナルの色は、水色の役が紫寄り（公式のまま）
+
+### 自作のテーマ Outrun Electric も足した（全部で63個）
+
+- Night より背景が暗い種類（背景 #0c0a20・バー #090819・文字 #f2f3f7）。元のテーマどうしの違いは、この3色だけ（コードの色分けは同じ）
+- Neovim の配色を nvim/lua/outrun.lua に1つにまとめ、nvim/colors/outrun-night.lua・outrun-electric.lua は種類の名前を渡して呼ぶだけにした（同じことを2回書かない。色の調整も1か所）
+- bat/outrun-electric.tmTheme・themes/outrun-electric.nix も、Night と同じやり方で作った
+
+### 自作のテーマ Outrun Night を足した（全部で62個）
+
+- VS Code の Outrun Night Meets Synthwave（edevars/outrun-meets-synthwave。2021 年で止まっていて、ライセンスのファイルが無い）の色を参考に、ファイルは写さず自分で書いた（ユーザーの希望）
+- Neovim: nvim/colors/outrun-night.lua（自作の colorscheme。のちに中身を nvim/lua/outrun.lua にまとめた）。画面の部品は VS Code の画面の色、コードの色分けは VS Code の決まり（scope）を Neovim の同じ意味の色分け（treesitter の @〜 と昔からの名前）に当てはめた。カーソル行は元のテーマが背景と同じなので、背景に文字の色を 7% 混ぜた。関数の呼び出しは、元のテーマと同じく色を付けない
+- bat: bat/outrun-night.tmTheme。VS Code と bat は同じ決まり（TextMate）なので、色分け57個をそのまま当てはめた
+- テーマのファイル: themes/outrun-night.nix。元のテーマに本当の緑が無い（ターミナルの緑も青系）ので、緑の役には git の追加行の色（#a7da1e）、赤の役には差分の削除の赤（#e61f44）を当てた（ターミナルの赤はピンク）
+- 背景がもっと暗い種類（Outrun Electric。背景 #0c0a20）もある。コードの色分けは同じ
+
+### Synthwave 系のテーマを3つ足した（fluoromachine・synthweave・laserwave。全部で61個）
+
+- VS Code の Outrun Meets Synthwave の Neovim 版は無かった（元のテーマも 2021 年で止まっている）ので、似た雰囲気のものを足した（ユーザーの希望。あとで自分で作るかも考える）
+- fluoromachine: maxmx03/fluoromachine.nvim。光る効果（glow。背景に色が付く）は、ほかのテーマとの統一が崩れやすいので切った。青に当たる色が無いので、紫を青に当てた。コメントの色が暗い（地との差 2.2。公式のまま）
+- synthweave: samharju/synthweave.nvim（VS Code の Synthwave '84 の移植）。青と水色はどちらも水色系（元も同じ）
+- laserwave: lettertwo/laserwave.nvim（VS Code の LaserWave の移植）。ターミナルの赤はピンク寄り
+- 3つとも Ghostty に入っていない（Ghostty の Laser は別の色）ので、palette の色を直接使う。fluoromachine と synthweave はプラグインがターミナルの色を持たないので、プラグインの色の表から当てた
+- 色の表・bat は前と同じやり方で作り、3つとも不透明・半透明でタブの行とツリーのカーソル行のつながりを確かめた
+
 ### Neovim のステータスラインの細い区切りを、間にだけ出すようにした
 
 - 右のかたまりの左端の区切りを消した（tmux・sketchybar の右側と同じく、端には区切りを置かない。ユーザーの希望）

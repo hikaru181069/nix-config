@@ -132,6 +132,17 @@ local extra_themes = {
   mellow = { src = "mellow-theme/mellow.nvim", diff = true },
   jellybeans = { src = "WTFox/jellybeans.nvim" },
   ["doom-one"] = { src = "NTBBloodbath/doom-one.nvim" },
+  -- Synthwave 系。fluoromachine は光る効果（glow。背景に色が付く）を切る
+  fluoromachine = { src = "maxmx03/fluoromachine.nvim", setup = { "fluoromachine", { glow = false, theme = "fluoromachine", transparent = false } } },
+  synthweave = { src = "samharju/synthweave.nvim" },
+  laserwave = { src = "lettertwo/laserwave.nvim" },
+  -- Xcode の公式の配色（dark）
+  xcodedark = { src = "lunacookies/vim-colors-xcode" },
+  xcodedarkhc = { src = "lunacookies/vim-colors-xcode" }, -- 高いコントラスト版
+  xcodewwdc = { src = "lunacookies/vim-colors-xcode" }, -- WWDC の配色
+  -- 自作の配色（nvim/lua/outrun.lua。VS Code の Outrun Meets Synthwave の色を参考にした）
+  ["outrun-night"] = {},
+  ["outrun-electric"] = {},
   -- 上で入れてあるプラグインの、別の種類
   ["catppuccin-macchiato"] = {},
   ["catppuccin-frappe"] = {},
