@@ -333,7 +333,12 @@ elseif extra_themes[theme] then
     end
   end
 elseif theme == "sora" then
-  -- Sora
+  -- Sora。背景は palette の bg（少し紫寄りだった元の #0e1018 を、明るさそのままで青寄りにした色）にする
+  require("sora").setup({
+    on_colors = function(c)
+      c.bg = require("palette").bg
+    end,
+  })
   vim.cmd.colorscheme("sora")
 elseif theme == "moonfly" or theme == "nightfly" then
   -- Moonfly / Nightfly（同じ作者。名前がそのまま colorscheme の名前）

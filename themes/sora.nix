@@ -38,7 +38,7 @@
     comment = "#586478"; # fg_comment
 
     bg_bar = "#000000"; # バー・浮かぶウィンドウ・選んでいないタブ（真っ黒。MacBook のノッチと境目がなくなる。前は sora の bg_float #0a0c12）
-    bg = "#0e1018"; # 通常の背景（bg）
+    bg = "#070b11"; # 通常の背景（sora の bg #0e1018 は少し紫寄り（色み 274°）なので、青寄り（250°）にして、少し暗くした（明るさ 0.85 倍））
     bg_alt = "#14161e"; # bg_elevated
     bg_band = "#1e2430"; # sketchybar のアプリ名の帯など（bg_selection）
     border = "#364050"; # 枠線（border）
@@ -53,11 +53,11 @@
 
     # 差分の背景。ほかのテーマとそろえて、green / red / blue を背景に混ぜた色（行全体は 15%、_emph と diff_text は 30%）
     # 公式の差分の色（#0e1c16 など）は、背景とほとんど見分けがつかないので使わない
-    diff_add = "#222c2c";
-    diff_delete = "#291e26";
-    diff_change = "#1f2c36";
-    diff_text = "#304754";
-    diff_add_emph = "#354741";
-    diff_delete_emph = "#452c35";
+    diff_add = "#1c2726";
+    diff_delete = "#231a20";
+    diff_change = "#192730";
+    diff_text = "#2b444f";
+    diff_add_emph = "#30443c";
+    diff_delete_emph = "#402830";
   };
 }
