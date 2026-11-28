@@ -1,6 +1,11 @@
 # Mac 全体の設定（nix-darwin）。適用は `sudo darwin-rebuild switch --flake ~/nix-config`
 # ユーザーの設定（ツール・dotfiles）は home.nix。home-manager は nix-darwin の中で一緒に適用される
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -15,7 +20,10 @@
   networking.localHostName = "hikaru-mbp";
 
   # Nix 本体（nix-daemon と /etc/nix/nix.conf）も nix-darwin で管理する
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # 手入れの自動化。毎週日曜の朝に、14 日より古い世代を消してから使われていないものを掃除し、そのあと同じファイルを1つにまとめる
   # その時間に眠っていたら、起きたときに行う。消すのは Mac 全体の世代だけ（ユーザーの世代は home.nix の nix-gc-user）
   # 14 日より前の世代には戻せなくなる

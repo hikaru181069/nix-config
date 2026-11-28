@@ -978,9 +978,10 @@ in
       # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
       # 区切りの三角の一部は、旧環境と同じくブロックより1段明るい色にする（prefix 中の三角・ユーザー名の右端）
       # 灰色のブロック（ユーザー名・今のタブ）は、ブロック・三角・中の文字とも block_fg〜（palette.nix。fg〜をバーの地に寄せて暗くした色）
-      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.text_comment}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan},${p.bg_bar}},bg=${p.block_fg_dim},nobold]${r}#[fg=${p.bg_bar},bg=${p.block_fg_dim},bold] #(whoami) #[fg=${p.block_fg_dim},bg=${p.bg_bar},nobold]${r}"
+      # セッション名は斜体（bufferline の選んでいるタブと同じ。右端のホスト名も）。ユーザー名の前で斜体を戻す
+      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.text_fg_dim}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold,italics] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan},${p.bg_bar}},bg=${p.block_fg_dim},nobold,noitalics]${r}#[fg=${p.bg_bar},bg=${p.block_fg_dim},bold] #(whoami) #[fg=${p.block_fg_dim},bg=${p.bg_bar},nobold]${r}"
       # 右: 虹色の三角とホスト名
-      set -g status-right "${tmuxState}${rainbowArrows}#[fg=${p.text_comment},bg=${p.bg_bar},bold] #h "
+      set -g status-right "${tmuxState}${rainbowArrows}#[fg=${p.text_fg_dim},bg=${p.bg_bar},bold,italics] #h "
 
       # ウィンドウ一覧: 番号とディレクトリ名
       setw -g window-status-separator ""

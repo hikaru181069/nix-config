@@ -15,6 +15,8 @@ local function bufferline_highlights(defaults)
   local fg = {
     background = p.tab_inactive_fg,
     buffer_visible = p.fg_bright,
+    -- 選んでいるタブの名前は、sketchybar の右側・tmux の5つのアイコン（入っているとき）と同じ情報の文字の色
+    buffer_selected = p.text_fg_dim,
     numbers = p.tab_inactive_fg,
     numbers_visible = p.fg_dim,
     modified = p.yellow,

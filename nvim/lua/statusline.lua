@@ -15,7 +15,7 @@ local function mode(name, color)
 end
 local modes = {
   n = normal,
-  i = mode("INS", p.cyan),
+  i = mode("INS", p.green), -- 挿入は緑（lualine の標準など、よくある配色。前は水色）
   v = mode("VIS", p.magenta),
   V = mode("VLN", p.magenta), -- 行の選択
   ["\22"] = mode("VBL", p.magenta), -- 矩形の選択（Ctrl-V）
