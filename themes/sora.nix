@@ -18,6 +18,10 @@
     "#70bad3"
   ];
 
+  # バーの上の、選んでいないもの（ほかのタブ・デスクトップ、セッション名・ホスト名）と休んでいるアイコン（tmux の5つの休み・通信 0 など）だけ、
+  # ブロックと同じだけ暗くする（お試し）。情報の文字とアイコンは元の色のまま
+  darkenBarInactive = true;
+
   palette = {
     # 色（赤〜水色は、公式のターミナルの16色と同じ）
     black = "#0e1018";
@@ -33,7 +37,7 @@
 
     comment = "#586478"; # fg_comment
 
-    bg_bar = "#0a0c12"; # バー・浮かぶウィンドウ・選んでいないタブ（bg_float・bg_statusline）
+    bg_bar = "#000000"; # バー・浮かぶウィンドウ・選んでいないタブ（真っ黒。MacBook のノッチと境目がなくなる。前は sora の bg_float #0a0c12）
     bg = "#0e1018"; # 通常の背景（bg）
     bg_alt = "#14161e"; # bg_elevated
     bg_band = "#1e2430"; # sketchybar のアプリ名の帯など（bg_selection）

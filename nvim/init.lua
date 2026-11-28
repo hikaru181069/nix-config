@@ -105,7 +105,7 @@ local theme = require("theme").nvim
 -- 使うときだけ読みこむテーマ（数が多いので、使わないものは読みこまない）。名前がそのまま colorscheme の名前
 -- src: プラグイン（書いていないものは、上でもう入れてあるプラグインの別の種類）。name: 入れるときの名前（リポジトリの名前が
 -- nvim・vim のように分かりにくいもの）。colorscheme: colorscheme の名前がテーマの名前と違うもの
--- setup: 先に呼ぶ設定。diff: 差分の背景が明るすぎるので、palette の色にする
+-- setup: 先に呼ぶ設定。diff: 差分の背景が明るすぎるので、palette の色にする。highlights: colorscheme のあとに上書きする色
 local extra_themes = {
   vague = { src = "vague-theme/vague.nvim" },
   ["kanso-zen"] = { src = "webhooked/kanso.nvim" },
@@ -138,7 +138,8 @@ local extra_themes = {
   laserwave = { src = "lettertwo/laserwave.nvim" },
   -- Xcode の公式の配色（dark）
   xcodedark = { src = "lunacookies/vim-colors-xcode" },
-  xcodedarkhc = { src = "lunacookies/vim-colors-xcode" }, -- 高いコントラスト版
+  -- 高いコントラスト版。バーの色をこのテーマの浮かぶ窓の黒にしたので、関数の帯（treesitter-context）は前のバーの色にする（お試し）
+  xcodedarkhc = { src = "lunacookies/vim-colors-xcode", highlights = { TreesitterContext = { bg = "#17171b" } } },
   xcodewwdc = { src = "lunacookies/vim-colors-xcode" }, -- WWDC の配色
   -- 自作の配色（nvim/lua/outrun.lua。VS Code の Outrun Meets Synthwave の色を参考にした）
   ["outrun-night"] = {},
@@ -321,6 +322,9 @@ elseif extra_themes[theme] then
   -- テーマが決めたタブの色（BufferLine〜）は消し、lua/ui.lua の共通の見た目にする
   for _, name in ipairs(vim.fn.getcompletion("BufferLine", "highlight")) do
     vim.api.nvim_set_hl(0, name, {})
+  end
+  for name, hl in pairs(extra.highlights or {}) do
+    vim.api.nvim_set_hl(0, name, hl)
   end
   if extra.diff then
     local p = require("palette")

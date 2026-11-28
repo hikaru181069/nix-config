@@ -844,17 +844,17 @@ in
         {
           on = "window_zoomed_flag";
           icon = ''"\udb80\ude93"'';
-          color = p.fg_dim;
+          color = p.text_fg_dim;
         }
         {
           on = "#{==:#{pane_mode},copy-mode}";
           icon = ''"\udb80\udd8f"'';
-          color = p.fg_dim;
+          color = p.text_fg_dim;
         }
         {
           on = "#{@stash}";
           icon = ''"\udb80\ude09"'';
-          color = p.fg_dim;
+          color = p.text_fg_dim;
         }
         {
           on = "session_alert";
@@ -872,7 +872,7 @@ in
       tmuxState =
         "#[bg=${p.bg_bar}] "
         + lib.concatMapStringsSep " #[fg=${p.block_comment}]${lThin} " (
-          s: "#[fg=#{?${s.on},${s.color},${p.fg_muted}}]${builtins.fromJSON s.icon}" + lib.optionalString (s ? extra) "#{?${s.on},${s.extra},}"
+          s: "#[fg=#{?${s.on},${s.color},${p.text_fg_muted}}]${builtins.fromJSON s.icon}" + lib.optionalString (s ? extra) "#{?${s.on},${s.extra},}"
         ) tmuxStates
         + "  ";
       # Claude Code の状態（claude-tmux が記録した @claude）。ウィンドウの中のパネルを見て、いちばん急ぐものの色の ● を出す
@@ -969,7 +969,7 @@ in
       set -g status on
       set -g status-interval 1
       set -g status-justify left
-      set -g status-style "fg=${p.fg_dim},bg=${p.bg_bar}"
+      set -g status-style "fg=${p.text_fg_dim},bg=${p.bg_bar}"
       set -g status-left-length 100
       set -g status-right-length 100
       set -g status-left-style NONE
@@ -978,14 +978,14 @@ in
       # 左: セッション名（prefix を押している間は色が変わる）とユーザー名
       # 区切りの三角の一部は、旧環境と同じくブロックより1段明るい色にする（prefix 中の三角・ユーザー名の右端）
       # 灰色のブロック（ユーザー名・今のタブ）は、ブロック・三角・中の文字とも block_fg〜（palette.nix。fg〜をバーの地に寄せて暗くした色）
-      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.comment}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan},${p.bg_bar}},bg=${p.block_fg_dim},nobold]${r}#[fg=${p.bg_bar},bg=${p.block_fg_dim},bold] #(whoami) #[fg=${p.block_fg_dim},bg=${p.bg_bar},nobold]${r}"
+      set -g status-left "#[fg=#{?client_prefix,${p.bg_bar},${p.text_comment}},bg=#{?client_prefix,${p.cyan},${p.bg_bar}},bold] #S ${claudeWaiting}#[fg=#{?client_prefix,${p.cyan},${p.bg_bar}},bg=${p.block_fg_dim},nobold]${r}#[fg=${p.bg_bar},bg=${p.block_fg_dim},bold] #(whoami) #[fg=${p.block_fg_dim},bg=${p.bg_bar},nobold]${r}"
       # 右: 虹色の三角とホスト名
-      set -g status-right "${tmuxState}${rainbowArrows}#[fg=${p.comment},bg=${p.bg_bar},bold] #h "
+      set -g status-right "${tmuxState}${rainbowArrows}#[fg=${p.text_comment},bg=${p.bg_bar},bold] #h "
 
       # ウィンドウ一覧: 番号とディレクトリ名
       setw -g window-status-separator ""
-      setw -g window-status-style "fg=${p.comment},bg=${p.bg_bar}"
-      setw -g window-status-activity-style "underscore,fg=${p.comment},bg=${p.bg_bar}"
+      setw -g window-status-style "fg=${p.text_comment},bg=${p.bg_bar}"
+      setw -g window-status-activity-style "underscore,fg=${p.text_comment},bg=${p.bg_bar}"
       setw -g window-status-format "#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}#[default] #I #[fg=${p.block_comment}]${rThin}#[default] ${tmuxDir} ${claudeDot}#[fg=${p.bg_bar},bg=${p.bg_bar}]${r}"
       # 選んでいるウィンドウ: 番号の右の三角と右端の三角は、旧環境と同じくブロックより1段明るい色
       setw -g window-status-current-format "#[fg=${p.bg_bar},bg=${p.block_fg}]${r}#[fg=${p.block_fg_muted},bg=${p.block_fg}] #I #[fg=${p.block_fg_bright},bg=${p.block_fg_muted}]${r}#[fg=${p.block_fg_bright}] ${tmuxDir} ${claudeDot}#[fg=${p.block_comment},bg=${p.bg_bar}]${r}"
@@ -1265,7 +1265,7 @@ in
           magick -size 208x416 xc:none -fill '${hex}' -draw 'polygon 0,0 208,200 0,400' -resize 26x52! PNG32:$out/R_${name}.png
           magick -size 208x416 xc:none -fill '${hex}' -draw 'polygon 208,0 0,200 208,400' -resize 26x52! PNG32:$out/L_${name}.png
         ''
-      ) (lib.unique (builtins.attrValues palette))
+      ) (lib.unique (builtins.filter (v: builtins.isString v && lib.hasPrefix "#" v) (builtins.attrValues palette)))
     );
   xdg.configFile."sketchybar/icon_map.lua".source =
     "${pkgs.sketchybar-app-font}/lib/sketchybar-app-font/icon_map.lua";

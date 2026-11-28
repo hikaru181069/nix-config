@@ -7,6 +7,18 @@ Nix で開発環境を作り直す作業の記録。新しいものが上。
 
 ## 2026-11-26
 
+### sora のバーの地を真っ黒にした
+
+- bg_bar を #0a0c12 から #000000 にした（MacBook のノッチと境目がなくなる。ユーザーの希望）
+- Xcode Dark HC と同じく、バーの上の文字も暗くする（darkenBarText）・情報の文字だけ 40% にする（barTextDarken）も試したが、取りやめた（barTextDarken の仕組みも消した）。関数の帯は、sora の浮かぶ窓の色がもともと #0a0c12 なので、上書きしなくても前のバーの色のまま
+- 続けて、選んでいないもの（text_comment）と休んでいるアイコン（text_fg_muted）だけ 45% 暗くした（darkenBarInactive = true。お試し）。情報の文字とアイコンは元の色のまま
+- Neovim のタブの行の、ほかのタブの名前・番号（tab_inactive_fg。ほかのバーの選んでいないもの text_comment と同じ色にそろえた）と、色付きのファイルの種類のアイコンも 45% 暗くした。アイコンは bufferline が種類ごとに作る色（BufferLineDevIcon〜。選んでいるタブ用の …Selected は除く）を、元の色からバーの地に寄せた色に置きかえる（ファイルを開くたび・テーマを読みこみ直すたびに付け直す。nvim/lua/ui.lua）。palette.nix に数（tab_inactive_darken）が入ったので、sketchybar の色の読みこみと三角の画像づくりは「#」で始まる色だけを扱うようにした
+
+### Xcode Dark HC だけ、バーの色と関数の帯の色を入れかえた（お試し）
+
+- 関数の帯（treesitter-context。スクロールしたとき、今いる関数の始まりの行を上に固定する部品）は、浮かぶ窓と同じ色で、Xcode では黒（#07080d）だった
+- このテーマだけ、bg_bar を #07080d（黒）に、関数の帯を前の bg_bar（#17171b）にした（ユーザーの希望）。続けて bg_bar を真っ黒（#000000）にした。このテーマは文字のコントラストが高いので、バーの灰色の暗さも 0.45 → 0.55 にした（テーマのファイルに barDarken を書けるようにした。書いていないテーマは 0.45）。さらに、バーの地の上の文字とアイコン（情報の文字・選んでいないタブやデスクトップ・休んでいるアイコン）も同じだけ暗くした（darkenBarText = true。palette.nix の text_〜。書いていないテーマは元の色のまま）。Neovim のタブの行（bufferline）の文字も同じく暗くしてみたが、ほかのタブの名前がほぼ見えなくなったので、元に戻した。nvim/init.lua の extra_themes に、colorscheme のあとに上書きする色（highlights）を書けるようにした
+
 ### テーマに Xcode Dark HC・Xcode WWDC を足した（全部で66個）
 
 - vim-colors-xcode の別の種類（xcodedarkhc・xcodewwdc）。Ghostty の Xcode Dark hc・Xcode WWDC と、背景・文字の色が一致

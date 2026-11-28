@@ -7,10 +7,18 @@
 #   バー  block_fg・block_fg_dim・block_fg_muted: 3つのバー（tmux・sketchybar・Neovim のステータスライン）の灰色のブロックの色
 #         block_fg_bright・block_comment: 今アクティブなものの、ブロックより明るい三角と文字の色（block_comment は細い区切りの線にも使う）
 #         どれも fg〜・comment を、バーの地（bg_bar）に barDarken だけ寄せて暗くしたもの（全テーマ共通）
+#         text_fg_dim・text_comment・text_fg_muted: バーの地の上の文字とアイコン（テーマが darkenBarText = true のときだけ暗くする。
+#         darkenBarInactive = true なら、選んでいないもの text_comment と休んでいるもの text_fg_muted だけ暗くする）
 let
-  palette = (import ./theme.nix).palette;
+  theme = import ./theme.nix;
+  palette = theme.palette;
   # バーの灰色のブロックを暗くする割合（0 で元の色のまま。大きいほど暗い）
-  barDarken = 0.45;
+  # テーマのファイルに barDarken があれば、そのテーマだけその値にする（文字のコントラストに余裕があるテーマなど）
+  barDarken = theme.barDarken or 0.45;
+  # テーマのファイルに darkenBarText = true があれば、バーの地の上の文字とアイコン（text_〜）も同じだけ暗くする
+  darkenBarText = theme.darkenBarText or false;
+  # darkenBarInactive = true なら、選んでいないもの（text_comment）と休んでいるもの（text_fg_muted）だけ暗くする
+  darkenBarInactive = theme.darkenBarInactive or false;
 
   digits = "0123456789abcdef";
   digit = c: builtins.head (builtins.filter (i: builtins.substring i 1 digits == c) (builtins.genList (i: i) 16));
@@ -34,4 +42,12 @@ palette
   # 今アクティブなもの（今のタブ・今のデスクトップ）の、ブロックより明るい三角（間は fg_bright、終わりは comment）も同じだけ暗くする
   block_fg_bright = toBar palette.fg_bright;
   block_comment = toBar palette.comment;
+  # バーの地の上の文字とアイコン（情報の文字 fg_dim・選んでいないもの comment・休んでいるもの fg_muted）。ふだんは元の色のまま
+  text_fg_dim = if darkenBarText then toBar palette.fg_dim else palette.fg_dim;
+  text_comment = if darkenBarText || darkenBarInactive then toBar palette.comment else palette.comment;
+  text_fg_muted = if darkenBarText || darkenBarInactive then toBar palette.fg_muted else palette.fg_muted;
+  # Neovim のタブの行の、ほかのタブの文字と、色付きのアイコンを暗くする割合（darkenBarInactive のテーマだけ。色ではなく数）
+  # 文字は、ほかのバーの「選んでいないもの」（text_comment）と同じ色にそろえる。ふだんは元の fg_muted のまま
+  tab_inactive_fg = if darkenBarInactive then toBar palette.comment else palette.fg_muted;
+  tab_inactive_darken = if darkenBarInactive then barDarken else 0;
 }

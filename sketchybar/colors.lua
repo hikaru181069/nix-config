@@ -12,18 +12,22 @@ end
 
 local colors = {}
 for name, hex in pairs(palette) do
-  colors[name] = color(hex)
+  -- 色（"#rrggbb"）だけ。palette には数（tab_inactive_darken など）も入っている
+  if type(hex) == "string" and hex:sub(1, 1) == "#" then
+    colors[name] = color(hex)
+  end
 end
 
 local catppuccin = {
   -- 文字（明るい順）
   text = palette.fg_bright,
   subtext1 = palette.fg,
-  subtext0 = palette.fg_dim,
-  overlay2 = palette.fg_dim,
-  overlay1 = palette.comment,
-  overlay0 = palette.fg_muted,
-  grey = palette.fg_muted,
+  -- バーの地の上の文字とアイコン（palette.nix の text_〜。ふだんは fg_dim・comment・fg_muted のまま）
+  subtext0 = palette.text_fg_dim,
+  overlay2 = palette.text_fg_dim,
+  overlay1 = palette.text_comment,
+  overlay0 = palette.text_fg_muted,
+  grey = palette.text_fg_muted,
   -- 背景・枠（明るい順）
   surface2 = palette.search,
   surface1 = palette.border,

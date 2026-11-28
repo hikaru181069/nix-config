@@ -11,10 +11,11 @@ local function bufferline_highlights(defaults)
     hl[name] = vim.tbl_extend("force", attrs, { bg = name:match("_selected$") and p.bg or p.bg_bar })
   end
   -- 文字の色（旧設定と同じ考え方: ほかのタブは暗め、見えているタブは明るめ、変更ありは黄色）
+  -- ほかのタブの名前と番号は tab_inactive_fg（palette.nix。テーマが darkenBarInactive のときは、ほかの「選んでいないもの」と同じだけ暗い）
   local fg = {
-    background = p.fg_muted,
+    background = p.tab_inactive_fg,
     buffer_visible = p.fg_bright,
-    numbers = p.fg_muted,
+    numbers = p.tab_inactive_fg,
     numbers_visible = p.fg_dim,
     modified = p.yellow,
     modified_visible = p.yellow,
@@ -63,6 +64,43 @@ require("bufferline").setup({
     },
   },
 })
+-- ほかのタブの、ファイルの種類のアイコン（色付き）を暗くする（palette.nix の tab_inactive_darken。0 なら何もしない）
+-- bufferline は種類ごとに BufferLineDevIcon<種類>（ほかのタブ用）と …Selected（選んでいるタブ用）を作るので、
+-- ほかのタブ用の色を、元の色からバーの地に寄せた色に置きかえる。新しい種類のファイルを開くと作られるので、そのたびに付け直す
+if (p.tab_inactive_darken or 0) > 0 then
+  local original = {} -- 置きかえる前の色（何度も暗くしないように覚えておく）
+  local function mix(a, b, t)
+    local out = 0
+    for shift = 16, 0, -8 do
+      local x, y = math.floor(a / 2 ^ shift) % 256, math.floor(b / 2 ^ shift) % 256
+      out = out + math.floor(x + (y - x) * t + 0.5) * 2 ^ shift
+    end
+    return out
+  end
+  local bar = tonumber(p.bg_bar:sub(2), 16)
+  local function darken_icons()
+    for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
+      if name:match("^BufferLineDevIcon") and not name:match("Selected$") and hl.fg then
+        original[name] = original[name] or hl.fg
+        local fg = mix(original[name], bar, p.tab_inactive_darken)
+        if hl.fg ~= fg then
+          hl.fg = fg
+          -- bufferline は「既定の色」（default）として登録しているので、その印を外して上書きする（付いたままだと上書きされない）
+          hl.default = nil
+          vim.api.nvim_set_hl(0, name, hl)
+        end
+      end
+    end
+  end
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufAdd", "BufWinEnter" }, { callback = vim.schedule_wrap(darken_icons) })
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+      original = {} -- テーマを読みこみ直すと元の色も作り直されるので、覚えた色を捨てる
+      vim.schedule(darken_icons)
+    end,
+  })
+end
+
 vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "次のバッファ" })
 vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "前のバッファ" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "バッファを閉じる" })

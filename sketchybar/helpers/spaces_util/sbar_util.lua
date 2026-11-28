@@ -34,8 +34,8 @@ local function add_arrow_space(space_id, space_label)
       string = space_label,
       padding_left = 6,
       padding_right = 6,
-      color = COLORS.comment,
-      highlight_color = COLORS.comment,
+      color = COLORS.text_comment,
+      highlight_color = COLORS.text_comment,
     },
     label = { drawing = false },
     background = PL.block(COLORS.bg_bar),
@@ -49,8 +49,8 @@ local function add_arrow_space(space_id, space_label)
       string = "",
       padding_left = 6,
       padding_right = 8,
-      color = COLORS.comment,
-      highlight_color = COLORS.comment,
+      color = COLORS.text_comment,
+      highlight_color = COLORS.text_comment,
       font = "sketchybar-app-font:Regular:15.0",
       y_offset = -1,
     },
@@ -126,8 +126,8 @@ function space_api:highlight_focused_space(space_item, is_selected)
     arrow(parts.left, PL.R, COLORS.bg_bar, num_bg)
     space_item:set({
       icon = {
-        color = is_selected and COLORS.block_fg_muted or COLORS.comment,
-        highlight_color = is_selected and COLORS.block_fg_muted or COLORS.comment,
+        color = is_selected and COLORS.block_fg_muted or COLORS.text_comment,
+        highlight_color = is_selected and COLORS.block_fg_muted or COLORS.text_comment,
       },
       background = { color = num_bg },
     })
@@ -138,8 +138,8 @@ function space_api:highlight_focused_space(space_item, is_selected)
     end
     parts.apps:set({
       label = {
-        color = is_selected and COLORS.block_fg_bright or COLORS.comment,
-        highlight_color = is_selected and COLORS.block_fg_bright or COLORS.comment,
+        color = is_selected and COLORS.block_fg_bright or COLORS.text_comment,
+        highlight_color = is_selected and COLORS.block_fg_bright or COLORS.text_comment,
       },
       background = { color = apps_bg },
     })

@@ -4,7 +4,7 @@ local p = require("palette")
 
 -- バー全体の色（両端のブロック以外）。fg は細い区切りと、選んでいないウィンドウの文字の色
 -- 3つのバー（Neovim・tmux・sketchybar）で同じ決まり: 区切りと選んでいないものは comment、情報の文字とアイコンは fg_dim
-local bar = { fg = p.comment, bg = p.bg_bar }
+local bar = { fg = p.text_comment, bg = p.bg_bar }
 
 -- モードごとの名前とブロックの色（隣の三角も同じ色。tmux のセッション名・ユーザー名の三角と同じ）
 -- 名前は、モードが変わっても幅が変わらないよう3文字にそろえる
@@ -53,7 +53,7 @@ end
 
 -- 部品: バーの上の文字（ふつうの太さ。太字は両端のモードと行:列のブロックだけ）
 local function text(component, options)
-  return vim.tbl_extend("force", { component, color = { fg = p.fg_dim, bg = bar.bg }, padding = 1 }, options or {})
+  return vim.tbl_extend("force", { component, color = { fg = p.text_fg_dim, bg = bar.bg }, padding = 1 }, options or {})
 end
 
 -- 部品: 細い区切り。left は左の空き（マスの数）。cond は出す条件（隣に中身があるときだけ出し、端に浮いた区切りを残さない）
